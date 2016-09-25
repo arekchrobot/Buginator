@@ -3,19 +3,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>pl.ark.chr</groupId>
 	<artifactId>Buginator</artifactId>
-	<version>0.0.1</version>
 	<packaging>jar</packaging>
-
-	<name>Buginator</name>
-	<description>Webapp for Buginator</description>
 
 	<parent>
 		<groupId>pl.ark.chr</groupId>
 		<artifactId>BuginatorPOM</artifactId>
 		<version>0.0.1</version>
 	</parent>
+
+	<name>Buginator</name>
+	<description>Webapp for Buginator</description>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
