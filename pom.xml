@@ -23,9 +23,20 @@
         <module>BuginatorDomain</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>pieroxy</groupId>
+                <artifactId>user-agent-detection</artifactId>
+                <version>${pieroxy-useragent.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <pieroxy-useragent.version>2015.10.31.06.50.GMT</pieroxy-useragent.version>
     </properties>
 </project>

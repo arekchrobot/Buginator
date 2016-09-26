@@ -1,9 +1,6 @@
 package pl.ark.chr.buginator.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -33,6 +30,10 @@ public class Company extends BaseEntity {
 
     @Column(name = "address", length = 500)
     private String address;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_option_id", nullable = false)
+    private PaymentOption selectedPaymentOption;
 
     public String getUniqueKey() {
         return uniqueKey;
@@ -80,5 +81,13 @@ public class Company extends BaseEntity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public PaymentOption getSelectedPaymentOption() {
+        return selectedPaymentOption;
+    }
+
+    public void setSelectedPaymentOption(PaymentOption selectedPaymentOption) {
+        this.selectedPaymentOption = selectedPaymentOption;
     }
 }

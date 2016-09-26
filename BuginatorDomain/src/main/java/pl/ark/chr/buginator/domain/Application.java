@@ -1,6 +1,8 @@
 package pl.ark.chr.buginator.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Arek on 2016-09-25.
@@ -19,6 +21,9 @@ public class Application extends BaseEntity {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.application")
+    private Set<UserApplication> applicationUsers = new HashSet<>();
+
     public String getName() {
         return name;
     }
@@ -33,5 +38,13 @@ public class Application extends BaseEntity {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Set<UserApplication> getApplicationUsers() {
+        return applicationUsers;
+    }
+
+    public void setApplicationUsers(Set<UserApplication> applicationUsers) {
+        this.applicationUsers = applicationUsers;
     }
 }

@@ -1,5 +1,8 @@
 package pl.ark.chr.buginator.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import pl.ark.chr.buginator.domain.serializer.UserApplicationIdSerializer;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -17,6 +20,7 @@ public class UserApplication implements Serializable {
     private static final long serialVersionUID = 3322958058050699849L;
 
     @EmbeddedId
+    @JsonSerialize(using = UserApplicationIdSerializer.class)
     private UserApplicationId pk = new UserApplicationId();
 
     @Column(name = "view")
