@@ -34,6 +34,10 @@ public class User extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.user")
     private Set<UserApplication> userApplications = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "buginator_role_id", nullable = false)
+    private Role role;
+
     public String getName() {
         return name;
     }
@@ -72,5 +76,21 @@ public class User extends BaseEntity {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Set<UserApplication> getUserApplications() {
+        return userApplications;
+    }
+
+    public void setUserApplications(Set<UserApplication> userApplications) {
+        this.userApplications = userApplications;
     }
 }

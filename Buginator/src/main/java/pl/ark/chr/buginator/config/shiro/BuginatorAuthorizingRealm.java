@@ -5,6 +5,13 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import pl.ark.chr.buginator.domain.Permission;
+import pl.ark.chr.buginator.domain.Role;
+import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
+import pl.ark.chr.buginator.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.NoSuchElementException;
@@ -13,7 +20,11 @@ import java.util.Set;
 /**
  * Created by Arek on 2016-09-28.
  */
+@Component
 public class BuginatorAuthorizingRealm extends AuthorizingRealm {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -23,22 +34,18 @@ public class BuginatorAuthorizingRealm extends AuthorizingRealm {
         } catch (NoSuchElementException ex) {
             return null;
         }
-//        User user = userDao.findByUsername(username);
-//
-//        if (user != null) {
-//            Set<String> roles = new HashSet<>();
-//            Set<String> perms = new HashSet<>();
-//            for (Role role : user.getRoles()) {
-//                roles.add(role.getAuthority());
-//                for (Permission perm : role.getPermissions()) {
-//                    perms.add(perm.getAuthority());
-//                }
-//            }
-//            SimpleAuthorizationInfo authInfo = new SimpleAuthorizationInfo(roles);
-//            authInfo.setStringPermissions(perms);
-//
-//            return authInfo;
-//        }
+        User user = userRepository.findByEmail(username);
+
+        if (user != null) {
+            Set<String> roles = new HashSet<>();
+            Set<String> perms = new HashSet<>();
+            roles.add(user.getRole().getAuthority());
+            user.getRole().getPermissions().stream().forEach(p -> perms.add(p.getAuthority()));
+            SimpleAuthorizationInfo authInfo = new SimpleAuthorizationInfo(roles);
+            authInfo.setStringPermissions(perms);
+
+            return authInfo;
+        }
 
         return null;
     }
@@ -47,11 +54,11 @@ public class BuginatorAuthorizingRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken authToken = (UsernamePasswordToken) authenticationToken;
 
-//        User user = userDao.findByUsername(authToken.getUsername());
-//
-//        if (user == null) {
-//            throw new UsernameNotFoundException("Account does not exists");
-//        }
+        User user = userRepository.findByEmail(authToken.getUsername());
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Account does not exists");
+        }
 
         return new SimpleAuthenticationInfo(authToken.getUsername(), null, getName());
     }
