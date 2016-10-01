@@ -1,9 +1,33 @@
 <groups xmlns="http://www.isdc.ro/wro">
+    <group name="imported">
+        <css>classpath:META-INF/resources/webjars/bootstrap/3.1.1/css/bootstrap.min.css</css>
+        <css>webjar:angular-cookie-law/0.2.3/dist/angular-cookie-law.min.css</css>
+        <css>webjar:ng-dialog/0.5.9/css/ngDialog.css</css>
+        <css>webjar:ng-dialog/0.5.9/css/ngDialog-theme-default.css</css>
+        <css>webjar:ng-dialog/0.5.9/css/ngDialog.css</css>
+        <css>classpath:buginator.css</css>
+        <js>webjar:jquery/2.1.1/jquery.min.js</js>
+        <js>webjar:angularjs/1.4.7/angular.js</js>
+        <js>webjar:angularjs/1.4.7/angular-route.min.js</js>
+        <js>webjar:angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js</js>
+        <js>webjar:angular-animate/1.4.7/angular-animate.min.js</js>
+        <js>webjar:lodash/3.10.1/lodash.min.js</js>
+        <js>webjar:angular-simple-logger/0.1.4/dist/angular-simple-logger.min.js</js>
+        <js>webjar:ngSmoothScroll/1.7.1/angular-smooth-scroll.min.js</js>
+        <js>webjar:bootstrap/3.1.1/js/bootstrap.min.js</js>
+        <js>webjar:angular-local-storage/0.2.1/angular-local-storage.min.js</js>
+        <js>webjar:angular-cookie-law/0.2.3/dist/angular-cookie-law.min.js</js>
+        <js>webjar:angular-ui-router/0.2.18/angular-ui-router.min.js</js>
+        <js>webjar:angular-resource/1.4.7/angular-resource.min.js</js>
+        <js>webjar:ng-dialog/0.5.9/js/ngDialog.min.js</js>
+        <js>webjar:angular-smart-table/2.1.8/dist/smart-table.min.js</js>
+    </group>
     <group name="angular-app">
         <js>classpath:static/js/app/**.service.js</js>
-        <!--<js>classpath:static/js/app/**.controller.js</js>-->
-        <!--<js>classpath:static/js/app/directives.js</js>-->
-        <!--<js>classpath:static/js/app/filters.js</js>-->
-        <!--<js>classpath:static/js/app/app.js</js>-->
+        <js>classpath:static/js/app/**.controller.js</js>
+
+        <js>classpath:static/js/app/directives.js</js>
+        <js>classpath:static/js/app/filters.js</js>
+        <js>classpath:static/js/app/app.js</js>
     </group>
 </groups>

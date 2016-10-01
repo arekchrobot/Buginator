@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import pl.ark.chr.buginator.domain.BaseEntity;
 import pl.ark.chr.buginator.service.CrudService;
 import pl.ark.chr.buginator.util.HibernateLazyInitiator;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public abstract class CrudServiceImpl<T extends BaseEntity> implements CrudService<T> {
 
-    protected abstract JpaRepository<T, Long> getRepository();
+    protected abstract CrudRepository<T, Long> getRepository();
 
     @Override
     public T save(T entity) {
