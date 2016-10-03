@@ -14,7 +14,7 @@ angular.module("buginator", [
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", function ($sceDelegateProvider, $httpProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when("/", "login").otherwise("/");
+    //$urlRouterProvider.when("/", "login").otherwise("/");
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     $sceDelegateProvider

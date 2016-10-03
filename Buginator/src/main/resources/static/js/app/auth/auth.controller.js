@@ -1,5 +1,5 @@
 angular.module("buginator.authController", [])
-    .controller("authController", function ($rootScope, $scope, $state, authService) {
+    .controller("authController", function ($rootScope, $scope, $state, authService, $location) {
         $scope.credentials = {};
         $rootScope.loginError = false;
 
@@ -14,6 +14,10 @@ angular.module("buginator.authController", [])
                     $scope.credentials = {};
                     $rootScope.loginError = true;
                 });
+        };
+
+        $scope.isActive = function (viewLocation) {
+            return viewLocation === $location.path();
         };
 
         $scope.login = function () {

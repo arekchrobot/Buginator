@@ -5,7 +5,6 @@
         <css>webjar:ng-dialog/0.5.9/css/ngDialog.css</css>
         <css>webjar:ng-dialog/0.5.9/css/ngDialog-theme-default.css</css>
         <css>webjar:ng-dialog/0.5.9/css/ngDialog.css</css>
-        <css>classpath:buginator.css</css>
         <js>webjar:jquery/2.1.1/jquery.min.js</js>
         <js>webjar:angularjs/1.4.7/angular.js</js>
         <js>webjar:angularjs/1.4.7/angular-route.min.js</js>
@@ -23,6 +22,9 @@
         <js>webjar:angular-smart-table/2.1.8/dist/smart-table.min.js</js>
     </group>
     <group name="angular-app">
+        <css>classpath:static/css/buginator.css</css>
+        <css>classpath:static/css/local.css</css>
+
         <js>classpath:static/js/app/**.service.js</js>
         <js>classpath:static/js/app/**.controller.js</js>
 
