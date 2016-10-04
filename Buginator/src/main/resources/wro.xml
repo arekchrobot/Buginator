@@ -23,7 +23,10 @@
     </group>
     <group name="angular-app">
         <css>classpath:static/css/buginator.css</css>
-        <css>classpath:static/css/local.css</css>
+        <css>classpath:static/css/animate.css</css>
+        <css>classpath:static/css/main.css</css>
+        <css>classpath:static/css/metisMenu.css</css>
+        <css>classpath:static/css/theme.css</css>
 
         <js>classpath:static/js/app/**.service.js</js>
         <js>classpath:static/js/app/**.controller.js</js>
@@ -31,5 +34,9 @@
         <js>classpath:static/js/app/directives.js</js>
         <js>classpath:static/js/app/filters.js</js>
         <js>classpath:static/js/app/app.js</js>
+
+        <!--<js>classpath:static/js/metisMenu.js</js>-->
+        <!--<js>classpath:static/js/core.js</js>-->
+        <!--<js>classpath:static/js/app.js</js>-->
     </group>
 </groups>
