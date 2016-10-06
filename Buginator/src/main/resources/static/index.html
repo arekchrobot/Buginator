@@ -5,16 +5,16 @@
         <title>Buginator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="msapplication-TileColor" content="#5bc0de"/>
-        <meta name="msapplication-TileImage" content="images/metis-tile.png"/>
         <link rel="icon" type="image/x-icon" href="/buginator.ico">
         <link rel="stylesheet" href="/wro/imported.css"/>
         <link rel="stylesheet" href="/wro/angular-app.css"/>
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
     <body ng-app="buginator" ng-cloak class="ng-cloak" ng-controller="authController"
-          style="background-image: url('images/pattern/arches.png'); background-repeat: repeat; padding-top: 0px;">
-        <div class="bg-dark dk" id="wrap">
+          ng-class="{login: $state.includes('login')}"
+          ng-style="$state.includes('login') ? {'padding-top': '40px', 'padding-bottom': '40px', 'background': 'url(../images/pattern/irongrip.png) repeat #444'}
+          : {'background-image': 'url(images/pattern/arches.png)', 'background-repeat': 'repeat', 'padding-top': '0px'} ">
+        <div class="bg-dark dk" id="wrap" ng-if="!$state.includes('login')">
             <div id="top">
                 <!-- .navbar -->
                 <nav class="navbar navbar-inverse navbar-static-top">
@@ -78,7 +78,7 @@
                     <div class="main-bar">
                         <h3>
                             <i class="fa fa-home"></i>&nbsp;
-                            Metis
+                            Buginator
                         </h3>
                     </div>
                     <!-- /.main-bar -->
@@ -261,11 +261,14 @@
             <!-- /#content -->
         </div>
         <!-- /#wrap -->
-        <footer class="Footer bg-dark dker">
-            <p>2016 &copy; Metis Bootstrap Admin Template</p>
+        <div ng-if="$state.includes('login')" class="form-signin">
+            <div ui-view></div>
+        </div>
+
+        <footer class="Footer bg-dark dker" ng-if="!$state.includes('login')">
+            <p>2016 &copy; Arkadiusz Chrobot, Metis Bootstrap Admin Template</p>
         </footer>
         <!-- /#footer -->
-        </div>
 
         <script src="/wro/imported.js"></script>
         <script src="/wro/angular-app.js"></script>

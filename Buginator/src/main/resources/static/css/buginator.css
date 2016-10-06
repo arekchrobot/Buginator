@@ -1,3 +1,9 @@
 [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
 }
+
+.background {
+    background-image: url('../images/pattern/arches.png');
+    background-repeat: repeat;
+    padding-top: 0px;
+}
