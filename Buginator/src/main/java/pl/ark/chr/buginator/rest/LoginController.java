@@ -43,8 +43,9 @@ public class LoginController {
         UsernamePasswordToken authToken = new UsernamePasswordToken(credentials.getUsername(), credentials.getPassword(), true);
         try {
             logger.info("Logging user: " + credentials.getUsername());
+
             SecurityUtils.getSubject().login(authToken);
-            User user = userService.loadUserByEmail(credentials.getUsername());
+            User user = userService.validateUserLogin(credentials);
             UserWrapper userWrapper = new UserWrapper(user);
             sessionUtil.setCurrentUser(request, userWrapper);
             return userWrapper;

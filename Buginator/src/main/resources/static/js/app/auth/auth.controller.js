@@ -3,7 +3,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
         url: "/login",
         templateUrl: "html/auth/login.html"
     });
-}).controller("authController", function ($rootScope, $scope, $state, authService, $location) {
+}).controller("authController", function ($rootScope, $scope, $state, authService) {
     $scope.credentials = {};
     $rootScope.loginError = false;
 
@@ -14,6 +14,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
                 $rootScope.loginError = false;
                 $rootScope.user.perms = authService.createPermissions($rootScope.user);
                 $scope.credentials = {};
+                //$state.go("home");
             }, function (returnedData) {
                 $scope.credentials = {};
                 $rootScope.loginError = true;
@@ -21,10 +22,6 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
     };
 
     $rootScope.$state = $state;
-
-    $scope.isActive = function (viewLocation) {
-        return viewLocation === $location.path();
-    };
 
     $scope.login = function () {
         $scope.authenticate($scope.credentials);

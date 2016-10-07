@@ -1,0 +1,26 @@
+<div type="text/ng-template" id="html/error/error.html" class="error" ng-controller="dialogController" style="background: url('images/pattern/always_grey.png') repeat rgba(68, 68, 68, 0.9)">
+    <div class="container">
+        <div class="col-lg-4 text-center">
+            <div class="logo">
+                <h1>{{ngDialogData.status}}</h1>
+            </div>
+            <p class="lead text-muted">{{ngDialogData.description}}</p>
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+            <div class="sr-only">
+                &nbsp;
+            </div>
+            <br>
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-info" ng-click="close()">Close</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div style="padding-top: 20px;">
+                &nbsp;
+            </div>
+        </div>
+        <!-- /.col-lg-8 col-offset-2 -->
+    </div>
+</div>

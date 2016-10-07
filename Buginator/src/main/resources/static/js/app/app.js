@@ -9,6 +9,10 @@ angular.module("buginator", [
     "buginator.directives",
     "buginator.filters",
 
+    "buginator.exceptionHandler",
+    "buginator.dialogController",
+    "buginator.baseRestService",
+
     "buginator.authService",
     "buginator.authController"
 

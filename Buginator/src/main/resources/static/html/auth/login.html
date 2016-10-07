@@ -4,19 +4,19 @@
 <hr>
 <div class="tab-content">
     <div id="login" class="tab-pane active">
-        <form>
+        <form ng-submit="login()">
             <p class="text-muted text-center">
                 Enter your username and password
             </p>
-            <input type="text" placeholder="Username" class="form-control top">
-            <input type="password" placeholder="Password" class="form-control bottom">
+            <input type="text" placeholder="mail@domain.com" class="form-control top" ng-model="credentials.username">
+            <input type="password" placeholder="Password" class="form-control bottom" ng-model="credentials.password">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
     </div>
     <div id="forgot" class="tab-pane">
         <form>
             <p class="text-muted text-center">Enter your valid e-mail</p>
-            <input type="email" placeholder="mail@domain.com" class="form-control">
+            <input type="email" placeholder="mail@domain.com" class="form-control" ng-model="credentials.username">
             <br>
             <button class="btn btn-lg btn-danger btn-block" type="submit">Recover Password</button>
         </form>
