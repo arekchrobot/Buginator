@@ -11,6 +11,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
+import pl.ark.chr.buginator.domain.Company;
 import pl.ark.chr.buginator.domain.User;
 import pl.ark.chr.buginator.service.EmailService;
 
@@ -30,6 +31,7 @@ public class EmailServiceImpl implements EmailService {
     private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
 
     private static final String PASSWORD_RESET_TEMPLATE = "passwordReset.vm";
+    private static final String REGISTER_CONFIRM_TEMPLATE = "registerConfirm.vm";
     private static final String UTF_8 = "UTF-8";
 
     @Autowired
@@ -66,6 +68,34 @@ public class EmailServiceImpl implements EmailService {
             helper.setText(emailBody, true);
         } catch(MessagingException e) {
             logger.error("Error sending reset password to user with id: " + user.getId() + " with error: " + e.getMessage());
+        }
+
+        mailSender.send(message);
+    }
+
+    @Override
+    @Async
+    public void sendRegister(Company company, Locale locale, String email) {
+        Map<String, Object> emailData = new HashMap<>();
+
+        emailData.put("emailBody", messageSource);
+        emailData.put("locale", locale);
+        emailData.put("token", company.getToken());
+        emailData.put("uniqueKey", company.getUniqueKey());
+
+        String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, REGISTER_CONFIRM_TEMPLATE, UTF_8, emailData);
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        try {
+            helper.setSubject(messageSource.getMessage("registerConfirm.title", null, locale));
+            helper.setTo(email);
+            helper.setFrom(noReplyEmailAddress);
+            helper.setSentDate(new Date());
+            helper.setText(emailBody, true);
+        } catch(MessagingException e) {
+            logger.error("Error sending register email for company id: " + company.getId() + " with error: " + e.getMessage());
         }
 
         mailSender.send(message);

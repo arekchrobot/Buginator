@@ -1,5 +1,6 @@
 package pl.ark.chr.buginator.service;
 
+import pl.ark.chr.buginator.domain.Company;
 import pl.ark.chr.buginator.domain.User;
 
 import java.util.Locale;
@@ -10,4 +11,6 @@ import java.util.Locale;
 public interface EmailService {
 
     void sendResetPassword(User user, Locale locale, String newPassword);
+
+    void sendRegister(Company company, Locale locale, String email);
 }

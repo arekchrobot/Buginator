@@ -7,4 +7,6 @@ import pl.ark.chr.buginator.domain.Company;
  * Created by Arek on 2016-09-29.
  */
 public interface CompanyRepository extends CrudRepository<Company, Long> {
+
+    Company findByName(String name);
 }

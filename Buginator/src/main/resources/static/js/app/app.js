@@ -5,6 +5,7 @@ angular.module("buginator", [
     "ui.bootstrap",
     "ngDialog",
     "smart-table",
+    "LocalStorageModule",
 
     "buginator.directives",
     "buginator.filters",
@@ -12,6 +13,7 @@ angular.module("buginator", [
     "buginator.exceptionHandler",
     "buginator.dialogController",
     "buginator.baseRestService",
+    "buginator.cacheService",
 
     "buginator.authService",
     "buginator.authController"

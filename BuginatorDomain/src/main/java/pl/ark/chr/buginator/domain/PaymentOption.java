@@ -24,7 +24,7 @@ public class PaymentOption extends BaseEntity {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "name", length = 75)
+    @Column(name = "name", length = 75, unique = true)
     private String name;
 
     public Integer getDuration() {

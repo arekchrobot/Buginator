@@ -25,7 +25,7 @@ public class Company extends BaseEntity {
     @Column(name = "expiry_date")
     private LocalDate expiryDate;
 
-    @Column(name = "name", length = 100)
+    @Column(name = "name", length = 100, unique = true)
     private String name;
 
     @Column(name = "address", length = 500)

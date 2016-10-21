@@ -27,13 +27,15 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
         $scope.authenticate($scope.credentials);
     };
 
-    authService.isLogged(
-        function (returnedData) {
+    var loggedError = function (returnedData) {
+        $rootScope.user = null;
+    };
+
+    authService.isLogged(loggedError)
+        .then(function (returnedData) {
             $rootScope.user = returnedData;
             $rootScope.user.perms = authService.createPermissions($rootScope.user);
-        }, function (returnedData) {
-            $rootScope.user = null;
-        });
+        }, loggedError);
 
     $scope.logout = function () {
         authService.logout(
