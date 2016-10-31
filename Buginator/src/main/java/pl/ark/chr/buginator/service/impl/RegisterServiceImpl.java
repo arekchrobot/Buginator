@@ -87,44 +87,32 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     private void validateUserData(User user) throws ValidationException {
-        if (ValidationUtil.isBlank(user.getEmail())) {
-            logger.warn("Attempt to create user without email");
-            throw new ValidationException("User email cannot be empty");
-        }
+        validateBlankString(user.getEmail(), "Attempt to create user without email", "User email cannot be empty");
+        validateBlankString(user.getPassword(), "Attempt to create user without password", "Password cannot be empty");
+        validateBlankString(user.getName(), "Attempt to create user without name", "Username cannot be empty");
 
-        User unique = userRepository.findByEmail(user.getEmail());
-        if (ValidationUtil.isNotNull(unique)) {
-            throw new ValidationException("User with email: " + user.getEmail() + " already exists");
-        }
-
-        if (ValidationUtil.isBlank(user.getPassword())) {
-            logger.warn("Attempt to create user without password");
-            throw new ValidationException("Password cannot be empty");
-        }
-
-        if (ValidationUtil.isBlank(user.getName())) {
-            logger.warn("Attempt to create user without name");
-            throw new ValidationException("Username cannot be empty");
-        }
+        userRepository.findByEmail(user.getEmail()).ifPresent(u -> {
+            throw new IllegalArgumentException("User with email: " + user.getEmail() + " already exists");
+        });
     }
 
     private void validateCompanyData(Company company) throws ValidationException {
-        if (ValidationUtil.isBlank(company.getName())) {
-            logger.warn("Attempt to create company without name");
-            throw new ValidationException("Company name cannot be empty");
-        }
-        if (ValidationUtil.isBlank(company.getAddress())) {
-            logger.warn("Attempt to create company without address");
-            throw new ValidationException("Company address cannot be empty");
-        }
+        validateBlankString(company.getName(), "Attempt to create company without name", "Company name cannot be empty");
+        validateBlankString(company.getAddress(), "Attempt to create company without address", "Company address cannot be empty");
 
-        Company unique = companyRepository.findByName(company.getName());
-        if (ValidationUtil.isNotNull(unique)) {
-            throw new ValidationException("Company with name: " + company.getName() + " already exists");
-        }
+        companyRepository.findByName(company.getName()).ifPresent(u -> {
+            throw new IllegalArgumentException("Company with name: " + company.getName() + " already exists");
+        });
     }
 
     private String generateToken() {
         return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
+    }
+
+    private void validateBlankString(String object, String loggerMsg, String exceptionMsg) throws ValidationException {
+        if (ValidationUtil.isBlank(object)) {
+            logger.warn(loggerMsg);
+            throw new ValidationException(exceptionMsg);
+        }
     }
 }

@@ -19,6 +19,7 @@ import pl.ark.chr.buginator.util.Credentials;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * Created by Arek on 2016-09-29.
@@ -42,17 +43,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loadUserByEmail(String login) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(login);
+        Optional<User> userWrapper = userRepository.findByEmail(login);
 
-        if (user == null) {
+        if (!userWrapper.isPresent()) {
             logger.info("No user found for email: " + login);
             throw new UsernameNotFoundException("No such user: " + login);
-        } else if (user.getRole() == null) {
+        } else if (userWrapper.get().getRole() == null) {
             logger.warn("User: " + login + " has no authorities");
             throw new UsernameNotFoundException("User " + login + " has no authorities");
         }
 
-        return user;
+        return userWrapper.get();
     }
 
     @Override
@@ -71,19 +72,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void resetPassword(String login, Locale locale) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(login);
+        Optional<User> user = userRepository.findByEmail(login);
 
-        if (user == null) {
+        if (!user.isPresent()) {
             logger.info("No user found for email: " + login);
             throw new UsernameNotFoundException("No such user: " + login);
         }
 
+        User u = user.get();
         String newPassword = generatePassword();
-        user.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt(buginatorProperties.getBcryptStrength())));
+        u.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt(buginatorProperties.getBcryptStrength())));
 
-        user = userRepository.save(user);
+        u = userRepository.save(u);
 
-        emailService.sendResetPassword(user, locale, newPassword);
+        emailService.sendResetPassword(u, locale, newPassword);
     }
 
     private String generatePassword() {

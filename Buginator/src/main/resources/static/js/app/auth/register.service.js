@@ -1,12 +1,14 @@
 angular.module("buginator.registerService", [])
-    .factory("authService", function ($http) {
+    .factory("registerService", function ($http) {
         var service = {};
 
-
-
-        service.register = function (credentials, successFunction, failureFunction) {
-            $http.post("/auth/login", credentials)
+        service.register = function (registerData, successFunction, failureFunction) {
+            $http.post("/auth/register", registerData)
                 .then(successFunction, failureFunction);
+        };
+
+        service.validateInput = function(registerData) {
+
         };
 
         return service;

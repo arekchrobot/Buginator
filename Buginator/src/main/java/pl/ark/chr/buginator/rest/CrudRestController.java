@@ -40,35 +40,35 @@ public abstract class CrudRestController<T extends BaseEntity> {
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<T> getAll(HttpServletRequest request) throws RestException {
-        try {
+//        try {
             logger.info("Getting all " + className + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
             return getService().getAll();
-        } catch (RuntimeException ex) {
-            logger.error(ex.getMessage(), ex);
-            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request));
-        }
+//        } catch (RuntimeException ex) {
+//            logger.error(ex.getMessage(), ex);
+//            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request));
+//        }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public T get(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        try {
+//        try {
             logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
             return getService().get(id);
-        } catch (RuntimeException ex) {
-            logger.error(ex.getMessage(), ex);
-            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request));
-        }
+//        } catch (RuntimeException ex) {
+//            logger.error(ex.getMessage(), ex);
+//            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request));
+//        }
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public T save(@RequestBody T entity, HttpServletRequest request) throws RestException {
-        try {
+//        try {
             logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
             return getService().save(entity);
-        } catch (RuntimeException ex) {
-            logger.error(ex.getMessage(), ex);
-            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request), entity);
-        }
+//        } catch (RuntimeException ex) {
+//            logger.error(ex.getMessage(), ex);
+//            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request), entity);
+//        }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

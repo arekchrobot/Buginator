@@ -15,6 +15,7 @@ import pl.ark.chr.buginator.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -34,9 +35,10 @@ public class BuginatorAuthorizingRealm extends AuthorizingRealm {
         } catch (NoSuchElementException ex) {
             return null;
         }
-        User user = userRepository.findByEmail(username);
+        Optional<User> userOptional = userRepository.findByEmail(username);
 
-        if (user != null) {
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
             Set<String> roles = new HashSet<>();
             Set<String> perms = new HashSet<>();
             roles.add(user.getRole().getAuthority());
@@ -54,9 +56,9 @@ public class BuginatorAuthorizingRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken authToken = (UsernamePasswordToken) authenticationToken;
 
-        User user = userRepository.findByEmail(authToken.getUsername());
+        Optional<User> user = userRepository.findByEmail(authToken.getUsername());
 
-        if (user == null) {
+        if (!user.isPresent()) {
             throw new UsernameNotFoundException("Account does not exists");
         }
 
