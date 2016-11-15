@@ -18,7 +18,7 @@ angular.module("buginator.authService", [])
         };
 
         service.logout = function (successFunction, failureFunction) {
-            $http.post("/auth/logout", {})
+            $http.post("/auth/signout", {})
                 .then(successFunction, failureFunction);
         };
 
@@ -29,7 +29,7 @@ angular.module("buginator.authService", [])
 
             if (loggedUser == null || cacheService.shouldSynchronize(lastSyncDate, LOGGED_CACHE_TIME_MIN)) {
                 loggedUser = $http.get("/auth/logged", {})
-                    .then(function(response){
+                    .then(function (response) {
                         cache.put(cacheKeys.lastSyncDate, new Date());
                         return response.data;
                     }, failureFunction);
@@ -46,6 +46,11 @@ angular.module("buginator.authService", [])
                 }
             }
             return permissions;
+        };
+
+        service.remindPassword = function (email, successFunction, failureFunction) {
+            $http.put("/auth/reset?lg=" + email, {})
+                .then(successFunction, failureFunction);
         };
 
         return service;

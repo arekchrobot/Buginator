@@ -16,6 +16,7 @@ angular.module("buginator", [
     "buginator.cacheService",
 
     "buginator.authService",
+    "buginator.registerService",
     "buginator.authController"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", function ($sceDelegateProvider, $httpProvider, $urlRouterProvider) {

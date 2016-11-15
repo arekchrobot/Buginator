@@ -7,9 +7,5 @@ angular.module("buginator.registerService", [])
                 .then(successFunction, failureFunction);
         };
 
-        service.validateInput = function(registerData) {
-
-        };
-
         return service;
     });

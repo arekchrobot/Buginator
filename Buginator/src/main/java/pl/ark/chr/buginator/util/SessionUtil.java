@@ -13,11 +13,7 @@ public class SessionUtil {
     private static final String USER_KEY = "buginator_user";
 
     public UserWrapper getCurrentUser(HttpServletRequest request) {
-        UserWrapper currentUser = (UserWrapper) request.getSession().getAttribute(USER_KEY);
-        if(currentUser == null) {
-            return null;
-        }
-        return currentUser;
+        return (UserWrapper) request.getSession().getAttribute(USER_KEY);
     }
 
     public void setCurrentUser(HttpServletRequest request, UserWrapper currentUser) {

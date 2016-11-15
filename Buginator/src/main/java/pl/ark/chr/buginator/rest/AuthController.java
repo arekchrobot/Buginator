@@ -61,9 +61,11 @@ public class AuthController {
         }
     }
 
-    @RequestMapping( value = "/logout", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping( value = "/signout", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public boolean logout(HttpServletRequest request, HttpServletResponse response) {
-        logger.info("Logging out user: " + sessionUtil.getCurrentUser(request).getUsername());
+        UserWrapper currentUser = sessionUtil.getCurrentUser(request);
+        String username = currentUser != null ? currentUser.getUsername() : "";
+        logger.info("Logging out user: " + username);
         SecurityUtils.getSubject().logout();
         sessionUtil.removeCurrentUser(request);
         return true;

@@ -30,6 +30,8 @@ public class RestExceptionHandler {
                 .append("Error executing url: ")
                 .append(e.getOriginalUrl())
                 .append(e.getRequestBody() != null ? " with request body: " + e.getRequestBody().toString() : "")
+                .append(".With exception: ")
+                .append(e.toString())
                 .toString();
         logger.info(loggerMsg);
         ExceptionWrapper error = new ExceptionWrapper(e.getStatus().value(), e.getLocalizedMessage());
@@ -46,6 +48,8 @@ public class RestExceptionHandler {
                     .append("Error executing url: ")
                     .append(HttpUtil.generateOriginalUrl(request))
                     .append("POST".equalsIgnoreCase(request.getMethod()) ? request.getReader().lines().collect(Collectors.joining(System.lineSeparator())) : "")
+                    .append(".With exception: ")
+                    .append(e.toString())
                     .toString();
             logger.info(loggerMsg);
         } catch (IOException ex) {

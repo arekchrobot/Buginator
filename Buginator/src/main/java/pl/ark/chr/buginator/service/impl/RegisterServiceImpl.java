@@ -82,7 +82,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     private LocalDate generateExpiryDate(Integer duration) {
         LocalDate expiryDate = LocalDate.now();
-        expiryDate.plusDays(duration);
+        expiryDate = expiryDate.plusDays(duration);
         return expiryDate;
     }
 
