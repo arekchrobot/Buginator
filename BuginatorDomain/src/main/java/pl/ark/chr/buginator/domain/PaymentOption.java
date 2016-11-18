@@ -1,5 +1,7 @@
 package pl.ark.chr.buginator.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "payment_option")
 @SequenceGenerator(name = "default_gen", sequenceName = "payment_option_seq", allocationSize = 1)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PaymentOption extends BaseEntity {
 
     private static final long serialVersionUID = -1453981529749167170L;

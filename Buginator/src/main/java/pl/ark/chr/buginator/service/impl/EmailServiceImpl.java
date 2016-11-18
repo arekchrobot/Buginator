@@ -82,6 +82,7 @@ public class EmailServiceImpl implements EmailService {
         emailData.put("locale", locale);
         emailData.put("token", company.getToken());
         emailData.put("uniqueKey", company.getUniqueKey());
+        emailData.put("companyName", company.getName());
 
         String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, REGISTER_CONFIRM_TEMPLATE, UTF_8, emailData);
 

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.ark.chr.buginator.config.shiro.BCryptPasswordService;
 import pl.ark.chr.buginator.domain.Company;
 import pl.ark.chr.buginator.domain.PaymentOption;
 import pl.ark.chr.buginator.domain.Role;
@@ -51,6 +52,9 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private BCryptPasswordService passwordService;
+
     @Override
     public void registerUser(RegisterData registerData, Locale locale) throws ValidationException {
         validateCompanyData(registerData.getCompany());
@@ -74,6 +78,7 @@ public class RegisterServiceImpl implements RegisterService {
         user.setCompany(company);
         user.setRole(role);
         user.setActive(true);
+        user.setPassword(passwordService.encryptPassword(user.getPassword()));
 
         userRepository.save(user);
 

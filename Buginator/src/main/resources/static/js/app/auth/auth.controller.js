@@ -9,6 +9,8 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
     $scope.registerData = {};
     $scope.rePassword = null;
     $scope.registerError = false;
+    $scope.forgotError = false;
+    $scope.forgotSuccess = false;
 
     $scope.authenticate = function (credentials) {
         authService.authenticate(credentials,
@@ -56,6 +58,8 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
         registerService.register($scope.registerData,
             function (returnedData) {
                 $scope.registerError = false;
+                $scope.registerData = {};
+                $scope.rePassword = null;
                 $("a[href=#login]").tab("show");
             }, function (returnedData) {
                 $scope.registerError = true;
@@ -66,9 +70,13 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
     $scope.resetPass = function () {
         authService.remindPassword($scope.credentials.username,
             function (returnedData) {
-
+                $scope.credentials = {};
+                $scope.forgotError = false;
+                $scope.forgotSuccess = true;
             }, function (returnedData) {
-
+                $scope.forgotError = true;
+                $scope.forgotSuccess = false;
+                $scope.forgotErrorMsg = registerData.data.message;
             });
     }
 });

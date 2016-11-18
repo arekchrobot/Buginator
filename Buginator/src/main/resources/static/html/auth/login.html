@@ -14,16 +14,20 @@
         </form>
     </div>
     <div id="forgot" class="tab-pane">
-        <form>
+        <form id="forgotForm" name="forgotForm" novalidate ng-submit="resetPass()">
             <p class="text-muted text-center">Enter your valid e-mail</p>
-            <input type="email" placeholder="mail@domain.com" class="form-control" ng-model="credentials.username">
+            <div class="form-group" ng-class="{'has-error':(forgotForm.remindEmail.$error.required && forgotForm.remindEmail.$touched) || forgotForm.remindEmail.$error.email, 'has-success':!forgotForm.remindEmail.$error.required || (!forgotForm.remindEmail.$error.email && forgotForm.remindEmail.$touched)}">
+                <input type="email" placeholder="mail@domain.com" class="form-control" ng-model="credentials.username" id="remindEmail" name="remindEmail" required>
+                <span class="help-block" ng-show="forgotForm.remindEmail.$error.required && forgotForm.remindEmail.$touched">Email is required.</span>
+                <span class="help-block" ng-show="forgotForm.remindEmail.$error.email && forgotForm.remindEmail.$touched">Not a valid email.</span>
+            </div>
             <br>
             <button class="btn btn-lg btn-danger btn-block" type="submit">Recover Password</button>
         </form>
     </div>
     <div id="signup" class="tab-pane">
         <div class="alert alert-danger" ng-if="registerError">
-            <button class="close" type="button" data-dismiss="alert">×</button>
+            <!--<button class="close" type="button" data-dismiss="alert">×</button>-->
             {{registerErrorMsg}}
         </div>
         <form id="registerForm" name="registerForm" novalidate ng-submit="register()">

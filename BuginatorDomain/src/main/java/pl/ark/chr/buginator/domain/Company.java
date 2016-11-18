@@ -1,5 +1,7 @@
 package pl.ark.chr.buginator.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -9,6 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "company")
 @SequenceGenerator(name = "default_gen", sequenceName = "company_seq", allocationSize = 1)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "uniqueKey", "token"})
 public class Company extends BaseEntity {
 
     private static final long serialVersionUID = 2863610043925637330L;

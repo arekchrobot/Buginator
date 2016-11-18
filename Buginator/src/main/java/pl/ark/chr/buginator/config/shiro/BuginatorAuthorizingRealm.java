@@ -62,6 +62,8 @@ public class BuginatorAuthorizingRealm extends AuthorizingRealm {
             throw new UsernameNotFoundException("Account does not exists");
         }
 
-        return new SimpleAuthenticationInfo(authToken.getUsername(), null, getName());
+        User loggedUser = user.get();
+
+        return new SimpleAuthenticationInfo(loggedUser.getEmail(), loggedUser.getPassword(), getName());
     }
 }
