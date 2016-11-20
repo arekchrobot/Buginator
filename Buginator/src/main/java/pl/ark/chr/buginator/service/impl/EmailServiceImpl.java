@@ -54,6 +54,7 @@ public class EmailServiceImpl implements EmailService {
         emailData.put("emailBody", messageSource);
         emailData.put("locale", locale);
         emailData.put("newPassword", newPassword);
+        emailData.put("username", user.getName());
 
         String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, PASSWORD_RESET_TEMPLATE, UTF_8, emailData);
 

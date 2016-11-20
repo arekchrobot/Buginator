@@ -4,6 +4,12 @@
 <hr>
 <div class="tab-content">
     <div id="login" class="tab-pane active">
+        <div class="alert alert-success" ng-if="forgotSuccess">
+            {{forgotSuccessMsg}}
+        </div>
+        <div class="alert alert-success" ng-if="registerSuccess">
+            {{registerSuccessMsg}}
+        </div>
         <form ng-submit="login()">
             <p class="text-muted text-center">
                 Enter your username and password
@@ -14,6 +20,9 @@
         </form>
     </div>
     <div id="forgot" class="tab-pane">
+        <div class="alert alert-danger" ng-if="forgotError">
+            {{forgotErrorMsg}}
+        </div>
         <form id="forgotForm" name="forgotForm" novalidate ng-submit="resetPass()">
             <p class="text-muted text-center">Enter your valid e-mail</p>
             <div class="form-group" ng-class="{'has-error':(forgotForm.remindEmail.$error.required && forgotForm.remindEmail.$touched) || forgotForm.remindEmail.$error.email, 'has-success':!forgotForm.remindEmail.$error.required || (!forgotForm.remindEmail.$error.email && forgotForm.remindEmail.$touched)}">
