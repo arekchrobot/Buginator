@@ -26,12 +26,12 @@
         <div class="alert alert-danger" ng-if="forgotError">
             {{forgotErrorMsg}}
         </div>
-        <form id="forgotForm" name="forgotForm" novalidate ng-submit="resetPass()">
+        <form id="forms.forgotForm" name="forms.forgotForm" novalidate ng-submit="resetPass()">
             <p class="text-muted text-center">Enter your valid e-mail</p>
-            <div class="form-group" ng-class="{'has-error':(forgotForm.remindEmail.$error.required && forgotForm.remindEmail.$touched) || forgotForm.remindEmail.$error.email, 'has-success':!forgotForm.remindEmail.$error.required || (!forgotForm.remindEmail.$error.email && forgotForm.remindEmail.$touched)}">
+            <div class="form-group" ng-class="{'has-error':(forms.forgotForm.remindEmail.$error.required && forms.forgotForm.remindEmail.$touched) || forms.forgotForm.remindEmail.$error.email, 'has-success':!forms.forgotForm.remindEmail.$error.required || (!forms.forgotForm.remindEmail.$error.email && forms.forgotForm.remindEmail.$touched)}">
                 <input type="email" placeholder="mail@domain.com" class="form-control" ng-model="credentials.username" id="remindEmail" name="remindEmail" required>
-                <span class="help-block" ng-show="forgotForm.remindEmail.$error.required && forgotForm.remindEmail.$touched">Email is required.</span>
-                <span class="help-block" ng-show="forgotForm.remindEmail.$error.email && forgotForm.remindEmail.$touched">Not a valid email.</span>
+                <span class="help-block" ng-show="forms.forgotForm.remindEmail.$error.required && forms.forgotForm.remindEmail.$touched">Email is required.</span>
+                <span class="help-block" ng-show="forms.forgotForm.remindEmail.$error.email && forms.forgotForm.remindEmail.$touched">Not a valid email.</span>
             </div>
             <br>
             <button class="btn btn-lg btn-danger btn-block" type="submit">Recover Password</button>
@@ -42,33 +42,33 @@
             <!--<button class="close" type="button" data-dismiss="alert">×</button>-->
             {{registerErrorMsg}}
         </div>
-        <form id="registerForm" name="registerForm" novalidate ng-submit="register()">
-            <div class="form-group" ng-class="{'has-error':registerForm.companyName.$error.required && registerForm.companyName.$touched, 'has-success':!registerForm.companyName.$error.required}">
+        <form id="forms.registerForm" name="forms.registerForm" novalidate ng-submit="register()">
+            <div class="form-group" ng-class="{'has-error':forms.registerForm.companyName.$error.required && forms.registerForm.companyName.$touched, 'has-success':!forms.registerForm.companyName.$error.required}">
                 <input type="text" placeholder="company name" class="form-control top" ng-model="registerData.company.name" id="companyName" name="companyName" required>
-                <span class="help-block" ng-show="registerForm.companyName.$error.required && registerForm.companyName.$touched">Company name is required.</span>
+                <span class="help-block" ng-show="forms.registerForm.companyName.$error.required && forms.registerForm.companyName.$touched">Company name is required.</span>
             </div>
-            <div class="form-group" ng-class="{'has-error':registerForm.companyAddress.$error.required && registerForm.companyAddress.$touched, 'has-success':!registerForm.companyAddress.$error.required}">
+            <div class="form-group" ng-class="{'has-error':forms.registerForm.companyAddress.$error.required && forms.registerForm.companyAddress.$touched, 'has-success':!forms.registerForm.companyAddress.$error.required}">
                 <input type="text" placeholder="address " class="form-control middle" ng-model="registerData.company.address" id="companyAddress" name="companyAddress" required>
-                <span class="help-block" ng-show="registerForm.companyAddress.$error.required && registerForm.companyAddress.$touched">Company address is required.</span>
+                <span class="help-block" ng-show="forms.registerForm.companyAddress.$error.required && forms.registerForm.companyAddress.$touched">Company address is required.</span>
             </div>
-            <div class="form-group" ng-class="{'has-error':registerForm.userName.$error.required && registerForm.userName.$touched, 'has-success':!registerForm.userName.$error.required}">
+            <div class="form-group" ng-class="{'has-error':forms.registerForm.userName.$error.required && forms.registerForm.userName.$touched, 'has-success':!forms.registerForm.userName.$error.required}">
                 <input type="text" placeholder="username" class="form-control middle" ng-model="registerData.user.name" id="userName" name="userName" required>
-                <span class="help-block" ng-show="registerForm.userName.$error.required && registerForm.userName.$touched">Username is required.</span>
+                <span class="help-block" ng-show="forms.registerForm.userName.$error.required && forms.registerForm.userName.$touched">Username is required.</span>
             </div>
-            <div class="form-group" ng-class="{'has-error':(registerForm.userEmail.$error.required && registerForm.userEmail.$touched) || registerForm.userEmail.$error.email, 'has-success':!registerForm.userEmail.$error.required || (!registerForm.userEmail.$error.email && registerForm.userEmail.$touched)}">
+            <div class="form-group" ng-class="{'has-error':(forms.registerForm.userEmail.$error.required && forms.registerForm.userEmail.$touched) || forms.registerForm.userEmail.$error.email, 'has-success':!forms.registerForm.userEmail.$error.required || (!forms.registerForm.userEmail.$error.email && forms.registerForm.userEmail.$touched)}">
                 <input type="email" placeholder="mail@domain.com" class="form-control middle" ng-model="registerData.user.email" id="userEmail" name="userEmail" required>
-                <span class="help-block" ng-show="registerForm.userEmail.$error.required && registerForm.userEmail.$touched">Email is required.</span>
-                <span class="help-block" ng-show="registerForm.userEmail.$error.email && registerForm.userEmail.$touched">Not a valid email.</span>
+                <span class="help-block" ng-show="forms.registerForm.userEmail.$error.required && forms.registerForm.userEmail.$touched">Email is required.</span>
+                <span class="help-block" ng-show="forms.registerForm.userEmail.$error.email && forms.registerForm.userEmail.$touched">Not a valid email.</span>
             </div>
-            <div class="form-group" ng-class="{'has-error':registerForm.pass.$error.required && registerForm.pass.$touched, 'has-success':!registerForm.pass.$error.required}">
+            <div class="form-group" ng-class="{'has-error':forms.registerForm.pass.$error.required && forms.registerForm.pass.$touched, 'has-success':!forms.registerForm.pass.$error.required}">
                 <input type="password" placeholder="password" class="form-control middle" ng-model="registerData.user.password" id="pass" name="pass" required>
-                <span class="help-block" ng-show="registerForm.pass.$error.required && registerForm.pass.$touched">Password is required.</span>
+                <span class="help-block" ng-show="forms.registerForm.pass.$error.required && forms.registerForm.pass.$touched">Password is required.</span>
             </div>
-            <div class="form-group" ng-class="{'has-error':registerForm.rePass.$error.pwmatch, 'has-success':!registerForm.rePass.$error.pwmatch && registerForm.pass.$touched && !registerForm.userEmail.$error.required && !registerForm.userEmail.$error.email}">
+            <div class="form-group" ng-class="{'has-error':forms.registerForm.rePass.$error.pwmatch, 'has-success':!forms.registerForm.rePass.$error.pwmatch && forms.registerForm.pass.$touched && !forms.registerForm.userEmail.$error.required && !forms.registerForm.userEmail.$error.email}">
                 <input type="password" placeholder="re-password" class="form-control bottom" ng-model="rePassword" id="rePass" pw-check="pass" name="rePass">
-              <span class='help-block' ng-show='registerForm.rePass.$error.pwmatch'>Passwords don't match.</span>
+              <span class='help-block' ng-show='forms.registerForm.rePass.$error.pwmatch'>Passwords don't match.</span>
             </div>
-            <button class="btn btn-lg btn-success btn-block" type="submit" ng-disabled="!registerForm.$valid">Register</button>
+            <button class="btn btn-lg btn-success btn-block" type="submit" ng-disabled="!forms.registerForm.$valid">Register</button>
         </form>
     </div>
 </div>

@@ -13,6 +13,8 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
     $scope.forgotSuccess = false;
     $scope.registerSuccess = false;
 
+    $scope.forms = {};
+
     $scope.authenticate = function (credentials) {
         authService.authenticate(credentials,
             function (returnedData) {
@@ -59,8 +61,11 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
     $scope.register = function () {
         registerService.register($scope.registerData,
             function (returnedData) {
+                $scope.forms.registerForm.$setPristine();
+                $scope.forms.registerForm.$setUntouched();
                 $scope.registerError = false;
                 $scope.registerData = {};
+                $scope.rePassword = "";
                 $scope.rePassword = null;
                 $scope.registerSuccess = true;
                 $scope.registerSuccessMsg = "Thank you for registering. Details has been sent to mail.";
@@ -75,10 +80,12 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
     $scope.resetPass = function () {
         authService.remindPassword($scope.credentials.username,
             function (returnedData) {
+                $scope.forms.forgotForm.$setPristine();
+                $scope.forms.forgotForm.$setUntouched();
                 $scope.credentials = {};
                 $scope.forgotError = false;
                 $scope.forgotSuccess = true;
-                $scope.forgotSuccessMsg = "Your password has been reseted and sent to mail.";
+                $scope.forgotSuccessMsg = "Your password has been reset and sent to mail.";
                 $("a[href=#login]").tab("show");
             }, function (returnedData) {
                 $scope.forgotError = true;

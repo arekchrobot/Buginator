@@ -51,27 +51,10 @@ public class EmailServiceImpl implements EmailService {
     public void sendResetPassword(User user, Locale locale, String newPassword) {
         Map<String, Object> emailData = new HashMap<>();
 
-        emailData.put("emailBody", messageSource);
-        emailData.put("locale", locale);
         emailData.put("newPassword", newPassword);
         emailData.put("username", user.getName());
 
-        String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, PASSWORD_RESET_TEMPLATE, UTF_8, emailData);
-
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-
-        try {
-            helper.setSubject(messageSource.getMessage("passwordReminder.title", null, locale));
-            helper.setTo(user.getEmail());
-            helper.setFrom(noReplyEmailAddress);
-            helper.setSentDate(new Date());
-            helper.setText(emailBody, true);
-        } catch(MessagingException e) {
-            logger.error("Error sending reset password to user with id: " + user.getId() + " with error: " + e.getMessage());
-        }
-
-        mailSender.send(message);
+        sendMessage(emailData, locale, "passwordReminder.title", user.getEmail(), PASSWORD_RESET_TEMPLATE, "Error sending reset password to user with id: " + user.getId());
     }
 
     @Override
@@ -79,25 +62,34 @@ public class EmailServiceImpl implements EmailService {
     public void sendRegister(Company company, Locale locale, String email) {
         Map<String, Object> emailData = new HashMap<>();
 
-        emailData.put("emailBody", messageSource);
-        emailData.put("locale", locale);
         emailData.put("token", company.getToken());
         emailData.put("uniqueKey", company.getUniqueKey());
         emailData.put("companyName", company.getName());
 
-        String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, REGISTER_CONFIRM_TEMPLATE, UTF_8, emailData);
+        sendMessage(emailData, locale, "registerConfirm.title", email, REGISTER_CONFIRM_TEMPLATE, "Error sending register email for company id: " + company.getId());
+    }
+
+    private void sendMessage(Map<String, Object> emailData, Locale locale, String title, String email, String emailTemplate, String errorMsg) {
+        if (emailData == null) {
+            emailData = new HashMap<>();
+        }
+
+        emailData.put("emailBody", messageSource);
+        emailData.put("locale", locale);
+
+        String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailTemplate, UTF_8, emailData);
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
         try {
-            helper.setSubject(messageSource.getMessage("registerConfirm.title", null, locale));
+            helper.setSubject(messageSource.getMessage(title, null, locale));
             helper.setTo(email);
             helper.setFrom(noReplyEmailAddress);
             helper.setSentDate(new Date());
             helper.setText(emailBody, true);
         } catch(MessagingException e) {
-            logger.error("Error sending register email for company id: " + company.getId() + " with error: " + e.getMessage());
+            logger.error(errorMsg  + " with error: " + e.getMessage());
         }
 
         mailSender.send(message);
