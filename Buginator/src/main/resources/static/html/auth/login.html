@@ -10,6 +10,9 @@
         <div class="alert alert-success" ng-if="registerSuccess">
             {{registerSuccessMsg}}
         </div>
+        <div class="alert alert-danger" ng-if="loginError">
+            {{loginErrorMsg}}
+        </div>
         <form ng-submit="login()">
             <p class="text-muted text-center">
                 Enter your username and password

@@ -5,7 +5,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
     });
 }).controller("authController", function ($rootScope, $scope, $state, authService, registerService) {
     $scope.credentials = {};
-    $rootScope.loginError = false;
+    $scope.loginError = false;
     $scope.registerData = {};
     $scope.rePassword = null;
     $scope.registerError = false;
@@ -17,13 +17,14 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
         authService.authenticate(credentials,
             function (returnedData) {
                 $rootScope.user = returnedData;
-                $rootScope.loginError = false;
+                $scope.loginError = false;
                 $rootScope.user.perms = authService.createPermissions($rootScope.user);
                 $scope.credentials = {};
                 //$state.go("home");
             }, function (returnedData) {
                 $scope.credentials = {};
-                $rootScope.loginError = true;
+                $scope.loginError = true;
+                $scope.loginErrorMsg = "Username or password is invalid.";
             });
     };
 
