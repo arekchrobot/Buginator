@@ -1,0 +1,27 @@
+{
+  "LOGIN_INFO": "Enter your username and password",
+  "LOGIN_PASSWORD": "password",
+  "LOGIN_SUBMIT_BUTTON": "Sign in",
+  "LOGIN_TOGGLE": "Login",
+
+  "FORGOT_INFO": "Enter your valid e-mail",
+  "FORGOT_EMAIL_REQUIRED": "Email is required.",
+  "FORGOT_EMAIL_INVALID": "Not a valid email.",
+  "FORGOT_SUBMIT_BUTTON": "Recover Password",
+  "FORGOT_TOGGLE": "Forgot Password",
+
+  "SIGNUP_TOGGLE": "Signup",
+  "SIGNUP_COMPANY_NAME": "company name",
+  "SIGNUP_COMPANY_NAME_REQUIRED": "Company name is required.",
+  "SIGNUP_COMPANY_ADDRESS": "address",
+  "SIGNUP_COMPANY_ADDRESS_REQUIRED": "Company address is required.",
+  "SIGNUP_USERNAME": "username",
+  "SIGNUP_USERNAME_REQUIRED": "Username is required.",
+  "SIGNUP_EMAIL_REQUIRED": "Email is required.",
+  "SIGNUP_EMAIL_INVALID": "Not a valid email.",
+  "SIGNUP_PASSWORD": "password",
+  "SIGNUP_PASSWORD_REQUIRED": "Password is required.",
+  "SIGNUP_RE_PASSWORD": "re-password",
+  "SIGNUP_PASSWORD_MATCH": "Passwords don't match.",
+  "SIGNUP_SUBMIT_BUTTON": "Register"
+}

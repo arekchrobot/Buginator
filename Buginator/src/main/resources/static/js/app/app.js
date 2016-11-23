@@ -6,6 +6,9 @@ angular.module("buginator", [
     "ngDialog",
     "smart-table",
     "LocalStorageModule",
+    "pascalprecht.translate",
+    "ngCookies",
+    "ngSanitize",
 
     "buginator.directives",
     "buginator.filters",
@@ -19,14 +22,35 @@ angular.module("buginator", [
     "buginator.registerService",
     "buginator.authController"
 
-]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", function ($sceDelegateProvider, $httpProvider, $urlRouterProvider) {
+]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider) {
 
-    //$urlRouterProvider.when("/", "login").otherwise("/");
+    $urlRouterProvider
+        .when("/signup", "login")
+        .when("/forgot", "login");
+    //.otherwise("/");
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     $sceDelegateProvider
         .resourceUrlWhitelist([
-            "self",
-            "https://www.youtube.com/embed/**"
+            "self"
         ]);
+
+    $translateProvider.useLocalStorage();
+    $translateProvider.useStaticFilesLoader({
+        files: [{
+            prefix: "js/app/languages/",
+            suffix: ".json"
+        }, {
+            prefix: "js/app/languages/auth/",
+            suffix: ".json"
+        }]
+    });
+    $translateProvider.registerAvailableLanguageKeys(['en', 'pl'], {
+        "en_*": "en",
+        "pl_*": "pl",
+        "*":"en"
+    });
+    $translateProvider.determinePreferredLanguage();
+    $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+
 }]);

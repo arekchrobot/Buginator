@@ -1,0 +1,27 @@
+{
+  "LOGIN_INFO": "Podaj nazwę użytkownika oraz hasło",
+  "LOGIN_PASSWORD": "hasło",
+  "LOGIN_SUBMIT_BUTTON": "Zaloguj",
+  "LOGIN_TOGGLE": "Zaloguj",
+
+  "FORGOT_INFO": "Podaj poprawny adres e-mail",
+  "FORGOT_EMAIL_REQUIRED": "Email jest wymaganym polem.",
+  "FORGOT_EMAIL_INVALID": "Niepoprawny adres email.",
+  "FORGOT_SUBMIT_BUTTON": "Odzyskaj hasło",
+  "FORGOT_TOGGLE": "Zapomniałem hasła",
+
+  "SIGNUP_TOGGLE": "Zarejestruj",
+  "SIGNUP_COMPANY_NAME": "nazwa firmy",
+  "SIGNUP_COMPANY_NAME_REQUIRED": "Nazwa firmy jest wymaganym polem.",
+  "SIGNUP_COMPANY_ADDRESS": "adres",
+  "SIGNUP_COMPANY_ADDRESS_REQUIRED": "Adres firmy jest wymaganym polem.",
+  "SIGNUP_USERNAME": "nazwa użytkownika",
+  "SIGNUP_USERNAME_REQUIRED": "Nazwa użytkownika jest wymaganym polem.",
+  "SIGNUP_EMAIL_REQUIRED": "Email jest wymaganym polem.",
+  "SIGNUP_EMAIL_INVALID": "Niepoprawny adres email.",
+  "SIGNUP_PASSWORD": "hasło",
+  "SIGNUP_PASSWORD_REQUIRED": "Hasło jest wymaganym polem.",
+  "SIGNUP_RE_PASSWORD": "powtórz hasło",
+  "SIGNUP_PASSWORD_MATCH": "Hasła nie są identyczne.",
+  "SIGNUP_SUBMIT_BUTTON": "Zarejestruj"
+}
