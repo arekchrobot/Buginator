@@ -12,9 +12,9 @@ import java.util.Locale;
  */
 public interface UserService {
 
-    User loadUserByEmail(String login) throws UsernameNotFoundException;
+    User loadUserByEmail(String login, Locale locale) throws UsernameNotFoundException;
 
-    User validateUserLogin(Credentials credentials) throws RestException;
+    User validateUserLogin(Credentials credentials, Locale locale) throws RestException;
 
     void resetPassword(String login, Locale locale) throws UsernameNotFoundException;
 }

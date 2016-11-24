@@ -6,6 +6,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -41,20 +42,23 @@ public class AuthController {
     @Autowired
     private RegisterService registerService;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public UserWrapper login(HttpServletRequest request, HttpServletResponse response, @RequestBody Credentials credentials) throws RestException {
+    public UserWrapper login(HttpServletRequest request, HttpServletResponse response, Locale locale, @RequestBody Credentials credentials) throws RestException {
         UsernamePasswordToken authToken = new UsernamePasswordToken(credentials.getUsername(), credentials.getPassword(), true);
         try {
             logger.info("Logging user: " + credentials.getUsername());
 
             SecurityUtils.getSubject().login(authToken);
-            User user = userService.validateUserLogin(credentials);
+            User user = userService.validateUserLogin(credentials, locale);
             UserWrapper userWrapper = new UserWrapper(user);
             sessionUtil.setCurrentUser(request, userWrapper);
             return userWrapper;
         } catch (AuthenticationException exception) {
             logger.info("Not user found with username: " + credentials.getUsername() + " and password: " + credentials.getPassword());
-            throw new RestException("Wrong credentials", HttpStatus.UNAUTHORIZED, HttpUtil.generateOriginalUrl(request), credentials);
+            throw new RestException(messageSource.getMessage("wrongCredentials.msg", null, locale), HttpStatus.UNAUTHORIZED, HttpUtil.generateOriginalUrl(request), credentials);
         } catch (RuntimeException ex) {
             logger.info("Error executing login for user: " + credentials.getUsername() + " with error" + ex.getMessage());
             throw new RestException(ex.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request), credentials);

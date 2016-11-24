@@ -3,7 +3,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
         url: "/login",
         templateUrl: "html/auth/login.html"
     });
-}).controller("authController", function ($rootScope, $scope, $state, authService, registerService) {
+}).controller("authController", function ($rootScope, $scope, $state, authService, registerService, $translate) {
     $scope.credentials = {};
     $scope.loginError = false;
     $scope.registerData = {};
@@ -26,7 +26,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
             }, function (returnedData) {
                 $scope.credentials = {};
                 $scope.loginError = true;
-                $scope.loginErrorMsg = "Username or password is invalid.";
+                $scope.loginErrorMsg = $translate.instant("LOGIN_ERROR_MSG");
             });
     };
 
@@ -68,7 +68,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
                 $scope.rePassword = "";
                 $scope.rePassword = null;
                 $scope.registerSuccess = true;
-                $scope.registerSuccessMsg = "Thank you for registering. Details has been sent to mail.";
+                $scope.registerSuccessMsg = $translate.instant("SIGNUP_SUCCESS_MSG");
                 $("a[href=#login]").tab("show");
             }, function (returnedData) {
                 $scope.registerError = true;
@@ -85,7 +85,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
                 $scope.credentials = {};
                 $scope.forgotError = false;
                 $scope.forgotSuccess = true;
-                $scope.forgotSuccessMsg = "Your password has been reset and sent to mail.";
+                $scope.forgotSuccessMsg = $translate.instant("FORGOT_SUCCESS_MSG");
                 $("a[href=#login]").tab("show");
             }, function (returnedData) {
                 $scope.forgotError = true;

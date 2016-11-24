@@ -80,7 +80,7 @@ public class EmailServiceImpl implements EmailService {
         String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailTemplate, UTF_8, emailData);
 
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
+        MimeMessageHelper helper = new MimeMessageHelper(message, UTF_8);
 
         try {
             helper.setSubject(messageSource.getMessage(title, null, locale));

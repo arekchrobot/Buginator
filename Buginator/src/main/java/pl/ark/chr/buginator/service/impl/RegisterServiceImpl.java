@@ -4,6 +4,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.config.shiro.BCryptPasswordService;
@@ -55,10 +56,13 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     private BCryptPasswordService passwordService;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @Override
     public void registerUser(RegisterData registerData, Locale locale) throws ValidationException {
-        validateCompanyData(registerData.getCompany());
-        validateUserData(registerData.getUser());
+        validateCompanyData(registerData.getCompany(), locale);
+        validateUserData(registerData.getUser(), locale);
 
         Company company = registerData.getCompany();
         company.setToken(generateToken());
@@ -91,22 +95,36 @@ public class RegisterServiceImpl implements RegisterService {
         return expiryDate;
     }
 
-    private void validateUserData(User user) throws ValidationException {
-        validateBlankString(user.getEmail(), "Attempt to create user without email", "User email cannot be empty");
-        validateBlankString(user.getPassword(), "Attempt to create user without password", "Password cannot be empty");
-        validateBlankString(user.getName(), "Attempt to create user without name", "Username cannot be empty");
+    private void validateUserData(User user, Locale locale) throws ValidationException {
+        validateBlankString(user.getEmail(), "Attempt to create user without email", messageSource.getMessage("validation.userEmailEmpty", null, locale));
+        validateBlankString(user.getPassword(), "Attempt to create user without password", messageSource.getMessage("validation.passwordEmpty", null, locale));
+        validateBlankString(user.getName(), "Attempt to create user without name", messageSource.getMessage("validation.usernameEmpty", null, locale));
 
         userRepository.findByEmail(user.getEmail()).ifPresent(u -> {
-            throw new IllegalArgumentException("User with email: " + user.getEmail() + " already exists");
+            String errorMsg = new StringBuilder(60)
+                    .append(messageSource.getMessage("illegalArgument.user.prefix", null, locale))
+                    .append(" ")
+                    .append(user.getEmail())
+                    .append(" ")
+                    .append(messageSource.getMessage("illegalArgument.user.suffix", null, locale))
+                    .toString();
+            throw new IllegalArgumentException(errorMsg);
         });
     }
 
-    private void validateCompanyData(Company company) throws ValidationException {
-        validateBlankString(company.getName(), "Attempt to create company without name", "Company name cannot be empty");
-        validateBlankString(company.getAddress(), "Attempt to create company without address", "Company address cannot be empty");
+    private void validateCompanyData(Company company, Locale locale) throws ValidationException {
+        validateBlankString(company.getName(), "Attempt to create company without name", messageSource.getMessage("validation.companyNameEmpty", null, locale));
+        validateBlankString(company.getAddress(), "Attempt to create company without address", messageSource.getMessage("validation.companyAddressEmpty", null, locale));
 
         companyRepository.findByName(company.getName()).ifPresent(u -> {
-            throw new IllegalArgumentException("Company with name: " + company.getName() + " already exists");
+            String errorMsg = new StringBuilder(60)
+                    .append(messageSource.getMessage("illegalArgument.company.prefix", null, locale))
+                    .append(" ")
+                    .append(company.getName())
+                    .append(" ")
+                    .append(messageSource.getMessage("illegalArgument.company.suffix", null, locale))
+                    .toString();
+            throw new IllegalArgumentException(errorMsg);
         });
     }
 

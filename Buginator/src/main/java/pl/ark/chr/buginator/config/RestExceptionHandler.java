@@ -2,6 +2,8 @@ package pl.ark.chr.buginator.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +16,7 @@ import pl.ark.chr.buginator.util.HttpUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -23,6 +26,9 @@ import java.util.stream.Collectors;
 public class RestExceptionHandler {
 
     private Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
+
+    @Autowired
+    private MessageSource messageSource;
 
     @ExceptionHandler(value = {RestException.class})
     public ResponseEntity<ExceptionWrapper> restErrorHandler(HttpServletRequest request, RestException e) {
@@ -42,7 +48,7 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(value = {RuntimeException.class})
-    public ResponseEntity<ExceptionWrapper> runtimeErrorHandler(HttpServletRequest request, RuntimeException e) {
+    public ResponseEntity<ExceptionWrapper> runtimeErrorHandler(HttpServletRequest request, Locale locale, RuntimeException e) {
         try {
             String loggerMsg = new StringBuffer()
                     .append("Error executing url: ")
@@ -56,7 +62,8 @@ public class RestExceptionHandler {
             logger.info("No post body found for exception.");
         }
 
-        ExceptionWrapper error = new ExceptionWrapper(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getLocalizedMessage());
+
+        ExceptionWrapper error = new ExceptionWrapper(HttpStatus.INTERNAL_SERVER_ERROR.value(), messageSource.getMessage("internalError.msg", null, locale));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);

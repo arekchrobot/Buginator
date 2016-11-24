@@ -5,6 +5,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import pl.ark.chr.buginator.BuginatorProperties;
@@ -41,30 +42,40 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BuginatorProperties buginatorProperties;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @Override
-    public User loadUserByEmail(String login) throws UsernameNotFoundException {
+    public User loadUserByEmail(String login, Locale locale) throws UsernameNotFoundException {
         Optional<User> userWrapper = userRepository.findByEmail(login);
 
         if (!userWrapper.isPresent()) {
             logger.info("No user found for email: " + login);
-            throw new UsernameNotFoundException("No such user: " + login);
+            throw new UsernameNotFoundException(messageSource.getMessage("usernameNotFound.msg", null, locale) + " " +login);
         } else if (userWrapper.get().getRole() == null) {
             logger.warn("User: " + login + " has no authorities");
-            throw new UsernameNotFoundException("User " + login + " has no authorities");
+            String errorMsg = new StringBuilder(60)
+                    .append(messageSource.getMessage("usernameNotFound.prefix", null, locale))
+                    .append(" ")
+                    .append(login)
+                    .append(" ")
+                    .append(messageSource.getMessage("usernameNotFound.suffix", null, locale))
+                    .toString();
+            throw new UsernameNotFoundException(errorMsg);
         }
 
         return userWrapper.get();
     }
 
     @Override
-    public User validateUserLogin(Credentials credentials) throws RestException {
-        User user = loadUserByEmail(credentials.getUsername());
+    public User validateUserLogin(Credentials credentials, Locale locale) throws RestException {
+        User user = loadUserByEmail(credentials.getUsername(), locale);
 
         LocalDate currentDate = LocalDate.now();
 
         if (currentDate.isAfter(user.getCompany().getExpiryDate())) {
             logger.warn("User with id:" + user.getId() + " is inactive due to company with id: " + user.getCompany().getId() + " hasn't payed for subscription.");
-            throw new RestException("Your account has expired. Please contact your company to extend this limit.", HttpStatus.FORBIDDEN, "/auth/login", credentials);
+            throw new RestException(messageSource.getMessage("accountExpired.msg", null, locale), HttpStatus.FORBIDDEN, "/auth/login", credentials);
         }
 
         return user;
@@ -76,7 +87,7 @@ public class UserServiceImpl implements UserService {
 
         if (!user.isPresent()) {
             logger.info("No user found for email: " + login);
-            throw new UsernameNotFoundException("No such user: " + login);
+            throw new UsernameNotFoundException(messageSource.getMessage("usernameNotFound.msg", null, locale) + " " + login);
         }
 
         User u = user.get();

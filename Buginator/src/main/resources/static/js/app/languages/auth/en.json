@@ -3,12 +3,14 @@
   "LOGIN_PASSWORD": "password",
   "LOGIN_SUBMIT_BUTTON": "Sign in",
   "LOGIN_TOGGLE": "Login",
+  "LOGIN_ERROR_MSG": "Username or password is invalid.",
 
   "FORGOT_INFO": "Enter your valid e-mail",
   "FORGOT_EMAIL_REQUIRED": "Email is required.",
   "FORGOT_EMAIL_INVALID": "Not a valid email.",
   "FORGOT_SUBMIT_BUTTON": "Recover Password",
   "FORGOT_TOGGLE": "Forgot Password",
+  "FORGOT_SUCCESS_MSG": "Your password has been reset and sent to mail.",
 
   "SIGNUP_TOGGLE": "Signup",
   "SIGNUP_COMPANY_NAME": "company name",
@@ -23,5 +25,6 @@
   "SIGNUP_PASSWORD_REQUIRED": "Password is required.",
   "SIGNUP_RE_PASSWORD": "re-password",
   "SIGNUP_PASSWORD_MATCH": "Passwords don't match.",
-  "SIGNUP_SUBMIT_BUTTON": "Register"
+  "SIGNUP_SUBMIT_BUTTON": "Register",
+  "SIGNUP_SUCCESS_MSG": "Thank you for registering. Details has been sent to mail."
 }
