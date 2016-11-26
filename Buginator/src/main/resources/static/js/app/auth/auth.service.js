@@ -1,5 +1,5 @@
 angular.module("buginator.authService", [])
-    .factory("authService", function ($http, $cacheFactory, cacheService) {
+    .factory("authRestService", function ($http, $cacheFactory, cacheService) {
         var service = {};
 
         var LOGGED_CACHE_TIME_MIN = 3;
@@ -38,6 +38,15 @@ angular.module("buginator.authService", [])
             return loggedUser;
         };
 
+        service.remindPassword = function (email, successFunction, failureFunction) {
+            $http.put("/auth/reset?lg=" + email, {})
+                .then(successFunction, failureFunction);
+        };
+
+        return service;
+    }).factory("authService", function($translate){
+        var service = {};
+
         service.createPermissions = function (user) {
             var permissions = {};
             if (user.perms != null || user.perms != undefined) {
@@ -48,9 +57,54 @@ angular.module("buginator.authService", [])
             return permissions;
         };
 
-        service.remindPassword = function (email, successFunction, failureFunction) {
-            $http.put("/auth/reset?lg=" + email, {})
-                .then(successFunction, failureFunction);
+        service.initScope = function ($scope) {
+            $scope.credentials = {};
+            $scope.loginError = false;
+            $scope.registerData = {};
+            $scope.rePassword = null;
+            $scope.registerError = false;
+            $scope.forgotError = false;
+            $scope.forgotSuccess = false;
+            $scope.registerSuccess = false;
+            $scope.forms = {};
+        };
+
+        service.registerClearFormWithSuccess = function ($scope) {
+            $scope.forms.registerForm.$setPristine();
+            $scope.forms.registerForm.$setUntouched();
+            $scope.registerError = false;
+            $scope.registerData = {};
+            $scope.rePassword = "";
+            $scope.rePassword = null;
+            $scope.registerSuccess = true;
+            $scope.registerSuccessMsg = $translate.instant("SIGNUP_SUCCESS_MSG");
+        };
+
+        service.forgotClearFormWithSuccess = function ($scope) {
+            $scope.forms.forgotForm.$setPristine();
+            $scope.forms.forgotForm.$setUntouched();
+            $scope.credentials = {};
+            $scope.forgotError = false;
+            $scope.forgotSuccess = true;
+            $scope.forgotSuccessMsg = $translate.instant("FORGOT_SUCCESS_MSG");
+        };
+
+        service.loginError = function($scope) {
+            $scope.credentials = {};
+            $scope.loginError = true;
+            $scope.loginErrorMsg = $translate.instant("LOGIN_ERROR_MSG");
+        };
+
+        service.registerFormError = function($scope, returnedData) {
+            $scope.registerError = true;
+            $scope.registerSuccess = false;
+            $scope.registerErrorMsg = returnedData.data.message;
+        };
+
+        service.forgotFormError = function($scope, returnedData) {
+            $scope.forgotError = true;
+            $scope.forgotSuccess = false;
+            $scope.forgotErrorMsg = returnedData.data.message;
         };
 
         return service;

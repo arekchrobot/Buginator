@@ -3,20 +3,11 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
         url: "/login",
         templateUrl: "html/auth/login.html"
     });
-}).controller("authController", function ($rootScope, $scope, $state, authService, registerService, $translate) {
-    $scope.credentials = {};
-    $scope.loginError = false;
-    $scope.registerData = {};
-    $scope.rePassword = null;
-    $scope.registerError = false;
-    $scope.forgotError = false;
-    $scope.forgotSuccess = false;
-    $scope.registerSuccess = false;
-
-    $scope.forms = {};
+}).controller("authController", function ($rootScope, $scope, $state, authRestService, authService, registerService, $translate) {
+    authService.initScope($scope);
 
     $scope.authenticate = function (credentials) {
-        authService.authenticate(credentials,
+        authRestService.authenticate(credentials,
             function (returnedData) {
                 $rootScope.user = returnedData;
                 $scope.loginError = false;
@@ -24,9 +15,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
                 $scope.credentials = {};
                 //$state.go("home");
             }, function (returnedData) {
-                $scope.credentials = {};
-                $scope.loginError = true;
-                $scope.loginErrorMsg = $translate.instant("LOGIN_ERROR_MSG");
+                authService.loginError($scope);
             });
     };
 
@@ -40,19 +29,18 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
         $rootScope.user = null;
     };
 
-    authService.isLogged(loggedError)
+    authRestService.isLogged(loggedError)
         .then(function (returnedData) {
             $rootScope.user = returnedData;
             $rootScope.user.perms = authService.createPermissions($rootScope.user);
         }, loggedError);
 
     $scope.logout = function () {
-        authService.logout(
+        authRestService.logout(
             function (returnedData) {
                 $rootScope.user = null;
                 $state.go("login");
             }, function (returnedData) {
-                console.log(returnedData);
                 $rootScope.user = null;
                 $state.go("login");
             });
@@ -61,36 +49,20 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
     $scope.register = function () {
         registerService.register($scope.registerData,
             function (returnedData) {
-                $scope.forms.registerForm.$setPristine();
-                $scope.forms.registerForm.$setUntouched();
-                $scope.registerError = false;
-                $scope.registerData = {};
-                $scope.rePassword = "";
-                $scope.rePassword = null;
-                $scope.registerSuccess = true;
-                $scope.registerSuccessMsg = $translate.instant("SIGNUP_SUCCESS_MSG");
+                authService.registerClearFormWithSuccess($scope);
                 $("a[href=#login]").tab("show");
             }, function (returnedData) {
-                $scope.registerError = true;
-                $scope.registerSuccess = false;
-                $scope.registerErrorMsg = returnedData.data.message;
+                authService.registerFormError($scope, returnedData);
             });
     };
 
     $scope.resetPass = function () {
-        authService.remindPassword($scope.credentials.username,
+        authRestService.remindPassword($scope.credentials.username,
             function (returnedData) {
-                $scope.forms.forgotForm.$setPristine();
-                $scope.forms.forgotForm.$setUntouched();
-                $scope.credentials = {};
-                $scope.forgotError = false;
-                $scope.forgotSuccess = true;
-                $scope.forgotSuccessMsg = $translate.instant("FORGOT_SUCCESS_MSG");
+                authService.forgotClearFormWithSuccess($scope);
                 $("a[href=#login]").tab("show");
             }, function (returnedData) {
-                $scope.forgotError = true;
-                $scope.forgotSuccess = false;
-                $scope.forgotErrorMsg = returnedData.data.message;
+                authService.forgotFormError($scope, returnedData);
             });
     }
 });
