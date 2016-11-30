@@ -25,6 +25,8 @@
         <jBcrypt.version>0.4.1</jBcrypt.version>
         <wro4.version>1.7.8</wro4.version>
         <apache.commons.lang.version>3.3.2</apache.commons.lang.version>
+        <assertj.version>1.7.0</assertj.version>
+        <fluent.exception.version>1.0.1</fluent.exception.version>
     </properties>
 
     <dependencies>
@@ -143,6 +145,17 @@
                 </exclusion>
             </exclusions>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>pl.wkr</groupId>
+            <artifactId>fluent-exception-rule</artifactId>
+            <version>${fluent.exception.version}</version>
         </dependency>
 
         <!--Buginator dependencies-->

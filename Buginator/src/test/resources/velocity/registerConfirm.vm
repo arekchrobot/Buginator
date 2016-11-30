@@ -1,0 +1,15 @@
+<html>
+    <body>
+        #macro( msg $key )
+            $emailBody.getMessage($key, null, $locale)
+        #end
+        <p style="margin:15px 0;">
+            <b>#msg("registerConfirm.title")</b>
+        </p>
+        <p style="margin:15px 0;">#msg("registerConfirm.hello") ${companyName}!</p>
+        <p style="margin:15px 0;">#msg("registerConfirm.info")</p>
+        <p style="margin:15px 0;">#msg("registerConfirm.uniqueKey") ${uniqueKey}</p>
+        <p style="margin:15px 0;">#msg("registerConfirm.token") ${token}</p>
+        Buginator.com</p>
+    </body>
+</html>

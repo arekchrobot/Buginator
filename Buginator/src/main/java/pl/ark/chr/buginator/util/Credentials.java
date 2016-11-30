@@ -23,4 +23,15 @@ public class Credentials {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder(60)
+                .append("Credentials{ username:")
+                .append(username)
+                .append(", password: ")
+                .append(password)
+                .append("}")
+                .toString();
+    }
 }
