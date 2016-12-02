@@ -2,8 +2,10 @@ package pl.ark.chr.buginator.domain;
 
 import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
 import pl.ark.chr.buginator.domain.enums.ErrorStatus;
+import pl.ark.chr.buginator.domain.filter.FilterData;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "buginator_error")
 @SequenceGenerator(name = "default_gen", sequenceName = "buginator_error_seq", allocationSize = 1)
-public class Error extends BaseEntity {
+public class Error extends BaseEntity implements FilterData {
 
     private static final long serialVersionUID = -6062066697736318840L;
 
@@ -55,6 +57,12 @@ public class Error extends BaseEntity {
 
     @Column(name = "sent_to_aggregators")
     private Boolean sentToAggregators;
+
+    @Column(name = "error_count")
+    private Integer count;
+
+    @Column(name = "last_occurence")
+    private LocalDate lastOccurrence;
 
     public String getTitle() {
         return title;
@@ -142,5 +150,21 @@ public class Error extends BaseEntity {
 
     public void setSentToAggregators(Boolean sentToAggregators) {
         this.sentToAggregators = sentToAggregators;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public LocalDate getLastOccurrence() {
+        return lastOccurrence;
+    }
+
+    public void setLastOccurrence(LocalDate lastOccurrence) {
+        this.lastOccurrence = lastOccurrence;
     }
 }

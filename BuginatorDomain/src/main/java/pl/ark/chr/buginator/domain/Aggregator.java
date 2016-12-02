@@ -23,6 +23,10 @@ public abstract class Aggregator extends BaseEntity {
     @JsonIgnore
     private String aggregatorClass;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
+
     public String getLogin() {
         return login;
     }
@@ -45,5 +49,13 @@ public abstract class Aggregator extends BaseEntity {
 
     public void setAggregatorClass(String aggregatorClass) {
         this.aggregatorClass = aggregatorClass;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

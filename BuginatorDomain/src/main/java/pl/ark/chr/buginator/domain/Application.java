@@ -1,5 +1,8 @@
 package pl.ark.chr.buginator.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.ark.chr.buginator.domain.filter.FilterData;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "application")
 @SequenceGenerator(name = "default_gen", sequenceName = "application_seq", allocationSize = 1)
-public class Application extends BaseEntity {
+public class Application extends BaseEntity implements FilterData {
 
     private static final long serialVersionUID = -2010034649811124041L;
 
@@ -46,5 +49,12 @@ public class Application extends BaseEntity {
 
     public void setApplicationUsers(Set<UserApplication> applicationUsers) {
         this.applicationUsers = applicationUsers;
+    }
+
+    @Override
+    @Transient
+    @JsonIgnore
+    public Application getApplication() {
+        return this;
     }
 }

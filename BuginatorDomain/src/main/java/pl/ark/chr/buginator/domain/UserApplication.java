@@ -55,7 +55,7 @@ public class UserApplication implements Serializable {
         getPk().setApplication(application);
     }
 
-    public Boolean getView() {
+    public Boolean isView() {
         return view;
     }
 
@@ -63,7 +63,7 @@ public class UserApplication implements Serializable {
         this.view = view;
     }
 
-    public Boolean getModify() {
+    public Boolean isModify() {
         return modify;
     }
 
