@@ -8,12 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.ark.chr.buginator.domain.User;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
 import pl.ark.chr.buginator.exceptions.ValidationException;
+import pl.ark.chr.buginator.rest.annotations.GET;
+import pl.ark.chr.buginator.rest.annotations.POST;
+import pl.ark.chr.buginator.rest.annotations.PUT;
+import pl.ark.chr.buginator.rest.annotations.RestController;
 import pl.ark.chr.buginator.service.RegisterService;
 import pl.ark.chr.buginator.service.UserService;
 import pl.ark.chr.buginator.util.*;
@@ -27,8 +31,7 @@ import java.util.Map;
 /**
  * Created by Arek on 2016-09-29.
  */
-@RestController
-@RequestMapping("/auth")
+@RestController("/auth")
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
@@ -45,7 +48,7 @@ public class AuthController {
     @Autowired
     private MessageSource messageSource;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @POST("/login")
     public UserWrapper login(HttpServletRequest request, HttpServletResponse response, Locale locale, @RequestBody Credentials credentials) throws RestException {
         UsernamePasswordToken authToken = new UsernamePasswordToken(credentials.getUsername(), credentials.getPassword(), true);
         try {
@@ -65,7 +68,7 @@ public class AuthController {
         }
     }
 
-    @RequestMapping( value = "/signout", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @POST("/signout")
     public boolean logout(HttpServletRequest request, HttpServletResponse response) {
         UserWrapper currentUser = sessionUtil.getCurrentUser(request);
         String username = currentUser != null ? currentUser.getUsername() : "";
@@ -75,12 +78,12 @@ public class AuthController {
         return true;
     }
 
-    @RequestMapping(value = "/logged", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GET("/logged")
     public UserWrapper isLogged(HttpServletRequest request, HttpServletResponse response) {
         return sessionUtil.getCurrentUser(request);
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @POST("/register")
     public boolean registerUser(HttpServletRequest request, HttpServletResponse response, Locale locale, @RequestBody RegisterData registerData) throws RestException {
         logger.info("Creating new company: " + registerData.getCompany().getName() + " with user: " + registerData.getUser().getEmail());
         try {
@@ -88,13 +91,10 @@ public class AuthController {
         } catch (ValidationException | IllegalArgumentException ex) {
             throw new RestException(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, HttpUtil.generateOriginalUrl(request), registerData);
         }
-//        catch (RuntimeException ex) {
-//            throw new RestException(ex.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request), registerData);
-//        }
         return true;
     }
 
-    @RequestMapping(value = "/reset", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PUT("/reset")
     public Map resetPassword(HttpServletRequest request, HttpServletResponse response, Locale locale, @RequestParam("lg") String userEmail) throws RestException {
         logger.info("Resseting password for user: " + userEmail);
         try {
@@ -102,9 +102,6 @@ public class AuthController {
         } catch (UsernameNotFoundException ex) {
             throw new RestException(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, HttpUtil.generateOriginalUrl(request), null);
         }
-//        catch (RuntimeException ex) {
-//            throw new RestException(ex.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request), null);
-//        }
         return Collections.singletonMap("success", "Password reset successfully");
     }
 }

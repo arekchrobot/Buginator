@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.ark.chr.buginator.domain.BaseEntity;
 import pl.ark.chr.buginator.exceptions.RestException;
+import pl.ark.chr.buginator.rest.annotations.DELETE;
+import pl.ark.chr.buginator.rest.annotations.GET;
+import pl.ark.chr.buginator.rest.annotations.POST;
 import pl.ark.chr.buginator.service.CrudService;
 import pl.ark.chr.buginator.util.HttpUtil;
 import pl.ark.chr.buginator.util.SessionUtil;
@@ -38,40 +41,25 @@ public abstract class CrudRestController<T extends BaseEntity> {
 
     protected abstract SessionUtil getHttpSessionUtil();
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GET("/")
     public List<T> getAll(HttpServletRequest request) throws RestException {
-//        try {
-            logger.info("Getting all " + className + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
-            return getService().getAll();
-//        } catch (RuntimeException ex) {
-//            logger.error(ex.getMessage(), ex);
-//            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request));
-//        }
+        logger.info("Getting all " + className + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
+        return getService().getAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GET("/{id}")
     public T get(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-//        try {
-            logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
-            return getService().get(id);
-//        } catch (RuntimeException ex) {
-//            logger.error(ex.getMessage(), ex);
-//            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request));
-//        }
+        logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
+        return getService().get(id);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @POST("/")
     public T save(@RequestBody T entity, HttpServletRequest request) throws RestException {
-//        try {
-            logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
-            return getService().save(entity);
-//        } catch (RuntimeException ex) {
-//            logger.error(ex.getMessage(), ex);
-//            throw new RestException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpUtil.generateOriginalUrl(request), entity);
-//        }
+        logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
+        return getService().save(entity);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @DELETE("/{id}")
     public void delete(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
         logger.info("Deleting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
         getService().delete(id);
