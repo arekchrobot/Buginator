@@ -16,11 +16,10 @@ public class ApplicationAccessClientFilter extends AbstractClientFilter {
 
     @Override
     protected void validate(FilterData filterData, Set<UserApplication> userApplications) throws DataAccessException {
-        for (UserApplication userApplication : userApplications) {
-            if (userApplication.getApplication().getId().equals(filterData.getApplication().getId())) {
-                return;
-            }
-        }
-        throw new DataAccessException("Attempt to access forbidden resources", "");
+        userApplications.stream()
+                .filter(ua -> ua.getApplication().getId().equals(filterData.getApplication().getId()))
+                .findAny()
+                .map(userApplication1 -> userApplication1)
+                .orElseThrow(() -> new DataAccessException("Attempt to access forbidden resources", ""));
     }
 }

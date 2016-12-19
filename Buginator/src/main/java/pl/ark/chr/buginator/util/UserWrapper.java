@@ -17,15 +17,19 @@ public class UserWrapper {
 
     private String username;
     private Collection<String> perms;
+    private String role;
     private Company company;
     private Set<UserApplication> userApplications;
+    private String email;
 
     public UserWrapper(User user) {
         this.username = user.getName();
+        this.email = user.getEmail();
         Set<String> roles = new HashSet<>();
         roles.add(user.getRole().getAuthority());
         user.getRole().getPermissions().stream().forEach(p -> roles.add(p.getAuthority()));
         this.perms = roles;
+        this.role = user.getRole().getName();
         this.company = user.getCompany();
         this.userApplications = user.getUserApplications();
     }
@@ -38,11 +42,19 @@ public class UserWrapper {
         return perms;
     }
 
+    public String getRole() {
+        return role;
+    }
+
     public Company getCompany() {
         return company;
     }
 
     public Set<UserApplication> getUserApplications() {
         return userApplications;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

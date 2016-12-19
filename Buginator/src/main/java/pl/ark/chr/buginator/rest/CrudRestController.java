@@ -72,7 +72,7 @@ public abstract class CrudRestController<T extends BaseEntity> {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void delete(@PathVariable("id") Long id, HttpServletRequest request) {
+    public void delete(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
         logger.info("Deleting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
         getService().delete(id);
     }

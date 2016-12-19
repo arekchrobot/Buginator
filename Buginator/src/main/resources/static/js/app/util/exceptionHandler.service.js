@@ -12,8 +12,8 @@ angular.module('buginator.exceptionHandler', [])
                 $state.go("login");
             } else if (error.status !== undefined) {
                 var data = {};
-                data.status = error.status;
-                data.description = error.description;
+                data.status = error.data.status;
+                data.description = error.data.message;
                 ngDialog.open({template: "html/error/error.html", data: data});
             }
         };

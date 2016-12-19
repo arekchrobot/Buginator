@@ -16,15 +16,10 @@ public class DataModifyClientFilter extends AbstractClientFilter {
 
     @Override
     protected void validate(FilterData filterData, Set<UserApplication> userApplications) throws DataAccessException {
-        for (UserApplication userApplication : userApplications) {
-            if (userApplication.getApplication().getId().equals(filterData.getApplication().getId())) {
-                if (userApplication.isModify()) {
-                    return;
-                } else {
-                    throw new DataAccessException("User is not permitted to modify application","");
-                }
-            }
-        }
-        throw new DataAccessException("User is not permitted to modify application","");
+        userApplications.stream()
+                .filter(ua -> ua.getApplication().getId().equals(filterData.getApplication().getId()) && ua.isModify())
+                .findAny()
+                .map(ua -> ua)
+                .orElseThrow(() -> new DataAccessException("User is not permitted to modify application",""));
     }
 }

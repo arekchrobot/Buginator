@@ -49,7 +49,9 @@ public abstract class RestrictedAccessRestController<T extends BaseEntity & Filt
 
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void delete(@PathVariable("id") Long id, HttpServletRequest request) {
-        throw new UnsupportedOperationException("Method not allowed");
+    public void delete(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
+        T filterData = getService().get(id);
+        getClientFilter().validateAccess(filterData, getHttpSessionUtil().getCurrentUser(request).getUserApplications());
+        super.delete(id, request);
     }
 }
