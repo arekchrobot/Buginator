@@ -27,6 +27,12 @@ public class Application extends BaseEntity implements FilterData {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.application")
     private Set<UserApplication> applicationUsers = new HashSet<>();
 
+    @Transient
+    private Long errorCount;
+
+    @Transient
+    private Long lastWeekErrorCount;
+
     public String getName() {
         return name;
     }
@@ -43,12 +49,29 @@ public class Application extends BaseEntity implements FilterData {
         this.company = company;
     }
 
+    @JsonIgnore
     public Set<UserApplication> getApplicationUsers() {
         return applicationUsers;
     }
 
     public void setApplicationUsers(Set<UserApplication> applicationUsers) {
         this.applicationUsers = applicationUsers;
+    }
+
+    public Long getErrorCount() {
+        return errorCount;
+    }
+
+    public void setErrorCount(Long errorCount) {
+        this.errorCount = errorCount;
+    }
+
+    public Long getLastWeekErrorCount() {
+        return lastWeekErrorCount;
+    }
+
+    public void setLastWeekErrorCount(Long lastWeekErrorCount) {
+        this.lastWeekErrorCount = lastWeekErrorCount;
     }
 
     @Override

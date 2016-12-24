@@ -1,5 +1,7 @@
 package pl.ark.chr.buginator.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -86,6 +88,7 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
+    @JsonIgnore
     public Set<UserApplication> getUserApplications() {
         return userApplications;
     }

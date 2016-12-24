@@ -1,5 +1,6 @@
 package pl.ark.chr.buginator.util;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.ark.chr.buginator.domain.Authority;
 import pl.ark.chr.buginator.domain.Company;
 import pl.ark.chr.buginator.domain.User;
@@ -50,6 +51,7 @@ public class UserWrapper {
         return company;
     }
 
+    @JsonIgnore
     public Set<UserApplication> getUserApplications() {
         return userApplications;
     }

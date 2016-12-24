@@ -8,7 +8,7 @@ angular.module("buginator.applicationsController", []).config(function ($statePr
 
     applicationRestService.getAll(
         function(returnedData){
-            $scope.applications = returnedData;
+            $scope.applications = returnedData.data;
         }, exceptionHandler.handleRestError
     );
 });

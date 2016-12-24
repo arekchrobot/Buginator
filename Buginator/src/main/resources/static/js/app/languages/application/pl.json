@@ -1,0 +1,14 @@
+{
+  "CREATE_APPLICATION": "Utwórz aplikację",
+  "APPLICATION_NAME_INPUT": "Nazwa",
+  "APPLICATION_NAME_PLACEHOLDER": "Nazwa aplikacji",
+  "CREATE_APPLICATION_SUBMIT_BUTTON": "Stwórz",
+  "APPLICATION_NAME_REQUIRED": "Nazwa jest wymagana.",
+  "APPLICATIONS_TITLE": "Aplikacje",
+  "APPLICATIONS_CREATE_BUTTON": "Stwórz",
+  "APPLICATIONS_SEARCH": "Szukaj",
+  "APPLICATIONS_NAME": "Nazwa",
+  "APPLICATIONS_ERRORS": "Błędy",
+  "APPLICATION_ERRORS_LAST_WEEK": "Błędy z ostatnich 7 dni",
+  "APPLICATIONS_INFO_BUTTON": "Szczegóły"
+}

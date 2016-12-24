@@ -3,51 +3,42 @@
         <div class="box">
             <header>
                 <div class="icons"><i class="fa fa-desktop"></i></div>
-                <h5>Applications</h5>
+                <h5 translate>APPLICATIONS_TITLE</h5>
 
                 <div class="toolbar">
                     <div class="btn-group">
-                        <button class="btn btn-primary">Create</button>
+                        <button class="btn btn-primary" ng-redirect-to="createApplication" translate>APPLICATIONS_CREATE_BUTTON</button>
                     </div>
                 </div>
             </header>
             <div id="collapse4" class="body">
                 <div id="dataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                    <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+                    <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped" st-safe-src="applications" st-table="displayedApplications">
                         <div class="row">
                             <div class="col-sm-6">
                             </div>
                             <div class="col-sm-6">
                                 <div id="dataTable_filter" class="dataTables_filter">
                                     <label>
-                                        Search: <input class="form-control input-sm" placeholder="" aria-controls="dataTable" type="search">
+                                        <translate>APPLICATIONS_SEARCH</translate>: <input class="form-control input-sm" placeholder="" aria-controls="dataTable" type="search">
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <thead>
                         <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
+                            <th translate>APPLICATIONS_NAME</th>
+                            <th translate>APPLICATIONS_ERRORS</th>
+                            <th translate>APPLICATION_ERRORS_LAST_WEEK</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Trident</td>
-                            <td>Internet Explorer 4.0</td>
-                            <td>Win 95+</td>
-                            <td>4</td>
-                            <td>X</td>
-                        </tr>
-                        <tr>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
+                        <tr ng-repeat="application in displayedApplications">
+                            <td>{{application.name}}</td>
+                            <td>{{application.errorCount}}</td>
+                            <td>{{application.lastWeekErrorCount}}</td>
+                            <td><button class="btn btn-info" translate ng-redirect-to-url={{"/application/"+application.id}}>APPLICATIONS_INFO_BUTTON</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -55,7 +46,4 @@
             </div>
         </div>
     </div>
-</div>
-<div ng-repeat="application in applications">
-    {{application.id}} {{application.name}}
 </div>

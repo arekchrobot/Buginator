@@ -100,8 +100,10 @@ public class RegisterServiceImplTest {
         company.setName("TEST COMPANY");
         company.setAddress("TEST ADDRESS");
 
+        String email = "testEmail@gmail.com";
+
         User user = new User();
-        user.setEmail("testEmail@gmail.com");
+        user.setEmail(email);
         user.setName("TEST USER");
         user.setPassword("TEST_PASSWORD");
 
@@ -148,6 +150,10 @@ public class RegisterServiceImplTest {
                     .isNotNull()
                     .isNotEmpty()
                     .isEqualTo(TEST_BCRYPTED_PASSWORD);
+            assertThat(userToSave.getEmail())
+                    .isNotNull()
+                    .isNotEmpty()
+                    .isEqualTo(email.toLowerCase());
 
             return userToSave;
         }).when(userRepository).save(any(User.class));

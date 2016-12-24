@@ -50,7 +50,7 @@ public class AuthController {
 
     @POST("/login")
     public UserWrapper login(HttpServletRequest request, HttpServletResponse response, Locale locale, @RequestBody Credentials credentials) throws RestException {
-        UsernamePasswordToken authToken = new UsernamePasswordToken(credentials.getUsername(), credentials.getPassword(), true);
+        UsernamePasswordToken authToken = new UsernamePasswordToken(credentials.getUsername().toLowerCase(), credentials.getPassword(), true);
         try {
             logger.info("Logging user: " + credentials.getUsername());
 

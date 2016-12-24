@@ -25,7 +25,8 @@ angular.module("buginator", [
     "buginator.dashboardController",
 
     "buginator.applicationService",
-    "buginator.applicationsController"
+    "buginator.applicationsController",
+    "buginator.createApplicationController"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider) {
 
@@ -47,6 +48,9 @@ angular.module("buginator", [
             suffix: ".json"
         }, {
             prefix: "js/app/languages/auth/",
+            suffix: ".json"
+        }, {
+            prefix: "js/app/languages/application/",
             suffix: ".json"
         }]
     });

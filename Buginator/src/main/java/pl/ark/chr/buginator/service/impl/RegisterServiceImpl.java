@@ -83,6 +83,7 @@ public class RegisterServiceImpl implements RegisterService {
         user.setRole(role);
         user.setActive(true);
         user.setPassword(passwordService.encryptPassword(user.getPassword()));
+        user.setEmail(user.getEmail().toLowerCase());
 
         userRepository.save(user);
 
