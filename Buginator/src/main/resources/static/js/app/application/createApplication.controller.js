@@ -4,16 +4,14 @@ angular.module("buginator.createApplicationController", []).config(function ($st
         templateUrl: "html/application/application.html",
         controller: "createApplicationController"
     });
-}).controller("createApplicationController", function ($scope, $state, applicationRestService, exceptionHandler) {
+}).controller("createApplicationController", function ($scope, $state, applicationRestService, exceptionHandler, applicationService) {
 
-    $scope.editable = true;
-    $scope.application = {};
-    $scope.forms = {};
+    applicationService.initCreateAppScope($scope);
 
     $scope.submit = function () {
         applicationRestService.save($scope.application,
             function (returnedData) {
-                $state.go("applications")
+                $state.go("applications");
             }, exceptionHandler.handleRestError
         );
     };

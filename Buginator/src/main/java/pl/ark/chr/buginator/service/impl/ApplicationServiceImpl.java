@@ -11,13 +11,12 @@ import pl.ark.chr.buginator.domain.Application;
 import pl.ark.chr.buginator.domain.Company;
 import pl.ark.chr.buginator.domain.User;
 import pl.ark.chr.buginator.domain.UserApplication;
-import pl.ark.chr.buginator.exceptions.ValidationException;
 import pl.ark.chr.buginator.repository.ApplicationRepository;
 import pl.ark.chr.buginator.repository.ErrorRepository;
 import pl.ark.chr.buginator.repository.UserApplicationRepository;
 import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.ApplicationService;
-import pl.ark.chr.buginator.util.UserWrapper;
+import pl.ark.chr.buginator.data.UserWrapper;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -34,7 +33,7 @@ public class ApplicationServiceImpl extends CrudServiceImpl<Application> impleme
 
     private static final Logger logger = LoggerFactory.getLogger(ApplicationServiceImpl.class);
 
-    private static final Integer NUMER_OF_DAYS = 7;
+    private static final int NUMBER_OF_DAYS = 7;
 
     @Autowired
     private ApplicationRepository applicationRepository;
@@ -93,7 +92,7 @@ public class ApplicationServiceImpl extends CrudServiceImpl<Application> impleme
 
     @Override
     public List<Application> getUserApplications(UserWrapper user) {
-        LocalDate lastWeek = LocalDate.now().minusDays(NUMER_OF_DAYS);
+        LocalDate lastWeek = LocalDate.now().minusDays(NUMBER_OF_DAYS);
         return user.getUserApplications().stream()
                 .map(ua -> countErrors(ua.getApplication(), lastWeek))
                 .collect(Collectors.toList());

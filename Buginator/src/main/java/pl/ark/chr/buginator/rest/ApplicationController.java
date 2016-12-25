@@ -3,10 +3,7 @@ package pl.ark.chr.buginator.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.bind.annotation.RestController;
 import pl.ark.chr.buginator.domain.Application;
 import pl.ark.chr.buginator.domain.UserApplication;
@@ -19,11 +16,10 @@ import pl.ark.chr.buginator.rest.annotations.RestController;
 import pl.ark.chr.buginator.service.ApplicationService;
 import pl.ark.chr.buginator.service.CrudService;
 import pl.ark.chr.buginator.util.SessionUtil;
-import pl.ark.chr.buginator.util.UserWrapper;
+import pl.ark.chr.buginator.data.UserWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Arek on 2016-12-03.

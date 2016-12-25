@@ -5,4 +5,18 @@ angular.module("buginator.applicationService", [])
         service.baseObjectUrl = "/application/";
 
         return service;
+    }).factory("applicationService", function() {
+        var service = {};
+
+        service.initCreateAppScope = function($scope) {
+            $scope.editable = true;
+            $scope.application = {};
+            $scope.forms = {};
+        };
+
+        service.initDetailsAppScope = function($scope) {
+            $scope.editable = false;
+        };
+
+        return service;
     });

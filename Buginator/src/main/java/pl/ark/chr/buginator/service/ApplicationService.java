@@ -2,8 +2,7 @@ package pl.ark.chr.buginator.service;
 
 import pl.ark.chr.buginator.domain.Application;
 import pl.ark.chr.buginator.domain.UserApplication;
-import pl.ark.chr.buginator.exceptions.ValidationException;
-import pl.ark.chr.buginator.util.UserWrapper;
+import pl.ark.chr.buginator.data.UserWrapper;
 
 import java.util.List;
 

@@ -9,6 +9,7 @@ angular.module("buginator", [
     "pascalprecht.translate",
     "ngCookies",
     "ngSanitize",
+    "chart.js",
 
     "buginator.directives",
     "buginator.filters",
@@ -26,7 +27,8 @@ angular.module("buginator", [
 
     "buginator.applicationService",
     "buginator.applicationsController",
-    "buginator.createApplicationController"
+    "buginator.createApplicationController",
+    "buginator.detailsApplicationController"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider) {
 

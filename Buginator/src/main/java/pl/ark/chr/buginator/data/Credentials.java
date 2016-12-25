@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.util;
+package pl.ark.chr.buginator.data;
 
 /**
  * Created by Arek on 2016-09-29.

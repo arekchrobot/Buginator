@@ -1,6 +1,7 @@
 package pl.ark.chr.buginator.util;
 
 import org.springframework.stereotype.Service;
+import pl.ark.chr.buginator.data.UserWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 

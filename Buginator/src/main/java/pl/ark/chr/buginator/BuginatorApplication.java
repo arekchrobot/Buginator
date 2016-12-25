@@ -53,7 +53,8 @@ public class BuginatorApplication {
 
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setBasenames("classpath:/i18n/email",
-                "classpath:/i18n/errors");
+                "classpath:/i18n/errors",
+                "classpath:/i18n/chart");
         messageSource.setUseCodeAsDefaultMessage(true);
 
         return messageSource;

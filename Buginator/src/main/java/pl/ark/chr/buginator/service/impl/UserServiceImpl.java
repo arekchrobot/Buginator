@@ -15,7 +15,7 @@ import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
 import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.UserService;
-import pl.ark.chr.buginator.util.Credentials;
+import pl.ark.chr.buginator.data.Credentials;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loadUserByEmail(String login, Locale locale) throws UsernameNotFoundException {
-        Optional<User> userWrapper = userRepository.findByEmail(login);
+        Optional<User> userWrapper = userRepository.findByEmail(login.toLowerCase());
 
         if (!userWrapper.isPresent()) {
             logger.info("No user found for email: " + login);

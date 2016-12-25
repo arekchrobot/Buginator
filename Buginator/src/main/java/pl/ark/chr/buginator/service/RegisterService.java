@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.service;
 
 import pl.ark.chr.buginator.exceptions.ValidationException;
-import pl.ark.chr.buginator.util.RegisterData;
+import pl.ark.chr.buginator.data.RegisterData;
 
 import java.util.Locale;
 

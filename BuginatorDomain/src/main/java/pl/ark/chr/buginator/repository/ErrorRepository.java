@@ -5,6 +5,7 @@ import pl.ark.chr.buginator.domain.Application;
 import pl.ark.chr.buginator.domain.Error;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by Arek on 2016-09-29.
@@ -14,4 +15,6 @@ public interface ErrorRepository extends CrudRepository<Error, Long> {
     Long countByApplication(Application application);
 
     Long countByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
+
+    List<Error> findByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
 }

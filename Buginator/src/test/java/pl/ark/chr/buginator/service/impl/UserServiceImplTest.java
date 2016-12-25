@@ -19,7 +19,7 @@ import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
 import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.UserService;
-import pl.ark.chr.buginator.util.Credentials;
+import pl.ark.chr.buginator.data.Credentials;
 import pl.wkr.fluentrule.api.CheckExpectedException;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 import pl.wkr.fluentrule.api.check.SafeCheck;

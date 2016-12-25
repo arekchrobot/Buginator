@@ -3,7 +3,7 @@ package pl.ark.chr.buginator.service;
 import pl.ark.chr.buginator.domain.User;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
-import pl.ark.chr.buginator.util.Credentials;
+import pl.ark.chr.buginator.data.Credentials;
 
 import java.util.Locale;
 

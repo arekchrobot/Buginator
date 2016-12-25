@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.util;
+package pl.ark.chr.buginator.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.ark.chr.buginator.domain.Authority;

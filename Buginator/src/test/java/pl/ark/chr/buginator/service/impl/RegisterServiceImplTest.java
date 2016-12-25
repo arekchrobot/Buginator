@@ -18,7 +18,7 @@ import pl.ark.chr.buginator.repository.RoleRepository;
 import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.RegisterService;
-import pl.ark.chr.buginator.util.RegisterData;
+import pl.ark.chr.buginator.data.RegisterData;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.time.LocalDate;
