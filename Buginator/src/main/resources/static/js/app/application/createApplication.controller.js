@@ -12,7 +12,7 @@ angular.module("buginator.createApplicationController", []).config(function ($st
         applicationRestService.save($scope.application,
             function (returnedData) {
                 $state.go("applications");
-            }, exceptionHandler.handleRestError
+            }
         );
     };
 });

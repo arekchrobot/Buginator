@@ -34,6 +34,7 @@ public class ChartServiceImpl implements ChartService {
 
     private static final int LAST_SEVEN_DAYS = 7;
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final long NO_ERRORS = 0;
 
     private final ClientFilter clientFilter = ClientFilterFactory.createClientFilter(ClientFilterFactory.ClientFilterType.APPLICATION_ACCESS);
 
@@ -68,10 +69,18 @@ public class ChartServiceImpl implements ChartService {
 
         Map<String, Long> groupedErrors = groupErrorsByDay(applicationErrors);
 
-        groupedErrors.forEach((date, count) -> {
-            chartData.getLabels().add(date);
-            errorCounts.add(count);
-        });
+        for (int i = LAST_SEVEN_DAYS; i >= 0; i--) {
+            LocalDate selectedDate =  LocalDate.now().minusDays(i);
+            String dateKey = selectedDate.format(DATE_FORMAT);
+
+            chartData.getLabels().add(dateKey);
+            errorCounts.add(groupedErrors.containsKey(dateKey) ? groupedErrors.get(dateKey) : NO_ERRORS);
+        }
+
+//        groupedErrors.forEach((date, count) -> {
+//            chartData.getLabels().add(date);
+//            errorCounts.add(count);
+//        });
 
         chartData.getData().add(errorCounts);
 

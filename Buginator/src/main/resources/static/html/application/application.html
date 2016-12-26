@@ -3,6 +3,12 @@
     <header>
         <div class="icons"><i class="fa fa-edit"></i></div>
         <h5 translate>CREATE_APPLICATION</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-redirect-to="applications" translate>BACK_BUTTON</button>
+            </div>
+        </div>
     </header>
     <div id="div-1" class="body">
         <form class="form-horizontal" ng-submit="submit()" id="forms.createAppForm" name="forms.createAppForm"
@@ -35,13 +41,19 @@
 <div class="box dark" ng-if="!editable">
     <header>
         <h5>{{application.name}}</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-redirect-to="applications" translate>BACK_BUTTON</button>
+            </div>
+        </div>
     </header>
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-            <canvas id="line" class="chart chart-line" chart-data="data"
-                    chart-labels="labels" chart-series="series" chart-options="options"
-                    chart-dataset-override="datasetOverride" chart-click="onClick">
+            <canvas id="line" class="chart chart-line" chart-data="errorsChart.data"
+                    chart-labels="errorsChart.labels" chart-series="errorsChart.series" chart-options="errorsChart.options"
+                    chart-dataset-override="errorsChart.datasetOverride">
             </canvas>
         </div>
     </div>

@@ -1,4 +1,4 @@
-angular.module("buginator.applicationService", [])
+angular.module("buginator.applicationServices", [])
     .factory("applicationRestService", function ($http, baseRestService) {
         var service = angular.copy(baseRestService);
 

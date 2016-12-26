@@ -25,10 +25,12 @@ angular.module("buginator", [
 
     "buginator.dashboardController",
 
-    "buginator.applicationService",
+    "buginator.applicationServices",
     "buginator.applicationsController",
     "buginator.createApplicationController",
-    "buginator.detailsApplicationController"
+    "buginator.detailsApplicationController",
+
+    "buginator.chartServices"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider) {
 
