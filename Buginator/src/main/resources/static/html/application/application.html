@@ -31,7 +31,7 @@
 
             <br>
             <button class="btn btn-primary center-block" type="submit" ng-disabled="!forms.createAppForm.$valid"
-                    translate>CREATE_APPLICATION_SUBMIT_BUTTON
+                    translate ng-if="user.perms['create_application']">CREATE_APPLICATION_SUBMIT_BUTTON
             </button>
         </form>
     </div>

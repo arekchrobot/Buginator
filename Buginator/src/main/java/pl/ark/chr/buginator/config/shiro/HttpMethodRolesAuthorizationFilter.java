@@ -1,7 +1,9 @@
 package pl.ark.chr.buginator.config.shiro;
 
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
+import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -39,6 +41,12 @@ public class HttpMethodRolesAuthorizationFilter extends RolesAuthorizationFilter
             IOException {
 
         Subject subject = this.getSubject(request, response);
+
+        if (subject.getPrincipals() == null || subject.getPrincipals().isEmpty()) {
+            //no user found so no need to check
+            return false;
+        }
+
         String[] rolesArray = (String[]) mappedValue;
 
         if (rolesArray == null || rolesArray.length == 0) {
@@ -56,5 +64,24 @@ public class HttpMethodRolesAuthorizationFilter extends RolesAuthorizationFilter
         final HttpMethod requestMethod = HttpMethod.parse(((HttpServletRequest) request).getMethod());
         final String role = methodToRoleMapping.get(requestMethod);
         return subject.isPermitted(role);
+    }
+
+    @Override
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
+        Subject subject = this.getSubject(request, response);
+        if (subject.getPrincipal() == null) {
+            //show user 401 instead of redirect
+            //front-end is handled by angular so no need for shiro to handle this
+            WebUtils.toHttp(response).sendError(401);
+        } else {
+            String unauthorizedUrl = this.getUnauthorizedUrl();
+            if (StringUtils.hasText(unauthorizedUrl)) {
+                WebUtils.issueRedirect(request, response, unauthorizedUrl);
+            } else {
+                WebUtils.toHttp(response).sendError(401);
+            }
+        }
+
+        return false;
     }
 }

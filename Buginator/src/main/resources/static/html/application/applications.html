@@ -7,7 +7,7 @@
 
                 <div class="toolbar">
                     <div class="btn-group">
-                        <button class="btn btn-primary" ng-redirect-to="createApplication" translate>APPLICATIONS_CREATE_BUTTON</button>
+                        <button class="btn btn-primary" ng-redirect-to="createApplication" translate ng-if="user.perms['create_application']">APPLICATIONS_CREATE_BUTTON</button>
                     </div>
                 </div>
             </header>

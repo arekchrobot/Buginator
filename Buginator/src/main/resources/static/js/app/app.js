@@ -73,7 +73,8 @@ angular.module("buginator", [
         KeepaliveProvider.interval(5 * 60); // 5 minute keep-alive ping
 
     }])
-    .run(function ($rootScope, $state) {
+    .run(function ($rootScope, $state, Idle) {
+        Idle.watch();
         $rootScope.$on('IdleTimeout', function () {
             console.log("userTimedOut");
             $rootScope.user = null;

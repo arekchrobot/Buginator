@@ -151,7 +151,7 @@ public class ApplicationServiceImplTest {
 
         UserApplication ua = TestObjectCreator.createUserApplication(user, testApp, true);
 
-        Application testApp2 = TestObjectCreator.createApplication(company, "Test App 2");
+        Application testApp2 = TestObjectCreator.createApplication(company, "Test App 2", 2L);
 
         UserApplication ua2 = TestObjectCreator.createUserApplication(user, testApp2, true);
 
@@ -177,15 +177,21 @@ public class ApplicationServiceImplTest {
                 .isNotEmpty()
                 .hasSize(2)
                 .contains(testApp, testApp2);
-        Application app1 = applications.get(0);
-        assertThat(app1.getErrorCount())
-                .isEqualTo(errorCount);
-        assertThat(app1.getLastWeekErrorCount())
-                .isEqualTo(lastWeekErrorCountApp2);
-        Application app2 = applications.get(1);
-        assertThat(app2.getErrorCount())
-                .isEqualTo(errorCount);
-        assertThat(app2.getLastWeekErrorCount())
-                .isEqualTo(lastWeekErrorCountApp1);
+
+        applications.forEach(application -> {
+            if (application.getId().equals(1L)) {
+                assertThat(application.getErrorCount())
+                        .isEqualTo(errorCount);
+                assertThat(application.getLastWeekErrorCount())
+                        .isEqualTo(lastWeekErrorCountApp1);
+            } else if(application.getId().equals(2L)){
+                assertThat(application.getErrorCount())
+                        .isEqualTo(errorCount);
+                assertThat(application.getLastWeekErrorCount())
+                        .isEqualTo(lastWeekErrorCountApp2);
+            } else {
+                fail("This id should not be in this list: " + application.getId());
+            }
+        });
     }
 }

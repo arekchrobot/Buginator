@@ -1,10 +1,14 @@
 INSERT INTO payment_option (id, version, duration, max_users, price, name) VALUES (1, 1, 30, 5, 0.00, 'Trial');
 
 INSERT INTO buginator_permission (id, version, name) VALUES (1,1,'Company_manager');
+INSERT INTO buginator_permission (id, version, name) VALUES (2,1,'read_application');
+INSERT INTO buginator_permission (id, version, name) VALUES (2,1,'create_application');
 
 INSERT INTO buginator_role (id, version, name) VALUES (1,1,'Company Manager');
 
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,1);
+INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,2);
+INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,3);
 
 INSERT INTO company(id, version, address, expiry_date, name, token, unique_key, user_limit,payment_option_id) VALUES
 (1,1,'Test address', NOW() + INTERVAL '30 days','Test Company', 'Xqg5ueAkyuwLM6bVFR16vuThX83flR','lSFdQB4rQ79ydSt4C05qjFTmNHMnMi',5,1);

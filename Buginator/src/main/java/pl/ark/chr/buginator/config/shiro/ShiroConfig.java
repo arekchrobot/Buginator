@@ -2,6 +2,8 @@ package pl.ark.chr.buginator.config.shiro;
 
 import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.authc.credential.PasswordService;
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
@@ -30,6 +32,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMapping = new HashMap<>();
         filterChainDefinitionMapping.put("/auth/login", "anon");
         filterChainDefinitionMapping.put("/auth/logout", "authc");
+        filterChainDefinitionMapping.put("/application/**", "http[GET=read_application,POST=create_application,DELETE=http_method_not_allowed]");
         filterChainDefinitionMapping.put("/**", "anon");
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
 
@@ -51,7 +54,13 @@ public class ShiroConfig {
         final DefaultWebSecurityManager securityManager
                 = new DefaultWebSecurityManager();
         securityManager.setRealm(realm());
+        securityManager.setCacheManager(cacheManager());
         return securityManager;
+    }
+
+    @Bean(name = "cacheManager")
+    public CacheManager cacheManager() {
+        return new MemoryConstrainedCacheManager();
     }
 
     @Bean(name = "realm")

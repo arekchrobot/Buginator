@@ -5,7 +5,6 @@ import pl.ark.chr.buginator.domain.*;
 import pl.ark.chr.buginator.domain.Error;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,9 +56,13 @@ public class TestObjectCreator {
     }
 
     public static Application createApplication(Company company, String name) {
+        return createApplication(company, name, 1L);
+    }
+
+    public static Application createApplication(Company company, String name, long id) {
         Application application = new Application();
         application.setName(name != null ? name : "Test Application");
-        application.setId(1L);
+        application.setId(id);
         application.setCompany(company);
 
         return application;
