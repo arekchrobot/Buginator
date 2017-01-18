@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.BuginatorProperties;
 import pl.ark.chr.buginator.domain.User;
 import pl.ark.chr.buginator.exceptions.RestException;
@@ -17,7 +18,6 @@ import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.UserService;
 import pl.ark.chr.buginator.data.Credentials;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Optional;

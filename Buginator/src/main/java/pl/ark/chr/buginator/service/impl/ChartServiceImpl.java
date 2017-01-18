@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.data.ChartData;
 import pl.ark.chr.buginator.domain.*;
 import pl.ark.chr.buginator.domain.Error;
@@ -17,7 +18,6 @@ import pl.ark.chr.buginator.repository.ApplicationRepository;
 import pl.ark.chr.buginator.repository.ErrorRepository;
 import pl.ark.chr.buginator.service.ChartService;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -76,11 +76,6 @@ public class ChartServiceImpl implements ChartService {
             chartData.getLabels().add(dateKey);
             errorCounts.add(groupedErrors.containsKey(dateKey) ? groupedErrors.get(dateKey) : NO_ERRORS);
         }
-
-//        groupedErrors.forEach((date, count) -> {
-//            chartData.getLabels().add(date);
-//            errorCounts.add(count);
-//        });
 
         chartData.getData().add(errorCounts);
 

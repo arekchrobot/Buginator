@@ -5,53 +5,65 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.ark.chr.buginator.domain.BaseEntity;
+import pl.ark.chr.buginator.domain.UserApplication;
 import pl.ark.chr.buginator.domain.filter.FilterData;
-import pl.ark.chr.buginator.exceptions.DataAccessException;
 import pl.ark.chr.buginator.exceptions.RestException;
-import pl.ark.chr.buginator.filter.ClientFilter;
 import pl.ark.chr.buginator.rest.annotations.DELETE;
 import pl.ark.chr.buginator.rest.annotations.GET;
 import pl.ark.chr.buginator.rest.annotations.POST;
+import pl.ark.chr.buginator.service.RestrictedAccessCrudService;
+import pl.ark.chr.buginator.util.SessionUtil;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Set;
 
 /**
- * Created by Arek on 2016-12-01.
+ * Created by Arek on 2017-01-18.
  */
-public abstract class RestrictedAccessRestController<T extends BaseEntity & FilterData> extends CrudRestController<T> {
+public abstract class RestrictedAccessRestController<T extends BaseEntity & FilterData>{
 
     private final static Logger logger = LoggerFactory.getLogger(RestrictedAccessRestController.class);
+    protected String className;
 
-    protected abstract ClientFilter getClientFilter();
-
-    @Override
-    @GET("/")
-    public List<T> getAll(HttpServletRequest request) throws RestException {
-        logger.info("User: " + getHttpSessionUtil().getCurrentUser(request).getUsername() + " tries to get all restricted resources");
-        throw new DataAccessException("Attempt to access forbidden resources", "");
+    @PostConstruct
+    private void init() {
+        ParameterizedType thisType = (ParameterizedType) getClass().getGenericSuperclass();
+        Class<T> domainClass = (Class<T>) thisType.getActualTypeArguments()[0];
+        this.className = domainClass.getSimpleName();
     }
 
-    @Override
+    protected abstract SessionUtil getHttpSessionUtil();
+
+    protected abstract RestrictedAccessCrudService<T> getService();
+
+    @GET("/byApplication/{id}")
+    public List<T> getAllByApplication(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
+        logger.info("Getting all " + className + " by application with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        return getService().getAllByApplication(id, getUserApplications(request));
+    }
+
     @GET("/{id}")
     public T get(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        T filterData = super.get(id, request);
-        getClientFilter().validateAccess(filterData, getHttpSessionUtil().getCurrentUser(request).getUserApplications());
-        return filterData;
+        logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        return getService().get(id, getUserApplications(request));
     }
 
-    @Override
     @POST("/")
     public T save(@RequestBody T entity, HttpServletRequest request) throws RestException {
-        getClientFilter().validateAccess(entity, getHttpSessionUtil().getCurrentUser(request).getUserApplications());
-        return super.save(entity, request);
+        logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        return getService().save(entity, getUserApplications(request));
     }
 
-    @Override
     @DELETE("/{id}")
     public void delete(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        T filterData = getService().get(id);
-        getClientFilter().validateAccess(filterData, getHttpSessionUtil().getCurrentUser(request).getUserApplications());
-        super.delete(id, request);
+        logger.info("Deleting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        getService().delete(id, getUserApplications(request));
+    }
+
+    protected Set<UserApplication> getUserApplications(HttpServletRequest request) {
+        return getHttpSessionUtil().getCurrentUser(request).getUserApplications();
     }
 }

@@ -36,7 +36,7 @@ public class RestExceptionHandler {
                 .append("Error executing url: ")
                 .append(e.getOriginalUrl())
                 .append(e.getRequestBody() != null ? " with request body: " + e.getRequestBody().toString() : "")
-                .append(".With exception: ")
+                .append(" .With exception: ")
                 .append(e.toString())
                 .toString();
         logger.info(loggerMsg);
@@ -57,7 +57,7 @@ public class RestExceptionHandler {
                     .append(".With exception: ")
                     .append(e.toString())
                     .toString();
-            logger.info(loggerMsg);
+            logger.info(loggerMsg, e);
         } catch (IOException ex) {
             logger.info("No post body found for exception.");
         }

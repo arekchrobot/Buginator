@@ -44,9 +44,5 @@
         <js>classpath:static/js/app/directives.js</js>
         <js>classpath:static/js/app/filters.js</js>
         <js>classpath:static/js/app/app.js</js>
-
-        <!--<js>classpath:static/js/metisMenu.js</js>-->
-        <!--<js>classpath:static/js/core.js</js>-->
-        <!--<js>classpath:static/js/app.js</js>-->
     </group>
 </groups>

@@ -2,7 +2,7 @@ INSERT INTO payment_option (id, version, duration, max_users, price, name) VALUE
 
 INSERT INTO buginator_permission (id, version, name) VALUES (1,1,'Company_manager');
 INSERT INTO buginator_permission (id, version, name) VALUES (2,1,'read_application');
-INSERT INTO buginator_permission (id, version, name) VALUES (2,1,'create_application');
+INSERT INTO buginator_permission (id, version, name) VALUES (3,1,'create_application');
 
 INSERT INTO buginator_role (id, version, name) VALUES (1,1,'Company Manager');
 

@@ -43,25 +43,25 @@ public abstract class CrudRestController<T extends BaseEntity> {
 
     @GET("/")
     public List<T> getAll(HttpServletRequest request) throws RestException {
-        logger.info("Getting all " + className + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
+        logger.info("Getting all " + className + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
         return getService().getAll();
     }
 
     @GET("/{id}")
     public T get(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
+        logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
         return getService().get(id);
     }
 
     @POST("/")
     public T save(@RequestBody T entity, HttpServletRequest request) throws RestException {
-        logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
+        logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
         return getService().save(entity);
     }
 
     @DELETE("/{id}")
     public void delete(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        logger.info("Deleting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getUsername());
+        logger.info("Deleting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
         getService().delete(id);
     }
 }

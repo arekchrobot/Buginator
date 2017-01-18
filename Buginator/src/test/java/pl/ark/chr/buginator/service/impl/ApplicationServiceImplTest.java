@@ -12,6 +12,7 @@ import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.data.UserWrapper;
 import pl.ark.chr.buginator.domain.*;
+import pl.ark.chr.buginator.exceptions.DataAccessException;
 import pl.ark.chr.buginator.repository.ApplicationRepository;
 import pl.ark.chr.buginator.repository.ErrorRepository;
 import pl.ark.chr.buginator.repository.UserApplicationRepository;
@@ -67,7 +68,7 @@ public class ApplicationServiceImplTest {
     }
 
     @Test
-    public void testSave__Success() {
+    public void testSave__Success() throws DataAccessException {
         //given
         String companyName = "Test Company";
         Company company = TestObjectCreator.createCompany(LocalDate.now(), companyName, "", "");
@@ -108,7 +109,7 @@ public class ApplicationServiceImplTest {
     }
 
     @Test
-    public void testSave__ApplicationWithThisNameAlreadyExists() {
+    public void testSave__ApplicationWithThisNameAlreadyExists() throws DataAccessException {
         //given
         String companyName = "Test Company";
         Company company = TestObjectCreator.createCompany(LocalDate.now(), companyName, "", "");

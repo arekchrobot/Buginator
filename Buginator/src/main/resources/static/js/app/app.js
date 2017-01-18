@@ -31,7 +31,9 @@ angular.module("buginator", [
     "buginator.createApplicationController",
     "buginator.detailsApplicationController",
 
-    "buginator.chartServices"
+    "buginator.chartServices",
+
+    "buginator.errorServices"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", "IdleProvider", "KeepaliveProvider",
     function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider, IdleProvider, KeepaliveProvider) {
@@ -57,6 +59,9 @@ angular.module("buginator", [
                 suffix: ".json"
             }, {
                 prefix: "js/app/languages/application/",
+                suffix: ".json"
+            }, {
+                prefix: "js/app/languages/error/",
                 suffix: ".json"
             }]
         });

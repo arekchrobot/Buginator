@@ -1,0 +1,8 @@
+{
+  "ERROR_TITLE": "Tytuł",
+  "ERROR_DESCRIPTION": "Opis",
+  "ERROR_STATUS":"Status",
+  "ERROR_SEVERITY":"Waga",
+  "ERROR_LAST_OCCURRENCE": "Ostatnie wystąpienie",
+  "ERROR_COUNT": "Ilość"
+}

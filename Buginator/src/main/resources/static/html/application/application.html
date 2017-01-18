@@ -52,9 +52,64 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <canvas id="line" class="chart chart-line" chart-data="errorsChart.data"
-                    chart-labels="errorsChart.labels" chart-series="errorsChart.series" chart-options="errorsChart.options"
+                    chart-labels="errorsChart.labels" chart-series="errorsChart.series"
+                    chart-options="errorsChart.options"
                     chart-dataset-override="errorsChart.datasetOverride">
             </canvas>
+        </div>
+    </div>
+    <div id="collapse4" class="body">
+        <div id="dataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped"
+                   st-safe-src="errors" st-table="displayedErrors">
+                <div class="row">
+                    <div class="col-sm-6">
+                        Errors
+                    </div>
+                    <!--<div class="col-sm-6">-->
+                    <!--<div id="dataTable_filter" class="dataTables_filter">-->
+                    <!--<label>-->
+                    <!--<translate>APPLICATIONS_SEARCH</translate>-->
+                    <!--: <input class="form-control input-sm" placeholder="" aria-controls="dataTable"-->
+                    <!--type="search">-->
+                    <!--</label>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <thead>
+                <tr>
+                    <th translate>ERROR_TITLE</th>
+                    <th translate>ERROR_DESCRIPTION</th>
+                    <th translate>ERROR_STATUS</th>
+                    <th translate>ERROR_SEVERITY</th>
+                    <th translate>ERROR_LAST_OCCURRENCE</th>
+                    <th translate>ERROR_COUNT</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="error in displayedErrors">
+                    <td>{{error.title}}</td>
+                    <td>{{error.description}}</td>
+                    <td>{{error.status}}</td>
+                    <td>{{error.severity}}</td>
+                    <td>{{error.lastOccurrence}}</td>
+                    <td>{{error.count}}</td>
+                    <td>
+                        <button class="btn btn-info" translate ng-redirect-to-url={{"/application/"+application.id}}>
+                            APPLICATIONS_INFO_BUTTON
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="7" class="text-center">
+                        <div st-pagination="" st-items-by-page="5" st-displayed-pages="7"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </div>

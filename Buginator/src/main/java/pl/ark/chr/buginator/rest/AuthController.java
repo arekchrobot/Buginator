@@ -74,7 +74,7 @@ public class AuthController {
     @POST("/signout")
     public boolean logout(HttpServletRequest request, HttpServletResponse response) {
         UserWrapper currentUser = sessionUtil.getCurrentUser(request);
-        String username = currentUser != null ? currentUser.getUsername() : "";
+        String username = currentUser != null ? currentUser.getEmail() : "";
         logger.info("Logging out user: " + username);
         SecurityUtils.getSubject().logout();
         sessionUtil.removeCurrentUser(request);

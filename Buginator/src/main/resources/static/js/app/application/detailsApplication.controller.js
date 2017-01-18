@@ -4,13 +4,20 @@ angular.module("buginator.detailsApplicationController", []).config(function ($s
         templateUrl: "html/application/application.html",
         controller: "detailsApplicationController"
     });
-}).controller("detailsApplicationController", function ($scope, $state, $stateParams, applicationRestService, exceptionHandler, applicationService, chartService) {
+}).controller("detailsApplicationController", function ($scope, $state, $stateParams, applicationRestService, exceptionHandler, applicationService,
+                                                        chartService, errorRestService) {
 
     applicationService.initDetailsAppScope($scope);
 
     applicationRestService.get($stateParams.id,
         function (returnedData) {
             $scope.application = returnedData.data;
+        }
+    );
+
+    errorRestService.getAllByApplication($stateParams.id,
+        function (returnedData) {
+            $scope.errors = returnedData.data;
         }
     );
 

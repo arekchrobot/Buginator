@@ -17,4 +17,6 @@ public interface ErrorRepository extends CrudRepository<Error, Long> {
     Long countByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
 
     List<Error> findByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
+
+    List<Error> findByApplication(Application application);
 }
