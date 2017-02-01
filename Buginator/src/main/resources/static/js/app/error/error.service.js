@@ -14,5 +14,10 @@ angular.module("buginator.errorServices", [])
                 .then(successFunction, exceptionHandler.handleRestError);
         };
 
+        service.save = function (data, successFunction, errorFunction) {
+            $http.post(this.baseObjectUrl, data)
+                .then(successFunction, errorFunction);
+        };
+
         return service;
     });

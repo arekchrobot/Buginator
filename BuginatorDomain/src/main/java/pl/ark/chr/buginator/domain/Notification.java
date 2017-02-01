@@ -23,9 +23,6 @@ public class Notification extends BaseEntity {
     @Column(name = "seen")
     private Boolean seen;
 
-    @Column(name = "seen_mobile")
-    private Boolean seenMobile;
-
     public User getUser() {
         return user;
     }
@@ -48,13 +45,5 @@ public class Notification extends BaseEntity {
 
     public void setSeen(Boolean seen) {
         this.seen = seen;
-    }
-
-    public Boolean getSeenMobile() {
-        return seenMobile;
-    }
-
-    public void setSeenMobile(Boolean seenMobile) {
-        this.seenMobile = seenMobile;
     }
 }

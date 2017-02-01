@@ -37,7 +37,9 @@ public class ApplicationServiceImpl extends RestrictedAccessCrudServiceImpl<Appl
 
     private static final Logger logger = LoggerFactory.getLogger(ApplicationServiceImpl.class);
 
-    private final ClientFilter clientFilter = ClientFilterFactory.createClientFilter(ClientFilterFactory.ClientFilterType.APPLICATION_ACCESS);
+    private final ClientFilter readClientFilter = ClientFilterFactory.createClientFilter(ClientFilterFactory.ClientFilterType.APPLICATION_ACCESS);
+    private final ClientFilter writeClientFilter = ClientFilterFactory.createClientFilter(ClientFilterFactory.ClientFilterType.APPLICATION_ACCESS,
+            ClientFilterFactory.ClientFilterType.DATA_MODIFY);
 
     private static final int NUMBER_OF_DAYS = 7;
 
@@ -62,8 +64,13 @@ public class ApplicationServiceImpl extends RestrictedAccessCrudServiceImpl<Appl
     }
 
     @Override
-    protected ClientFilter getClientFilter() {
-        return clientFilter;
+    protected ClientFilter getReadClientFilter() {
+        return readClientFilter;
+    }
+
+    @Override
+    protected ClientFilter getWriteClientFilter() {
+        return writeClientFilter;
     }
 
     @Override

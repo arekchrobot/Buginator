@@ -14,8 +14,10 @@ import pl.ark.chr.buginator.repository.ApplicationRepository;
 import pl.ark.chr.buginator.repository.ErrorRepository;
 import pl.ark.chr.buginator.service.ErrorService;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Arek on 2017-01-16.
@@ -25,6 +27,11 @@ import java.util.Set;
 public class ErrorServiceImpl extends RestrictedAccessCrudServiceImpl<Error> implements ErrorService {
 
     private final ClientFilter clientFilter = ClientFilterFactory.createClientFilter(ClientFilterFactory.ClientFilterType.APPLICATION_ACCESS);
+
+    private Comparator<Error> statusComparator = Comparator.comparing(error -> error.getStatus().getOrder());
+    private Comparator<Error> severityComparator = Comparator.comparing(error -> error.getSeverity().getOrder());
+    private Comparator<Error> lastOccurrenceComparator = Comparator.comparing(Error::getLastOccurrence).reversed();
+    private Comparator<Error> errorComparator = lastOccurrenceComparator.thenComparing(severityComparator).thenComparing(statusComparator);
 
     @Autowired
     private ErrorRepository errorRepository;
@@ -38,7 +45,12 @@ public class ErrorServiceImpl extends RestrictedAccessCrudServiceImpl<Error> imp
     }
 
     @Override
-    protected ClientFilter getClientFilter() {
+    protected ClientFilter getReadClientFilter() {
+        return clientFilter;
+    }
+
+    @Override
+    protected ClientFilter getWriteClientFilter() {
         return clientFilter;
     }
 
@@ -48,6 +60,10 @@ public class ErrorServiceImpl extends RestrictedAccessCrudServiceImpl<Error> imp
 
         clientFilter.validateAccess(application, userApplications);
 
-        return errorRepository.findByApplication(application);
+        List<Error> errors = errorRepository.findByApplication(application);
+
+        errors = errors.stream().sorted(errorComparator).collect(Collectors.toList());
+
+        return errors;
     }
 }

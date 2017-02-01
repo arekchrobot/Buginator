@@ -1,5 +1,7 @@
 package pl.ark.chr.buginator.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -19,6 +21,7 @@ public class ErrorStackTrace extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "buginator_error_id", nullable = false)
+    @JsonIgnore
     private Error error;
 
     @Column(name = "stack_trace_order")

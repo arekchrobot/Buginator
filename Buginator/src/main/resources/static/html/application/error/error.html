@@ -1,0 +1,184 @@
+<!--display panel-->
+<div class="box dark">
+    <header>
+        <h5>{{error.title}}</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-info" ng-click="changeStatus('ONGOING')" translate ng-if="error.status !== 'ONGOING' && error.status !== 'RESOLVED'">ERROR_ONGOING
+                </button>
+                <button class="btn btn-success" ng-click="changeStatus('RESOLVED')" translate ng-if="error.status !== 'RESOLVED'">ERROR_RESOLVE
+                </button>
+                <button class="btn btn-warning" ng-click="changeStatus('REOPENED')" translate ng-if="error.status === 'RESOLVED'">ERROR_REOPEN
+                </button>
+                <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId}} translate>BACK_BUTTON
+                </button>
+            </div>
+        </div>
+    </header>
+    <div id="div-1" class="body">
+        <div class="form-horizontal">
+            <h5><strong translate>ERROR_GENERAL</strong></h5>
+            <div class="form-group">
+                <label for="errorDescription" class="control-label col-lg-3" translate>ERROR_DESCRIPTION</label>
+                <div class="col-lg-5">
+                    <div id="errorDescription" disabled type="text" class="form-control">{{error.description}}</div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="form-group">
+                <label for="errorSeverity" class="control-label col-lg-3" translate>ERROR_SEVERITY</label>
+                <div class="col-lg-5 has-feedback"
+                     ng-class="{'has-error': error.severity !== 'WARNING', 'has-warning': error.severity === 'WARNING'}">
+                    <div id="errorSeverity" disabled type="text" class="form-control"> {{error.severity}}</div>
+                    <span class="fa fa-exclamation-triangle form-control-feedback"
+                          ng-if="error.severity === 'WARNING'"></span>
+                    <span class="fa fa-times form-control-feedback" ng-if="error.severity !== 'WARNING'"></span>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="form-group">
+                <label for="errorStatus" class="control-label col-lg-3" translate>ERROR_STATUS</label>
+                <div class="col-lg-5 has-feedback" ng-class="{'has-success': error.status === 'RESOLVED'}">
+                    <div id="errorStatus" disabled type="text" class="form-control">{{error.status}}</div>
+                    <span class="fa fa-check form-control-feedback" ng-if="error.status === 'RESOLVED'"></span>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="form-group">
+                <label for="errorDate" class="control-label col-lg-3" translate>ERROR_FIRST_OCCURRENCE</label>
+                <div class="col-lg-5">
+                    <div id="errorDate" disabled type="text" class="form-control">
+                        {{error.dateTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="form-group">
+                <label for="errorLastOccurrence" class="control-label col-lg-3" translate>ERROR_LAST_OCCURRENCE</label>
+                <div class="col-lg-5">
+                    <div id="errorLastOccurrence" disabled type="text" class="form-control">{{error.lastOccurrence}}
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="form-group">
+                <label for="errorCount" class="control-label col-lg-3" translate>ERROR_COUNT</label>
+                <div class="col-lg-5">
+                    <div id="errorCount" disabled type="text" class="form-control">{{error.count}}</div>
+                </div>
+            </div>
+
+            <br ng-if="error.requestUrl"/>
+
+            <div class="form-group" ng-if="error.requestUrl">
+                <label for="errorRequestUrl" class="control-label col-lg-3" translate>ERROR_REQUEST_URL</label>
+                <div class="col-lg-5">
+                    <div id="errorRequestUrl" disabled type="text" class="form-control">{{error.requestUrl}}</div>
+                </div>
+            </div>
+
+            <br ng-if="error.queryParams"/>
+
+            <div class="form-group" ng-if="error.queryParams">
+                <label for="errorQueryParams" class="control-label col-lg-3" translate>ERROR_QUERY_PARAMS</label>
+                <div class="col-lg-5">
+                    <div id="errorQueryParams" disabled type="text" class="form-control">{{error.queryParams}}</div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="body">
+                <h5><strong translate>ERROR_STACK_TRACE</strong></h5>
+
+                <div class="form-group">
+                    <div class="control-label col-lg-3">
+                    </div>
+                    <div class="col-lg-5">
+                        <textarea id="autosize" class="form-control" disabled
+                                  style="overflow: hidden; resize: both; min-height: 250px;"
+                        >{{errorStackTrace}}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="body" ng-if="error.userAgent">
+                <h5><strong translate>ERROR_USER_AGENT_DATA</strong></h5>
+
+                <div class="form-group">
+                    <label for="errorUAManufacturer" class="control-label col-lg-3"
+                           translate>ERROR_UA_MANUFACTURER</label>
+                    <div class="col-lg-5">
+                        <div id="errorUAManufacturer" disabled type="text" class="form-control">
+                            {{error.userAgent.manufacturer}}
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    <label for="errorUADevice" class="control-label col-lg-3" translate>ERROR_UA_DEVICE</label>
+                    <div class="col-lg-5">
+                        <div id="errorUADevice" disabled type="text" class="form-control">
+                            {{error.userAgent.device}} {{error.userAgent.deviceType}}
+                            {{error.userAgent.deviceArchitecture}}
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    <label for="errorUAOperatingSystem" class="control-label col-lg-3" translate>ERROR_UA_OPERATING_SYSTEM</label>
+                    <div class="col-lg-5">
+                        <div id="errorUAOperatingSystem" disabled type="text" class="form-control">
+                            {{error.userAgent.operatingSystemVendor}} {{error.userAgent.operatingSystem}}
+                            {{error.userAgent.operatingSystemVersion}}
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    <label for="errorUABrowser" class="control-label col-lg-3" translate>ERROR_UA_BROWSER</label>
+                    <div class="col-lg-5">
+                        <div id="errorUABrowser" disabled type="text" class="form-control">
+                            {{error.userAgent.browserVendor}} {{error.userAgent.browser}}
+                            {{error.userAgent.browserFullVersion}}
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="form-group"
+                     ng-if="error.userAgent.country != 'Unknown' && error.userAgent.language != 'Unknown'">
+                    <label for="errorUACountryLang" class="control-label col-lg-3"
+                           translate>ERROR_UA_COUNTRY_LANG</label>
+                    <div class="col-lg-5">
+                        <div id="errorUACountryLang" disabled type="text" class="form-control">
+                            {{error.userAgent.country}}, {{error.userAgent.language}}
+                        </div>
+                    </div>
+                </div>
+
+                <br ng-if="error.userAgent.country != 'Unknown' && error.userAgent.language != 'Unknown'"/>
+            </div>
+        </div>
+    </div>
+</div>

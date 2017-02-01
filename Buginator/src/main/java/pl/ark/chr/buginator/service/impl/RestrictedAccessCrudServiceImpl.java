@@ -14,12 +14,14 @@ import java.util.Set;
  */
 public abstract class RestrictedAccessCrudServiceImpl<T extends BaseEntity & FilterData> extends CrudServiceImpl<T> implements RestrictedAccessCrudService<T> {
 
-    protected abstract ClientFilter getClientFilter();
+    protected abstract ClientFilter getReadClientFilter();
+
+    protected abstract ClientFilter getWriteClientFilter();
 
     @Override
     public T save(T t, Set<UserApplication> userApplications) throws DataAccessException {
         if (!t.isNew()) {
-            getClientFilter().validateAccess(t, userApplications);
+            getWriteClientFilter().validateAccess(t, userApplications);
         }
         return super.save(t);
     }
@@ -27,14 +29,14 @@ public abstract class RestrictedAccessCrudServiceImpl<T extends BaseEntity & Fil
     @Override
     public T get(Long id, Set<UserApplication> userApplications) throws DataAccessException {
         T entity = super.get(id);
-        getClientFilter().validateAccess(entity, userApplications);
+        getReadClientFilter().validateAccess(entity, userApplications);
         return entity;
     }
 
     @Override
     public void delete(Long id, Set<UserApplication> userApplications) throws DataAccessException {
         T entity = super.get(id);
-        getClientFilter().validateAccess(entity, userApplications);
+        getWriteClientFilter().validateAccess(entity, userApplications);
         super.delete(id);
     }
 }

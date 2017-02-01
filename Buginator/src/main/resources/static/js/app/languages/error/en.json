@@ -1,8 +1,24 @@
 {
   "ERROR_TITLE": "Title",
   "ERROR_DESCRIPTION": "Description",
-  "ERROR_STATUS":"Status",
-  "ERROR_SEVERITY":"Severity",
+  "ERROR_STATUS": "Status",
+  "ERROR_SEVERITY": "Severity",
   "ERROR_LAST_OCCURRENCE": "Last occurrence",
-  "ERROR_COUNT": "Count"
+  "ERROR_COUNT": "Count",
+  "APPLICATION_ERRORS": "Errors",
+  "ERROR_INFO_BUTTON": "Details",
+  "ERROR_FIRST_OCCURRENCE": "First appeared",
+  "ERROR_REQUEST_URL": "Request URL",
+  "ERROR_QUERY_PARAMS": "Query params",
+  "ERROR_GENERAL": "General",
+  "ERROR_USER_AGENT_DATA": "User Agent Data",
+  "ERROR_UA_MANUFACTURER": "Manufacturer",
+  "ERROR_UA_DEVICE": "Device",
+  "ERROR_UA_OPERATING_SYSTEM": "Operating System",
+  "ERROR_UA_BROWSER": "Browser",
+  "ERROR_UA_COUNTRY_LANG": "Country and Language",
+  "ERROR_STACK_TRACE": "Stack Trace",
+  "ERROR_RESOLVE": "Resolve",
+  "ERROR_ONGOING": "In progress",
+  "ERROR_REOPEN": "Reopen"
 }

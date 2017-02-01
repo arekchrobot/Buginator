@@ -1,8 +1,24 @@
 {
   "ERROR_TITLE": "Tytuł",
   "ERROR_DESCRIPTION": "Opis",
-  "ERROR_STATUS":"Status",
-  "ERROR_SEVERITY":"Waga",
+  "ERROR_STATUS": "Status",
+  "ERROR_SEVERITY": "Waga",
   "ERROR_LAST_OCCURRENCE": "Ostatnie wystąpienie",
-  "ERROR_COUNT": "Ilość"
+  "ERROR_COUNT": "Ilość",
+  "APPLICATION_ERRORS": "Błędy",
+  "ERROR_INFO_BUTTON": "Szczegóły",
+  "ERROR_FIRST_OCCURRENCE": "Pierwsze wystąpienie",
+  "ERROR_REQUEST_URL": "Adres URL",
+  "ERROR_QUERY_PARAMS": "Parametry zapytania",
+  "ERROR_GENERAL": "Ogólne",
+  "ERROR_USER_AGENT_DATA": "Dane User Agent",
+  "ERROR_UA_MANUFACTURER": "Producent",
+  "ERROR_UA_DEVICE": "Urządzenie",
+  "ERROR_UA_OPERATING_SYSTEM": "System operacyjny",
+  "ERROR_UA_BROWSER": "Przeglądarka",
+  "ERROR_UA_COUNTRY_LANG": "Kraj i Język",
+  "ERROR_STACK_TRACE": "Stos wywołań",
+  "ERROR_RESOLVE": "Rozwiąż",
+  "ERROR_ONGOING": "Zbadaj",
+  "ERROR_REOPEN": "Otwórz"
 }

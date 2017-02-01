@@ -64,7 +64,7 @@
                    st-safe-src="errors" st-table="displayedErrors">
                 <div class="row">
                     <div class="col-sm-6">
-                        Errors
+                        <p class="lead" translate>APPLICATION_ERRORS</p>
                     </div>
                     <!--<div class="col-sm-6">-->
                     <!--<div id="dataTable_filter" class="dataTables_filter">-->
@@ -96,8 +96,8 @@
                     <td>{{error.lastOccurrence}}</td>
                     <td>{{error.count}}</td>
                     <td>
-                        <button class="btn btn-info" translate ng-redirect-to-url={{"/application/"+application.id}}>
-                            APPLICATIONS_INFO_BUTTON
+                        <button class="btn btn-info" translate ng-redirect-to-url={{"/application/"+application.id+"/error/"+error.id}}>
+                            ERROR_INFO_BUTTON
                         </button>
                     </td>
                 </tr>
