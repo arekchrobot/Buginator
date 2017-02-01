@@ -5,11 +5,14 @@
 
         <div class="toolbar">
             <div class="btn-group">
-                <button class="btn btn-info" ng-click="changeStatus('ONGOING')" translate ng-if="error.status !== 'ONGOING' && error.status !== 'RESOLVED'">ERROR_ONGOING
+                <button class="btn btn-info" ng-click="changeStatus('ONGOING')" translate
+                        ng-if="error.status !== 'ONGOING' && error.status !== 'RESOLVED'">ERROR_ONGOING
                 </button>
-                <button class="btn btn-success" ng-click="changeStatus('RESOLVED')" translate ng-if="error.status !== 'RESOLVED'">ERROR_RESOLVE
+                <button class="btn btn-success" ng-click="changeStatus('RESOLVED')" translate
+                        ng-if="error.status !== 'RESOLVED'">ERROR_RESOLVE
                 </button>
-                <button class="btn btn-warning" ng-click="changeStatus('REOPENED')" translate ng-if="error.status === 'RESOLVED'">ERROR_REOPEN
+                <button class="btn btn-warning" ng-click="changeStatus('REOPENED')" translate
+                        ng-if="error.status === 'RESOLVED'">ERROR_REOPEN
                 </button>
                 <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId}} translate>BACK_BUTTON
                 </button>

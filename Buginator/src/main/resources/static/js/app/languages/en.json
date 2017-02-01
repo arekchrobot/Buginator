@@ -1,3 +1,5 @@
 {
-  "BACK_BUTTON":"Return"
+  "BACK_BUTTON": "Return",
+  "DASHBOARD": "Dashboard",
+  "APPLICATIONS": "Applications"
 }

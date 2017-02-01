@@ -34,7 +34,9 @@ angular.module("buginator", [
     "buginator.chartServices",
 
     "buginator.errorServices",
-    "buginator.detailsErrorController"
+    "buginator.detailsErrorController",
+
+    "buginator.applicationManageUsersController"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", "IdleProvider", "KeepaliveProvider",
     function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider, IdleProvider, KeepaliveProvider) {

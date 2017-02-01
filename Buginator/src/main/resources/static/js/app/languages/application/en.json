@@ -10,5 +10,6 @@
   "APPLICATIONS_NAME": "Name",
   "APPLICATIONS_ERRORS": "Errors",
   "APPLICATION_ERRORS_LAST_WEEK": "Errors last 7 days",
-  "APPLICATIONS_INFO_BUTTON": "Details"
+  "APPLICATIONS_INFO_BUTTON": "Details",
+  "APP_MANAGE_USERS": "Manage Users"
 }

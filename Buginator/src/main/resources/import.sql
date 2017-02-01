@@ -23,7 +23,9 @@ INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (3,2);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (3,3);
 
 INSERT INTO buginator_user(id, version, active, email, name, pass, company_id, buginator_role_id) VALUES
-(1,1,true,'asd@asd', 'User1', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,1);
+(1,1,true,'asd@asd', 'User1', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,1),
+(2,1,true,'asd2@asd', 'User2', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,1);
+
 
 INSERT INTO application(id, version, name, company_id) VALUES
 (1,1, 'Test application', 1),

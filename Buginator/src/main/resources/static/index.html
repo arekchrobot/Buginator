@@ -38,11 +38,11 @@
                                     <i class="fa fa-envelope"></i>
                                     <span class="label label-warning">5</span>
                                 </a>
-                                <a data-placement="bottom" data-original-title="Messages" href="#" data-toggle="tooltip"
-                                   class="btn btn-default btn-sm">
-                                    <i class="fa fa-comments"></i>
-                                    <span class="label label-danger">4</span>
-                                </a>
+                                <!--<a data-placement="bottom" data-original-title="Messages" href="#" data-toggle="tooltip"-->
+                                   <!--class="btn btn-default btn-sm">-->
+                                    <!--<i class="fa fa-comments"></i>-->
+                                    <!--<span class="label label-danger">4</span>-->
+                                <!--</a>-->
                             </div>
                             <div class="btn-group">
                                 <a ng-click="logout()" data-toggle="tooltip" data-original-title="Logout"
@@ -56,17 +56,17 @@
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <!-- .nav -->
                             <ul class="nav navbar-nav">
-                                <li><a href="" ng-redirect-to="dashboard">Dashboard</a></li>
-                                <li><a href="table.html">Tables</a></li>
-                                <li><a href="file.html">File Manager</a></li>
-                                <li class='dropdown '>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        Form Elements <b class="caret"></b>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="form-general.html">General</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="" ng-redirect-to="dashboard" translate>DASHBOARD</a></li>
+                                <li><a href="" ng-redirect-to="applications" translate>APPLICATIONS</a></li>
+                                <!--<li><a href="file.html">File Manager</a></li>-->
+                                <!--<li class='dropdown '>-->
+                                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+                                        <!--Form Elements <b class="caret"></b>-->
+                                    <!--</a>-->
+                                    <!--<ul class="dropdown-menu">-->
+                                        <!--<li><a href="form-general.html">General</a></li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
                             </ul>
                             <!-- /.nav -->
                         </div>
@@ -111,93 +111,93 @@
                     <li class="nav-divider"></li>
                     <li class="">
                         <a href="" ng-redirect-to="dashboard">
-                            <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span>
+                            <i class="fa fa-dashboard"></i>&nbsp;<span class="link-title" translate>DASHBOARD</span>
                         </a>
                     </li>
                     <li ng-if="user.perms['read_application']">
                         <a href="" ng-redirect-to="applications">
                             <i class="fa fa-desktop" ></i>
-                            <span class="link-title">Applications</span>
+                            <span class="link-title" translate>APPLICATIONS</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="file.html">
-                            <i class="fa fa-file"></i>
-                                      <span class="link-title">
-                              File Manager
-                                  </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="typography.html">
-                            <i class="fa fa-font"></i>
-                                      <span class="link-title">
-                                    Typography
-                                  </span> </a>
-                    </li>
-                    <li>
-                        <a href="maps.html">
-                            <i class="fa fa-map-marker"></i><span class="link-title">
-                                    Maps
-                                  </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chart.html">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                                      <span class="link-title">
-                                    Charts
-                                  </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="calendar.html">
-                            <i class="fa fa-calendar"></i>
-                                      <span class="link-title">
-                                    Calendar
-                                  </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="fa fa-exclamation-triangle"></i>
-                                      <span class="link-title">
-                                      Error Pages
-                                    </span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="collapse">
-                            <li>
-                                <a href="403.html">
-                                    <i class="fa fa-angle-right"></i>&nbsp;403</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="grid.html">
-                            <i class="fa fa-columns"></i>
-                                      <span class="link-title">
-                            Grid
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="blank.html">
-                            <i class="fa fa-square-o"></i>
-                                      <span class="link-title">
-                            Blank Page
-                            </span>
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a href="file.html">-->
+                            <!--<i class="fa fa-file"></i>-->
+                                      <!--<span class="link-title">-->
+                              <!--File Manager-->
+                                  <!--</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="typography.html">-->
+                            <!--<i class="fa fa-font"></i>-->
+                                      <!--<span class="link-title">-->
+                                    <!--Typography-->
+                                  <!--</span> </a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="maps.html">-->
+                            <!--<i class="fa fa-map-marker"></i><span class="link-title">-->
+                                    <!--Maps-->
+                                  <!--</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="chart.html">-->
+                            <!--<i class="fa fa fa-bar-chart-o"></i>-->
+                                      <!--<span class="link-title">-->
+                                    <!--Charts-->
+                                  <!--</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="calendar.html">-->
+                            <!--<i class="fa fa-calendar"></i>-->
+                                      <!--<span class="link-title">-->
+                                    <!--Calendar-->
+                                  <!--</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="javascript:;">-->
+                            <!--<i class="fa fa-exclamation-triangle"></i>-->
+                                      <!--<span class="link-title">-->
+                                      <!--Error Pages-->
+                                    <!--</span>-->
+                            <!--<span class="fa arrow"></span>-->
+                        <!--</a>-->
+                        <!--<ul class="collapse">-->
+                            <!--<li>-->
+                                <!--<a href="403.html">-->
+                                    <!--<i class="fa fa-angle-right"></i>&nbsp;403</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="grid.html">-->
+                            <!--<i class="fa fa-columns"></i>-->
+                                      <!--<span class="link-title">-->
+                            <!--Grid-->
+                            <!--</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="blank.html">-->
+                            <!--<i class="fa fa-square-o"></i>-->
+                                      <!--<span class="link-title">-->
+                            <!--Blank Page-->
+                            <!--</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
                     <li class="nav-divider"></li>
-                    <li>
-                        <a href="login.html">
-                            <i class="fa fa-sign-in"></i>
-                                      <span class="link-title">
-                            Login Page
-                            </span>
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a href="login.html">-->
+                            <!--<i class="fa fa-sign-in"></i>-->
+                                      <!--<span class="link-title">-->
+                            <!--Login Page-->
+                            <!--</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
                 </ul>
                 <!-- /#menu -->
             </div>
