@@ -11,6 +11,8 @@ angular.module("buginator", [
     "ngSanitize",
     "chart.js",
     "ngIdle",
+    "frapontillo.bootstrap-switch",
+    "ui.checkbox",
 
     "buginator.directives",
     "buginator.filters",
@@ -36,6 +38,7 @@ angular.module("buginator", [
     "buginator.errorServices",
     "buginator.detailsErrorController",
 
+    "buginator.applicationManageUserServices",
     "buginator.applicationManageUsersController"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", "IdleProvider", "KeepaliveProvider",

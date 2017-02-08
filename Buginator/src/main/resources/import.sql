@@ -3,12 +3,14 @@ INSERT INTO payment_option (id, version, duration, max_users, price, name) VALUE
 INSERT INTO buginator_permission (id, version, name) VALUES (1,1,'Company_manager');
 INSERT INTO buginator_permission (id, version, name) VALUES (2,1,'read_application');
 INSERT INTO buginator_permission (id, version, name) VALUES (3,1,'create_application');
+INSERT INTO buginator_permission (id, version, name) VALUES (4,1,'app_manage_users');
 
 INSERT INTO buginator_role (id, version, name) VALUES (1,1,'Company Manager');
 
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,1);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,2);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,3);
+INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,4);
 
 INSERT INTO company(id, version, address, expiry_date, name, token, unique_key, user_limit,payment_option_id) VALUES
 (1,1,'Test address', NOW() + INTERVAL '30 days','Test Company', 'Xqg5ueAkyuwLM6bVFR16vuThX83flR','lSFdQB4rQ79ydSt4C05qjFTmNHMnMi',5,1),
@@ -24,7 +26,7 @@ INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (3,3);
 
 INSERT INTO buginator_user(id, version, active, email, name, pass, company_id, buginator_role_id) VALUES
 (1,1,true,'asd@asd', 'User1', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,1),
-(2,1,true,'asd2@asd', 'User2', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,1);
+(2,1,true,'asd2@asd', 'User2', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,2);
 
 
 INSERT INTO application(id, version, name, company_id) VALUES

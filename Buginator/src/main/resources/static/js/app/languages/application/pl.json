@@ -11,5 +11,12 @@
   "APPLICATIONS_ERRORS": "Błędy",
   "APPLICATION_ERRORS_LAST_WEEK": "Błędy z ostatnich 7 dni",
   "APPLICATIONS_INFO_BUTTON": "Szczegóły",
-  "APP_MANAGE_USERS": "Zarządzaj użytkownikami"
+  "APP_MANAGE_USERS": "Zarządzaj użytkownikami",
+  "CURRENT_USERS": "Obecni użytkownicy",
+  "ADD_USERS": "Dodaj użytkowników",
+  "APP_USER_MODIFY": "Modyfikacja:",
+  "APP_USER_REMOVE_BUTTON": "Usuń",
+  "APP_USER_ADD_BUTTON": "Dodaj",
+  "REMOVE_USERS_ERROR": "Błąd podczas usuwania użytkowników z aplikacji. Proszę spróbować ponownie.",
+  "ADD_USERS_ERROR": "Błąd podczas dodawania użytkowników do aplikacji. Proszę spróbować ponownie."
 }

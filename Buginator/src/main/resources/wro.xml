@@ -6,6 +6,7 @@
         <css>webjar:ng-dialog/0.5.9/css/ngDialog.css</css>
         <css>webjar:ng-dialog/0.5.9/css/ngDialog-theme-default.css</css>
         <css>webjar:ng-dialog/0.5.9/css/ngDialog.css</css>
+        <css>webjar:bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.css</css>
         <js>webjar:jquery/2.1.1/jquery.min.js</js>
         <js>webjar:angularjs/1.4.7/angular.js</js>
         <js>webjar:angularjs/1.4.7/angular-route.min.js</js>
@@ -30,6 +31,9 @@
         <js>webjar:chartjs/2.1.3/Chart.js</js>
         <js>webjar:angular-chart.js/1.0.3/angular-chart.js</js>
         <js>webjar:ng-idle/1.3.1/angular-idle.min.js</js>
+        <js>webjar:angular-bootstrap-switch/0.5.1/dist/angular-bootstrap-switch.min.js</js>
+        <js>webjar:bootstrap-switch/3.3.2/js/bootstrap-switch.min.js</js>
+        <js>webjar:angular-bootstrap-checkbox/1.0.0/angular-bootstrap-checkbox.js</js>
     </group>
     <group name="angular-app">
         <css>classpath:static/css/buginator.css</css>

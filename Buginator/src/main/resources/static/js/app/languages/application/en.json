@@ -11,5 +11,12 @@
   "APPLICATIONS_ERRORS": "Errors",
   "APPLICATION_ERRORS_LAST_WEEK": "Errors last 7 days",
   "APPLICATIONS_INFO_BUTTON": "Details",
-  "APP_MANAGE_USERS": "Manage Users"
+  "APP_MANAGE_USERS": "Manage Users",
+  "CURRENT_USERS": "Current Users",
+  "ADD_USERS": "Add Users",
+  "APP_USER_MODIFY": "Modify:",
+  "APP_USER_REMOVE_BUTTON": "Remove",
+  "APP_USER_ADD_BUTTON": "Add",
+  "REMOVE_USERS_ERROR": "Error removing users from application. Please try again.",
+  "ADD_USERS_ERROR": "Error adding users to application. Please try again."
 }

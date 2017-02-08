@@ -1,5 +1,10 @@
 {
   "BACK_BUTTON":"Powrót",
   "DASHBOARD": "Pulpit",
-  "APPLICATIONS": "Aplikacje"
+  "APPLICATIONS": "Aplikacje",
+  "YES": "TAK",
+  "NO": "NIE",
+  "ERROR_CLOSE_BUTTON": "Zamknij",
+  "UNAUTHORIZED_ACCESS": "Nieupoważniony dostęp",
+  "USER_NOT_PERMITTED": "Użytkownik nie ma uprawnień"
 }

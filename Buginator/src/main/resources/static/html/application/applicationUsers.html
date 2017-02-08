@@ -13,24 +13,35 @@
         <div class="col-lg-6">
             <div class="box dark">
                 <header>
-                    <h5>CURRENT_USERS</h5>
+                    <h5 translate>CURRENT_USERS</h5>
                 </header>
             </div>
             <div class="body">
                 <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label col-lg-4">Multiple select</label>
+                    <div class="form-group" ng-repeat="appUser in appUsers" >
+                        <label class="control-label col-lg-4">
+                            <checkbox class="btn-danger" ng-model="selectedRemove[$index]" ng-change="removeUser(appUser, $index)"
+                                      ng-if="$root.user.email != appUser.email"></checkbox>
+                            {{appUser.username}}
+                        </label>
                         <div class="col-lg-8">
-                            <select class="form-control" multiple ng-model="omgUsers" size="10">
-                                <option selected="">7</option>
-                                <option selected="">8</option>
-                                <option>9</option>
-                                <option selected="">10</option>
-                                <option>11</option>
-                            </select>
+                            <label class="control-label col-lg-4" translate>APP_USER_MODIFY</label>
+                            <input bs-switch ng-model="appUser.modify" type="checkbox" switch-animate="true"
+                                   switch-on-text="{{switchButton.yes}}" switch-off-text="{{switchButton.no}}" switch-on-color="primary"
+                                   switch-off-color="default"
+                                   switch-label-width="67" switch-handle-width="67"
+                                   switch-change="changeModifyForUser(appUser)"
+                                   switch-wrapper="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on"
+                                   switch-size="small" switch-readonly="$root.user.email === appUser.email"/>
                         </div>
                     </div>
-                    selectedValues = {{omgUsers}}
+                    <br/>
+                    <div class="form-group">
+                        <label class="control-label col-lg-6"></label>
+                        <div class="col-lg-6">
+                            <button class="btn btn-danger" ng-click="removeSelectedUsers()" translate ng-if="user.perms['app_manage_users']">APP_USER_REMOVE_BUTTON</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,23 +49,32 @@
         <div class="col-lg-6">
             <div class="box inverse">
                 <header>
-                    <h5>ADD_USERS</h5>
+                    <h5 translate>ADD_USERS</h5>
                 </header>
             </div>
             <div class="body">
                 <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label col-lg-4">Multiple select</label>
+                    <div class="form-group" ng-repeat="userNotBoundToApp in usersNotBoundToApp">
+                        <label class="control-label col-lg-4">
+                            <checkbox class="btn-success" ng-model="selectedAdd[$index]" ng-change="addUser(userNotBoundToApp, $index)"></checkbox>
+                            {{userNotBoundToApp.username}}
+                        </label>
                         <div class="col-lg-8">
-                            <select class="form-control" multiple ng-model="selectedUsers" size="10">
-                                <option selected="">1</option>
-                                <option selected="">2</option>
-                                <option>3</option>
-                                <option selected="">4</option>
-                                <option>5</option>
-                            </select>
+                            <label class="control-label col-lg-4" translate>APP_USER_MODIFY</label>
+                            <input bs-switch ng-model="userNotBoundToApp.modify" type="checkbox" switch-animate="true"
+                                   switch-on-text="{{switchButton.yes}}" switch-off-text="{{switchButton.no}}" switch-on-color="primary"
+                                   switch-off-color="default"
+                                   switch-label-width="67" switch-handle-width="67"
+                                   switch-wrapper="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on"
+                                   switch-size="small"/>
                         </div>
-                        selectedValues = {{selectedUsers}}
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label class="control-label col-lg-6"></label>
+                        <div class="col-lg-6">
+                            <button class="btn btn-success" ng-click="addSelectedUsers()" translate ng-if="user.perms['app_manage_users']">APP_USER_ADD_BUTTON</button>
+                        </div>
                     </div>
                 </div>
             </div>
