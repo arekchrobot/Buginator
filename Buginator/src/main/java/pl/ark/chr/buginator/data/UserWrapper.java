@@ -22,8 +22,9 @@ public class UserWrapper {
     private Company company;
     private Set<UserApplication> userApplications;
     private String email;
+    private String token;
 
-    public UserWrapper(User user) {
+    public UserWrapper(User user, String token) {
         this.username = user.getName();
         this.email = user.getEmail();
         Set<String> roles = new HashSet<>();
@@ -33,6 +34,7 @@ public class UserWrapper {
         this.role = user.getRole().getName();
         this.company = user.getCompany();
         this.userApplications = user.getUserApplications();
+        this.token = token;
     }
 
     public String getUsername() {
@@ -58,5 +60,9 @@ public class UserWrapper {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

@@ -80,7 +80,7 @@ public class TestObjectCreator {
     }
 
     public static UserWrapper createUserWrapper(User user) {
-        return new UserWrapper(user);
+        return new UserWrapper(user, "123:abc");
     }
 
     public static List<Error> generateErrorListForLastWeekForApplication(Application application) {

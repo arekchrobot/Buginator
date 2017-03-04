@@ -41,7 +41,7 @@ public class ErrorController extends RestrictedAccessRestController<Error> {
 
     @Override
     @GET("/notUsed/{id}")
-    public Error get(Long id, HttpServletRequest request) throws RestException {
+    public Error get(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
         throw new UnsupportedOperationException("Use method that returns ErrorWrapper: getOne()");
     }
 

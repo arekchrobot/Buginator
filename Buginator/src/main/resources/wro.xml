@@ -5,7 +5,6 @@
         <css>webjar:datatables/1.10.12/media/css/dataTables.bootstrap.min.css</css>
         <css>webjar:ng-dialog/0.5.9/css/ngDialog.css</css>
         <css>webjar:ng-dialog/0.5.9/css/ngDialog-theme-default.css</css>
-        <css>webjar:ng-dialog/0.5.9/css/ngDialog.css</css>
         <css>webjar:bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.css</css>
         <js>webjar:jquery/2.1.1/jquery.min.js</js>
         <js>webjar:angularjs/1.4.7/angular.js</js>
@@ -34,6 +33,8 @@
         <js>webjar:angular-bootstrap-switch/0.5.1/dist/angular-bootstrap-switch.min.js</js>
         <js>webjar:bootstrap-switch/3.3.2/js/bootstrap-switch.min.js</js>
         <js>webjar:angular-bootstrap-checkbox/1.0.0/angular-bootstrap-checkbox.js</js>
+        <js>webjar:sockjs-client/1.1.2/sockjs.min.js</js>
+        <js>webjar:stomp-websocket/2.3.3/stomp.min.js</js>
     </group>
     <group name="angular-app">
         <css>classpath:static/css/buginator.css</css>

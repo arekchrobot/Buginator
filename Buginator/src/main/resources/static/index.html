@@ -33,17 +33,20 @@
                         </header>
 
                         <div class="topnav">
-                            <div class="btn-group">
-                                <a data-placement="bottom" data-original-title="E-mail" data-toggle="tooltip"
+                            <div class="btn-group" ng-controller="notificationController">
+                                <a data-placement="bottom" data-original-title="Notifications" data-toggle="dropdown"
                                    class="btn btn-default btn-sm">
                                     <i class="fa fa-envelope"></i>
-                                    <span class="label label-warning">5</span>
+                                    <span class="label label-warning" ng-if="notifications.length > 0">{{notifications.length}}</span>
                                 </a>
-                                <!--<a data-placement="bottom" data-original-title="Messages" href="#" data-toggle="tooltip"-->
-                                   <!--class="btn btn-default btn-sm">-->
-                                    <!--<i class="fa fa-comments"></i>-->
-                                    <!--<span class="label label-danger">4</span>-->
-                                <!--</a>-->
+                                <ul class="dropdown-menu dropdown-menu-right media user-media bg-dark nav navbar-nav">
+                                    <li ng-repeat="notification in notifications" style="width: 100%">
+                                        <a ng-redirect-to-url={{"/application/"+notification.applicationId+"/error/"+notification.errorId}}
+                                           ng-click="removeNotification($index, notification)">
+                                            {{notification.errorTitle}}
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="btn-group">
                                 <a ng-click="logout()" data-toggle="tooltip" data-original-title="Logout"

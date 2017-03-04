@@ -21,6 +21,7 @@ import pl.ark.chr.buginator.rest.annotations.GET;
 import pl.ark.chr.buginator.rest.annotations.POST;
 import pl.ark.chr.buginator.rest.annotations.PUT;
 import pl.ark.chr.buginator.rest.annotations.RestController;
+import pl.ark.chr.buginator.service.NotificationService;
 import pl.ark.chr.buginator.service.RegisterService;
 import pl.ark.chr.buginator.service.UserService;
 import pl.ark.chr.buginator.util.*;
@@ -51,6 +52,9 @@ public class AuthController {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @POST("/login")
     public UserWrapper login(HttpServletRequest request, HttpServletResponse response, Locale locale, @RequestBody Credentials credentials) throws RestException {
         UsernamePasswordToken authToken = new UsernamePasswordToken(credentials.getUsername().toLowerCase(), credentials.getPassword(), true);
@@ -59,7 +63,7 @@ public class AuthController {
 
             SecurityUtils.getSubject().login(authToken);
             User user = userService.validateUserLogin(credentials, locale);
-            UserWrapper userWrapper = new UserWrapper(user);
+            UserWrapper userWrapper = new UserWrapper(user, notificationService.addTokenForActiveSession(user));
             sessionUtil.setCurrentUser(request, userWrapper);
             return userWrapper;
         } catch (AuthenticationException exception) {
@@ -75,7 +79,9 @@ public class AuthController {
     public boolean logout(HttpServletRequest request, HttpServletResponse response) {
         UserWrapper currentUser = sessionUtil.getCurrentUser(request);
         String username = currentUser != null ? currentUser.getEmail() : "";
+        String token = currentUser != null ? currentUser.getToken() : "";
         logger.info("Logging out user: " + username);
+        notificationService.removeTokenForSession(token);
         SecurityUtils.getSubject().logout();
         sessionUtil.removeCurrentUser(request);
         return true;

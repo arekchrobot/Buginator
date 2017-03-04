@@ -16,7 +16,9 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
                 $state.go("dashboard")
                     .then(function(){
                         //TODO: implement better approach to refresh scope view
-                        $timeout(function() {window.location.reload();}, 0);
+                        $timeout(function() {
+                            window.location.reload();
+                        }, 0);
                 });
             }, function (returnedData) {
                 authService.loginError($scope);
@@ -37,6 +39,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
         .then(function (returnedData) {
             $rootScope.user = returnedData;
             $rootScope.user.perms = authService.createPermissions($rootScope.user);
+            $rootScope.$broadcast('establishNotificationWebSocket');
         }, loggedError);
 
     $scope.logout = function () {

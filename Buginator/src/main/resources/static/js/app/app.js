@@ -22,6 +22,9 @@ angular.module("buginator", [
     "buginator.baseRestService",
     "buginator.cacheService",
 
+    "buginator.notificationServices",
+    "buginator.notificationController",
+
     "buginator.authService",
     "buginator.registerService",
     "buginator.authController",
