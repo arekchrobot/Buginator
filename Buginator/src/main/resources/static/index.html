@@ -39,7 +39,10 @@
                                     <i class="fa fa-envelope"></i>
                                     <span class="label label-warning" ng-if="notifications.length > 0">{{notifications.length}}</span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-right media user-media bg-dark nav navbar-nav">
+                                <ul class="dropdown-menu dropdown-menu-right media user-media bg-dark nav navbar-nav" ng-if="notifications.length > 0">
+                                    <li style="width: 100%">
+                                        <a ng-click="removeAllNotifications()"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </li>
                                     <li ng-repeat="notification in notifications" style="width: 100%">
                                         <a ng-redirect-to-url={{"/application/"+notification.applicationId+"/error/"+notification.errorId}}
                                            ng-click="removeNotification($index, notification)">

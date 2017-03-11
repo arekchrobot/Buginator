@@ -13,8 +13,8 @@ angular.module("buginator.notificationServices", [])
         service.NOTIFICATION_TOPIC_ENDPOINT = "/topic/notification/";
         service.NOTIFICATION_TOPIC_SEND_ENDPOINT = "/app/notification/send/";
 
-        var send = function() {
-            socket.client.send(service.NOTIFICATION_TOPIC_SEND_ENDPOINT + connectionToken,{},null);
+        var send = function () {
+            socket.client.send(service.NOTIFICATION_TOPIC_SEND_ENDPOINT + connectionToken, {}, null);
         };
 
         service.receive = function () {
@@ -65,6 +65,22 @@ angular.module("buginator.notificationServices", [])
                 connect();
             }
 
+        };
+
+        return service;
+    }).factory("notificationRestService", function ($http, exceptionHandler) {
+        var service = {};
+
+        service.baseObjectUrl = "/notification/";
+
+        service.markNotificationSeen = function(id, successFunction) {
+            $http.put(this.baseObjectUrl + id, {})
+                .then(successFunction, exceptionHandler.handleRestError);
+        };
+
+        service.markAllNotificationsSeen = function(notifications, successFunction) {
+            $http.put(this.baseObjectUrl, notifications)
+                .then(successFunction, exceptionHandler.handleRestError);
         };
 
         return service;

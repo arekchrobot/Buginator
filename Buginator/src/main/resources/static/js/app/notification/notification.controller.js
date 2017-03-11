@@ -1,5 +1,5 @@
 angular.module("buginator.notificationController", [])
-    .controller("notificationController", function ($rootScope, $scope, $state, notificationWebSocketService) {
+    .controller("notificationController", function ($rootScope, $scope, $state, notificationWebSocketService, notificationRestService) {
 
         $rootScope.$on('establishNotificationWebSocket', function () {
             notificationWebSocketService.initialize($rootScope.user.token);
@@ -9,8 +9,21 @@ angular.module("buginator.notificationController", [])
             $scope.notifications = data;
         });
 
-        $scope.removeNotification = function(notificationIndex, notification) {
+        $scope.removeNotification = function (notificationIndex, notification) {
 
-            $scope.notifications.splice(notificationIndex, 1);
+            notificationRestService.markNotificationSeen(notification.id,
+                function () {
+                    $scope.notifications.splice(notificationIndex, 1);
+                }
+            );
         };
+
+        $scope.removeAllNotifications = function () {
+
+            notificationRestService.markAllNotificationsSeen($scope.notifications,
+                function () {
+                    $scope.notifications = [];
+                }
+            );
+        }
     });
