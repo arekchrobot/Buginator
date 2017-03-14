@@ -1,6 +1,7 @@
 package pl.ark.chr.buginator.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
 
 import javax.persistence.*;
 
@@ -26,6 +27,17 @@ public abstract class Aggregator extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "error_severity")
+    private ErrorSeverity errorSeverity;
+
+    @ManyToOne
+    @JoinColumn(name = "application_id", nullable = false)
+    private Application application;
+
+    @Column(name = "count")
+    private Integer count;
 
     public String getLogin() {
         return login;
@@ -57,5 +69,29 @@ public abstract class Aggregator extends BaseEntity {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public ErrorSeverity getErrorSeverity() {
+        return errorSeverity;
+    }
+
+    public void setErrorSeverity(ErrorSeverity errorSeverity) {
+        this.errorSeverity = errorSeverity;
+    }
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

@@ -11,6 +11,11 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
+import pl.ark.chr.buginator.aggregator.service.AggregatorServiceValidator;
+import pl.ark.chr.buginator.aggregator.service.impl.EmailAggregatorServiceImpl;
+import pl.ark.chr.buginator.domain.EmailAggregator;
+import pl.ark.chr.buginator.repository.AggregatorRepository;
+import pl.ark.chr.buginator.repository.EmailAggregatorRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.impl.EmailServiceImpl;
 
@@ -72,5 +77,30 @@ public class TestApplicationConfiguration {
     @Bean
     public EmailService emailService() {
         return new EmailServiceImpl();
+    }
+
+    @Bean
+    public EmailAggregator emailAggregator() {
+        return new EmailAggregator();
+    }
+
+    @Bean
+    public AggregatorServiceValidator aggregatorServiceValidator() {
+        return new AggregatorServiceValidator();
+    }
+
+    @Bean
+    public EmailAggregatorServiceImpl emailAggregatorService() {
+        return new EmailAggregatorServiceImpl();
+    }
+
+    @Bean
+    public EmailAggregatorRepository emailAggregatorRepository() {
+        return Mockito.mock(EmailAggregatorRepository.class);
+    }
+
+    @Bean
+    public AggregatorRepository aggregatorRepository() {
+        return Mockito.mock(AggregatorRepository.class);
     }
 }
