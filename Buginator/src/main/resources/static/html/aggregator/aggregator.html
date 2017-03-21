@@ -1,0 +1,69 @@
+<!--edit panel-->
+<div class="box dark" ng-if="editable">
+    <header>
+        <h5><translate>AGGREGATOR_EDIT</translate>: {{aggregatorData.aggregator['@type']}}</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId+"/aggregator"}} translate>BACK_BUTTON
+                </button>
+            </div>
+        </div>
+    </header>
+    <div id="div-1" class="body">
+        <form class="form-horizontal" ng-submit="submit()" id="forms.createAggregatorForm" name="forms.createAggregatorForm" novalidate>
+            <ANY ng-repeat="(key,value) in aggregatorData.aggregator track by key" ng-if="service.checkFieldAllowed(aggregatorData.aggregator[key], key, aggregatorData.aggregator['@type']) && key !== '@type'">
+                <div class="form-group">
+                    <label class="control-label col-lg-3">{{service.getHeaderValue(key)}}</label>
+                    <div class="col-lg-5"
+                         ng-class="{'has-error':(forms.createAggregatorForm[$index].$error.required && forms.createAggregatorForm[$index].$touched), 'has-success':!forms.createAggregatorForm[$index].$error.required && forms.createAggregatorForm[$index].$touched}">
+                        <ANY ng-switch on="service.getType(aggregatorData.aggregator[key], key)">
+                            <input ng-switch-when="string" type="text" class="form-control" ng-model="aggregatorData.aggregator[key]" required name="{{$index}}"/>
+                            <input ng-switch-when="object" type="text" class="form-control" ng-model="aggregatorData.aggregator[key]" required name="{{$index}}"/>
+                            <input ng-switch-when="number" type="number" class="form-control" ng-model="aggregatorData.aggregator[key]" min="0" step="1" required name="{{$index}}"/>
+                            <checkbox ng-switch-when="boolean" class="btn-info" ng-model="aggregatorData.aggregator[key]" name="{{$index}}"></checkbox>
+                            <select ng-switch-when="selectBox" ng-model="aggregatorData.aggregator[key]" data-placeholder="Choose..." class="form-control chzn-select" name="{{$index}}"
+                                    ng-options="item for item in service.specialTypes[key]" required>
+                            </select>
+                        </ANY>
+                        <span class="help-block"
+                              ng-show="forms.createAggregatorForm[$index].$error.required && forms.createAggregatorForm[$index].$touched"
+                              translate>AGGREGATOR_FIELD_REQUIRED</span>
+                    </div>
+                </div>
+                <br/>
+            </ANY>
+            <br>
+            <button class="btn btn-success center-block" type="submit" ng-disabled="!forms.createAggregatorForm.$valid"
+                    translate ng-if="user.perms['create_application']">EDIT_AGGREGATOR_SUBMIT_BUTTON
+            </button>
+        </form>
+    </div>
+</div>
+
+<!--display panel-->
+<div class="box dark" ng-if="!editable">
+    <header>
+        <h5 translate>AGGREGATOR_DETAILS</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId+"/aggregator"}} translate>BACK_BUTTON
+                </button>
+            </div>
+        </div>
+    </header>
+    <div id="div-1" class="body">
+        <div class="form-horizontal">
+            <ANY ng-repeat="(key,value) in aggregatorData.aggregator track by key" ng-if="service.checkFieldAllowed(aggregatorData.aggregator[key], key, aggregatorData.aggregator['@type'])">
+                <div class="form-group">
+                    <label class="control-label col-lg-3">{{service.getHeaderValue(key)}}</label>
+                    <div class="col-lg-5">
+                        <div disabled type="text" class="form-control">{{aggregatorData.aggregator[key]}}</div>
+                    </div>
+                </div>
+                <br/>
+            </ANY>
+        </div>
+    </div>
+</div>

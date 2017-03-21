@@ -58,18 +58,14 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void markNotificationSeen(Long id) {
-        Notification notification = notificationRepository.findOne(id);
-
-        notification.setSeen(true);
-
-        notificationRepository.save(notification);
+    public void removeNotification(Long id) {
+        notificationRepository.delete(id);
     }
 
     @Override
     @Async
-    public void markNotificationsSeen(List<NotificationData> notifications) {
-        notifications.forEach(notification -> markNotificationSeen(notification.getId()));
+    public void removeNotifications(List<NotificationData> notifications) {
+        notifications.forEach(notification -> removeNotification(notification.getId()));
     }
 
     @Override

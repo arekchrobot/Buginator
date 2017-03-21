@@ -71,6 +71,12 @@ INSERT INTO buginator_error_stack_trace(id, version, stack_trace, stack_trace_or
 (6, 1, 'at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:691)', 6, 1);
 
 INSERT INTO buginator_notification(id, version, seen, buginator_error_id, buginator_user_id) VALUES
-(1,1,false, 11, 1),
-(2,1,true,1,1),
-(3, 1,false,16,1);
+(1, 1, false, 11, 1),
+(2, 1, true, 1, 1),
+(3, 1, false, 16, 1);
+
+INSERT INTO aggregator(id, version, aggregator_class, count, error_severity, login, pass, application_id, company_id) VALUES
+(1, 1, 'EmailAggregator', 5, 'ERROR', null, null, 1, 1);
+
+INSERT INTO email_aggregator(id, language, recipients) VALUES
+(1, 'pl', '13aki13@gmail.com,buginator.noreply@gmail.com');

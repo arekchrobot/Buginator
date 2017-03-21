@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class EmailAggregator extends Aggregator {
 
     @Column(name = "recipients")
-    private String recipients;
+    private String recipients = "";
 
     @Column(name = "language")
     private String language;

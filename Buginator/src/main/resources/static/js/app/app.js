@@ -21,6 +21,8 @@ angular.module("buginator", [
     "buginator.dialogController",
     "buginator.baseRestService",
     "buginator.cacheService",
+    "buginator.utilService",
+    "buginator.warningHandler",
 
     "buginator.notificationServices",
     "buginator.notificationController",
@@ -42,7 +44,13 @@ angular.module("buginator", [
     "buginator.detailsErrorController",
 
     "buginator.applicationManageUserServices",
-    "buginator.applicationManageUsersController"
+    "buginator.applicationManageUsersController",
+
+    "buginator.aggregatorServices",
+    "buginator.aggregatorsController",
+    "buginator.detailsAggregatorController",
+    "buginator.editAggregatorController",
+    "buginator.createAggregatorController"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", "IdleProvider", "KeepaliveProvider",
     function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider, IdleProvider, KeepaliveProvider) {
@@ -71,6 +79,9 @@ angular.module("buginator", [
                 suffix: ".json"
             }, {
                 prefix: "js/app/languages/error/",
+                suffix: ".json"
+            }, {
+                prefix: "js/app/languages/aggregator/",
                 suffix: ".json"
             }]
         });

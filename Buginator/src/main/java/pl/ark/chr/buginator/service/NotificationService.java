@@ -12,9 +12,9 @@ public interface NotificationService {
 
     List<NotificationData> getNotificationsForUser(String token);
 
-    void markNotificationSeen(Long id);
+    void removeNotification(Long id);
 
-    void markNotificationsSeen(List<NotificationData> notifications);
+    void removeNotifications(List<NotificationData> notifications);
 
     String addTokenForActiveSession(User user);
 

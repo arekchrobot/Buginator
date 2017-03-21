@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box">
+            <header>
+                <div class="icons"><i class="fa fa-desktop"></i></div>
+                <h5 translate>AGGREGATORS_TITLE</h5>
+
+                <div class="toolbar">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId+"/aggregators/create"}} translate ng-if="user.perms['create_application']">CREATE_AGGREGATOR</button>
+                        <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId}} translate ng-if="user.perms['create_application']">BACK_BUTTON</button>
+                    </div>
+                </div>
+            </header>
+            <div id="collapse4" class="body">
+                <div id="dataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped" st-safe-src="aggregators" st-table="displayedAggregators">
+                        <thead>
+                        <tr>
+                            <th translate>AGGREGATOR_TYPE</th>
+                            <th translate>AGGREGATOR_ERROR_SEVERITY</th>
+                            <th translate>AGGREGATOR_COUNT</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="aggregatorData in displayedAggregators">
+                            <td>{{aggregatorData.aggregator['@type']}}</td>
+                            <td>{{aggregatorData.aggregator.errorSeverity}}</td>
+                            <td>{{aggregatorData.aggregator.count}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-info" translate ng-redirect-to-url={{"/application/"+appId+"/aggregator/"+aggregatorData.aggregator.id}}>AGGREGATOR_INFO_BUTTON</button>
+                                    <button class="btn btn-success" translate ng-redirect-to-url={{"/application/"+appId+"/aggregator/"+aggregatorData.aggregator.id+"/edit"}}>AGGREGATOR_MODIFY_BUTTON</button>
+                                    <button class="btn btn-danger" translate ng-click="removeItem(aggregatorData)">AGGREGATOR_REMOVE_BUTTON</button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

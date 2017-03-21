@@ -74,13 +74,17 @@ angular.module("buginator.notificationServices", [])
         service.baseObjectUrl = "/notification/";
 
         service.markNotificationSeen = function(id, successFunction) {
-            $http.put(this.baseObjectUrl + id, {})
+            $http.delete(this.baseObjectUrl + id, {})
                 .then(successFunction, exceptionHandler.handleRestError);
         };
 
         service.markAllNotificationsSeen = function(notifications, successFunction) {
-            $http.put(this.baseObjectUrl, notifications)
-                .then(successFunction, exceptionHandler.handleRestError);
+            $http({
+                url: this.baseObjectUrl,
+                method: "DELETE",
+                data: notifications,
+                headers: {"Content-Type": "application/json;charset=utf-8"}
+            }).then(successFunction, exceptionHandler.handleRestError);
         };
 
         return service;

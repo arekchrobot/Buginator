@@ -5,7 +5,7 @@ angular.module("buginator.applicationManageUsersController", []).config(function
         controller: "applicationManageUsersController"
     });
 }).controller("applicationManageUsersController", function ($scope, $state, $stateParams, $translate, applicationRestService, exceptionHandler,
-                                                            appManageUserRestService, appManageUserService) {
+                                                            appManageUserRestService, appManageUserService, warningHandler) {
 
     $scope.appId = $stateParams.appId;
 
@@ -79,19 +79,23 @@ angular.module("buginator.applicationManageUsersController", []).config(function
     };
 
     $scope.removeSelectedUsers = function () {
-        appManageUserRestService.removeUsersFromApplication($scope.selectedUsersToDelete, $scope.appId, function (returnedData) {
-            if (returnedData.data.result === "OK") {
-                for (var i = 0; i < $scope.selectedUsersToDelete.length; i++) {
-                    appManageUserService.addRemoveUser($scope.usersNotBoundToApp, $scope.selectedUsersToDelete[i], true);
-                    appManageUserService.addRemoveUser($scope.appUsers, $scope.selectedUsersToDelete[i], false);
-                }
-                $scope.selectedUsersToDelete = [];
-                $scope.selectedUsersToAdd = [];
-                appManageUserService.clearCheckboxes($scope.appUsers, $scope.selectedRemove);
-                appManageUserService.clearCheckboxes($scope.usersNotBoundToApp, $scope.selectedAdd);
-            } else {
-                exceptionHandler.handleManageUsersError(returnedData);
+        warningHandler.handleWarning("REMOVE_APP_USERS_HEADER", "REMOVE_APP_USERS_DESCRIPTION",
+            function () {
+                appManageUserRestService.removeUsersFromApplication($scope.selectedUsersToDelete, $scope.appId, function (returnedData) {
+                    if (returnedData.data.result === "OK") {
+                        for (var i = 0; i < $scope.selectedUsersToDelete.length; i++) {
+                            appManageUserService.addRemoveUser($scope.usersNotBoundToApp, $scope.selectedUsersToDelete[i], true);
+                            appManageUserService.addRemoveUser($scope.appUsers, $scope.selectedUsersToDelete[i], false);
+                        }
+                        $scope.selectedUsersToDelete = [];
+                        $scope.selectedUsersToAdd = [];
+                        appManageUserService.clearCheckboxes($scope.appUsers, $scope.selectedRemove);
+                        appManageUserService.clearCheckboxes($scope.usersNotBoundToApp, $scope.selectedAdd);
+                    } else {
+                        exceptionHandler.handleManageUsersError(returnedData);
+                    }
+                });
             }
-        });
+        )
     };
 });

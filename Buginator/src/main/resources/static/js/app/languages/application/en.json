@@ -18,5 +18,8 @@
   "APP_USER_REMOVE_BUTTON": "Remove",
   "APP_USER_ADD_BUTTON": "Add",
   "REMOVE_USERS_ERROR": "Error removing users from application. Please try again.",
-  "ADD_USERS_ERROR": "Error adding users to application. Please try again."
+  "ADD_USERS_ERROR": "Error adding users to application. Please try again.",
+  "APP_MANAGE_AGGREGATORS": "Manage notifications",
+  "REMOVE_APP_USERS_HEADER": "Warning",
+  "REMOVE_APP_USERS_DESCRIPTION": "Do you want to remove those users from application?"
 }

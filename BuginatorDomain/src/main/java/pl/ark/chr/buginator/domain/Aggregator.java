@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
+import pl.ark.chr.buginator.domain.filter.FilterData;
 
 import javax.persistence.*;
 
@@ -9,20 +9,22 @@ import javax.persistence.*;
  * Created by Arek on 2016-09-26.
  */
 @Entity
-@Table(name = "aggregator")
+@Table(name = "aggregator",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "severity_count_application", columnNames = {"error_severity", "application_id", "count"})
+        })
 @SequenceGenerator(name = "default_gen", sequenceName = "aggregator_seq", allocationSize = 1)
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Aggregator extends BaseEntity {
+public class Aggregator extends BaseEntity implements FilterData {
 
     @Column(name = "login", length = 100)
-    private String login;
+    private String login = "";
 
     @Column(name = "pass", length = 100)
-    private String password;
+    private String password = "";
 
     @Column(name = "aggregator_class", length = 100)
-    @JsonIgnore
-    private String aggregatorClass;
+    private String aggregatorClass = "";
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
@@ -37,7 +39,7 @@ public abstract class Aggregator extends BaseEntity {
     private Application application;
 
     @Column(name = "count")
-    private Integer count;
+    private int count = 0;
 
     public String getLogin() {
         return login;
@@ -87,11 +89,11 @@ public abstract class Aggregator extends BaseEntity {
         this.application = application;
     }
 
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(int count) {
         this.count = count;
     }
 }
