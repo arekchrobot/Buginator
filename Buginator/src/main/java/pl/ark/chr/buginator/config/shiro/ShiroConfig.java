@@ -35,7 +35,9 @@ public class ShiroConfig {
         filterChainDefinitionMapping.put("/application/**", "http[GET=read_application,POST=create_application,DELETE=http_method_not_allowed]");
         filterChainDefinitionMapping.put("/error/**", "http[GET=read_application,POST=read_application]");
         filterChainDefinitionMapping.put("/manageUser/**", "http[GET=app_manage_users,POST=app_manage_users,PUT=app_manage_users,DELETE=app_manage_users]");
+        filterChainDefinitionMapping.put("/aggregator/**", "http[GET=app_show_notification,POST=app_modify_notification,PUT=app_modify_notification,DELETE=app_modify_notification]");
         filterChainDefinitionMapping.put("/notification/**", "authc");
+        filterChainDefinitionMapping.put("/chart/**", "authc");
         filterChainDefinitionMapping.put("/**", "anon");
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
 

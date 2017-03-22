@@ -44,7 +44,7 @@
 
         <div class="toolbar">
             <div class="btn-group">
-                <button class="btn btn-success" ng-redirect-to-url={{"/application/"+application.id+"/aggregator"}} ng-if="user.perms['app_manage_users']" translate>APP_MANAGE_AGGREGATORS</button>
+                <button class="btn btn-success" ng-redirect-to-url={{"/application/"+application.id+"/aggregator"}} ng-if="user.perms['app_show_notification']" translate>APP_MANAGE_AGGREGATORS</button>
                 <button class="btn btn-success" ng-redirect-to-url={{"/application/"+application.id+"/manageUsers"}} ng-if="user.perms['app_manage_users']" translate>APP_MANAGE_USERS</button>
                 <button class="btn btn-primary" ng-redirect-to="applications" translate>BACK_BUTTON</button>
             </div>

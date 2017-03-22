@@ -35,7 +35,7 @@
             </ANY>
             <br>
             <button class="btn btn-success center-block" type="submit" ng-disabled="!forms.createAggregatorForm.$valid"
-                    translate ng-if="user.perms['create_application']">EDIT_AGGREGATOR_SUBMIT_BUTTON
+                    translate ng-if="user.perms['app_modify_notification']">EDIT_AGGREGATOR_SUBMIT_BUTTON
             </button>
         </form>
     </div>
@@ -48,6 +48,8 @@
 
         <div class="toolbar">
             <div class="btn-group">
+                <button class="btn btn-success" translate ng-redirect-to-url={{"/application/"+appId+"/aggregator/"+aggregatorData.aggregator.id+"/edit"}}
+                        ng-if="user.perms['app_modify_notification']">AGGREGATOR_MODIFY_BUTTON</button>
                 <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId+"/aggregator"}} translate>BACK_BUTTON
                 </button>
             </div>

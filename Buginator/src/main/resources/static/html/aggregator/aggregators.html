@@ -7,7 +7,7 @@
 
                 <div class="toolbar">
                     <div class="btn-group">
-                        <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId+"/aggregators/create"}} translate ng-if="user.perms['create_application']">CREATE_AGGREGATOR</button>
+                        <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId+"/aggregators/create"}} translate ng-if="user.perms['app_modify_notification']">CREATE_AGGREGATOR</button>
                         <button class="btn btn-primary" ng-redirect-to-url={{"/application/"+appId}} translate ng-if="user.perms['create_application']">BACK_BUTTON</button>
                     </div>
                 </div>
@@ -30,9 +30,9 @@
                             <td>{{aggregatorData.aggregator.count}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button class="btn btn-info" translate ng-redirect-to-url={{"/application/"+appId+"/aggregator/"+aggregatorData.aggregator.id}}>AGGREGATOR_INFO_BUTTON</button>
-                                    <button class="btn btn-success" translate ng-redirect-to-url={{"/application/"+appId+"/aggregator/"+aggregatorData.aggregator.id+"/edit"}}>AGGREGATOR_MODIFY_BUTTON</button>
-                                    <button class="btn btn-danger" translate ng-click="removeItem(aggregatorData)">AGGREGATOR_REMOVE_BUTTON</button>
+                                    <button class="btn btn-info" translate ng-redirect-to-url={{"/application/"+appId+"/aggregator/"+aggregatorData.aggregator.id}} ng-if="user.perms['app_show_notification']">AGGREGATOR_INFO_BUTTON</button>
+                                    <button class="btn btn-success" translate ng-redirect-to-url={{"/application/"+appId+"/aggregator/"+aggregatorData.aggregator.id+"/edit"}} ng-if="user.perms['app_modify_notification']">AGGREGATOR_MODIFY_BUTTON</button>
+                                    <button class="btn btn-danger" translate ng-click="removeItem(aggregatorData)" ng-if="user.perms['app_modify_notification']">AGGREGATOR_REMOVE_BUTTON</button>
                                 </div>
                             </td>
                         </tr>

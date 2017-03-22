@@ -29,7 +29,8 @@ import static org.apache.velocity.util.StringUtils.capitalizeFirstLetter;
 @Transactional
 public class AggregatorServiceImpl implements AggregatorService {
 
-    private final ClientFilter clientFilter = ClientFilterFactory.createClientFilter(ClientFilterFactory.ClientFilterType.APPLICATION_ACCESS);
+    private final ClientFilter clientFilter = ClientFilterFactory.createClientFilter(ClientFilterFactory.ClientFilterType.APPLICATION_ACCESS,
+            ClientFilterFactory.ClientFilterType.DATA_MODIFY);
 
     private static final String AGGREGATOR_SUFFIX = "Aggregator";
 
