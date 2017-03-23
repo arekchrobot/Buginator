@@ -3,6 +3,7 @@ package pl.ark.chr.buginator.repository;
 import org.springframework.data.repository.CrudRepository;
 import pl.ark.chr.buginator.domain.Application;
 import pl.ark.chr.buginator.domain.Error;
+import pl.ark.chr.buginator.domain.enums.ErrorStatus;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,4 +20,6 @@ public interface ErrorRepository extends CrudRepository<Error, Long> {
     List<Error> findByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
 
     List<Error> findByApplication(Application application);
+
+    List<Error> findByStatusAndLastOccurrenceLessThanEqual(ErrorStatus status, LocalDate lastOccurrence);
 }

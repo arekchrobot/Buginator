@@ -8,7 +8,11 @@ import java.util.Set;
  * Created by Arek on 2016-09-25.
  */
 @Entity
-@Table(name = "buginator_role")
+@Table(name = "buginator_role",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "companyId_name", columnNames = {"name", "company_id"})
+        }
+)
 @SequenceGenerator(name = "default_gen", sequenceName = "buginator_role_seq", allocationSize = 1)
 public class Role extends BaseEntity implements Authority {
 

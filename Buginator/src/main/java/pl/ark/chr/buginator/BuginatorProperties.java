@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 public class BuginatorProperties {
 
     private int bcryptStrength;
+    private int schedulerThreads;
+    private int errorMonthsOldToRemove;
 
     public int getBcryptStrength() {
         return bcryptStrength;
@@ -18,5 +20,21 @@ public class BuginatorProperties {
 
     public void setBcryptStrength(int bcryptStrength) {
         this.bcryptStrength = bcryptStrength;
+    }
+
+    public int getSchedulerThreads() {
+        return schedulerThreads;
+    }
+
+    public void setSchedulerThreads(int schedulerThreads) {
+        this.schedulerThreads = schedulerThreads;
+    }
+
+    public int getErrorMonthsOldToRemove() {
+        return errorMonthsOldToRemove;
+    }
+
+    public void setErrorMonthsOldToRemove(int errorMonthsOldToRemove) {
+        this.errorMonthsOldToRemove = errorMonthsOldToRemove;
     }
 }

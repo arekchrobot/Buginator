@@ -4,6 +4,7 @@ import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
@@ -15,9 +16,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import pl.ark.chr.buginator.websocket.NotificationEndpoint;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +28,16 @@ import java.util.concurrent.TimeUnit;
 @SpringBootApplication
 @EnableAsync
 @EnableWebSocketMessageBroker
+@EnableScheduling
 public class BuginatorApplication {
+
+    @Autowired
+    private BuginatorProperties buginatorProperties;
+
+    @Bean(destroyMethod = "shutdown")
+    public Executor taskScheduler() {
+        return Executors.newScheduledThreadPool(buginatorProperties.getSchedulerThreads());
+    }
 
     @Bean
     @Profile("dev")
