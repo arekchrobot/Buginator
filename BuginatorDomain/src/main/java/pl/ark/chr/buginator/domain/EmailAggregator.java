@@ -1,7 +1,5 @@
 package pl.ark.chr.buginator.domain;
 
-import pl.ark.chr.buginator.domain.Aggregator;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -55,11 +55,8 @@ public class Error extends BaseEntity implements FilterData {
     @JoinColumn(name = "application_id", nullable = false)
     private Application application;
 
-    @Column(name = "sent_to_aggregators")
-    private Boolean sentToAggregators;
-
     @Column(name = "error_count")
-    private Integer count;
+    private int count;
 
     @Column(name = "last_occurence")
     private LocalDate lastOccurrence;
@@ -144,19 +141,11 @@ public class Error extends BaseEntity implements FilterData {
         this.application = application;
     }
 
-    public Boolean getSentToAggregators() {
-        return sentToAggregators;
-    }
-
-    public void setSentToAggregators(Boolean sentToAggregators) {
-        this.sentToAggregators = sentToAggregators;
-    }
-
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(int count) {
         this.count = count;
     }
 

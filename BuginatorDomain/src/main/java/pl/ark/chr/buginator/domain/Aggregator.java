@@ -26,10 +26,6 @@ public class Aggregator extends BaseEntity implements FilterData {
     @Column(name = "aggregator_class", length = 100)
     private String aggregatorClass = "";
 
-    @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
-    private Company company;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "error_severity")
     private ErrorSeverity errorSeverity;
@@ -63,14 +59,6 @@ public class Aggregator extends BaseEntity implements FilterData {
 
     public void setAggregatorClass(String aggregatorClass) {
         this.aggregatorClass = aggregatorClass;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     public ErrorSeverity getErrorSeverity() {

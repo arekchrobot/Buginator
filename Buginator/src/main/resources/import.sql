@@ -47,24 +47,24 @@ INSERT INTO user_agent_data(id, version, browser, browser_family, browser_full_v
                             operating_system_vendor, operating_system_version, country, language) VALUES
 (1, 1, 'Firefox', 'Firefox', '40.1','Mozilla','40.1','PC','64bits','COMPUTER','(Windows)','Windows NT','Windows','Microsoft','7', 'Poland', 'PL');
 
-INSERT INTO buginator_error(id, version, error_count, date_time, description, last_occurence,sent_to_aggregators, severity, status,title, application_id, user_agent_data_id, request_url, query_params) VALUES
-(1,1,1,NOW()- INTERVAL '9 days','NullPointerException', NOW() - INTERVAL '9 days',false, 'ERROR', 'CREATED', 'Null has appeared', 1, 1, 'http://google.com/firstUrlEver', 'a=b&x=cc&acb=dcf'),
-(2,1,1,NOW()- INTERVAL '8 days','NullPointerException', NOW() - INTERVAL '8 days',false, 'ERROR', 'RESOLVED', 'Null has appeared', 1, NULL, NULL, NULL),
-(3,1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days',false, 'ERROR', 'ONGOING', 'Null has appeared', 1, NULL, NULL, NULL),
-(4,1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days',false, 'ERROR', 'REOPENED', 'Null has appeared', 1, NULL, NULL, NULL),
-(5,1,1,NOW()- INTERVAL '6 days','DataAccessException', NOW() - INTERVAL '6 days',false, 'ERROR', 'CREATED', 'Data Access Exception', 1, NULL, NULL, NULL),
-(6,1,1,NOW()- INTERVAL '4 days','DataAccessException', NOW() - INTERVAL '4 days',false, 'ERROR', 'CREATED', 'Data Access Exception', 1, NULL, NULL, NULL),
-(7,1,1,NOW()- INTERVAL '4 days','PermissionError', NOW() - INTERVAL '4 days',false, 'ERROR', 'CREATED', 'PermissionError', 1, NULL, NULL, NULL),
-(8,1,1,NOW()- INTERVAL '4 days','Null', NOW() - INTERVAL '4 days',false, 'WARNING', 'CREATED', 'Null', 1, NULL, NULL, NULL),
-(9,1,1,NOW()- INTERVAL '3 days','DatabaseError', NOW() - INTERVAL '3 days',false, 'CRITICAL', 'CREATED', 'Could not insert', 1, NULL, NULL, NULL),
-(10,1,1,NOW()- INTERVAL '3 days','DatabaseError', NOW() - INTERVAL '3 days',false, 'CRITICAL', 'CREATED', 'Could not insert', 1, NULL, NULL, NULL),
-(11,1,1,NOW(),'NullPointerException', NOW(),false, 'ERROR', 'CREATED', 'Null has appeared', 1, NULL, NULL, NULL),
-(12,1,1,NOW()- INTERVAL '14 days','NullPointerException', NOW() - INTERVAL '14 days',false, 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
-(13,1,1,NOW()- INTERVAL '11 days','NullPointerException', NOW() - INTERVAL '11 days',false, 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
-(14,1,1,NOW()- INTERVAL '4 days','NullPointerException', NOW() - INTERVAL '4 days',false, 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
-(15,1,1,NOW()- INTERVAL '3 days','NullPointerException', NOW() - INTERVAL '3 days',false, 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
-(16,1,1,NOW()- INTERVAL '3 days','DataAccessException', NOW() - INTERVAL '3 days',false, 'ERROR', 'CREATED', 'Data Access Exception', 2, NULL, NULL, NULL),
-(17,1,1,NOW(),'DataAccessException', NOW(),false, 'ERROR', 'CREATED', 'Data Access Exception', 3, NULL, NULL, NULL);
+INSERT INTO buginator_error(id, version, error_count, date_time, description, last_occurence, severity, status,title, application_id, user_agent_data_id, request_url, query_params) VALUES
+(1,1,1,NOW()- INTERVAL '9 days','NullPointerException', NOW() - INTERVAL '9 days', 'ERROR', 'CREATED', 'Null has appeared', 1, 1, 'http://google.com/firstUrlEver', 'a=b&x=cc&acb=dcf'),
+(2,1,1,NOW()- INTERVAL '8 days','NullPointerException', NOW() - INTERVAL '8 days', 'ERROR', 'RESOLVED', 'Null has appeared', 1, NULL, NULL, NULL),
+(3,1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'ONGOING', 'Null has appeared', 1, NULL, NULL, NULL),
+(4,1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'REOPENED', 'Null has appeared', 1, NULL, NULL, NULL),
+(5,1,1,NOW()- INTERVAL '6 days','DataAccessException', NOW() - INTERVAL '6 days', 'ERROR', 'CREATED', 'Data Access Exception', 1, NULL, NULL, NULL),
+(6,1,1,NOW()- INTERVAL '4 days','DataAccessException', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'Data Access Exception', 1, NULL, NULL, NULL),
+(7,1,1,NOW()- INTERVAL '4 days','PermissionError', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'PermissionError', 1, NULL, NULL, NULL),
+(8,1,1,NOW()- INTERVAL '4 days','Null', NOW() - INTERVAL '4 days', 'WARNING', 'CREATED', 'Null', 1, NULL, NULL, NULL),
+(9,1,1,NOW()- INTERVAL '3 days','DatabaseError', NOW() - INTERVAL '3 days', 'CRITICAL', 'CREATED', 'Could not insert', 1, NULL, NULL, NULL),
+(10,1,1,NOW()- INTERVAL '3 days','DatabaseError', NOW() - INTERVAL '3 days', 'CRITICAL', 'CREATED', 'Could not insert', 1, NULL, NULL, NULL),
+(11,1,1,NOW(),'NullPointerException', NOW(), 'ERROR', 'CREATED', 'Null has appeared', 1, NULL, NULL, NULL),
+(12,1,1,NOW()- INTERVAL '14 days','NullPointerException', NOW() - INTERVAL '14 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
+(13,1,1,NOW()- INTERVAL '11 days','NullPointerException', NOW() - INTERVAL '11 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
+(14,1,1,NOW()- INTERVAL '4 days','NullPointerException', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
+(15,1,1,NOW()- INTERVAL '3 days','NullPointerException', NOW() - INTERVAL '3 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
+(16,1,1,NOW()- INTERVAL '3 days','DataAccessException', NOW() - INTERVAL '3 days', 'ERROR', 'CREATED', 'Data Access Exception', 2, NULL, NULL, NULL),
+(17,1,1,NOW(),'DataAccessException', NOW(), 'ERROR', 'CREATED', 'Data Access Exception', 3, NULL, NULL, NULL);
 
 INSERT INTO buginator_error_stack_trace(id, version, stack_trace, stack_trace_order, buginator_error_id) VALUES
 (1, 1, 'Exception in thread "main" java.lang.NullPointerException', 1, 1),
@@ -79,8 +79,8 @@ INSERT INTO buginator_notification(id, version, seen, buginator_error_id, bugina
 (2, 1, true, 1, 1),
 (3, 1, false, 16, 1);
 
-INSERT INTO aggregator(id, version, aggregator_class, count, error_severity, login, pass, application_id, company_id) VALUES
-(1, 1, 'EmailAggregator', 5, 'ERROR', null, null, 1, 1);
+INSERT INTO aggregator(id, version, aggregator_class, count, error_severity, login, pass, application_id) VALUES
+(1, 1, 'EmailAggregator', 5, 'ERROR', null, null, 1);
 
 INSERT INTO email_aggregator(id, language, recipients) VALUES
 (1, 'pl', '13aki13@gmail.com,buginator.noreply@gmail.com');

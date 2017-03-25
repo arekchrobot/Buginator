@@ -52,7 +52,7 @@ public class AggregatorServiceImpl implements AggregatorService {
 
         clientFilter.validateAccess(application, userWrapper.getUserApplications());
 
-        List<Aggregator> allApplicationAggregators = baseAggregatorRepository.findByCompanyAndApplication(userWrapper.getCompany(), application);
+        List<Aggregator> allApplicationAggregators = baseAggregatorRepository.findByApplication( application);
 
         List<AggregatorData> concreteAggregators = new ArrayList<>();
 
@@ -69,7 +69,6 @@ public class AggregatorServiceImpl implements AggregatorService {
         clientFilter.validateAccess(aggregatorData.getAggregator(), userWrapper.getUserApplications());
 
         Aggregator aggregator = aggregatorData.getAggregator();
-        aggregator.setCompany(userWrapper.getCompany());
 
         CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
 

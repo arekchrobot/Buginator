@@ -14,5 +14,5 @@ import java.util.List;
 @NoRepositoryBean
 public interface AbstractAggregatorRepository<T extends Aggregator> extends CrudRepository<T, Long> {
 
-    List<T> findByCompanyAndApplication(Company company, Application application);
+    List<T> findByApplication(Application application);
 }
