@@ -4,7 +4,7 @@ angular.module("buginator.aggregatorsController", []).config(function ($statePro
         templateUrl: "html/aggregator/aggregators.html",
         controller: "aggregatorsController"
     });
-}).controller("aggregatorsController", function ($scope, $state, $stateParams, exceptionHandler, aggregatorRestService, warningHandler) {
+}).controller("aggregatorsController", function ($scope, $state, $stateParams, exceptionHandler, aggregatorRestService, warningHandler, aggregatorService) {
 
     $scope.appId = $stateParams.appId;
 
@@ -19,11 +19,7 @@ angular.module("buginator.aggregatorsController", []).config(function ($statePro
             function () {
                 aggregatorRestService.delete(aggregatorData.aggregator.id,
                     function (returnedData) {
-                        aggregatorRestService.getAllByApplication($scope.appId,
-                            function (returnedData) {
-                                $scope.aggregators = returnedData.data;
-                            }
-                        );
+                        aggregatorService.removeItemFromCollection($scope.aggregators, aggregatorData);
                     }
                 )
             }

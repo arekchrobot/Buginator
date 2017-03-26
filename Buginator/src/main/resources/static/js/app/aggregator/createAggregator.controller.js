@@ -4,17 +4,10 @@ angular.module("buginator.createAggregatorController", []).config(function ($sta
         templateUrl: "html/aggregator/createAggregator.html",
         controller: "createAggregatorController"
     });
-}).controller("createAggregatorController", function ($scope, $state, $stateParams, $location, aggregatorRestService, aggregatorWizardService) {
+}).controller("createAggregatorController", function ($scope, $state, $stateParams, $location, aggregatorRestService, aggregatorService) {
 
-    $scope.appId = $stateParams.appId;
 
-    $scope.service = aggregatorWizardService;
-
-    $scope.forms = {};
-
-    $scope.selectedType = false;
-
-    $scope.availableTypes = ["Email"];
+    aggregatorService.initCreateScope($scope, $stateParams.appId);
 
 
     $scope.selected = function () {
@@ -27,9 +20,7 @@ angular.module("buginator.createAggregatorController", []).config(function ($sta
     };
 
     $scope.submit = function () {
-        $scope.aggregatorData.aggregator.application = {};
-        $scope.aggregatorData.aggregator.application.id = $scope.appId;
-        $scope.aggregatorData.aggregator.aggregatorClass = $scope.type + "Aggregator";
+        aggregatorService.fillAggregatorData($scope);
         aggregatorRestService.save($scope.aggregatorData,
             function (returnedData) {
                 $location.path("/application/" + $scope.appId + "/aggregator");

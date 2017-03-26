@@ -94,4 +94,35 @@ angular.module("buginator.aggregatorServices", [])
         };
 
         return service;
-});
+    }).factory("aggregatorService", function(aggregatorWizardService) {
+        var service = {};
+
+        service.removeItemFromCollection = function(collection, item) {
+            var index = collection.indexOf(item);
+            console.log(item);
+            console.log(index);
+            if (index > -1) {
+                collection.splice(index, 1);
+            }
+        };
+
+        service.initCreateScope = function($scope, appId) {
+            $scope.appId = appId;
+
+            $scope.service = aggregatorWizardService;
+
+            $scope.forms = {};
+
+            $scope.selectedType = false;
+
+            $scope.availableTypes = ["Email"];
+        };
+
+        service.fillAggregatorData = function($scope) {
+            $scope.aggregatorData.aggregator.application = {};
+            $scope.aggregatorData.aggregator.application.id = $scope.appId;
+            $scope.aggregatorData.aggregator.aggregatorClass = $scope.type + "Aggregator";
+        };
+
+        return service;
+    });
