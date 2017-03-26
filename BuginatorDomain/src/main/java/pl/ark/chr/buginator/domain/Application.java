@@ -12,7 +12,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "application")
-@SequenceGenerator(name = "default_gen", sequenceName = "application_seq", allocationSize = 1)
 public class Application extends BaseEntity implements FilterData {
 
     private static final long serialVersionUID = -2010034649811124041L;

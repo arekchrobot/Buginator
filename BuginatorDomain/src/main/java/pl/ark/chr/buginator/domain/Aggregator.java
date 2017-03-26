@@ -13,7 +13,6 @@ import javax.persistence.*;
         uniqueConstraints = {
                 @UniqueConstraint(name = "severity_count_application", columnNames = {"error_severity", "application_id", "count"})
         })
-@SequenceGenerator(name = "default_gen", sequenceName = "aggregator_seq", allocationSize = 1)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Aggregator extends BaseEntity implements FilterData {
 

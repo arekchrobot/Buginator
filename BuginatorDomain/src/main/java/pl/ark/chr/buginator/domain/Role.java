@@ -13,7 +13,6 @@ import java.util.Set;
                 @UniqueConstraint(name = "companyId_name", columnNames = {"name", "company_id"})
         }
 )
-@SequenceGenerator(name = "default_gen", sequenceName = "buginator_role_seq", allocationSize = 1)
 public class Role extends BaseEntity implements Authority {
 
     private static final long serialVersionUID = -160920230822990299L;

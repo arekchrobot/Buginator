@@ -7,7 +7,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "buginator_notification")
-@SequenceGenerator(name = "default_gen", sequenceName = "buginator_notification_seq", allocationSize = 1)
 public class Notification extends BaseEntity {
 
     private static final long serialVersionUID = -1058915386956441446L;

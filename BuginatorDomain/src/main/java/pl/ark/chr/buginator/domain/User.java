@@ -12,7 +12,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "buginator_user")
-@SequenceGenerator(name = "default_gen", sequenceName = "buginator_user_seq", allocationSize = 1)
 public class User extends BaseEntity {
 
     private static final long serialVersionUID = -2530893894458448440L;

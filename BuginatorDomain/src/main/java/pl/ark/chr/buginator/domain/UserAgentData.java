@@ -12,7 +12,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user_agent_data")
-@SequenceGenerator(name = "default_gen", sequenceName = "user_agent_data_seq", allocationSize = 1)
 public class UserAgentData extends BaseEntity {
 
     private static final long serialVersionUID = -8089095071313692442L;

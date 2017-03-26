@@ -10,7 +10,6 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "company")
-@SequenceGenerator(name = "default_gen", sequenceName = "company_seq", allocationSize = 1)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "uniqueKey", "token"})
 public class Company extends BaseEntity {
 

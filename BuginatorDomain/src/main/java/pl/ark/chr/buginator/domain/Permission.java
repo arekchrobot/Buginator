@@ -10,7 +10,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "buginator_permission")
-@SequenceGenerator(name = "default_gen", sequenceName = "buginator_permission_seq", allocationSize = 1)
 public class Permission extends BaseEntity implements Authority {
 
     private static final long serialVersionUID = 5827480917177013654L;

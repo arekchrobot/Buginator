@@ -12,7 +12,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "payment_option")
-@SequenceGenerator(name = "default_gen", sequenceName = "payment_option_seq", allocationSize = 1)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PaymentOption extends BaseEntity {
 

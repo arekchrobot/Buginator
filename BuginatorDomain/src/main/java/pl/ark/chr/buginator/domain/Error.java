@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Entity
 @Table(name = "buginator_error")
-@SequenceGenerator(name = "default_gen", sequenceName = "buginator_error_seq", allocationSize = 1)
 public class Error extends BaseEntity implements FilterData {
 
     private static final long serialVersionUID = -6062066697736318840L;
