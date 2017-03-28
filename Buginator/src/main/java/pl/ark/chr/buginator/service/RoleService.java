@@ -1,6 +1,7 @@
 package pl.ark.chr.buginator.service;
 
 import pl.ark.chr.buginator.domain.Company;
+import pl.ark.chr.buginator.domain.Permission;
 import pl.ark.chr.buginator.domain.Role;
 import pl.ark.chr.buginator.exceptions.ValidationException;
 
@@ -18,4 +19,6 @@ public interface RoleService {
     Role get(Long id, Company company)  throws ValidationException;
 
     void delete(Long id, Company company)  throws ValidationException;
+
+    List<Permission> getAllPermissions();
 }

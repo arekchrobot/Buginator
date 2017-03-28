@@ -2,6 +2,7 @@ package pl.ark.chr.buginator.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import pl.ark.chr.buginator.domain.Company;
+import pl.ark.chr.buginator.domain.Role;
 import pl.ark.chr.buginator.domain.User;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findByCompany(Company company);
 
     List<User> findByIdIn(List<Long> id);
+
+    List<User> findByRole(Role role);
 }

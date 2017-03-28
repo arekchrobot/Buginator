@@ -50,7 +50,13 @@ angular.module("buginator", [
     "buginator.aggregatorsController",
     "buginator.detailsAggregatorController",
     "buginator.editAggregatorController",
-    "buginator.createAggregatorController"
+    "buginator.createAggregatorController",
+
+    "buginator.roleServices",
+    "buginator.rolesController",
+    "buginator.detailsRoleController",
+    "buginator.modifyRoleController",
+    "buginator.createRoleController"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", "IdleProvider", "KeepaliveProvider",
     function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider, IdleProvider, KeepaliveProvider) {
@@ -82,6 +88,9 @@ angular.module("buginator", [
                 suffix: ".json"
             }, {
                 prefix: "js/app/languages/aggregator/",
+                suffix: ".json"
+            }, {
+                prefix: "js/app/languages/role/",
                 suffix: ".json"
             }]
         });

@@ -1,0 +1,49 @@
+<div class="box dark">
+    <header>
+        <div class="icons"><i class="fa fa-edit"></i></div>
+        <h5 translate>CREATE_ROLE</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-redirect-to="roles" translate>BACK_BUTTON</button>
+            </div>
+        </div>
+    </header>
+    <div id="div-1" class="body">
+        <form class="form-horizontal" novalidate id="forms.createRoleForm" name="forms.createRoleForm" ng-submit="submit()">
+            <div class="form-group">
+                <label for="roleName" class="control-label col-lg-3" translate>APPLICATION_NAME_INPUT</label>
+
+                <div class="col-lg-5"
+                     ng-class="{'has-error':(forms.createRoleForm.roleName.$error.required && forms.createRoleForm.roleName.$touched), 'has-success':!forms.createRoleForm.roleName.$error.required}">
+                    <input type="text" id="roleName" name="roleName" placeholder="Role name"
+                           class="form-control" ng-model="role.name" required translate
+                           translate-attr-placeholder="ROLE_NAME_PLACEHOLDER">
+                    <span class="help-block"
+                          ng-show="forms.createRoleForm.roleName.$error.required && forms.createRoleForm.roleName.$touched"
+                          translate>ROLE_NAME_REQUIRED</span>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="form-group">
+                <label class="control-label col-lg-3" translate>ROLE_PERMISSIONS</label>
+            </div>
+            <div class="form-group" ng-repeat="permission in allPerms">
+                <label class="control-label col-lg-3">
+                    <checkbox class="btn-success" ng-model="selectedAdd[$index]" ng-change="addPerm(permission, $index)"></checkbox>
+                </label>
+                <div class="col-lg-5">
+                    <div disabled type="text" class="form-control" translate>{{permission.name}}</div>
+                </div>
+            </div>
+
+            <br/>
+
+            <button class="btn btn-primary center-block" type="submit" ng-disabled="!forms.createRoleForm.$valid"
+                    translate ng-if="user.perms['manage_role']">CREATE_ROLE_SUBMIT_BUTTON
+            </button>
+        </form>
+    </div>
+</div>

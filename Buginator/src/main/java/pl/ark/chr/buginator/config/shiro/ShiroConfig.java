@@ -38,6 +38,7 @@ public class ShiroConfig {
         filterChainDefinitionMapping.put("/aggregator/**", "http[GET=app_show_notification,POST=app_modify_notification,PUT=app_modify_notification,DELETE=app_modify_notification]");
         filterChainDefinitionMapping.put("/notification/**", "authc");
         filterChainDefinitionMapping.put("/chart/**", "authc");
+        filterChainDefinitionMapping.put("/role/**", "http[GET=manage_role,POST=manage_role, DELETE=manage_role]");
         filterChainDefinitionMapping.put("/**", "anon");
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
 

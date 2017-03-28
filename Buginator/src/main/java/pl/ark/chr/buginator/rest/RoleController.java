@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import pl.ark.chr.buginator.domain.Permission;
 import pl.ark.chr.buginator.domain.Role;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.ValidationException;
@@ -53,6 +54,13 @@ public class RoleController {
             logger.warn("Unauthorized access to role: " + id + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
             throw new RestException(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, HttpUtil.generateOriginalUrl(request));
         }
+    }
+
+    @GET("/perms/all")
+    public List<Permission> getAllPermissions(HttpServletRequest request, HttpServletResponse response) throws RestException {
+        logger.info("Get all permissions with user: " + sessionUtil.getCurrentUser(request).getEmail());
+
+        return roleService.getAllPermissions();
     }
 
     @POST("/")

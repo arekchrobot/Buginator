@@ -6,9 +6,13 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.domain.Company;
+import pl.ark.chr.buginator.domain.Permission;
 import pl.ark.chr.buginator.domain.Role;
+import pl.ark.chr.buginator.domain.User;
 import pl.ark.chr.buginator.exceptions.ValidationException;
+import pl.ark.chr.buginator.repository.PermissionRepository;
 import pl.ark.chr.buginator.repository.RoleRepository;
+import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.RoleService;
 
 import java.util.List;
@@ -25,7 +29,13 @@ public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
 
     @Autowired
+    private PermissionRepository permissionRepository;
+
+    @Autowired
     private MessageSource messageSource;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Role save(Role role, Company company) throws ValidationException {
@@ -49,7 +59,13 @@ public class RoleServiceImpl implements RoleService {
     public void delete(Long id, Company company) throws ValidationException {
         Role role = get(id, company);
         checkModifyAccess(role, company);
+        checkUsersExists(role);
         roleRepository.delete(id);
+    }
+
+    @Override
+    public List<Permission> getAllPermissions() {
+        return (List<Permission>) permissionRepository.findAll();
     }
 
     @Override
@@ -68,6 +84,14 @@ public class RoleServiceImpl implements RoleService {
         if (role.getCompany() == null || !role.getCompany().getId().equals(company.getId())) {
             Locale locale = LocaleContextHolder.getLocale();
             throw new ValidationException(messageSource.getMessage("roleException.unauthorizedOperation", null, locale));
+        }
+    }
+
+    private void checkUsersExists(Role role) throws ValidationException {
+        List<User> roleUsers = userRepository.findByRole(role);
+        if(roleUsers != null && !roleUsers.isEmpty()) {
+            Locale locale = LocaleContextHolder.getLocale();
+            throw new ValidationException(messageSource.getMessage("roleException.usersExists", null, locale));
         }
     }
 }

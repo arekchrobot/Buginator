@@ -1,0 +1,95 @@
+<!--edit panel-->
+<div class="box dark" ng-if="editable">
+    <header>
+        <div class="icons"><i class="fa fa-edit"></i></div>
+        <h5>{{role.name}}</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-redirect-to-url={{"/role/"+role.id}} translate>BACK_BUTTON</button>
+            </div>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="box dark">
+                <header>
+                    <h5 translate>CURRENT_PERMISSIONS</h5>
+                </header>
+            </div>
+            <div class="body">
+                <div class="form-horizontal">
+                    <div class="form-group" ng-repeat="currentPerm in role.permissions" >
+                        <label class="control-label col-lg-3">
+                            <checkbox class="btn-danger" ng-model="selectedRemove[$index]" ng-change="removePerm(currentPerm, $index)"></checkbox>
+                        </label>
+                        <div class="col-lg-5">
+                            <div disabled type="text" class="form-control" translate>{{currentPerm.name}}</div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label class="control-label col-lg-6"></label>
+                        <div class="col-lg-6">
+                            <button class="btn btn-danger" ng-click="removeSelectedPerms()" translate ng-if="user.perms['manage_role'] && role.company">PERMISSIONS_REMOVE_BUTTON</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="box inverse">
+                <header>
+                    <h5 translate>ADD_PERMISSIONS</h5>
+                </header>
+            </div>
+            <div class="body">
+                <div class="form-horizontal">
+                    <div class="form-group" ng-repeat="permToAdd in permsToAdd">
+                        <label class="control-label col-lg-3">
+                            <checkbox class="btn-success" ng-model="selectedAdd[$index]" ng-change="addPerm(permToAdd, $index)"></checkbox>
+                        </label>
+                        <div class="col-lg-5">
+                            <div disabled type="text" class="form-control" translate>{{permToAdd.name}}</div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label class="control-label col-lg-6"></label>
+                        <div class="col-lg-6">
+                            <button class="btn btn-success" ng-click="addSelectedPerms()" translate ng-if="user.perms['manage_role'] && role.company">PERMISSIONS_ADD_BUTTON</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--display panel-->
+<div class="box dark" ng-if="!editable">
+    <header>
+        <h5>{{role.name}}</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-success" ng-redirect-to-url={{"/role/"+role.id+"/edit"}} ng-if="user.perms['manage_role'] && role.company" translate>ROLES_MODIFY_BUTTON</button>
+                <button class="btn btn-primary" ng-redirect-to="roles" translate>BACK_BUTTON</button>
+            </div>
+        </div>
+    </header>
+    <div id="div-1" class="body">
+        <div class="form-horizontal">
+            <h5><strong translate>ROLE_PERMISSIONS</strong></h5>
+            <div class="form-group" ng-repeat="permission in role.permissions">
+                <label class="control-label col-lg-3"></label>
+                <div class="col-lg-5">
+                    <div disabled type="text" class="form-control" translate>{{permission.name}}</div>
+                </div>
+            </div>
+
+            <br/>
+        </div>
+    </div>
+</div>

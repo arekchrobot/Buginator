@@ -7,5 +7,6 @@
   "ERROR_CLOSE_BUTTON": "Zamknij",
   "UNAUTHORIZED_ACCESS": "Nieupoważniony dostęp",
   "USER_NOT_PERMITTED": "Użytkownik nie ma uprawnień",
-  "WARNING_CONFIRM_BUTTON": "Ok"
+  "WARNING_CONFIRM_BUTTON": "Ok",
+  "ROLES": "Zarządzaj rolami"
 }

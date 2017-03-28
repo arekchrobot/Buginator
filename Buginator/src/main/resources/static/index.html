@@ -197,14 +197,12 @@
                         <!--</a>-->
                     <!--</li>-->
                     <li class="nav-divider"></li>
-                    <!--<li>-->
-                        <!--<a href="login.html">-->
-                            <!--<i class="fa fa-sign-in"></i>-->
-                                      <!--<span class="link-title">-->
-                            <!--Login Page-->
-                            <!--</span>-->
-                        <!--</a>-->
-                    <!--</li>-->
+                    <li ng-if="user.perms['manage_role']">
+                        <a href="" ng-redirect-to="roles">
+                            <i class="fa fa-tasks" ></i>
+                            <span class="link-title" translate>ROLES</span>
+                        </a>
+                    </li>
                 </ul>
                 <!-- /#menu -->
             </div>

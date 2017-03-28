@@ -1,11 +1,11 @@
 INSERT INTO payment_option (version, duration, max_users, price, name) VALUES (1, 30, 5, 0.00, 'Trial');
 
-INSERT INTO buginator_permission (version, name) VALUES (1,'Company_manager');
 INSERT INTO buginator_permission (version, name) VALUES (1,'read_application');
 INSERT INTO buginator_permission (version, name) VALUES (1,'create_application');
 INSERT INTO buginator_permission (version, name) VALUES (1,'app_manage_users');
 INSERT INTO buginator_permission (version, name) VALUES (1,'app_show_notification');
 INSERT INTO buginator_permission (version, name) VALUES (1,'app_modify_notification');
+INSERT INTO buginator_permission (version, name) VALUES (1,'manage_role');
 
 INSERT INTO buginator_role (version, name) VALUES (1,'Company Manager');
 

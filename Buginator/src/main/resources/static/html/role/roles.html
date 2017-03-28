@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box">
+            <header>
+                <div class="icons"><i class="fa fa-desktop"></i></div>
+                <h5 translate>ROLES_TITLE</h5>
+
+                <div class="toolbar">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" ng-redirect-to="createRole" translate ng-if="user.perms['manage_role']">ROLE_CREATE_BUTTON</button>
+                    </div>
+                </div>
+            </header>
+            <div id="collapse4" class="body">
+                <div id="dataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped" st-safe-src="roles" st-table="displayedRoles">
+                        <thead>
+                        <tr>
+                            <th translate>ROLE_NAME</th>
+                            <th translate>ROLE_CUSTOM</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="role in displayedRoles">
+                            <td>{{role.name}}</td>
+                            <td><checkbox class="btn-success" ng-model="customRoles[$index]" disabled></checkbox></td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-info" translate ng-redirect-to-url={{"/role/"+role.id}}>ROLES_INFO_BUTTON</button>
+                                    <button class="btn btn-success" translate ng-redirect-to-url={{"/role/"+role.id+"/edit"}} ng-if="user.perms['manage_role'] && role.company">ROLES_MODIFY_BUTTON</button>
+                                    <button class="btn btn-danger" translate ng-click="remove(role)" ng-if="user.perms['manage_role'] && role.company">ROLES_REMOVE_BUTTON</button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
