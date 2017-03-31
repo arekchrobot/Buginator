@@ -35,7 +35,7 @@ public class BuginatorAuthorizingRealm extends AuthorizingRealm {
         } catch (NoSuchElementException ex) {
             return null;
         }
-        Optional<User> userOptional = userRepository.findByEmail(username);
+        Optional<User> userOptional = userRepository.findByEmailAndActiveTrue(username);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -56,7 +56,7 @@ public class BuginatorAuthorizingRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken authToken = (UsernamePasswordToken) authenticationToken;
 
-        Optional<User> user = userRepository.findByEmail(authToken.getUsername());
+        Optional<User> user = userRepository.findByEmailAndActiveTrue(authToken.getUsername());
 
         if (!user.isPresent()) {
             throw new UsernameNotFoundException("Account does not exists");
