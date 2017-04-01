@@ -20,10 +20,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import pl.ark.chr.buginator.websocket.NotificationEndpoint;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 @SpringBootApplication
 @EnableAsync
@@ -37,6 +34,11 @@ public class BuginatorApplication {
     @Bean(destroyMethod = "shutdown")
     public Executor taskScheduler() {
         return Executors.newScheduledThreadPool(buginatorProperties.getSchedulerThreads());
+    }
+
+    @Bean(destroyMethod = "shutdown")
+    public ExecutorService innerJobScheduler() {
+        return Executors.newFixedThreadPool(buginatorProperties.getInnerJobExecutorThreads());
     }
 
     @Bean

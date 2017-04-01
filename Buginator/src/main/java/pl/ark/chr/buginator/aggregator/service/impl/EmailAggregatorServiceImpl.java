@@ -83,6 +83,7 @@ public class EmailAggregatorServiceImpl extends AbstractAggregatorService<EmailA
             helper.setText(emailBody, true);
         } catch(MessagingException e) {
             logger.error("Error sending notification to: " + emails + " for error: " + errorId);
+            throw new RuntimeException(e);
         }
 
         mailSender.send(message);

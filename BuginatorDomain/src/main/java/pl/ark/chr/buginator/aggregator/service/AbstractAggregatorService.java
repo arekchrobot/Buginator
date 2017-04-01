@@ -21,9 +21,9 @@ public abstract class AbstractAggregatorService<T extends Aggregator> implements
     @Override
     public void notifyExternalAggregator(T aggregator, Error error) {
         if (aggregatorServiceValidator.checkErrorSeverityDoesNotMatch(aggregator, error) ||
-                aggregatorServiceValidator.checkErrorCountLessTanAggregator(aggregator, error)) {
+                aggregatorServiceValidator.checkErrorCountLessThanAggregator(aggregator, error)) {
             logger.info("Error has invalid severity or counts does not match for id: " + error.getId());
-            return;
+            throw new RuntimeException("Error has invalid severity or counts does not match for id: " + error.getId());
         }
 
         notifyExternalAggregatorInternal(aggregator, error);

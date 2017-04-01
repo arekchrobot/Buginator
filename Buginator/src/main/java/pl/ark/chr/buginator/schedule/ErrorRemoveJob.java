@@ -7,15 +7,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.BuginatorProperties;
+import pl.ark.chr.buginator.domain.*;
 import pl.ark.chr.buginator.domain.Error;
-import pl.ark.chr.buginator.domain.ErrorStackTrace;
-import pl.ark.chr.buginator.domain.Notification;
-import pl.ark.chr.buginator.domain.UserAgentData;
 import pl.ark.chr.buginator.domain.enums.ErrorStatus;
-import pl.ark.chr.buginator.repository.ErrorRepository;
-import pl.ark.chr.buginator.repository.ErrorStackTraceRepository;
-import pl.ark.chr.buginator.repository.NotificationRepository;
-import pl.ark.chr.buginator.repository.UserAgentDataRepository;
+import pl.ark.chr.buginator.repository.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -46,6 +41,9 @@ public class ErrorRemoveJob {
     @Autowired
     private UserAgentDataRepository userAgentDataRepository;
 
+    @Autowired
+    private AggregatorLogRepository aggregatorLogRepository;
+
     @Scheduled(cron = "${buginator.cron-schedule-error-remove}")
     public void performRemove() {
         logger.info("Starting job: Remove all old errors");
@@ -61,6 +59,7 @@ public class ErrorRemoveJob {
             removeNotifications(errorsToRemove);
             removeErrorStackTraces(errorsToRemove);
             removeUserAgentData(errorsToRemove);
+            removeAggregatorLogs(errorsToRemove);
 
             errorRepository.delete(errorsToRemove);
         } else {
@@ -113,6 +112,20 @@ public class ErrorRemoveJob {
             notificationRepository.delete(notificationsToRemove);
         } else {
             logger.info("No notification to remove");
+        }
+    }
+
+    private void removeAggregatorLogs(List<Error> errorsToRemove) {
+        List<AggregatorLog> aggregatorLogs = aggregatorLogRepository.findByErrorIn(errorsToRemove);
+
+        if(!aggregatorLogs.isEmpty()) {
+            String ids = aggregatorLogs.stream().map(al -> al.getId().toString()).collect(Collectors.joining(","));
+
+            logger.info("Removing aggregatorLogs with ids: " + ids);
+
+            aggregatorLogRepository.delete(aggregatorLogs);
+        } else {
+            logger.info("No aggregatorLogs to remove");
         }
     }
 }

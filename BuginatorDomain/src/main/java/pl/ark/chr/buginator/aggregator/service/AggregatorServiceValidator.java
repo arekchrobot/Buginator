@@ -14,7 +14,7 @@ public class AggregatorServiceValidator {
         return !aggregator.getErrorSeverity().equals(error.getSeverity());
     }
 
-    public boolean checkErrorCountLessTanAggregator(Aggregator aggregator, Error error) {
+    public boolean checkErrorCountLessThanAggregator(Aggregator aggregator, Error error) {
         return error.getCount() < aggregator.getCount();
     }
 }

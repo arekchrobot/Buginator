@@ -53,7 +53,7 @@ INSERT INTO user_agent_data(version, browser, browser_family, browser_full_versi
 (1, 'Firefox', 'Firefox', '40.1','Mozilla','40.1','PC','64bits','COMPUTER','(Windows)','Windows NT','Windows','Microsoft','7', 'Poland', 'PL');
 
 INSERT INTO buginator_error(version, error_count, date_time, description, last_occurence, severity, status,title, application_id, user_agent_data_id, request_url, query_params) VALUES
-(1,1,NOW()- INTERVAL '9 days','NullPointerException', NOW() - INTERVAL '9 days', 'ERROR', 'CREATED', 'Null has appeared', 1, 1, 'http://google.com/firstUrlEver', 'a=b&x=cc&acb=dcf'),
+(1,3,NOW()- INTERVAL '9 days','NullPointerException', NOW() - INTERVAL '9 days', 'ERROR', 'CREATED', 'Null has appeared', 1, 1, 'http://google.com/firstUrlEver', 'a=b&x=cc&acb=dcf'),
 (1,1,NOW()- INTERVAL '8 days','NullPointerException', NOW() - INTERVAL '8 days', 'ERROR', 'RESOLVED', 'Null has appeared', 1, NULL, NULL, NULL),
 (1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'ONGOING', 'Null has appeared', 1, NULL, NULL, NULL),
 (1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'REOPENED', 'Null has appeared', 1, NULL, NULL, NULL),
@@ -89,3 +89,6 @@ INSERT INTO aggregator(version, aggregator_class, count, error_severity, login, 
 
 INSERT INTO email_aggregator(id, language, recipients) VALUES
 (1, 'pl', '13aki13@gmail.com,buginator.noreply@gmail.com');
+
+INSERT INTO aggregator_log(version, error_description, retry_count, status, timestamp, aggregator_id, error_id) VALUES
+(1, 'Error sending email', 1, 'FAILURE', NOW(), 1, 1);
