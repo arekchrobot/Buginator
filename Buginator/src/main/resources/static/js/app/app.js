@@ -56,15 +56,20 @@ angular.module("buginator", [
     "buginator.rolesController",
     "buginator.detailsRoleController",
     "buginator.modifyRoleController",
-    "buginator.createRoleController"
+    "buginator.createRoleController",
+
+    "buginator.userServices",
+    "buginator.usersController",
+    "buginator.modifyUserController",
+    "buginator.createUserController"
 
 ]).config(["$sceDelegateProvider", "$httpProvider", "$urlRouterProvider", "$translateProvider", "IdleProvider", "KeepaliveProvider",
     function ($sceDelegateProvider, $httpProvider, $urlRouterProvider, $translateProvider, IdleProvider, KeepaliveProvider) {
 
         $urlRouterProvider
             .when("/signup", "login")
-            .when("/forgot", "login");
-        //.otherwise("/");
+            .when("/forgot", "login")
+            .otherwise("login");
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         $sceDelegateProvider
@@ -91,6 +96,9 @@ angular.module("buginator", [
                 suffix: ".json"
             }, {
                 prefix: "js/app/languages/role/",
+                suffix: ".json"
+            }, {
+                prefix: "js/app/languages/user/",
                 suffix: ".json"
             }]
         });

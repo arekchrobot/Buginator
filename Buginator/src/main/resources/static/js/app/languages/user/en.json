@@ -1,0 +1,21 @@
+{
+  "USERS_TITLE": "Users",
+  "USER_CREATE_BUTTON": "Create",
+  "USER_NAME": "Username",
+  "USER_EMAIL": "Email",
+  "USER_ROLE": "Role",
+  "USER_ACTIVE": "Active",
+  "USERS_INFO_BUTTON": "Details",
+  "USERS_MODIFY_BUTTON": "Modify",
+  "USERS_DEACTIVATE_BUTTON": "Deactivate",
+  "USERS_ACTIVATE_BUTTON": "Activate",
+  "USER_ACTIVATE_DEACTIVATE_HEADER": "Warning",
+  "DEACTIVATE_DESCRIPTION": "Do you want to deactivate this user?",
+  "ACTIVATE_DESCRIPTION": "Do you want to activate this user?",
+  "ROLE_REQUIRED": "Role is required",
+  "EDIT_USER_SUBMIT_BUTTON": "Modify",
+  "CREATE_USER_SUBMIT_BUTTON": "Create",
+  "USER_CREATE": "Create user",
+  "USER_PASSWORD": "Password",
+  "USER_RE_PASSWORD": "Re-password"
+}

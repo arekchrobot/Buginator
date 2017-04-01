@@ -6,19 +6,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.BuginatorProperties;
+import pl.ark.chr.buginator.config.shiro.BCryptPasswordService;
+import pl.ark.chr.buginator.domain.Company;
 import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.exceptions.DataAccessException;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
+import pl.ark.chr.buginator.exceptions.ValidationException;
 import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.UserService;
 import pl.ark.chr.buginator.data.Credentials;
+import pl.ark.chr.buginator.util.ValidationUtil;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -45,13 +52,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private BCryptPasswordService passwordService;
+
     @Override
     public User loadUserByEmail(String login, Locale locale) throws UsernameNotFoundException {
         Optional<User> userWrapper = userRepository.findByEmail(login.toLowerCase());
 
         if (!userWrapper.isPresent()) {
             logger.info("No user found for email: " + login);
-            throw new UsernameNotFoundException(messageSource.getMessage("usernameNotFound.msg", null, locale) + " " +login);
+            throw new UsernameNotFoundException(messageSource.getMessage("usernameNotFound.msg", null, locale) + " " + login);
         } else if (userWrapper.get().getRole() == null) {
             logger.warn("User: " + login + " has no authorities");
             String errorMsg = new StringBuilder(60)
@@ -99,7 +109,68 @@ public class UserServiceImpl implements UserService {
         emailService.sendResetPassword(u, locale, newPassword);
     }
 
+    @Override
+    public List<User> getAllByCompany(Company company) {
+        return userRepository.findByCompany(company);
+    }
+
+    @Override
+    public User save(User user, Company company) throws DataAccessException, ValidationException {
+        if (user.isNew()) {
+            validateUserData(user, LocaleContextHolder.getLocale());
+            user.setCompany(company);
+            user.setActive(true);
+            user.setPassword(passwordService.encryptPassword(user.getPassword()));
+        } else {
+            validateAccess(user, company);
+        }
+
+        return userRepository.save(user);
+    }
+
+    private void validateAccess(User user, Company company) throws DataAccessException {
+        if (!user.getCompany().getId().equals(company.getId())) {
+            Locale locale = LocaleContextHolder.getLocale();
+            throw new DataAccessException(messageSource.getMessage("userModify.forbidden", null, locale), null);
+        }
+    }
+
+    @Override
+    public void activateDeactivateAccount(String email, Company company, boolean active) throws DataAccessException {
+        User user = loadUserByEmail(email, LocaleContextHolder.getLocale());
+
+        validateAccess(user, company);
+
+        user.setActive(active);
+
+        userRepository.save(user);
+    }
+
     private String generatePassword() {
         return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
+    }
+
+    private void validateUserData(User user, Locale locale) throws ValidationException {
+        validateBlankString(user.getEmail(), "Attempt to create user without email", messageSource.getMessage("validation.userEmailEmpty", null, locale));
+        validateBlankString(user.getPassword(), "Attempt to create user without password", messageSource.getMessage("validation.passwordEmpty", null, locale));
+        validateBlankString(user.getName(), "Attempt to create user without name", messageSource.getMessage("validation.usernameEmpty", null, locale));
+
+        userRepository.findByEmail(user.getEmail()).ifPresent(u -> {
+            String errorMsg = new StringBuilder(60)
+                    .append(messageSource.getMessage("illegalArgument.user.prefix", null, locale))
+                    .append(" ")
+                    .append(user.getEmail())
+                    .append(" ")
+                    .append(messageSource.getMessage("illegalArgument.user.suffix", null, locale))
+                    .toString();
+            throw new IllegalArgumentException(errorMsg);
+        });
+    }
+
+    private void validateBlankString(String object, String loggerMsg, String exceptionMsg) throws ValidationException {
+        if (ValidationUtil.isBlank(object)) {
+            logger.warn(loggerMsg);
+            throw new ValidationException(exceptionMsg);
+        }
     }
 }

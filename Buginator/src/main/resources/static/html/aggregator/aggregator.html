@@ -1,6 +1,7 @@
 <!--edit panel-->
 <div class="box dark" ng-if="editable">
     <header>
+        <div class="icons"><i class="fa fa-edit"></i></div>
         <h5><translate>AGGREGATOR_EDIT</translate>: {{aggregatorData.aggregator['@type']}}</h5>
 
         <div class="toolbar">
@@ -44,6 +45,7 @@
 <!--display panel-->
 <div class="box dark" ng-if="!editable">
     <header>
+        <div class="icons"><i class="fa fa-desktop"></i></div>
         <h5 translate>AGGREGATOR_DETAILS</h5>
 
         <div class="toolbar">

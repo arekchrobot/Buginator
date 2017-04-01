@@ -20,10 +20,10 @@
             <div class="body">
                 <div class="form-horizontal">
                     <div class="form-group" ng-repeat="currentPerm in role.permissions" >
-                        <label class="control-label col-lg-3">
+                        <label class="control-label col-lg-2">
                             <checkbox class="btn-danger" ng-model="selectedRemove[$index]" ng-change="removePerm(currentPerm, $index)"></checkbox>
                         </label>
-                        <div class="col-lg-5">
+                        <div class="col-lg-6">
                             <div disabled type="text" class="form-control" translate>{{currentPerm.name}}</div>
                         </div>
                     </div>
@@ -47,10 +47,10 @@
             <div class="body">
                 <div class="form-horizontal">
                     <div class="form-group" ng-repeat="permToAdd in permsToAdd">
-                        <label class="control-label col-lg-3">
+                        <label class="control-label col-lg-2">
                             <checkbox class="btn-success" ng-model="selectedAdd[$index]" ng-change="addPerm(permToAdd, $index)"></checkbox>
                         </label>
-                        <div class="col-lg-5">
+                        <div class="col-lg-6">
                             <div disabled type="text" class="form-control" translate>{{permToAdd.name}}</div>
                         </div>
                     </div>
@@ -70,6 +70,7 @@
 <!--display panel-->
 <div class="box dark" ng-if="!editable">
     <header>
+        <div class="icons"><i class="fa fa-desktop"></i></div>
         <h5>{{role.name}}</h5>
 
         <div class="toolbar">
@@ -83,8 +84,8 @@
         <div class="form-horizontal">
             <h5><strong translate>ROLE_PERMISSIONS</strong></h5>
             <div class="form-group" ng-repeat="permission in role.permissions">
-                <label class="control-label col-lg-3"></label>
-                <div class="col-lg-5">
+                <label class="control-label col-lg-2"></label>
+                <div class="col-lg-6">
                     <div disabled type="text" class="form-control" translate>{{permission.name}}</div>
                 </div>
             </div>

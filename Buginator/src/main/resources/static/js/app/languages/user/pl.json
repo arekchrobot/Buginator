@@ -1,0 +1,21 @@
+{
+  "USERS_TITLE": "Użytkownicy",
+  "USER_CREATE_BUTTON": "Stwórz",
+  "USER_NAME": "Nazwa użytkownika",
+  "USER_EMAIL": "Email",
+  "USER_ROLE": "Rola",
+  "USER_ACTIVE": "Aktywny",
+  "USERS_INFO_BUTTON": "Szczegóły",
+  "USERS_MODIFY_BUTTON": "Edytuj",
+  "USERS_DEACTIVATE_BUTTON": "Deaktywuj",
+  "USERS_ACTIVATE_BUTTON": "Aktywuj",
+  "USER_ACTIVATE_DEACTIVATE_HEADER": "Ostrzeżenie",
+  "DEACTIVATE_DESCRIPTION": "Czy chcesz deaktywować tego użytkownika?",
+  "ACTIVATE_DESCRIPTION": "Czy chcesz aktywować tego użytkownika?",
+  "ROLE_REQUIRED": "Rola jet wymagana",
+  "EDIT_USER_SUBMIT_BUTTON": "Zapisz",
+  "CREATE_USER_SUBMIT_BUTTON": "Stwórz",
+  "USER_CREATE": "Stwórz użytkownika",
+  "USER_PASSWORD": "Hasło",
+  "USER_RE_PASSWORD": "Powtórz hasło"
+}

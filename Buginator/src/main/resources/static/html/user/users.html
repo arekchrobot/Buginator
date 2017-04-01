@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box">
+            <header>
+                <div class="icons"><i class="fa fa-desktop"></i></div>
+                <h5 translate>USERS_TITLE</h5>
+
+                <div class="toolbar">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" ng-redirect-to="createUser" translate ng-if="user.perms['manage_role'] && user.perms['manage_user']">USER_CREATE_BUTTON</button>
+                    </div>
+                </div>
+            </header>
+            <div id="collapse4" class="body">
+                <div id="dataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped" st-safe-src="users" st-table="displayedUsers">
+                        <thead>
+                        <tr>
+                            <th translate>USER_NAME</th>
+                            <th translate>USER_EMAIL</th>
+                            <th translate>USER_ROLE</th>
+                            <th translate>USER_ACTIVE</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="displayedUser in displayedUsers">
+                            <td>{{displayedUser.name}}</td>
+                            <td>{{displayedUser.email}}</td>
+                            <td>{{displayedUser.role.name}}</td>
+                            <td><checkbox class="btn-success" ng-model="displayedUser.active" disabled></checkbox></td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-success" translate ng-redirect-to-url={{"/user/"+displayedUser.email+"/edit"}}
+                                            ng-if="user.perms['manage_role'] && user.perms['manage_user'] && displayedUser.email != user.email">USERS_MODIFY_BUTTON</button>
+                                    <button class="btn btn-danger" translate ng-click="activateDeactivate(displayedUser)"
+                                            ng-if="user.perms['manage_role'] && user.perms['manage_user'] && displayedUser.active && displayedUser.email != user.email">USERS_DEACTIVATE_BUTTON</button>
+                                    <button class="btn btn-warning" translate ng-click="activateDeactivate(displayedUser)"
+                                            ng-if="user.perms['manage_role'] && user.perms['manage_user'] && !displayedUser.active && displayedUser.email != user.email">USERS_ACTIVATE_BUTTON</button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

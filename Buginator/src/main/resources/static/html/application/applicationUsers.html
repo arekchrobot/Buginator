@@ -1,5 +1,6 @@
 <div class="box dark">
     <header>
+        <div class="icons"><i class="fa fa-desktop"></i></div>
         <h5>{{application.name}}</h5>
 
         <div class="toolbar">
@@ -20,9 +21,9 @@
                 <div class="form-horizontal">
                     <div class="form-group" ng-repeat="appUser in appUsers" >
                         <label class="control-label col-lg-4">
-                            <checkbox class="btn-danger" ng-model="selectedRemove[$index]" ng-change="removeUser(appUser, $index)"
-                                      ng-if="$root.user.email != appUser.email"></checkbox>
-                            {{appUser.username}}
+                            <div class="col-lg-2"><checkbox class="btn-danger" ng-model="selectedRemove[$index]" ng-change="removeUser(appUser, $index)"
+                                                            ng-if="$root.user.email != appUser.email"></checkbox></div>
+                            <div class="col-lg-2">{{appUser.username}}</div>
                         </label>
                         <div class="col-lg-8">
                             <label class="control-label col-lg-4" translate>APP_USER_MODIFY</label>
@@ -56,8 +57,8 @@
                 <div class="form-horizontal">
                     <div class="form-group" ng-repeat="userNotBoundToApp in usersNotBoundToApp">
                         <label class="control-label col-lg-4">
-                            <checkbox class="btn-success" ng-model="selectedAdd[$index]" ng-change="addUser(userNotBoundToApp, $index)"></checkbox>
-                            {{userNotBoundToApp.username}}
+                            <div class="col-lg-2"><checkbox class="btn-success" ng-model="selectedAdd[$index]" ng-change="addUser(userNotBoundToApp, $index)"></checkbox></div>
+                            <div class="col-lg-2">{{userNotBoundToApp.username}}</div>
                         </label>
                         <div class="col-lg-8">
                             <label class="control-label col-lg-4" translate>APP_USER_MODIFY</label>

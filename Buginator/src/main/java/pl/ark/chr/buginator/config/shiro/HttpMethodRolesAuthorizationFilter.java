@@ -63,7 +63,12 @@ public class HttpMethodRolesAuthorizationFilter extends RolesAuthorizationFilter
 
         final HttpMethod requestMethod = HttpMethod.parse(((HttpServletRequest) request).getMethod());
         final String role = methodToRoleMapping.get(requestMethod);
-        return subject.isPermitted(role);
+        final String[] multipleRoles = role.split(";");
+        if(multipleRoles.length > 1) {
+            return subject.isPermittedAll(multipleRoles);
+        } else {
+            return subject.isPermitted(role);
+        }
     }
 
     @Override

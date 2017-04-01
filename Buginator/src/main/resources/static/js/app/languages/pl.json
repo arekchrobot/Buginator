@@ -8,5 +8,6 @@
   "UNAUTHORIZED_ACCESS": "Nieupoważniony dostęp",
   "USER_NOT_PERMITTED": "Użytkownik nie ma uprawnień",
   "WARNING_CONFIRM_BUTTON": "Ok",
-  "ROLES": "Zarządzaj rolami"
+  "ROLES": "Zarządzaj rolami",
+  "USERS": "Zarządzaj użytkownikami"
 }

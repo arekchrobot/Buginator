@@ -1,0 +1,103 @@
+<!--edit panel-->
+<div class="box dark" ng-if="editable">
+    <header>
+        <div class="icons"><i class="fa fa-edit"></i></div>
+        <h5>{{editUser.email}}</h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-redirect-to="users" translate>BACK_BUTTON
+                </button>
+            </div>
+        </div>
+    </header>
+    <div id="div-1" class="body">
+        <form class="form-horizontal" ng-submit="submit()" id="forms.editUserForm" name="forms.editUserForm" novalidate>
+            <div class="form-group">
+                <label class="control-label col-lg-3" translate>USER_ROLE</label>
+                <div class="col-lg-5"
+                     ng-class="{'has-error':(forms.editUserForm.selectedRole.$error.required && forms.editUserForm.selectedRole.$touched), 'has-success':!forms.editUserForm.selectedRole.$error.required && forms.editUserForm.selectedRole.$touched}">
+                    <select ng-model="editUser.role.id" class="form-control" name="selectedRole"
+                            ng-options="role.id as role.name for role in roles" required>
+                    </select>
+                    <span class="help-block"
+                          ng-show="forms.editUserForm.selectedRole.$error.required && forms.editUserForm.selectedRole.$touched"
+                          translate>ROLE_REQUIRED</span>
+                </div>
+            </div>
+            <br/>
+            <button class="btn btn-success center-block" type="submit" ng-disabled="!forms.editUserForm.$valid"
+                    translate ng-if="user.perms['manage_role'] && user.perms['manage_user'] && editUser.email != user.email">EDIT_USER_SUBMIT_BUTTON
+            </button>
+        </form>
+    </div>
+</div>
+
+<!--create panel-->
+<div class="box dark" ng-if="!editable">
+    <header>
+        <div class="icons"><i class="fa fa-edit"></i></div>
+        <h5>
+            <translate>USER_CREATE</translate>
+        </h5>
+
+        <div class="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-redirect-to="users" translate>
+                    BACK_BUTTON
+                </button>
+            </div>
+        </div>
+    </header>
+    <div id="div-1" class="body">
+        <form class="form-horizontal" ng-submit="submit()" id="forms.createUserForm"
+              name="forms.createUserForm" novalidate>
+            <div class="form-group" ng-class="{'has-error':forms.createUserForm.userName.$error.required && forms.createUserForm.userName.$touched, 'has-success':!forms.createUserForm.userName.$error.required}">
+                <label class="control-label col-lg-3" translate>USER_NAME</label>
+                <div class="col-lg-5">
+                    <input class="form-control" type="text" placeholder="username" class="form-control middle"
+                           ng-model="createUser.name" id="userName" name="userName" required translate translate-attr-placeholder="SIGNUP_USERNAME">
+                    <span class="help-block" ng-show="forms.createUserForm.userName.$error.required && forms.createUserForm.userName.$touched" translate>SIGNUP_USERNAME_REQUIRED</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error':(forms.createUserForm.userEmail.$error.required && forms.createUserForm.userEmail.$touched) || forms.createUserForm.userEmail.$error.email, 'has-success':!forms.createUserForm.userEmail.$error.required || (!forms.createUserForm.userEmail.$error.email && forms.createUserForm.userEmail.$touched)}">
+                <label class="control-label col-lg-3" translate>USER_EMAIL</label>
+                <div class="col-lg-5">
+                    <input type="email" placeholder="mail@domain.com" class="form-control middle" ng-model="createUser.email" id="userEmail" name="userEmail" required>
+                    <span class="help-block" ng-show="forms.createUserForm.userEmail.$error.required && forms.createUserForm.userEmail.$touched" translate>SIGNUP_EMAIL_REQUIRED</span>
+                    <span class="help-block" ng-show="forms.createUserForm.userEmail.$error.email && forms.createUserForm.userEmail.$touched" translate>SIGNUP_EMAIL_INVALID</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error':forms.createUserForm.pass.$error.required && forms.createUserForm.pass.$touched, 'has-success':!forms.createUserForm.pass.$error.required}">
+                <label class="control-label col-lg-3" translate>USER_PASSWORD</label>
+                <div class="col-lg-5">
+                    <input type="password" placeholder="password" class="form-control middle" ng-model="createUser.password" id="pass" name="pass" required translate translate-attr-placeholder="SIGNUP_PASSWORD">
+                    <span class="help-block" ng-show="forms.createUserForm.pass.$error.required && forms.createUserForm.pass.$touched" translate>SIGNUP_PASSWORD_REQUIRED</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error':forms.createUserForm.rePass.$error.pwmatch, 'has-success':!forms.createUserForm.rePass.$error.pwmatch && forms.createUserForm.pass.$touched && !forms.createUserForm.userEmail.$error.required && !forms.createUserForm.userEmail.$error.email}">
+                <label class="control-label col-lg-3" translate>USER_RE_PASSWORD</label>
+                <div class="col-lg-5">
+                    <input type="password" placeholder="re-password" class="form-control bottom" ng-model="rePassword" id="rePass" pw-check="pass" name="rePass" translate translate-attr-placeholder="SIGNUP_RE_PASSWORD">
+                    <span class='help-block' ng-show='forms.createUserForm.rePass.$error.pwmatch' translate>SIGNUP_PASSWORD_MATCH</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error':(forms.createUserForm.selectedRole.$error.required && forms.createUserForm.selectedRole.$touched), 'has-success':!forms.createUserForm.selectedRole.$error.required && forms.createUserForm.selectedRole.$touched}">
+                <label class="control-label col-lg-3" translate>USER_ROLE</label>
+                <div class="col-lg-5"
+                     >
+                    <select ng-model="createUser.role.id" class="form-control" name="selectedRole"
+                            ng-options="role.id as role.name for role in roles" required>
+                    </select>
+                    <span class="help-block"
+                          ng-show="forms.createUserForm.selectedRole.$error.required && forms.createUserForm.selectedRole.$touched"
+                          translate>ROLE_REQUIRED</span>
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-success center-block" type="submit" ng-disabled="!forms.createUserForm.$valid"
+                    translate ng-if="user.perms['manage_role'] && user.perms['manage_user']">CREATE_USER_SUBMIT_BUTTON
+            </button>
+        </form>
+    </div>
+</div>

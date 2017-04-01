@@ -6,6 +6,7 @@ INSERT INTO buginator_permission (version, name) VALUES (1,'app_manage_users');
 INSERT INTO buginator_permission (version, name) VALUES (1,'app_show_notification');
 INSERT INTO buginator_permission (version, name) VALUES (1,'app_modify_notification');
 INSERT INTO buginator_permission (version, name) VALUES (1,'manage_role');
+INSERT INTO buginator_permission (version, name) VALUES (1,'manage_user');
 
 INSERT INTO buginator_role (version, name) VALUES (1,'Company Manager');
 
@@ -15,6 +16,7 @@ INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,3);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,4);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,5);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,6);
+INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,7);
 
 INSERT INTO company(version, address, expiry_date, name, token, unique_key, user_limit,payment_option_id) VALUES
 (1,'Test address', NOW() + INTERVAL '30 days','Test Company', 'Xqg5ueAkyuwLM6bVFR16vuThX83flR','lSFdQB4rQ79ydSt4C05qjFTmNHMnMi',5,1),
@@ -25,13 +27,15 @@ INSERT INTO buginator_role (version, name, company_id) VALUES (1, 'App 3 Develop
 
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (2,2);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (2,3);
+INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (2,7);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (3,2);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (3,3);
 
 INSERT INTO buginator_user(version, active, email, name, pass, company_id, buginator_role_id) VALUES
 (1,true,'asd@asd', 'User1', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,1),
 (1,true,'asd2@asd', 'User2', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,2),
-(1,false,'asd3@asd', 'User3', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,1);
+(1,false,'asd3@asd', 'User3', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',1,1),
+(1,true,'asd4@asd', 'User4', '$2a$11$ICWXs/nL4KcnsZ2org5KzOJEt8FpLP9ibJeC0mOeja8Lznv5YrFDi',2,1);
 
 
 INSERT INTO application(version, name, company_id) VALUES

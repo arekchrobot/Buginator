@@ -64,16 +64,9 @@
                             <!-- .nav -->
                             <ul class="nav navbar-nav">
                                 <li><a href="" ng-redirect-to="dashboard" translate>DASHBOARD</a></li>
-                                <li><a href="" ng-redirect-to="applications" translate>APPLICATIONS</a></li>
-                                <!--<li><a href="file.html">File Manager</a></li>-->
-                                <!--<li class='dropdown '>-->
-                                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-                                        <!--Form Elements <b class="caret"></b>-->
-                                    <!--</a>-->
-                                    <!--<ul class="dropdown-menu">-->
-                                        <!--<li><a href="form-general.html">General</a></li>-->
-                                    <!--</ul>-->
-                                <!--</li>-->
+                                <li><a href="" ng-redirect-to="applications" ng-if="user.perms['read_application']" translate>APPLICATIONS</a></li>
+                                <li><a href="" ng-redirect-to="roles" ng-if="user.perms['manage_role']" translate>ROLES</a></li>
+                                <li><a href="" ng-redirect-to="users" ng-if="user.perms['manage_role'] && user.perms['manage_user']" translate>USERS</a></li>
                             </ul>
                             <!-- /.nav -->
                         </div>
@@ -101,7 +94,7 @@
                     <div class="user-wrapper bg-dark">
                         <a class="user-link" href="">
                             <img class="media-object img-thumbnail user-img" alt="User Picture" src="images/user.gif">
-                            <span class="label label-danger user-label">16</span>
+                            <!--<span class="label label-danger user-label">16</span>-->
                         </a>
 
                         <div class="media-body">
@@ -127,80 +120,17 @@
                             <span class="link-title" translate>APPLICATIONS</span>
                         </a>
                     </li>
-                    <!--<li>-->
-                        <!--<a href="file.html">-->
-                            <!--<i class="fa fa-file"></i>-->
-                                      <!--<span class="link-title">-->
-                              <!--File Manager-->
-                                  <!--</span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="typography.html">-->
-                            <!--<i class="fa fa-font"></i>-->
-                                      <!--<span class="link-title">-->
-                                    <!--Typography-->
-                                  <!--</span> </a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="maps.html">-->
-                            <!--<i class="fa fa-map-marker"></i><span class="link-title">-->
-                                    <!--Maps-->
-                                  <!--</span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="chart.html">-->
-                            <!--<i class="fa fa fa-bar-chart-o"></i>-->
-                                      <!--<span class="link-title">-->
-                                    <!--Charts-->
-                                  <!--</span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="calendar.html">-->
-                            <!--<i class="fa fa-calendar"></i>-->
-                                      <!--<span class="link-title">-->
-                                    <!--Calendar-->
-                                  <!--</span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="javascript:;">-->
-                            <!--<i class="fa fa-exclamation-triangle"></i>-->
-                                      <!--<span class="link-title">-->
-                                      <!--Error Pages-->
-                                    <!--</span>-->
-                            <!--<span class="fa arrow"></span>-->
-                        <!--</a>-->
-                        <!--<ul class="collapse">-->
-                            <!--<li>-->
-                                <!--<a href="403.html">-->
-                                    <!--<i class="fa fa-angle-right"></i>&nbsp;403</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="grid.html">-->
-                            <!--<i class="fa fa-columns"></i>-->
-                                      <!--<span class="link-title">-->
-                            <!--Grid-->
-                            <!--</span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="blank.html">-->
-                            <!--<i class="fa fa-square-o"></i>-->
-                                      <!--<span class="link-title">-->
-                            <!--Blank Page-->
-                            <!--</span>-->
-                        <!--</a>-->
-                    <!--</li>-->
                     <li class="nav-divider"></li>
                     <li ng-if="user.perms['manage_role']">
                         <a href="" ng-redirect-to="roles">
                             <i class="fa fa-tasks" ></i>
                             <span class="link-title" translate>ROLES</span>
+                        </a>
+                    </li>
+                    <li ng-if="user.perms['manage_role'] && user.perms['manage_user']">
+                        <a href="" ng-redirect-to="users">
+                            <i class="fa fa-users" ></i>
+                            <span class="link-title" translate>USERS</span>
                         </a>
                     </li>
                 </ul>
