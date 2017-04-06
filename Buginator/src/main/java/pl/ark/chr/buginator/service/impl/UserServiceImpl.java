@@ -22,7 +22,7 @@ import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.UserService;
 import pl.ark.chr.buginator.data.Credentials;
-import pl.ark.chr.buginator.util.ValidationUtil;
+import pl.ark.chr.buginator.util.UserCompanyValidator;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -54,6 +54,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BCryptPasswordService passwordService;
+
+    @Autowired
+    private UserCompanyValidator userCompanyValidator;
 
     @Override
     public User loadUserByEmail(String login, Locale locale) throws UsernameNotFoundException {
@@ -117,7 +120,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user, Company company) throws DataAccessException, ValidationException {
         if (user.isNew()) {
-            validateUserData(user, LocaleContextHolder.getLocale());
+            userCompanyValidator.validateUserData(user, LocaleContextHolder.getLocale());
             user.setCompany(company);
             user.setActive(true);
             user.setPassword(passwordService.encryptPassword(user.getPassword()));
@@ -148,29 +151,5 @@ public class UserServiceImpl implements UserService {
 
     private String generatePassword() {
         return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
-    }
-
-    private void validateUserData(User user, Locale locale) throws ValidationException {
-        validateBlankString(user.getEmail(), "Attempt to create user without email", messageSource.getMessage("validation.userEmailEmpty", null, locale));
-        validateBlankString(user.getPassword(), "Attempt to create user without password", messageSource.getMessage("validation.passwordEmpty", null, locale));
-        validateBlankString(user.getName(), "Attempt to create user without name", messageSource.getMessage("validation.usernameEmpty", null, locale));
-
-        userRepository.findByEmail(user.getEmail()).ifPresent(u -> {
-            String errorMsg = new StringBuilder(60)
-                    .append(messageSource.getMessage("illegalArgument.user.prefix", null, locale))
-                    .append(" ")
-                    .append(user.getEmail())
-                    .append(" ")
-                    .append(messageSource.getMessage("illegalArgument.user.suffix", null, locale))
-                    .toString();
-            throw new IllegalArgumentException(errorMsg);
-        });
-    }
-
-    private void validateBlankString(String object, String loggerMsg, String exceptionMsg) throws ValidationException {
-        if (ValidationUtil.isBlank(object)) {
-            logger.warn(loggerMsg);
-            throw new ValidationException(exceptionMsg);
-        }
     }
 }

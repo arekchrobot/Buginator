@@ -25,7 +25,7 @@ public class Error extends BaseEntity implements FilterData {
     @Column(name = "description", length = 1000)
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "error")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "error", cascade = CascadeType.PERSIST)
     @OrderColumn(name = "stack_trace_order")
     private List<ErrorStackTrace> stackTrace = new ArrayList<>();
 

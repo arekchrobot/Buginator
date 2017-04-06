@@ -7,6 +7,9 @@ import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
 import pl.ark.chr.buginator.domain.enums.ErrorStatus;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -190,5 +193,72 @@ public class TestObjectCreator {
 
     public static Long[] getSortedErrorIdArray() {
         return new Long[]{6L,5L,7L,4L,3L,2L,1L};
+    }
+
+    public static Error createFullDataError(boolean sameData, boolean sameStackTrace, Application application) {
+        Error error = new Error();
+        if(sameData) {
+            error.setApplication(application);
+            error.setLastOccurrence(LocalDate.now());
+            error.setCount(1);
+            error.setDateTime(LocalDateTime.now());
+            error.setDescription("Test description 1");
+            error.setTitle("Test Title 1");
+            error.setSeverity(ErrorSeverity.ERROR);
+        } else {
+            error.setApplication(application);
+            error.setLastOccurrence(LocalDate.now());
+            error.setCount(1);
+            error.setDateTime(LocalDateTime.now().minusDays(1));
+            error.setDescription("Test description 2");
+            error.setTitle("Test Title 2");
+            error.setSeverity(ErrorSeverity.WARNING);
+        }
+
+        if(sameStackTrace) {
+            List<ErrorStackTrace> errorStackTraces = new ArrayList<>();
+
+            ErrorStackTrace errorStackTrace = new ErrorStackTrace();
+            errorStackTrace.setStackTraceOrder(1);
+            errorStackTrace.setStackTrace("Test stack trace 1");
+            errorStackTrace.setError(error);
+
+            ErrorStackTrace errorStackTrace2 = new ErrorStackTrace();
+            errorStackTrace2.setStackTraceOrder(2);
+            errorStackTrace2.setStackTrace("Test stack trace 2");
+            errorStackTrace2.setError(error);
+
+            errorStackTraces.add(errorStackTrace);
+            errorStackTraces.add(errorStackTrace2);
+
+            error.setStackTrace(errorStackTraces);
+        } else {
+            List<ErrorStackTrace> errorStackTraces = new ArrayList<>();
+
+            ErrorStackTrace errorStackTrace = new ErrorStackTrace();
+            errorStackTrace.setStackTraceOrder(1);
+            errorStackTrace.setStackTrace("Test stack trace 2");
+            errorStackTrace.setError(error);
+
+            ErrorStackTrace errorStackTrace2 = new ErrorStackTrace();
+            errorStackTrace2.setStackTraceOrder(2);
+            errorStackTrace2.setStackTrace("Test stack trace 1");
+            errorStackTrace2.setError(error);
+
+            errorStackTraces.add(errorStackTrace);
+            errorStackTraces.add(errorStackTrace2);
+
+            error.setStackTrace(errorStackTraces);
+        }
+
+        return error;
+    }
+
+    public static UserAgentData createUserAgentData(String device) {
+        UserAgentData userAgentData = new UserAgentData(null);
+
+        userAgentData.setDevice(device);
+
+        return userAgentData;
     }
 }

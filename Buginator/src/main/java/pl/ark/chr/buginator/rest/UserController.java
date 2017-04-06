@@ -28,7 +28,7 @@ import java.util.Locale;
 @RestController("/user")
 public class UserController {
 
-    public static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;

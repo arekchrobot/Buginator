@@ -5,6 +5,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import pl.ark.chr.buginator.domain.Aggregator;
 import pl.ark.chr.buginator.domain.Application;
 import pl.ark.chr.buginator.domain.Company;
+import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ import java.util.List;
  */
 public interface AggregatorRepository extends AbstractAggregatorRepository<Aggregator> {
 
+    List<Aggregator> findByApplicationAndSeverityAndCount(Application application, ErrorSeverity errorSeverity, int count);
 }

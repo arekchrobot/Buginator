@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.config.shiro.BCryptPasswordService;
@@ -19,6 +20,7 @@ import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.RegisterService;
 import pl.ark.chr.buginator.data.RegisterData;
+import pl.ark.chr.buginator.util.UserCompanyValidator;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.time.LocalDate;
@@ -39,6 +41,10 @@ public class RegisterServiceImplTest {
 
     @InjectMocks
     private RegisterService sut = new RegisterServiceImpl();
+
+    @InjectMocks
+    @Spy
+    private UserCompanyValidator userCompanyValidator = new UserCompanyValidator();
 
     @Mock
     private CompanyRepository companyRepository;
@@ -66,6 +72,7 @@ public class RegisterServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
+
         when(messageSource.getMessage(any(String.class), any(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
         when(passwordService.encryptPassword(any(Object.class))).thenReturn(TEST_BCRYPTED_PASSWORD);
     }

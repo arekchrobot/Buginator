@@ -34,7 +34,7 @@ public class ChartServiceImpl implements ChartService {
 
     private static final int LAST_SEVEN_DAYS = 7;
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public static final long NO_ERRORS = 0;
+    private static final long NO_ERRORS = 0;
 
     private final ClientFilter clientFilter = ClientFilterFactory.createClientFilter(ClientFilterFactory.ClientFilterType.APPLICATION_ACCESS);
 
