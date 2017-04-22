@@ -3,6 +3,7 @@ package pl.ark.chr.buginator.data;
 import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
 import pl.ark.chr.buginator.domain.enums.ErrorStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,16 @@ public class ExternalData {
     private String dateString;
     private String requestUrl;
     private String queryParams;
+    private String requestMethod;
     private List<ExternalStackTrace> stackTrace;
+    private List<String> requestParams;
+    private List<String> requestHeaders;
+
+    public ExternalData() {
+        this.stackTrace = new ArrayList<>();
+        this.requestParams = new ArrayList<>();
+        this.requestHeaders = new ArrayList<>();
+    }
 
     public String getApplicationName() {
         return applicationName;
@@ -94,12 +104,36 @@ public class ExternalData {
         this.queryParams = queryParams;
     }
 
+    public String getRequestMethod() {
+        return requestMethod;
+    }
+
+    public void setRequestMethod(String requestMethod) {
+        this.requestMethod = requestMethod;
+    }
+
     public List<ExternalStackTrace> getStackTrace() {
         return stackTrace;
     }
 
     public void setStackTrace(List<ExternalStackTrace> stackTrace) {
         this.stackTrace = stackTrace;
+    }
+
+    public List<String> getRequestParams() {
+        return requestParams;
+    }
+
+    public void setRequestParams(List<String> requestParams) {
+        this.requestParams = requestParams;
+    }
+
+    public List<String> getRequestHeaders() {
+        return requestHeaders;
+    }
+
+    public void setRequestHeaders(List<String> requestHeaders) {
+        this.requestHeaders = requestHeaders;
     }
 
     public class ExternalStackTrace {
@@ -143,7 +177,10 @@ public class ExternalData {
                 ", dateString='" + dateString + '\'' +
                 ", requestUrl='" + requestUrl + '\'' +
                 ", queryParams='" + queryParams + '\'' +
+                ", requestMethod='" + requestMethod + '\'' +
                 ", stackTrace=" + stackTrace.stream().map(Object::toString).collect(Collectors.joining(",")) +
+                ", requestHeaders=" + requestHeaders.stream().collect(Collectors.joining(",")) +
+                ", requestParams=" + requestParams.stream().collect(Collectors.joining(",")) +
                 '}';
     }
 }

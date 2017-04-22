@@ -44,11 +44,20 @@ public class Error extends BaseEntity implements FilterData {
     @JoinColumn(name = "user_agent_data_id")
     private UserAgentData userAgent;
 
-    @Column(name = "query_params", length = 250)
+    @Column(name = "query_params", length = 750)
     private String queryParams;
 
     @Column(name = "request_url", length = 200)
     private String requestUrl;
+
+    @Column(name = "request_method", length = 50)
+    private String requestMethod;
+
+    @Column(name = "request_params", length = 1000)
+    private String requestParams;
+
+    @Column(name = "request_headers", length = 800)
+    private String requestHeaders;
 
     @ManyToOne
     @JoinColumn(name = "application_id", nullable = false)
@@ -130,6 +139,30 @@ public class Error extends BaseEntity implements FilterData {
 
     public void setRequestUrl(String requestUrl) {
         this.requestUrl = requestUrl;
+    }
+
+    public String getRequestMethod() {
+        return requestMethod;
+    }
+
+    public void setRequestMethod(String requestMethod) {
+        this.requestMethod = requestMethod;
+    }
+
+    public String getRequestParams() {
+        return requestParams;
+    }
+
+    public void setRequestParams(String requestParams) {
+        this.requestParams = requestParams;
+    }
+
+    public String getRequestHeaders() {
+        return requestHeaders;
+    }
+
+    public void setRequestHeaders(String requestHeaders) {
+        this.requestHeaders = requestHeaders;
     }
 
     public Application getApplication() {

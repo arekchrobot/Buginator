@@ -1,5 +1,6 @@
 package pl.ark.chr.buginator.data;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import pl.ark.chr.buginator.domain.Error;
 import pl.ark.chr.buginator.domain.ErrorStackTrace;
 
@@ -18,6 +19,8 @@ public class ErrorWrapper {
     private String errorStackTrace;
 
     public ErrorWrapper(Error error) {
+        error.setRequestHeaders(StringEscapeUtils.unescapeJava(error.getRequestHeaders()));
+        error.setRequestParams(StringEscapeUtils.unescapeJava(error.getRequestParams()));
         this.error = error;
         this.errorStackTrace = generateStackTraceString(error.getStackTrace());
     }

@@ -30,13 +30,13 @@ public interface ErrorRepository extends CrudRepository<Error, Long> {
             "where e.title = :title " +
             "and e.description = :description " +
             "and e.severity = :severity " +
-            "and (e.queryParams = :queryParams or e.queryParams is null) " +
+            "and (e.requestMethod = :requestMethod or e.requestMethod is null) " +
             "and (e.requestUrl = :requestUrl or e.requestUrl is null) " +
             "and e.application = :application")
     List<Error> findDuplicateError(@Param("title") String title,
                                    @Param("description") String description,
                                    @Param("severity") ErrorSeverity severity,
-                                   @Param("queryParams") String queryParams,
+                                   @Param("requestMethod") String requestMethod,
                                    @Param("requestUrl") String requestUrl,
                                    @Param("application") Application application);
 }

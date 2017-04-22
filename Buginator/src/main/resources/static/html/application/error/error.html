@@ -92,12 +92,41 @@
                 </div>
             </div>
 
+            <br ng-if="error.requestMethod"/>
+
+            <div class="form-group" ng-if="error.requestMethod">
+                <label for="errorRequestUrl" class="control-label col-lg-3" translate>ERROR_REQUEST_METHOD</label>
+                <div class="col-lg-5">
+                    <div id="errorRequestMethod" disabled type="text" class="form-control">{{error.requestMethod}}</div>
+                </div>
+            </div>
+
             <br ng-if="error.queryParams"/>
 
             <div class="form-group" ng-if="error.queryParams">
                 <label for="errorQueryParams" class="control-label col-lg-3" translate>ERROR_QUERY_PARAMS</label>
                 <div class="col-lg-5">
                     <div id="errorQueryParams" disabled type="text" class="form-control">{{error.queryParams}}</div>
+                </div>
+            </div>
+
+            <br ng-if="error.requestParams"/>
+
+            <div class="form-group" ng-if="error.requestParams">
+                <label for="errorRequestParams" class="control-label col-lg-3" translate>ERROR_REQUEST_PARAMS</label>
+                <div class="col-lg-5">
+                    <textarea id="errorRequestParams" disabled style="overflow: hidden; resize: both; min-height: 250px;"
+                              class="form-control">{{error.requestParams}}</textarea>
+                </div>
+            </div>
+
+            <br ng-if="error.requestHeaders"/>
+
+            <div class="form-group" ng-if="error.requestHeaders">
+                <label for="errorRequestHeaders" class="control-label col-lg-3" translate>ERROR_REQUEST_HEADERS</label>
+                <div class="col-lg-5">
+                    <textarea id="errorRequestHeaders" disabled style="overflow: hidden; resize: both; min-height: 250px;"
+                              class="form-control">{{error.requestHeaders}}</textarea>
                 </div>
             </div>
 

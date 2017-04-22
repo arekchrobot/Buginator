@@ -58,7 +58,7 @@ public class ErrorResolverImpl implements ErrorResolver {
         }
 
         List<Error> foundDuplicates = errorRepository.findDuplicateError(externalData.getErrorTitle(), externalData.getErrorDescription(),
-                externalData.getErrorSeverity(), externalData.getQueryParams(), externalData.getRequestUrl(), application);
+                externalData.getErrorSeverity(), externalData.getRequestMethod(), externalData.getRequestUrl(), application);
 
         if (foundDuplicates.isEmpty()) {
             return createNewError(externalData, application);
@@ -105,6 +105,15 @@ public class ErrorResolverImpl implements ErrorResolver {
             UserAgentData savedUAD = userAgentDataRepository.save(new UserAgentData(userAgentDetector.parseUserAgent(externalData.getUserAgentString())));
             error.setUserAgent(savedUAD);
         }
+        if (shouldSetField(error.getRequestParams(), externalData.getRequestParams())) {
+            error.setRequestParams(externalData.getRequestParams().stream().collect(Collectors.joining("\n")));
+        }
+        if (shouldSetField(error.getRequestHeaders(), externalData.getRequestHeaders())) {
+            error.setRequestParams(externalData.getRequestHeaders().stream().collect(Collectors.joining("\n")));
+        }
+        if(shouldSetField(error.getRequestMethod(), externalData.getRequestMethod())) {
+            error.setRequestMethod(externalData.getRequestMethod());
+        }
     }
 
     private boolean shouldSetField(String oldValue, String newValue) {
@@ -113,6 +122,10 @@ public class ErrorResolverImpl implements ErrorResolver {
 
     private boolean shouldSetField(Object oldValue, Object newValue) {
         return ValidationUtil.isNull(oldValue) && ValidationUtil.isNotNull(newValue);
+    }
+
+    private boolean shouldSetField(String oldValue, List<String> newValues) {
+        return ValidationUtil.isNull(oldValue) && ValidationUtil.isNotNull(newValues) && !newValues.isEmpty();
     }
 
     private List<ErrorStackTrace> generateStackTrace(Error error, List<ExternalData.ExternalStackTrace> extStackTraces) {

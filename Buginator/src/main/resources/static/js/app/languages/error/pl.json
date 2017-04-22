@@ -20,5 +20,8 @@
   "ERROR_STACK_TRACE": "Stos wywołań",
   "ERROR_RESOLVE": "Rozwiąż",
   "ERROR_ONGOING": "Zbadaj",
-  "ERROR_REOPEN": "Otwórz"
+  "ERROR_REOPEN": "Otwórz",
+  "ERROR_REQUEST_METHOD": "Metoda żądania",
+  "ERROR_REQUEST_PARAMS": "Parametry żądania",
+  "ERROR_REQUEST_HEADERS": "Nagłówki żądania"
 }

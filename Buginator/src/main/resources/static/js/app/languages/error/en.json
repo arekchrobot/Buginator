@@ -20,5 +20,8 @@
   "ERROR_STACK_TRACE": "Stack Trace",
   "ERROR_RESOLVE": "Resolve",
   "ERROR_ONGOING": "In progress",
-  "ERROR_REOPEN": "Reopen"
+  "ERROR_REOPEN": "Reopen",
+  "ERROR_REQUEST_METHOD": "Request method",
+  "ERROR_REQUEST_PARAMS": "Request params",
+  "ERROR_REQUEST_HEADERS": "Request headers"
 }

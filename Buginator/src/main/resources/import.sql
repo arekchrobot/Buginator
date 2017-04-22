@@ -54,24 +54,24 @@ INSERT INTO user_agent_data(version, browser, browser_family, browser_full_versi
                             operating_system_vendor, operating_system_version, country, language) VALUES
 (1, 'Firefox', 'Firefox', '40.1','Mozilla','40.1','PC','64bits','COMPUTER','(Windows)','Windows NT','Windows','Microsoft','7', 'Poland', 'PL');
 
-INSERT INTO buginator_error(version, error_count, date_time, description, last_occurence, severity, status,title, application_id, user_agent_data_id, request_url, query_params) VALUES
-(1,3,NOW()- INTERVAL '9 days','NullPointerException', NOW() - INTERVAL '9 days', 'ERROR', 'CREATED', 'Null has appeared', 1, 1, 'http://google.com/firstUrlEver', 'a=b&x=cc&acb=dcf'),
-(1,1,NOW()- INTERVAL '8 days','NullPointerException', NOW() - INTERVAL '8 days', 'ERROR', 'RESOLVED', 'Null has appeared', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'ONGOING', 'Null has appeared', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'REOPENED', 'Null has appeared', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '6 days','DataAccessException', NOW() - INTERVAL '6 days', 'ERROR', 'CREATED', 'Data Access Exception', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '4 days','DataAccessException', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'Data Access Exception', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '4 days','PermissionError', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'PermissionError', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '4 days','Null', NOW() - INTERVAL '4 days', 'WARNING', 'CREATED', 'Null', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '3 days','DatabaseError', NOW() - INTERVAL '3 days', 'CRITICAL', 'CREATED', 'Could not insert', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '3 days','DatabaseError', NOW() - INTERVAL '3 days', 'CRITICAL', 'CREATED', 'Could not insert', 1, NULL, NULL, NULL),
-(1,1,NOW(),'NullPointerException', NOW(), 'ERROR', 'CREATED', 'Null has appeared', 1, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '14 days','NullPointerException', NOW() - INTERVAL '14 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '11 days','NullPointerException', NOW() - INTERVAL '11 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '4 days','NullPointerException', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '3 days','NullPointerException', NOW() - INTERVAL '3 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL),
-(1,1,NOW()- INTERVAL '3 days','DataAccessException', NOW() - INTERVAL '3 days', 'ERROR', 'CREATED', 'Data Access Exception', 2, NULL, NULL, NULL),
-(1,1,NOW(),'DataAccessException', NOW(), 'ERROR', 'CREATED', 'Data Access Exception', 3, NULL, NULL, NULL);
+INSERT INTO buginator_error(version, error_count, date_time, description, last_occurence, severity, status,title, application_id, user_agent_data_id, request_url, query_params, request_method, request_params, request_headers) VALUES
+(1,3,NOW()- INTERVAL '9 days','NullPointerException', NOW() - INTERVAL '9 days', 'ERROR', 'CREATED', 'Null has appeared', 1, 1, 'http://google.com/firstUrlEver', 'a=b&x=cc&acb=dcf','GET',NULL,'host=api.mobl-apps.com\nx-real-ip=193.105.74.47\nx-forwarded-for=193.105.74.47\naccept-encoding=gzip,deflate'),
+(1,1,NOW()- INTERVAL '8 days','NullPointerException', NOW() - INTERVAL '8 days', 'ERROR', 'RESOLVED', 'Null has appeared', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'ONGOING', 'Null has appeared', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'REOPENED', 'Null has appeared', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '6 days','DataAccessException', NOW() - INTERVAL '6 days', 'ERROR', 'CREATED', 'Data Access Exception', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '4 days','DataAccessException', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'Data Access Exception', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '4 days','PermissionError', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'PermissionError', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '4 days','Null', NOW() - INTERVAL '4 days', 'WARNING', 'CREATED', 'Null', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '3 days','DatabaseError', NOW() - INTERVAL '3 days', 'CRITICAL', 'CREATED', 'Could not insert', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '3 days','DatabaseError', NOW() - INTERVAL '3 days', 'CRITICAL', 'CREATED', 'Could not insert', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW(),'NullPointerException', NOW(), 'ERROR', 'CREATED', 'Null has appeared', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '14 days','NullPointerException', NOW() - INTERVAL '14 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '11 days','NullPointerException', NOW() - INTERVAL '11 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '4 days','NullPointerException', NOW() - INTERVAL '4 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '3 days','NullPointerException', NOW() - INTERVAL '3 days', 'ERROR', 'CREATED', 'Null has appeared', 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW()- INTERVAL '3 days','DataAccessException', NOW() - INTERVAL '3 days', 'ERROR', 'CREATED', 'Data Access Exception', 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(1,1,NOW(),'DataAccessException', NOW(), 'ERROR', 'CREATED', 'Data Access Exception', 3, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO buginator_error_stack_trace(version, stack_trace, stack_trace_order, buginator_error_id) VALUES
 (1, 'Exception in thread "main" java.lang.NullPointerException', 1, 1),
