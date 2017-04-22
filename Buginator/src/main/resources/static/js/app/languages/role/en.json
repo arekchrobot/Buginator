@@ -25,5 +25,7 @@
   "app_modify_notification": "Modify application notifications",
   "create_application": "Create application",
   "read_application": "Show applications and errors",
-  "manage_role": "Manage roles and permissions"
+  "manage_role": "Manage roles and permissions",
+  "manage_user": "Manage users",
+  "app_show_notification_log": "Show application notification logs"
 }

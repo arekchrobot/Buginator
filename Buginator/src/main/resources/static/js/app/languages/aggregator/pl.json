@@ -22,5 +22,11 @@
   "AGGREGATOR_EMPTY_OPTION": "Wybierz typ...",
   "CREATE_AGGREGATOR_CHOOSE_TYPE_BUTTON": "Zatwierdź",
   "REMOVE_AGGREGATOR_HEADER": "Ostrzeżenie",
-  "REMOVE_AGGREGATOR_DESCRIPTION": "Czy chcesz usunąć to powiadomienie?"
+  "REMOVE_AGGREGATOR_DESCRIPTION": "Czy chcesz usunąć to powiadomienie?",
+  "AGGREGATOR_LOGS":"Logi aggregatora",
+  "AGGREGATOR_LOG_ERROR_TITLE": "Błąd",
+  "AGGREGATOR_LOG_TIMESTAMP": "Czas ostatniego powiadomienia",
+  "AGGREGATOR_LOG_STATUS": "Status",
+  "AGGREGATOR_LOG_RETRY_COUNT": "Liczba powtórzeń",
+  "AGGREGATOR_LOG_ERROR_DESCRIPTION": "Przyczyna porażki"
 }

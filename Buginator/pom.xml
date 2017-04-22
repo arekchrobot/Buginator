@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>pl.ark.chr</groupId>
+        <groupId>pl.ark.chr.buginator</groupId>
         <artifactId>BuginatorPOM</artifactId>
         <version>0.0.1</version>
     </parent>
@@ -176,7 +176,7 @@
 
         <!--Buginator dependencies-->
         <dependency>
-            <groupId>pl.ark.chr</groupId>
+            <groupId>pl.ark.chr.buginator</groupId>
             <artifactId>BuginatorDomain</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

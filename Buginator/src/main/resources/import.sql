@@ -7,6 +7,7 @@ INSERT INTO buginator_permission (version, name) VALUES (1,'app_show_notificatio
 INSERT INTO buginator_permission (version, name) VALUES (1,'app_modify_notification');
 INSERT INTO buginator_permission (version, name) VALUES (1,'manage_role');
 INSERT INTO buginator_permission (version, name) VALUES (1,'manage_user');
+INSERT INTO buginator_permission (version, name) VALUES (1,'app_show_notification_log');
 
 INSERT INTO buginator_role (version, name) VALUES (1,'Company Manager');
 
@@ -17,6 +18,7 @@ INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,4);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,5);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,6);
 INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,7);
+INSERT INTO buginator_role_permission (role_id, permission_id) VALUES (1,8);
 
 INSERT INTO company(version, address, expiry_date, name, token, unique_key, user_limit,payment_option_id) VALUES
 (1,'Test address', NOW() + INTERVAL '30 days','Test Company', 'Xqg5ueAkyuwLM6bVFR16vuThX83flR','lSFdQB4rQ79ydSt4C05qjFTmNHMnMi',5,1),

@@ -22,5 +22,11 @@
   "AGGREGATOR_EMPTY_OPTION": "Choose type...",
   "CREATE_AGGREGATOR_CHOOSE_TYPE_BUTTON": "Confirm",
   "REMOVE_AGGREGATOR_HEADER": "Warning",
-  "REMOVE_AGGREGATOR_DESCRIPTION": "Do you want to remove this notification?"
+  "REMOVE_AGGREGATOR_DESCRIPTION": "Do you want to remove this notification?",
+  "AGGREGATOR_LOGS":"Aggregator Logs",
+  "AGGREGATOR_LOG_ERROR_TITLE": "Error",
+  "AGGREGATOR_LOG_TIMESTAMP": "Last notification timestamp",
+  "AGGREGATOR_LOG_STATUS": "Status",
+  "AGGREGATOR_LOG_RETRY_COUNT": "Retry counts",
+  "AGGREGATOR_LOG_ERROR_DESCRIPTION": "Failure cause"
 }

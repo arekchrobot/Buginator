@@ -6,7 +6,7 @@
 
     <parent>
         <artifactId>BuginatorPOM</artifactId>
-        <groupId>pl.ark.chr</groupId>
+        <groupId>pl.ark.chr.buginator</groupId>
         <version>0.0.1</version>
     </parent>
 

@@ -63,7 +63,7 @@ public class ExternalDataServiceImpl implements ExternalDataService {
 
         Error error = errorResolver.resolveError(externalData, application);
 
-        List<Aggregator> aggregators = aggregatorRepository.findByApplicationAndSeverityAndCount(application, error.getSeverity(), error.getCount());
+        List<Aggregator> aggregators = aggregatorRepository.findByApplicationAndErrorSeverityAndCount(application, error.getSeverity(), error.getCount());
 
         aggregators.forEach(aggregator -> launchSingleNotification(aggregator, error));
     }

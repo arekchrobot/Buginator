@@ -25,5 +25,7 @@
   "app_modify_notification": "Zarządzanie powiadomieniami aplikacji",
   "create_application": "Tworzenie aplikacji",
   "read_application": "Wyświetlanie aplikacji i błędów",
-  "manage_role": "Zarządzanie rolami i uprawnieniami"
+  "manage_role": "Zarządzanie rolami i uprawnieniami",
+  "manage_user": "Zarządzanie użytkownikami",
+  "app_show_notification_log": "Wyświetlanie logów powiadomień aplikacji"
 }

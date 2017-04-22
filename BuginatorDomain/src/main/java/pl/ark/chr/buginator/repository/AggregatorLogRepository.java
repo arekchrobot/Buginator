@@ -1,6 +1,7 @@
 package pl.ark.chr.buginator.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import pl.ark.chr.buginator.domain.Aggregator;
 import pl.ark.chr.buginator.domain.AggregatorLog;
 import pl.ark.chr.buginator.domain.Error;
 import pl.ark.chr.buginator.domain.enums.AggregatorLogStatus;
@@ -14,4 +15,5 @@ public interface AggregatorLogRepository extends CrudRepository<AggregatorLog, L
 
     List<AggregatorLog> findByStatus(AggregatorLogStatus status);
     List<AggregatorLog> findByErrorIn(List<Error> errors);
+    List<AggregatorLog> findByAggregator(Aggregator aggregator);
 }

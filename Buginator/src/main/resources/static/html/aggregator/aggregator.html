@@ -70,4 +70,47 @@
             </ANY>
         </div>
     </div>
+    <div id="collapse4" class="body">
+        <div id="dataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped"
+                   st-safe-src="aggregatorLogs" st-table="displayedLogs">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="lead" translate>AGGREGATOR_LOGS</p>
+                    </div>
+                </div>
+                <thead>
+                <tr>
+                    <th translate>AGGREGATOR_LOG_ERROR_TITLE</th>
+                    <th translate>AGGREGATOR_LOG_TIMESTAMP</th>
+                    <th translate>AGGREGATOR_LOG_STATUS</th>
+                    <th translate>AGGREGATOR_LOG_RETRY_COUNT</th>
+                    <th translate>AGGREGATOR_LOG_ERROR_DESCRIPTION</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="aggregatorLog in displayedLogs">
+                    <td>{{aggregatorLog.error.title}}</td>
+                    <td>{{aggregatorLog.timestamp | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{aggregatorLog.status}}</td>
+                    <td>{{aggregatorLog.retryCount}}</td>
+                    <td>{{aggregatorLog.errorDescription}}</td>
+                    <td>
+                        <button class="btn btn-info" translate ng-redirect-to-url={{"/application/"+appId+"/error/"+aggregatorLog.error.id}}>
+                            ERROR_INFO_BUTTON
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="7" class="text-center">
+                        <div st-pagination="" st-items-by-page="5" st-displayed-pages="7"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 </div>

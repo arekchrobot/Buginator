@@ -47,6 +47,7 @@ angular.module("buginator", [
     "buginator.applicationManageUsersController",
 
     "buginator.aggregatorServices",
+    "buginator.aggregatorLogServices",
     "buginator.aggregatorsController",
     "buginator.detailsAggregatorController",
     "buginator.editAggregatorController",

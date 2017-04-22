@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface AggregatorRepository extends AbstractAggregatorRepository<Aggregator> {
 
-    List<Aggregator> findByApplicationAndSeverityAndCount(Application application, ErrorSeverity errorSeverity, int count);
+    List<Aggregator> findByApplicationAndErrorSeverityAndCount(Application application, ErrorSeverity errorSeverity, int count);
 }
