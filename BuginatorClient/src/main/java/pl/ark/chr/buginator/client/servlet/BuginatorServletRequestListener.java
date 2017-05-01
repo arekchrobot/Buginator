@@ -18,14 +18,14 @@ public class BuginatorServletRequestListener implements ServletRequestListener {
 
     @Override
     public void requestDestroyed(ServletRequestEvent servletRequestEvent) {
-        ServletRequest servletRequest = servletRequestEvent.getServletRequest();
-        if (servletRequest instanceof HttpServletRequest) {
-            httpServletRequest.set((HttpServletRequest) servletRequest);
-        }
+        httpServletRequest.remove();
     }
 
     @Override
     public void requestInitialized(ServletRequestEvent servletRequestEvent) {
-        httpServletRequest.remove();
+        ServletRequest servletRequest = servletRequestEvent.getServletRequest();
+        if (servletRequest instanceof HttpServletRequest) {
+            httpServletRequest.set((HttpServletRequest) servletRequest);
+        }
     }
 }

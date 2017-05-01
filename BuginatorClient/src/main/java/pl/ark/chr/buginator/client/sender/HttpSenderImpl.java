@@ -16,7 +16,8 @@ public class HttpSenderImpl implements HttpSender {
     private static final Logger logger = LoggerFactory.getLogger(HttpSenderImpl.class);
 
     protected final static String DEFAULT_ENDPOINT_SUFFIX = "/ext/notify/";
-    protected final static String DEFAULT_ENDPOINT_PREFIX = "http://api.buginator.com";
+//    protected final static String DEFAULT_ENDPOINT_PREFIX = "http://api.buginator.com";
+    protected final static String DEFAULT_ENDPOINT_PREFIX = "https://localhost:8443";
     protected final static int DEFAULT_TIMEOUT = 5000;
 
     protected String endpoint = DEFAULT_ENDPOINT_PREFIX + DEFAULT_ENDPOINT_SUFFIX;
@@ -74,7 +75,7 @@ public class HttpSenderImpl implements HttpSender {
 
     @Override
     public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint + DEFAULT_ENDPOINT_SUFFIX;
+        this.endpoint = endpoint;
     }
 
     @Override

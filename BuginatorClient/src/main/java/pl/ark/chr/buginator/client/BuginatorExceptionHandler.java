@@ -16,7 +16,7 @@ class BuginatorExceptionHandler implements UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread thread, Throwable exception) {
-        client.sendNotification(exception);
+        client.sendNotification(exception, thread);
 
         if(originalHandler != null) {
             originalHandler.uncaughtException(thread, exception);
