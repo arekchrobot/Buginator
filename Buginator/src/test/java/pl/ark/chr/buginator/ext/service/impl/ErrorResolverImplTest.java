@@ -278,12 +278,12 @@ public class ErrorResolverImplTest {
     }
 
     private List<ExternalData.ExternalStackTrace> createStackTrace() {
-        ExternalData.ExternalStackTrace externalStackTrace = new ExternalData().new ExternalStackTrace();
+        ExternalData.ExternalStackTrace externalStackTrace = new ExternalData.ExternalStackTrace();
 
         externalStackTrace.setDescription("Test stack trace 1");
         externalStackTrace.setOrder(1);
 
-        ExternalData.ExternalStackTrace externalStackTrace2 = new ExternalData().new ExternalStackTrace();
+        ExternalData.ExternalStackTrace externalStackTrace2 = new ExternalData.ExternalStackTrace();
 
         externalStackTrace2.setDescription("Test stack trace 2");
         externalStackTrace2.setOrder(2);

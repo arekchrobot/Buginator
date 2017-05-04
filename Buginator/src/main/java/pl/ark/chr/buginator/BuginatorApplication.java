@@ -9,16 +9,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import pl.ark.chr.buginator.websocket.NotificationEndpoint;
 
 import java.util.concurrent.*;
 
@@ -86,24 +83,4 @@ public class BuginatorApplication {
     public static void main(String[] args) {
         SpringApplication.run(BuginatorApplication.class, args);
     }
-
-//    public static void main(String[] args) {
-//
-//        ConfigurableApplicationContext run = SpringApplication.run(BuginatorApplication.class, args);
-//
-//        SimpMessagingTemplate simpMessagingTemplate = run.getBean(SimpMessagingTemplate.class);
-//
-//        NotificationEndpoint endpoint = new NotificationEndpoint();
-//
-//        ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
-//        ses.scheduleAtFixedRate(() -> {
-//            System.out.println("Broadcasting");
-//            try {
-//                simpMessagingTemplate.convertAndSend("/topic/notification/User1", endpoint.sendNotification("token is cringy"));
-//            } catch (Exception ex) {
-//                System.out.println("Error: " + ex.getMessage());
-//                ex.printStackTrace();
-//            }
-//        }, 0, 3, TimeUnit.SECONDS);
-//    }
 }

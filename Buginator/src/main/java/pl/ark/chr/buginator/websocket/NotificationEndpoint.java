@@ -11,6 +11,7 @@ import pl.ark.chr.buginator.data.NotificationData;
 import pl.ark.chr.buginator.exceptions.TokenNotActiveException;
 import pl.ark.chr.buginator.service.NotificationService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,17 +22,19 @@ public class NotificationEndpoint {
 
     private static final Logger logger = LoggerFactory.getLogger(NotificationEndpoint.class);
 
+    public static final String TOPIC_NOTIFICATION_URL = "/topic/notification/";
+
     @Autowired
     private NotificationService notificationService;
 
     @MessageMapping("/notification/send/{token}")
-    @SendTo("/topic/notification/{token}")
+    @SendTo(TOPIC_NOTIFICATION_URL + "{token}")
     public List<NotificationData> sendNotification(@DestinationVariable String token) {
         if (notificationService.checkTokenActivated(token)) {
             logger.info("Returning all notifications for token: " + token);
             return notificationService.getNotificationsForUser(token);
         } else {
-            throw new TokenNotActiveException("Your token is not active");
+            return new ArrayList<>();
         }
     }
 }

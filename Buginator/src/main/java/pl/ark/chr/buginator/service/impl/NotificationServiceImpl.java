@@ -13,6 +13,7 @@ import pl.ark.chr.buginator.exceptions.TokenNotExistException;
 import pl.ark.chr.buginator.repository.NotificationRepository;
 import pl.ark.chr.buginator.repository.UserRepository;
 import pl.ark.chr.buginator.service.NotificationService;
+import pl.ark.chr.buginator.util.TokenGenerator;
 
 import java.util.Base64;
 import java.util.HashMap;
@@ -48,7 +49,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<NotificationData> getNotificationsForUser(String token) {
-        String decodedToken = decode(token);
+        String decodedToken = TokenGenerator.decode(token);
         String userEmail = decodedToken.split(TOKEN_SPLITTER)[0];
         User user = userRepository.findByEmail(userEmail).get();
 
@@ -70,7 +71,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public String addTokenForActiveSession(User user) {
-        String token = generateToken(user);
+        String token = TokenGenerator.generateToken(user);
 
         try {
             writeLock.lock();
@@ -124,24 +125,26 @@ public class NotificationServiceImpl implements NotificationService {
         }
 
         if(tokenActivated == null) {
-            throw new TokenNotExistException("No token is registered: " + token);
+            logger.warn("No token is registered: " + token);
+            return false;
+//            throw new TokenNotExistException("No token is registered: " + token);
         }
         return tokenActivated;
     }
 
-    private String generateToken(User user) {
-        String rawToken = user.getEmail() + TOKEN_SPLITTER + user.getCompany().getId();
-        return encode(rawToken);
-    }
-
-    private String encode(String rawToken) {
-        return Base64.getEncoder().encodeToString(
-                Base64.getEncoder().encode(rawToken.getBytes()));
-    }
-
-    private String decode(String encodedToken) {
-        byte[] encodedBytes = Base64.getDecoder().decode(
-                Base64.getDecoder().decode(encodedToken));
-        return new String(encodedBytes);
-    }
+//    private String generateToken(User user) {
+//        String rawToken = user.getEmail() + TOKEN_SPLITTER + user.getCompany().getId();
+//        return encode(rawToken);
+//    }
+//
+//    private String encode(String rawToken) {
+//        return Base64.getEncoder().encodeToString(
+//                Base64.getEncoder().encode(rawToken.getBytes()));
+//    }
+//
+//    private String decode(String encodedToken) {
+//        byte[] encodedBytes = Base64.getDecoder().decode(
+//                Base64.getDecoder().decode(encodedToken));
+//        return new String(encodedBytes);
+//    }
 }

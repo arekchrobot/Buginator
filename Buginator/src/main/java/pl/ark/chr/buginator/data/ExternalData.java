@@ -136,7 +136,7 @@ public class ExternalData {
         this.requestHeaders = requestHeaders;
     }
 
-    public class ExternalStackTrace {
+    public static class ExternalStackTrace {
         private int order;
         private String description;
 

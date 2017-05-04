@@ -15,6 +15,7 @@ import pl.ark.chr.buginator.domain.enums.AggregatorLogStatus;
 import pl.ark.chr.buginator.ext.service.ApplicationResolver;
 import pl.ark.chr.buginator.ext.service.ErrorResolver;
 import pl.ark.chr.buginator.ext.service.ExternalDataService;
+import pl.ark.chr.buginator.ext.service.NotificationSender;
 import pl.ark.chr.buginator.repository.*;
 import pl.ark.chr.buginator.util.ValidationUtil;
 
@@ -50,6 +51,9 @@ public class ExternalDataServiceImpl implements ExternalDataService {
     private AggregatorLogRepository aggregatorLogRepository;
 
     @Autowired
+    private NotificationSender notificationSender;
+
+    @Autowired
     private ApplicationContext applicationContext;
 
     @Override
@@ -62,6 +66,8 @@ public class ExternalDataServiceImpl implements ExternalDataService {
         Application application = applicationResolver.resolveApplication(uniqueKey, token, externalData.getApplicationName());
 
         Error error = errorResolver.resolveError(externalData, application);
+
+        notificationSender.createAndSendNotifications(error, application);
 
         List<Aggregator> aggregators = aggregatorRepository.findByApplicationAndErrorSeverityAndCount(application, error.getSeverity(), error.getCount());
 
