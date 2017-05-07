@@ -74,4 +74,9 @@ public class AsyncHttpSenderImpl implements HttpSender {
     public void setTimeout(int timeout) {
         baseSender.setTimeout(timeout);
     }
+
+    @Override
+    public void setTrustAllSsl(boolean trustAllSsl) {
+        baseSender.setTrustAllSsl(trustAllSsl);
+    }
 }

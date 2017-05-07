@@ -36,7 +36,7 @@ public class ChartController {
 
     @GET("/applicationLastWeek/{id}")
     public ChartData generateLastWeekErrorChartForApplication(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        logger.info("Getting last week error count for application: " + id + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting last week error count for application: " + id + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         try {
             return chartService.generateLastWeekErrorsForApplication(id, sessionUtil.getCurrentUser(request).getUserApplications());

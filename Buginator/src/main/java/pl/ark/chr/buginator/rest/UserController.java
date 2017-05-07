@@ -38,21 +38,21 @@ public class UserController {
 
     @GET("/")
     public List<User> getAll(HttpServletRequest request, HttpServletResponse response) throws RestException {
-        logger.info("Getting all users with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting all users with user: " + sessionUtil.getCurrentUserEmail(request));
 
         return userService.getAllByCompany(sessionUtil.getCurrentUser(request).getCompany());
     }
 
     @GET("/{email}")
     public User get(@PathVariable("email") String email, HttpServletRequest request, HttpServletResponse response, Locale locale) throws RestException {
-        logger.info("Getting user with email: " + email + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting user with email: " + email + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         return userService.loadUserByEmail(email, locale);
     }
 
     @POST("/")
     public User save(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws RestException {
-        logger.info("Saving user with id: " + user.getId() + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Saving user with id: " + user.getId() + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         try {
             return userService.save(user, sessionUtil.getCurrentUser(request).getCompany());
@@ -64,9 +64,9 @@ public class UserController {
     @PUT("/{email}/{active}")
     public void activateDeactivate(@PathVariable("email") String email, @PathVariable("active") boolean active,HttpServletRequest request, HttpServletResponse response) throws RestException {
         if(active) {
-            logger.info("Activating user with email: " + email + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+            logger.info("Activating user with email: " + email + " with user: " + sessionUtil.getCurrentUserEmail(request));
         } else {
-            logger.info("Deactivating user with email: " + email + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+            logger.info("Deactivating user with email: " + email + " with user: " + sessionUtil.getCurrentUserEmail(request));
         }
 
         userService.activateDeactivateAccount(email, sessionUtil.getCurrentUser(request).getCompany(), active);

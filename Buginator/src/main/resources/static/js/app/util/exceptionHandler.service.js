@@ -1,15 +1,18 @@
 angular.module('buginator.exceptionHandler', [])
-    .factory('exceptionHandler', function ($state, $rootScope, $translate, ngDialog) {
+    .factory('exceptionHandler', function ($state, $rootScope, $window, $translate, ngDialog) {
         var service = {};
 
         service.handleRestError = function (error) {
             if (error.status !== undefined && error.status === 401) {
-                //$rootScope.user = null;
                 var data = {};
                 data.status = error.status;
                 data.description = $translate.instant("UNAUTHORIZED_ACCESS");
                 ngDialog.open({template: "html/error/error.html", data: data});
-                if ($rootScope.user == null) {
+                if ($rootScope.user == null || $rootScope.user == undefined || $rootScope.user == "") {
+                    if(!$window.location.href.includes("login")) {
+                        console.log($window.location.href);
+                        $rootScope.originUrl = $window.location.href;
+                    }
                     $state.go("login");
                 }
             } else if(error.status !== undefined && error.status === 403) {

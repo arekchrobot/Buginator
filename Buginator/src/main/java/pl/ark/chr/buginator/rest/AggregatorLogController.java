@@ -30,7 +30,7 @@ public class AggregatorLogController {
 
     @GET("/{id}")
     public List<AggregatorLog> getAllByAggregator(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        logger.info("Getting all aggregator logs for aggregator: " + id + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting all aggregator logs for aggregator: " + id + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         return aggregatorLogService.getAllByAggregator(id, sessionUtil.getCurrentUser(request).getUserApplications());
     }

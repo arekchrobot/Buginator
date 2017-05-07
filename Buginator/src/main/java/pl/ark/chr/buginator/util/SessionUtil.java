@@ -17,6 +17,11 @@ public class SessionUtil {
         return (UserWrapper) request.getSession().getAttribute(USER_KEY);
     }
 
+    public String getCurrentUserEmail(HttpServletRequest request) {
+        UserWrapper currentUser = getCurrentUser(request);
+        return currentUser != null ? currentUser.getEmail() : "";
+    }
+
     public void setCurrentUser(HttpServletRequest request, UserWrapper currentUser) {
         request.getSession().setAttribute(USER_KEY, currentUser);
     }

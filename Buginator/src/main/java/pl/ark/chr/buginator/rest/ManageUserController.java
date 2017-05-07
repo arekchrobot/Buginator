@@ -40,14 +40,14 @@ public class ManageUserController {
 
     @GET("/byApplication/{id}")
     public List<ManageUserData> getUsersByApplication(@PathVariable("id") Long appId, HttpServletRequest request) throws RestException {
-        logger.info("Getting all users with access to application: " + appId + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting all users with access to application: " + appId + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         return manageUserService.getAllApplicationUsers(appId, sessionUtil.getCurrentUser(request).getUserApplications());
     }
 
     @GET("/byApplicationNot/{id}")
     public List<ManageUserData> getUsersByApplicationNot(@PathVariable("id") Long appId, HttpServletRequest request) throws RestException {
-        logger.info("Getting all users with no access to application: " + appId + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting all users with no access to application: " + appId + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         return manageUserService.getAllUsersNotInApplication(appId, sessionUtil.getCurrentUser(request));
     }

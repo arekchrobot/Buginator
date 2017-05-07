@@ -39,50 +39,50 @@ public class RoleController {
 
     @GET("/")
     public List<Role> getAll(HttpServletRequest request, HttpServletResponse response) throws RestException {
-        logger.info("Getting all roles with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting all roles with user: " + sessionUtil.getCurrentUserEmail(request));
 
         return roleService.getAll(sessionUtil.getCurrentUser(request).getCompany());
     }
 
     @GET("/{id}")
     public Role get(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws RestException {
-        logger.info("Get role with id: " + id + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Get role with id: " + id + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         try {
             return roleService.get(id, sessionUtil.getCurrentUser(request).getCompany());
         } catch (ValidationException ex) {
-            logger.warn("Unauthorized access to role: " + id + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+            logger.warn("Unauthorized access to role: " + id + " with user: " + sessionUtil.getCurrentUserEmail(request));
             throw new RestException(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, HttpUtil.generateOriginalUrl(request));
         }
     }
 
     @GET("/perms/all")
     public List<Permission> getAllPermissions(HttpServletRequest request, HttpServletResponse response) throws RestException {
-        logger.info("Get all permissions with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Get all permissions with user: " + sessionUtil.getCurrentUserEmail(request));
 
         return roleService.getAllPermissions();
     }
 
     @POST("/")
     public Role save(@RequestBody Role role, HttpServletRequest request, HttpServletResponse response) throws RestException {
-        logger.info("Saving role with id: " + role.getId() + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Saving role with id: " + role.getId() + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         try {
             return roleService.save(role, sessionUtil.getCurrentUser(request).getCompany());
         } catch (ValidationException ex) {
-            logger.warn("Unauthorized save of role: " + role.getId() + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+            logger.warn("Unauthorized save of role: " + role.getId() + " with user: " + sessionUtil.getCurrentUserEmail(request));
             throw new RestException(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, HttpUtil.generateOriginalUrl(request), role);
         }
     }
 
     @DELETE("/{id}")
     public void delete(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws RestException {
-        logger.info("Deleting role with id: " + id + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Deleting role with id: " + id + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         try {
             roleService.delete(id, sessionUtil.getCurrentUser(request).getCompany());
         } catch (ValidationException ex) {
-            logger.warn("Unauthorized remove of role: " + id + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+            logger.warn("Unauthorized remove of role: " + id + " with user: " + sessionUtil.getCurrentUserEmail(request));
             throw new RestException(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, HttpUtil.generateOriginalUrl(request));
         }
     }

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import pl.ark.chr.buginator.data.UserWrapper;
 import pl.ark.chr.buginator.domain.BaseEntity;
 import pl.ark.chr.buginator.domain.UserApplication;
 import pl.ark.chr.buginator.domain.filter.FilterData;
@@ -17,6 +18,7 @@ import pl.ark.chr.buginator.util.SessionUtil;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.ParameterizedType;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,29 +43,31 @@ public abstract class RestrictedAccessRestController<T extends BaseEntity & Filt
 
     @GET("/byApplication/{id}")
     public List<T> getAllByApplication(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        logger.info("Getting all " + className + " by application with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        logger.info("Getting all " + className + " by application with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUserEmail(request));
         return getService().getAllByApplication(id, getUserApplications(request));
     }
 
     @GET("/{id}")
     public T get(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUserEmail(request));
         return getService().get(id, getUserApplications(request));
     }
 
     @POST("/")
     public T save(@RequestBody T entity, HttpServletRequest request) throws RestException {
-        logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUserEmail(request));
         return getService().save(entity, getUserApplications(request));
     }
 
     @DELETE("/{id}")
     public void delete(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        logger.info("Deleting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        logger.info("Deleting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUserEmail(request));
         getService().delete(id, getUserApplications(request));
     }
 
     protected Set<UserApplication> getUserApplications(HttpServletRequest request) {
-        return getHttpSessionUtil().getCurrentUser(request).getUserApplications();
+        UserWrapper currentUser = getHttpSessionUtil().getCurrentUser(request);
+        return currentUser != null ? currentUser.getUserApplications() : new HashSet<>();
+//        return getHttpSessionUtil().getCurrentUser(request).getUserApplications();
     }
 }

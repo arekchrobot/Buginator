@@ -20,27 +20,25 @@ public class HttpSenderImpl implements HttpSender {
     private static final Logger logger = LoggerFactory.getLogger(HttpSenderImpl.class);
 
     protected final static String DEFAULT_ENDPOINT_SUFFIX = "/ext/notify/";
-//    protected final static String DEFAULT_ENDPOINT_PREFIX = "http://api.buginator.com";
-    protected final static String DEFAULT_ENDPOINT_PREFIX = "https://127.0.0.1:8443";
+    //    protected final static String DEFAULT_ENDPOINT_PREFIX = "http://api.buginator.com";
+    protected final static String DEFAULT_ENDPOINT_PREFIX = "http://127.0.0.1:8080";
     protected final static int DEFAULT_TIMEOUT = 5000;
 
     protected String endpoint = DEFAULT_ENDPOINT_PREFIX + DEFAULT_ENDPOINT_SUFFIX;
     protected int timeout = DEFAULT_TIMEOUT;
-
-    static {
-        disableSslVerification();
-    }
+    protected boolean trustAllSsl = false;
 
     private static void disableSslVerification() {
-        try
-        {
+        try {
             // Create a trust manager that does not validate certificate chains
-            TrustManager[] trustAllCerts = new TrustManager[] {new X509TrustManager() {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
                 public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
+
                 public void checkClientTrusted(X509Certificate[] certs, String authType) {
                 }
+
                 public void checkServerTrusted(X509Certificate[] certs, String authType) {
                 }
             }
@@ -91,7 +89,7 @@ public class HttpSenderImpl implements HttpSender {
                     if (outputStream != null) {
                         outputStream.close();
                     }
-                } catch(IOException e) {
+                } catch (IOException e) {
                     //Not needed, just in case not to break result of response
                 }
             }
@@ -99,7 +97,7 @@ public class HttpSenderImpl implements HttpSender {
             int status = connection.getResponseCode();
             String responseMessage = connection.getResponseMessage();
 
-            if(status != 200) {
+            if (status != 200) {
                 logger.warn("Error not send to Buginator. Response status: {}", status);
             } else if (responseMessage == null || responseMessage.equals("ERROR")) {
                 logger.warn("Error not send to Buginator. Response message: {}", responseMessage);
@@ -125,5 +123,13 @@ public class HttpSenderImpl implements HttpSender {
     @Override
     public void setTimeout(int timeout) {
         this.timeout = timeout;
+    }
+
+    @Override
+    public void setTrustAllSsl(boolean trustAllSsl) {
+        this.trustAllSsl = trustAllSsl;
+        if(trustAllSsl) {
+            disableSslVerification();
+        }
     }
 }

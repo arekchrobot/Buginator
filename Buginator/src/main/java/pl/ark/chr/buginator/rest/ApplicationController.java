@@ -44,14 +44,14 @@ public class ApplicationController extends RestrictedAccessRestController<Applic
 
     @GET("/")
     public List<Application> getAll(HttpServletRequest request) throws RestException {
-        logger.info("Getting all applications for user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        logger.info("Getting all applications for user: " + getHttpSessionUtil().getCurrentUserEmail(request));
         return applicationService.getUserApplications(getHttpSessionUtil().getCurrentUser(request));
     }
 
     @Override
     @POST("/")
     public Application save(@RequestBody Application entity, HttpServletRequest request) throws RestException {
-        logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        logger.info("Saving " + className + " with id: " + entity.getId() + " with user: " + getHttpSessionUtil().getCurrentUserEmail(request));
 
         UserWrapper userWrapper = getHttpSessionUtil().getCurrentUser(request);
         UserApplication newUserApplication = applicationService.save(entity, userWrapper);

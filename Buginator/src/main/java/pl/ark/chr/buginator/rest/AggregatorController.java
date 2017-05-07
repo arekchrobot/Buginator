@@ -30,37 +30,37 @@ public class AggregatorController {
 
     @GET("/byApplication/{id}")
     public List<AggregatorData> getAllByApplication(@PathVariable("id") Long appId, HttpServletRequest request) throws RestException, ClassNotFoundException {
-        logger.info("Getting all aggregators for application: " + appId + " for user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting all aggregators for application: " + appId + " for user: " + sessionUtil.getCurrentUserEmail(request));
         return aggregatorService.getAllAggregatorsForApplication(appId, sessionUtil.getCurrentUser(request));
     }
 
     @GET("/{id}")
     public AggregatorData get(@PathVariable("id") Long aggregatorId, HttpServletRequest request) throws RestException, ClassNotFoundException {
-        logger.info("Getting aggregator with id: " + aggregatorId + " for user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Getting aggregator with id: " + aggregatorId + " for user: " + sessionUtil.getCurrentUserEmail(request));
         return aggregatorService.getAggregator(aggregatorId, sessionUtil.getCurrentUser(request));
     }
 
     @GET("/empty/{type}")
     public AggregatorData getEmpty(@PathVariable("type") String aggregatorType, HttpServletRequest request) throws RestException, ClassNotFoundException {
-        logger.info("Creating empty aggregator with type: " + aggregatorType + " for user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Creating empty aggregator with type: " + aggregatorType + " for user: " + sessionUtil.getCurrentUserEmail(request));
         return aggregatorService.getEmptyAggregator(aggregatorType);
     }
 
     @POST("/")
     public AggregatorData save(@RequestBody AggregatorData aggregatorData, HttpServletRequest request) throws RestException, ClassNotFoundException {
-        logger.info("Creating new aggregator with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Creating new aggregator with user: " + sessionUtil.getCurrentUserEmail(request));
         return aggregatorService.saveNewAggregator(aggregatorData, sessionUtil.getCurrentUser(request));
     }
 
     @PUT("/")
     public AggregatorData update(@RequestBody AggregatorData aggregatorData, HttpServletRequest request) throws RestException, ClassNotFoundException {
-        logger.info("Updating aggregator with id: " + aggregatorData.getAggregator().getId() + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Updating aggregator with id: " + aggregatorData.getAggregator().getId() + " with user: " + sessionUtil.getCurrentUserEmail(request));
         return aggregatorService.updateAggregator(aggregatorData, sessionUtil.getCurrentUser(request));
     }
 
     @DELETE("/{id}")
     public void delete(@PathVariable("id") Long aggregatorId, HttpServletRequest request) throws RestException, ClassNotFoundException {
-        logger.info("Deleting aggregator with id: " + aggregatorId + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Deleting aggregator with id: " + aggregatorId + " with user: " + sessionUtil.getCurrentUserEmail(request));
         aggregatorService.removeAggregator(aggregatorId, sessionUtil.getCurrentUser(request));
     }
 }

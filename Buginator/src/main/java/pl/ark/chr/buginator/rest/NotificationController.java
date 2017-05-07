@@ -35,7 +35,7 @@ public class NotificationController {
 
     @DELETE("/{id}")
     public void markNotificationSeen(HttpServletRequest request, HttpServletResponse response, Locale locale, @PathVariable("id") Long id) throws RestException {
-        logger.info("Deleting notification with id: " + id + " with user: " + sessionUtil.getCurrentUser(request).getEmail());
+        logger.info("Deleting notification with id: " + id + " with user: " + sessionUtil.getCurrentUserEmail(request));
 
         notificationService.removeNotification(id);
     }
@@ -47,7 +47,7 @@ public class NotificationController {
         logger.info("Marking notifications with ids: " + notifications.stream()
                 .map(notificationData -> notificationData.getId().toString())
                 .collect(Collectors.joining(","))
-                + " seen with user: " + sessionUtil.getCurrentUser(request).getEmail());
+                + " seen with user: " + sessionUtil.getCurrentUserEmail(request));
 
         notificationService.removeNotifications(notifications);
     }

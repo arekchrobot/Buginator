@@ -13,13 +13,20 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
                 $scope.loginError = false;
                 $rootScope.user.perms = authService.createPermissions($rootScope.user);
                 $scope.credentials = {};
-                $state.go("dashboard")
-                    .then(function(){
-                        //TODO: implement better approach to refresh scope view
-                        $timeout(function() {
-                            window.location.reload();
-                        }, 0);
-                });
+                if($rootScope.originUrl != null) {
+                    var newHref = $rootScope.originUrl;
+                    $rootScope.originUrl = null;
+                    $window.location.replace(newHref);
+                    $window.location.reload();
+                } else {
+                    $state.go("dashboard")
+                        .then(function () {
+                            //TODO: implement better approach to refresh scope view
+                            $timeout(function () {
+                                window.location.reload();
+                            }, 0);
+                        });
+                }
             }, function (returnedData) {
                 authService.loginError($scope);
             });

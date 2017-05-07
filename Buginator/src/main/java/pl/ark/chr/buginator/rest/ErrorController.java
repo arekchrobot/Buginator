@@ -47,7 +47,7 @@ public class ErrorController extends RestrictedAccessRestController<Error> {
 
     @GET("/{id}")
     public ErrorWrapper getOne(@PathVariable("id") Long id, HttpServletRequest request) throws RestException {
-        logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUser(request).getEmail());
+        logger.info("Getting " + className + " with id: " + id + " with user: " + getHttpSessionUtil().getCurrentUserEmail(request));
         Error entity = getService().get(id, getUserApplications(request));
 
         return new ErrorWrapper(entity);

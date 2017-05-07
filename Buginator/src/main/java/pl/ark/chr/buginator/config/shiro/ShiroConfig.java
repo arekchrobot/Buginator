@@ -33,16 +33,15 @@ public class ShiroConfig {
         filterChainDefinitionMapping.put("/auth/login", "anon");
         filterChainDefinitionMapping.put("/auth/logout", "authc");
         filterChainDefinitionMapping.put("/application/**", "http[GET=read_application,POST=create_application,DELETE=http_method_not_allowed]");
-        filterChainDefinitionMapping.put("/error/**", "http[GET=read_application,POST=read_application]");
+        filterChainDefinitionMapping.put("/error/**", "http[GET=read_application,POST=read_application,DELETE=http_method_not_allowed]");
         filterChainDefinitionMapping.put("/manageUser/**", "http[GET=app_manage_users,POST=app_manage_users,PUT=app_manage_users,DELETE=app_manage_users]");
         filterChainDefinitionMapping.put("/aggregator/**", "http[GET=app_show_notification,POST=app_modify_notification,PUT=app_modify_notification,DELETE=app_modify_notification]");
         filterChainDefinitionMapping.put("/notification/**", "authc");
         filterChainDefinitionMapping.put("/chart/**", "authc");
-        filterChainDefinitionMapping.put("/role/**", "http[GET=manage_role,POST=manage_role, DELETE=manage_role]");
-        filterChainDefinitionMapping.put("/user/**", "http[GET=manage_user;manage_role,POST=manage_user;manage_role, PUT=manage_user;manage_role]");
+        filterChainDefinitionMapping.put("/role/**", "http[GET=manage_role,POST=manage_role,DELETE=manage_role]");
+        filterChainDefinitionMapping.put("/user/**", "http[GET=manage_user;manage_role,POST=manage_user;manage_role,PUT=manage_user;manage_role]");
         filterChainDefinitionMapping.put("/ext/notify/**", "anon");
         filterChainDefinitionMapping.put("/aggregatorLog/**", "http[GET=app_show_notification_log]");
-        filterChainDefinitionMapping.put("/**", "anon");
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
 
         Map<String, Filter> filters = new HashMap<>();
