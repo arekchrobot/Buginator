@@ -28,6 +28,11 @@ angular.module('buginator.exceptionHandler', [])
             }
         };
 
+        service.handleSubRestError = function(error) {
+            //subsequent access is needed when user is not permitted to see some part of the page
+            //example: user can see aggregator but not aggregator logs
+        };
+
         service.handleManageUsersError = function (error, isAdd) {
             var data = {};
             data.status = 409;

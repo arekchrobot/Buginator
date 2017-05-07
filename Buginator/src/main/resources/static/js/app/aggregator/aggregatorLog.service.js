@@ -6,7 +6,7 @@ angular.module("buginator.aggregatorLogServices", [])
 
         service.getAllByAggregator = function (id, successFunction) {
             $http.get(this.baseObjectUrl + id, {})
-                .then(successFunction, exceptionHandler.handleRestError);
+                .then(successFunction, exceptionHandler.handleSubRestError);
         };
 
         return service;
