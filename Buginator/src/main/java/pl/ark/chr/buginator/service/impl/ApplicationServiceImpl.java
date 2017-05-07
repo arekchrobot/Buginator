@@ -3,6 +3,8 @@ package pl.ark.chr.buginator.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.repository.CrudRepository;
@@ -74,6 +76,7 @@ public class ApplicationServiceImpl extends RestrictedAccessCrudServiceImpl<Appl
     }
 
     @Override
+    @CacheEvict(value = "applications", allEntries = true)
     public UserApplication save(Application entity, UserWrapper userWrapper) throws DataAccessException {
         validateDuplicate(entity, userWrapper.getCompany());
         entity.setCompany(userWrapper.getCompany());
@@ -109,6 +112,7 @@ public class ApplicationServiceImpl extends RestrictedAccessCrudServiceImpl<Appl
     }
 
     @Override
+    @Cacheable(value = "applications", key = "#user.email")
     public List<Application> getUserApplications(UserWrapper user) {
         LocalDate lastWeek = LocalDate.now().minusDays(NUMBER_OF_DAYS);
         return user.getUserApplications().stream()

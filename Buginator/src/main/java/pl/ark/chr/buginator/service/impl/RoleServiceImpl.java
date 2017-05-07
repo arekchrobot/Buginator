@@ -1,6 +1,8 @@
 package pl.ark.chr.buginator.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,7 @@ public class RoleServiceImpl implements RoleService {
     private UserRepository userRepository;
 
     @Override
+    @CacheEvict(value = "roles", key = "#company.id")
     public Role save(Role role, Company company) throws ValidationException {
         if (role.isNew()) {
             role.setCompany(company);
@@ -56,6 +59,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @CacheEvict(value = "roles", key = "#company.id")
     public void delete(Long id, Company company) throws ValidationException {
         Role role = get(id, company);
         checkModifyAccess(role, company);
@@ -64,11 +68,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Cacheable("permissions")
     public List<Permission> getAllPermissions() {
         return (List<Permission>) permissionRepository.findAll();
     }
 
     @Override
+    @Cacheable(value = "roles", key = "#company.id")
     public List<Role> getAll(Company company) {
         return roleRepository.findAllByCompany(company);
     }

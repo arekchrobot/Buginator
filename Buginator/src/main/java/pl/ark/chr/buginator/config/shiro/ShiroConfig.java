@@ -66,7 +66,7 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    @Bean(name = "cacheManager")
+    @Bean(name = "shiroCacheManager")
     public CacheManager cacheManager() {
         return new MemoryConstrainedCacheManager();
     }

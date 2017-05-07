@@ -5,6 +5,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -113,11 +115,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(value = "users", key = "#company.id")
     public List<User> getAllByCompany(Company company) {
         return userRepository.findByCompany(company);
     }
 
     @Override
+    @CacheEvict(value = "users", key = "#company.id")
     public User save(User user, Company company) throws DataAccessException, ValidationException {
         if (user.isNew()) {
             userCompanyValidator.validateUserData(user, LocaleContextHolder.getLocale());
@@ -139,6 +143,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(value = "users", key = "#company.id")
     public void activateDeactivateAccount(String email, Company company, boolean active) throws DataAccessException {
         User user = loadUserByEmail(email, LocaleContextHolder.getLocale());
 
