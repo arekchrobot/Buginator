@@ -32,7 +32,7 @@ public class User extends BaseEntity {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user")
     private Set<UserApplication> userApplications = new HashSet<>();
 
     @ManyToOne

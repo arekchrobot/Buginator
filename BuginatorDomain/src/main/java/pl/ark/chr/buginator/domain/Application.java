@@ -23,7 +23,7 @@ public class Application extends BaseEntity implements FilterData {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.application")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.application")
     private Set<UserApplication> applicationUsers = new HashSet<>();
 
     @Transient

@@ -7,8 +7,10 @@ import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +27,7 @@ import java.util.concurrent.*;
 @EnableWebSocketMessageBroker
 @EnableScheduling
 @EnableCaching
-public class BuginatorApplication {
+public class BuginatorApplication extends SpringBootServletInitializer {
 
     @Autowired
     private BuginatorProperties buginatorProperties;
@@ -84,5 +86,10 @@ public class BuginatorApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BuginatorApplication.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(BuginatorApplication.class);
     }
 }

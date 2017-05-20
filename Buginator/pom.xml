@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>Buginator</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <parent>
         <groupId>pl.ark.chr.buginator</groupId>
@@ -28,6 +28,7 @@
         <assertj.version>1.7.0</assertj.version>
         <fluent.exception.version>1.0.1</fluent.exception.version>
         <ehcache.version>2.6.11</ehcache.version>
+        <!--<mysql.version>5.1.19</mysql.version>-->
     </properties>
 
     <profiles>
@@ -133,6 +134,12 @@
             <version>${postgres.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!--<version>${mysql.version}</version>-->
+            <scope>runtime</scope>
+        </dependency>
 
         <!--wro4j-->
         <dependency>
@@ -191,6 +198,7 @@
             <groupId>pl.wkr</groupId>
             <artifactId>fluent-exception-rule</artifactId>
             <version>${fluent.exception.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!--Buginator dependencies-->
@@ -363,6 +371,8 @@
     </dependencies>
 
     <build>
+        <finalName>ROOT</finalName>
+
         <resources>
             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>

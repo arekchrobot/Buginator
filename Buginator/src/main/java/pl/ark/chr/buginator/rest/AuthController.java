@@ -63,6 +63,7 @@ public class AuthController {
 
             SecurityUtils.getSubject().login(authToken);
             User user = userService.validateUserLogin(credentials, locale);
+            HibernateLazyInitiator.init(user);
             UserWrapper userWrapper = new UserWrapper(user, notificationService.addTokenForActiveSession(user));
             sessionUtil.setCurrentUser(request, userWrapper);
             return userWrapper;
