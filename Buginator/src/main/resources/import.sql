@@ -55,7 +55,7 @@ INSERT INTO user_agent_data(version, browser, browser_family, browser_full_versi
 (1, 'Firefox', 'Firefox', '40.1','Mozilla','40.1','PC','64bits','COMPUTER','(Windows)','Windows NT','Windows','Microsoft','7', 'Poland', 'PL');
 
 INSERT INTO buginator_error(version, error_count, date_time, description, last_occurence, severity, status,title, application_id, user_agent_data_id, request_url, query_params, request_method, request_params, request_headers) VALUES
-  (1,3,NOW()- INTERVAL '9 days','NullPointerException', NOW() - INTERVAL '9 days', 'ERROR', 'CREATED', 'Null has appeared', 1, 1, 'http://google.com/firstUrlEver', 'a=b&x=cc&acb=dcf','GET',NULL,'host=api.mobl-apps.com\nx-real-ip=193.105.74.47\nx-forwarded-for=193.105.74.47\naccept-encoding=gzip,deflate'),
+  (1,6,NOW()- INTERVAL '9 days','NullPointerException', NOW() - INTERVAL '9 days', 'ERROR', 'CREATED', 'Null has appeared', 1, 1, 'http://google.com/firstUrlEver', 'a=b&x=cc&acb=dcf','GET',NULL,'host=api.mobl-apps.com\nx-real-ip=193.105.74.47\nx-forwarded-for=193.105.74.47\naccept-encoding=gzip,deflate'),
   (1,1,NOW()- INTERVAL '8 days','NullPointerException', NOW() - INTERVAL '8 days', 'ERROR', 'RESOLVED', 'Null has appeared', 1, NULL, NULL, NULL, NULL, NULL, NULL),
   (1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'ONGOING', 'Null has appeared', 1, NULL, NULL, NULL, NULL, NULL, NULL),
   (1,1,NOW()- INTERVAL '7 days','NullPointerException', NOW() - INTERVAL '7 days', 'ERROR', 'REOPENED', 'Null has appeared', 1, NULL, NULL, NULL, NULL, NULL, NULL),

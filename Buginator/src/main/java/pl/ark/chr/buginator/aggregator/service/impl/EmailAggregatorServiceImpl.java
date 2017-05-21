@@ -15,6 +15,7 @@ import pl.ark.chr.buginator.aggregator.service.AbstractAggregatorService;
 import pl.ark.chr.buginator.aggregator.service.AggregatorService;
 import pl.ark.chr.buginator.domain.EmailAggregator;
 import pl.ark.chr.buginator.domain.Error;
+import pl.ark.chr.buginator.util.NetworkUtil;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -55,11 +56,25 @@ public class EmailAggregatorServiceImpl extends AbstractAggregatorService<EmailA
 
         emailData.put("errorTitle", error.getTitle());
         emailData.put("applicationName", error.getApplication().getName());
+        emailData.put("errorUrl", createUrl(error));
 
         String[] emails = aggregator.getRecipients().split(RECIPIENT_SPLIT_TOKEN);
 
         logger.info("Sending email notification for error: " + error.getId() + " to recipients: " + aggregator.getRecipients());
         sendMessage(emailData, locale, emails, error.getId());
+    }
+
+    private String createUrl(Error error) {
+        StringBuilder sb = new StringBuilder(50)
+                .append("http://")
+                .append(NetworkUtil.getHostIP())
+                .append(":").append(NetworkUtil.getHostPort())
+                .append("/#/application/")
+                .append(error.getApplication().getId())
+                .append("/error/")
+                .append(error.getId());
+
+        return sb.toString();
     }
 
     private void sendMessage(Map<String, Object> emailData, Locale locale, String[] emails, Long errorId) {
@@ -81,7 +96,7 @@ public class EmailAggregatorServiceImpl extends AbstractAggregatorService<EmailA
             helper.setFrom(noReplyEmailAddress);
             helper.setSentDate(new Date());
             helper.setText(emailBody, true);
-        } catch(MessagingException e) {
+        } catch (MessagingException e) {
             logger.error("Error sending notification to: " + emails + " for error: " + errorId);
             throw new RuntimeException(e);
         }
