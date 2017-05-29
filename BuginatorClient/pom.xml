@@ -7,7 +7,7 @@
 
     <groupId>pl.ark.chr.buginator</groupId>
     <artifactId>BuginatorClient</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
 
     <properties>
         <assertj.version>1.7.0</assertj.version>
