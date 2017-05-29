@@ -3,11 +3,11 @@ package pl.ark.chr.buginator.aggregator.util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import pl.ark.chr.buginator.TestApplicationConfiguration;
 import pl.ark.chr.buginator.aggregator.service.AggregatorService;
 import pl.ark.chr.buginator.aggregator.service.impl.EmailAggregatorServiceImpl;
@@ -22,8 +22,8 @@ import static org.assertj.core.api.Assertions.*;
  * Created by Arek on 2017-03-12.
  */
 @ActiveProfiles("UNIT_TEST")
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(TestApplicationConfiguration.class)
+@SpringBootTest(classes = TestApplicationConfiguration.class)
+@RunWith(SpringRunner.class)
 public class AggregatorReflectionTest {
 
     private AggregatorReflection sut = new AggregatorReflection();
