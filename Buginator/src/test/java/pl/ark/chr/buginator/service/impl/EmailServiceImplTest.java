@@ -5,10 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import pl.ark.chr.buginator.TestApplicationConfiguration;
 import pl.ark.chr.buginator.domain.Company;
 import pl.ark.chr.buginator.domain.User;
@@ -26,8 +26,8 @@ import static org.assertj.core.api.Assertions.*;
  * Created by Arek on 2016-11-27.
  */
 @ActiveProfiles("UNIT_TEST")
-@SpringApplicationConfiguration(TestApplicationConfiguration.class)
-@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = TestApplicationConfiguration.class)
+@RunWith(SpringRunner.class)
 public class EmailServiceImplTest {
 
     @Autowired

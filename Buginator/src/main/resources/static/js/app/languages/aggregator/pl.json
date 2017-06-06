@@ -23,7 +23,7 @@
   "CREATE_AGGREGATOR_CHOOSE_TYPE_BUTTON": "Zatwierdź",
   "REMOVE_AGGREGATOR_HEADER": "Ostrzeżenie",
   "REMOVE_AGGREGATOR_DESCRIPTION": "Czy chcesz usunąć to powiadomienie?",
-  "AGGREGATOR_LOGS":"Logi aggregatora",
+  "AGGREGATOR_LOGS":"Logi powiadomienia",
   "AGGREGATOR_LOG_ERROR_TITLE": "Błąd",
   "AGGREGATOR_LOG_TIMESTAMP": "Czas ostatniego powiadomienia",
   "AGGREGATOR_LOG_STATUS": "Status",

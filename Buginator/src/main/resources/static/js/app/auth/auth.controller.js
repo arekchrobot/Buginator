@@ -19,7 +19,7 @@ angular.module("buginator.authController", []).config(function ($stateProvider) 
                     $window.location.replace(newHref);
                     $window.location.reload();
                 } else {
-                    $state.go("dashboard")
+                    $state.go("applications")
                         .then(function () {
                             //TODO: implement better approach to refresh scope view
                             $timeout(function () {
