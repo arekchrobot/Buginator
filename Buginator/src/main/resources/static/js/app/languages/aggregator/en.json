@@ -23,7 +23,7 @@
   "CREATE_AGGREGATOR_CHOOSE_TYPE_BUTTON": "Confirm",
   "REMOVE_AGGREGATOR_HEADER": "Warning",
   "REMOVE_AGGREGATOR_DESCRIPTION": "Do you want to remove this notification?",
-  "AGGREGATOR_LOGS":"Aggregator Logs",
+  "AGGREGATOR_LOGS":"Notification Logs",
   "AGGREGATOR_LOG_ERROR_TITLE": "Error",
   "AGGREGATOR_LOG_TIMESTAMP": "Last notification timestamp",
   "AGGREGATOR_LOG_STATUS": "Status",

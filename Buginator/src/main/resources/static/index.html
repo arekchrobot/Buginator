@@ -63,7 +63,7 @@
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <!-- .nav -->
                             <ul class="nav navbar-nav">
-                                <li><a href="" ng-redirect-to="dashboard" translate>DASHBOARD</a></li>
+                                <li><a href="" ng-redirect-to="dashboard" translate ng-if="user.perms['not_show']">DASHBOARD</a></li>
                                 <li><a href="" ng-redirect-to="applications" ng-if="user.perms['read_application']" translate>APPLICATIONS</a></li>
                                 <li><a href="" ng-redirect-to="roles" ng-if="user.perms['manage_role']" translate>ROLES</a></li>
                                 <li><a href="" ng-redirect-to="users" ng-if="user.perms['manage_role'] && user.perms['manage_user']" translate>USERS</a></li>
@@ -109,7 +109,7 @@
                 <ul id="menu" class="bg-blue dker">
                     <li class="nav-header">Menu</li>
                     <li class="nav-divider"></li>
-                    <li class="">
+                    <li class="" ng-if="user.perms['not_show']">
                         <a href="" ng-redirect-to="dashboard">
                             <i class="fa fa-dashboard"></i>&nbsp;<span class="link-title" translate>DASHBOARD</span>
                         </a>
