@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator;
 
-import org.apache.velocity.app.VelocityEngine;
+//import org.apache.velocity.app.VelocityEngine;
 import org.mockito.Mockito;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.ui.velocity.VelocityEngineFactoryBean;
+//import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import pl.ark.chr.buginator.aggregator.service.AggregatorServiceValidator;
 import pl.ark.chr.buginator.aggregator.service.impl.EmailAggregatorServiceImpl;
 import pl.ark.chr.buginator.domain.EmailAggregator;
@@ -41,20 +41,21 @@ public class TestApplicationConfiguration {
         return pspc;
     }
 
-    @Bean
-    @Primary
-    public VelocityEngine velocityEngine() throws IOException {
-        VelocityEngineFactoryBean fb = new VelocityEngineFactoryBean();
-        fb.setResourceLoaderPath("classpath:/velocity/");
-
-        Properties props = new Properties();
-        props.setProperty("resource.loader", "file");
-        props.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
-        props.setProperty("class.resource.loader.path", "classpath:/velocity");
-
-        fb.setVelocityProperties(props);
-        return fb.createVelocityEngine();
-    }
+    //TODO: add another engine template
+//    @Bean
+//    @Primary
+//    public VelocityEngine velocityEngine() throws IOException {
+//        VelocityEngineFactoryBean fb = new VelocityEngineFactoryBean();
+//        fb.setResourceLoaderPath("classpath:/velocity/");
+//
+//        Properties props = new Properties();
+//        props.setProperty("resource.loader", "file");
+//        props.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
+//        props.setProperty("class.resource.loader.path", "classpath:/velocity");
+//
+//        fb.setVelocityProperties(props);
+//        return fb.createVelocityEngine();
+//    }
 
     @Bean
     @Primary

@@ -75,7 +75,7 @@ public class ManageUserServiceImpl implements ManageUserService {
 
         users.forEach(user -> createPermissionForUser(user, application, permissionsToApp, usersToAdd));
 
-        userApplicationRepository.save(permissionsToApp);
+        userApplicationRepository.saveAll(permissionsToApp);
     }
 
     @Override
@@ -88,14 +88,14 @@ public class ManageUserServiceImpl implements ManageUserService {
 
         users.forEach(user -> createPermissionForUser(user, application, permissionsToApp, usersToRemove));
 
-        userApplicationRepository.delete(permissionsToApp);
+        userApplicationRepository.deleteAll(permissionsToApp);
     }
 
     @Override
     public void changeAccessToAppForUser(ManageUserData userData, Long appId, Set<UserApplication> userApplications) throws DataAccessException {
         Application application = validateAccessAndReturnApplication(appId, userApplications);
 
-        User user = userRepository.findOne(userData.getUserId());
+        User user = userRepository.findById(userData.getUserId()).get();
 
         Optional<UserApplication> ua = userApplicationRepository.findByPk_ApplicationAndPk_User(application, user);
 
@@ -126,7 +126,7 @@ public class ManageUserServiceImpl implements ManageUserService {
     }
 
     private Application validateAccessAndReturnApplication(Long appId, Set<UserApplication> userApplications) throws DataAccessException {
-        Application application = applicationRepository.findOne(appId);
+        Application application = applicationRepository.findById(appId).get();
 
         clientFilter.validateAccess(application, userApplications);
 

@@ -22,7 +22,7 @@ public abstract class CrudServiceImpl<T extends BaseEntity> implements CrudServi
 
     @Override
     public T get(Long id) {
-        T entity = getRepository().findOne(id);
+        T entity = getRepository().findById(id).get();
         HibernateLazyInitiator.init(entity);
         return entity;
     }
@@ -36,6 +36,6 @@ public abstract class CrudServiceImpl<T extends BaseEntity> implements CrudServi
 
     @Override
     public void delete(Long id) {
-        getRepository().delete(id);
+        getRepository().deleteById(id);
     }
 }

@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.apache.velocity.app.VelocityEngine;
+//import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.velocity.VelocityEngineUtils;
+//import org.springframework.ui.velocity.VelocityEngineUtils;
 import pl.ark.chr.buginator.domain.Company;
 import pl.ark.chr.buginator.domain.User;
 import pl.ark.chr.buginator.service.EmailService;
@@ -40,8 +40,8 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private MessageSource messageSource;
 
-    @Autowired
-    private VelocityEngine velocityEngine;
+//    @Autowired
+//    private VelocityEngine velocityEngine;
 
     @Value("${spring.mail.username}")
     private String noReplyEmailAddress;
@@ -77,8 +77,10 @@ public class EmailServiceImpl implements EmailService {
         emailData.put("emailBody", messageSource);
         emailData.put("locale", locale);
 
-        String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailTemplate, UTF_8, emailData);
+//        String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailTemplate, UTF_8, emailData);
 
+        //TODO: add new template
+        String emailBody = null;
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, UTF_8);
 

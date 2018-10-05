@@ -20,7 +20,7 @@ import pl.ark.chr.buginator.service.AggregatorService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.apache.velocity.util.StringUtils.capitalizeFirstLetter;
+//import static org.apache.velocity.util.StringUtils.capitalizeFirstLetter;
 
 /**
  * Created by Arek on 2017-03-15.
@@ -48,7 +48,7 @@ public class AggregatorServiceImpl implements AggregatorService {
 
     @Override
     public List<AggregatorData> getAllAggregatorsForApplication(Long applicationId, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
-        Application application = applicationRepository.findOne(applicationId);
+        Application application = applicationRepository.findById(applicationId).get();
 
         clientFilter.validateAccess(application, userWrapper.getUserApplications());
 
@@ -58,7 +58,7 @@ public class AggregatorServiceImpl implements AggregatorService {
 
         for(Aggregator aggregator : allApplicationAggregators) {
             CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
-            concreteAggregators.add(new AggregatorData((Aggregator) aggregatorRepository.findOne(aggregator.getId())));
+            concreteAggregators.add(new AggregatorData((Aggregator) aggregatorRepository.findById(aggregator.getId()).get()));
         }
 
         return concreteAggregators;
@@ -78,7 +78,8 @@ public class AggregatorServiceImpl implements AggregatorService {
     @Override
     public AggregatorData getEmptyAggregator(String aggregatorType) throws ClassNotFoundException {
         Aggregator aggregator = new Aggregator();
-        aggregator.setAggregatorClass(capitalizeFirstLetter(aggregatorType) + AGGREGATOR_SUFFIX);
+        //TODO: fix capitalize
+//        aggregator.setAggregatorClass(capitalizeFirstLetter(aggregatorType) + AGGREGATOR_SUFFIX);
 
         aggregator = aggregatorReflection.createEmptyAggregator(aggregator);
 
@@ -89,13 +90,13 @@ public class AggregatorServiceImpl implements AggregatorService {
 
     @Override
     public AggregatorData getAggregator(Long aggregatorId, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
-        Aggregator aggregator = baseAggregatorRepository.findOne(aggregatorId);
+        Aggregator aggregator = baseAggregatorRepository.findById(aggregatorId).get();
 
         clientFilter.validateAccess(aggregator, userWrapper.getUserApplications());
 
         CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
 
-        return new AggregatorData((Aggregator) aggregatorRepository.findOne(aggregatorId));
+        return new AggregatorData((Aggregator) aggregatorRepository.findById(aggregatorId).get());
     }
 
     @Override
@@ -109,7 +110,7 @@ public class AggregatorServiceImpl implements AggregatorService {
 
     @Override
     public void removeAggregator(Long aggregatorId, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
-        Aggregator aggregator = baseAggregatorRepository.findOne(aggregatorId);
+        Aggregator aggregator = baseAggregatorRepository.findById(aggregatorId).get();
 
         clientFilter.validateAccess(aggregator, userWrapper.getUserApplications());
 

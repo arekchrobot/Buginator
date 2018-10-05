@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.apache.commons.lang.RandomStringUtils;
+//import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +96,8 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     private String generateToken() {
-        return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
+        //TODO: fix generating token
+        return null;
+//        return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
     }
 }

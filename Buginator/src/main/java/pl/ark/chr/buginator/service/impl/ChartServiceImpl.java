@@ -51,7 +51,7 @@ public class ChartServiceImpl implements ChartService {
     public ChartData generateLastWeekErrorsForApplication(Long appId, Set<UserApplication> userApplications) throws ChartException, DataAccessException {
         LocalDate lastSevenDays = LocalDate.now().minusDays(LAST_SEVEN_DAYS);
 
-        Application application = applicationRepository.findOne(appId);
+        Application application = applicationRepository.findById(appId).get();
 
         Locale locale = LocaleContextHolder.getLocale();
 

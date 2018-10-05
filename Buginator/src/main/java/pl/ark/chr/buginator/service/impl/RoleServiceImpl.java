@@ -53,7 +53,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role get(Long id, Company company) throws ValidationException {
-        Role role = roleRepository.findOne(id);
+        Role role = roleRepository.findById(id).get();
         checkAccess(role, company);
         return role;
     }
@@ -64,7 +64,7 @@ public class RoleServiceImpl implements RoleService {
         Role role = get(id, company);
         checkModifyAccess(role, company);
         checkUsersExists(role);
-        roleRepository.delete(id);
+        roleRepository.deleteById(id);
     }
 
     @Override

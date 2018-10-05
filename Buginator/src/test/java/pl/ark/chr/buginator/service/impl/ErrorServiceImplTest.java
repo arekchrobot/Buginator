@@ -19,10 +19,7 @@ import pl.ark.chr.buginator.repository.ErrorRepository;
 import pl.ark.chr.buginator.service.ErrorService;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -78,7 +75,7 @@ public class ErrorServiceImplTest {
         Set<UserApplication> permissions = new HashSet<>();
         permissions.add(ua);
 
-        when(applicationRepository.findOne(any(Long.class))).thenReturn(app);
+        when(applicationRepository.findById(any(Long.class))).thenReturn(Optional.of(app));
         when(errorRepository.findByApplication(any(Application.class))).thenReturn(TestObjectCreator.generateErrorListForSorting(app));
 
         //when

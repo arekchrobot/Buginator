@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.apache.commons.lang.RandomStringUtils;
+//import org.apache.commons.lang.RandomStringUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -155,6 +155,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private String generatePassword() {
-        return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
+        //TODO: Generate password
+        return null;
+//        return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
     }
 }

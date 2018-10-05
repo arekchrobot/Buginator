@@ -56,7 +56,7 @@ public class ErrorServiceImpl extends RestrictedAccessCrudServiceImpl<Error> imp
 
     @Override
     public List<Error> getAllByApplication(Long appId, Set<UserApplication> userApplications) throws DataAccessException {
-        Application application = applicationRepository.findOne(appId);
+        Application application = applicationRepository.findById(appId).get();
 
         clientFilter.validateAccess(application, userApplications);
 

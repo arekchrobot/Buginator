@@ -61,7 +61,7 @@ public class ErrorRemoveJob {
             removeUserAgentData(errorsToRemove);
             removeAggregatorLogs(errorsToRemove);
 
-            errorRepository.delete(errorsToRemove);
+            errorRepository.deleteAll(errorsToRemove);
         } else {
             logger.info("No errors found for remove with date older than " + buginatorProperties.getErrorMonthsOldToRemove() + " months");
         }
@@ -78,7 +78,7 @@ public class ErrorRemoveJob {
 
             logger.info("Removing userAgentData with ids: " + ids);
 
-            userAgentDataRepository.delete(userAgentsToRemove);
+            userAgentDataRepository.deleteAll(userAgentsToRemove);
         } else {
             logger.info("No userAgentData to remove");
         }
@@ -95,7 +95,7 @@ public class ErrorRemoveJob {
 
             logger.info("Removing errorStackTrace with ids: " + ids);
 
-            errorStackTraceRepository.delete(errorStackTraces);
+            errorStackTraceRepository.deleteAll(errorStackTraces);
         } else {
             logger.info("No errorStackTrace to remove");
         }
@@ -109,7 +109,7 @@ public class ErrorRemoveJob {
 
             logger.info("Removing notifications with ids: " + ids);
 
-            notificationRepository.delete(notificationsToRemove);
+            notificationRepository.deleteAll(notificationsToRemove);
         } else {
             logger.info("No notification to remove");
         }
@@ -123,7 +123,7 @@ public class ErrorRemoveJob {
 
             logger.info("Removing aggregatorLogs with ids: " + ids);
 
-            aggregatorLogRepository.delete(aggregatorLogs);
+            aggregatorLogRepository.deleteAll(aggregatorLogs);
         } else {
             logger.info("No aggregatorLogs to remove");
         }

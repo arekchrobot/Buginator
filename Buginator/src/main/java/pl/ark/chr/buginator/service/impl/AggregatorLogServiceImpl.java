@@ -38,7 +38,7 @@ public class AggregatorLogServiceImpl implements AggregatorLogService {
 
     @Override
     public List<AggregatorLog> getAllByAggregator(Long aggregatorId, Set<UserApplication> userApplications) throws DataAccessException {
-        Aggregator aggregator = aggregatorRepository.findOne(aggregatorId);
+        Aggregator aggregator = aggregatorRepository.findById(aggregatorId).get();
 
         if(aggregator == null) {
             logger.error("No aggregator found for id: " + aggregatorId);

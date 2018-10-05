@@ -72,7 +72,7 @@ public class ChartServiceImplTest {
         int chartLabelsAndDataLength = 8;
         int chartDataAndSeriesLength = 1;
 
-        when(applicationRepository.findOne(any(Long.class))).thenReturn(testApplication);
+        when(applicationRepository.findById(any(Long.class))).thenReturn(Optional.of(testApplication));
 
         when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
                 .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
@@ -110,7 +110,7 @@ public class ChartServiceImplTest {
         ua.setApplication(testApplication);
         userApps.add(ua);
 
-        when(applicationRepository.findOne(any(Long.class))).thenReturn(null);
+        when(applicationRepository.findById(any(Long.class))).thenReturn(Optional.empty());
 
         when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
                 .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
@@ -135,7 +135,7 @@ public class ChartServiceImplTest {
         ua.setApplication(testApplication2);
         userApps.add(ua);
 
-        when(applicationRepository.findOne(any(Long.class))).thenReturn(testApplication);
+        when(applicationRepository.findById(any(Long.class))).thenReturn(Optional.of(testApplication));
 
         when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
                 .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
@@ -162,7 +162,7 @@ public class ChartServiceImplTest {
         int chartLabelsAndDataLength = 8;
         int chartDataAndSeriesLength = 1;
 
-        when(applicationRepository.findOne(any(Long.class))).thenReturn(testApplication);
+        when(applicationRepository.findById(any(Long.class))).thenReturn(Optional.of(testApplication));
 
         when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
                 .thenReturn(new ArrayList<>());

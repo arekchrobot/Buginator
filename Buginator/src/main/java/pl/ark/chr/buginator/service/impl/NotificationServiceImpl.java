@@ -60,7 +60,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void removeNotification(Long id) {
-        notificationRepository.delete(id);
+        notificationRepository.deleteById(id);
     }
 
     @Override
