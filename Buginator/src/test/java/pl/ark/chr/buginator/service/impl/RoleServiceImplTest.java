@@ -44,7 +44,7 @@ public class RoleServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        when(messageSource.getMessage(any(String.class), any(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
+        when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class RoleServiceImplTest {
         role.setCompany(company);
         role.setId(1L);
 
-        when(roleRepository.save(any(Role.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
+//        when(roleRepository.save(any(Role.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
 
         fluentThrown
                 .expect(ValidationException.class)
@@ -122,7 +122,7 @@ public class RoleServiceImplTest {
         role.setCompany(null);
         role.setId(1L);
 
-        when(roleRepository.save(any(Role.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
+//        when(roleRepository.save(any(Role.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
 
         fluentThrown
                 .expect(ValidationException.class)

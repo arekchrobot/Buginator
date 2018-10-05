@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.config.shiro.BCryptPasswordService;
@@ -42,9 +41,7 @@ public class RegisterServiceImplTest {
     @InjectMocks
     private RegisterService sut = new RegisterServiceImpl();
 
-    @InjectMocks
-    @Spy
-    private UserCompanyValidator userCompanyValidator = new UserCompanyValidator();
+    private UserCompanyValidator userCompanyValidator;
 
     @Mock
     private CompanyRepository companyRepository;
@@ -72,9 +69,13 @@ public class RegisterServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
+        userCompanyValidator = new UserCompanyValidator(companyRepository, userRepository, messageSource);
 
-        when(messageSource.getMessage(any(String.class), any(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
+        when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
         when(passwordService.encryptPassword(any(Object.class))).thenReturn(TEST_BCRYPTED_PASSWORD);
+
+
+        ((RegisterServiceImpl)sut).setUserCompanyValidator(userCompanyValidator);
     }
 
     @After

@@ -59,7 +59,7 @@ public class ApplicationServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        when(messageSource.getMessage(any(String.class), any(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
+        when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
     }
 
     @After
@@ -126,9 +126,9 @@ public class ApplicationServiceImplTest {
         testApp.setName(appName);
 
         when(applicationRepository.findByNameAndCompany(any(String.class), any(Company.class))).thenReturn(Optional.of(testApp));
-        when(userRepository.findByEmail(any(String.class))).thenReturn(Optional.of(user));
-        when(applicationRepository.save(any(Application.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
-        when(userApplicationRepository.save(any(UserApplication.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
+//        when(userRepository.findByEmail(any(String.class))).thenReturn(Optional.of(user));
+//        when(applicationRepository.save(any(Application.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
+//        when(userApplicationRepository.save(any(UserApplication.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
 
         fluentThrown.expect(IllegalArgumentException.class)
                 .hasMessage(TEST_MESSAGE_SOURCE_RETURN + " " + appName + " " + TEST_MESSAGE_SOURCE_RETURN);

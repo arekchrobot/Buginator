@@ -21,14 +21,18 @@ public class UserCompanyValidator {
 
     private static final Logger logger = LoggerFactory.getLogger(UserCompanyValidator.class);
 
-    @Autowired
     private CompanyRepository companyRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private MessageSource messageSource;
+
+    @Autowired
+    public UserCompanyValidator(CompanyRepository companyRepository, UserRepository userRepository, MessageSource messageSource) {
+        this.companyRepository = companyRepository;
+        this.userRepository = userRepository;
+        this.messageSource = messageSource;
+    }
 
     public void validateCompanyData(Company company, Locale locale) throws ValidationException {
         validateBlankString(company.getName(), "Attempt to create company without name", messageSource.getMessage("validation.companyNameEmpty", null, locale));

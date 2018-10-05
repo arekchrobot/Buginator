@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.domain.Application;
@@ -21,7 +21,7 @@ import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.util.*;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import static org.assertj.core.api.Assertions.*;
@@ -51,7 +51,7 @@ public class ErrorServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        when(messageSource.getMessage(any(String.class), any(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
+//        when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
     }
 
     @After

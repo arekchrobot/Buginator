@@ -58,6 +58,11 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     private UserCompanyValidator userCompanyValidator;
 
+    //TODO: remove after refactoring
+    public void setUserCompanyValidator(UserCompanyValidator userCompanyValidator) {
+        this.userCompanyValidator = userCompanyValidator;
+    }
+
     @Override
     public void registerUser(RegisterData registerData, Locale locale) throws ValidationException {
         userCompanyValidator.validateCompanyData(registerData.getCompany(), locale);
@@ -97,7 +102,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     private String generateToken() {
         //TODO: fix generating token
-        return null;
+        return "NOT IMPLEMENTED TOKEN";
 //        return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
     }
 }

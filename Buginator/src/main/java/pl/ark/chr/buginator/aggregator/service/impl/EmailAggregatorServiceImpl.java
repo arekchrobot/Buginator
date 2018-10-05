@@ -87,7 +87,7 @@ public class EmailAggregatorServiceImpl extends AbstractAggregatorService<EmailA
 
 //        String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, ERROR_NOTIFICATION_TEMPLATE, UTF_8, emailData);
         //TODO: add another email template + extract API
-        String emailBody = null;
+        String emailBody = "NULL TEMPLATE";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, UTF_8);

@@ -51,7 +51,7 @@ public class ChartServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        when(messageSource.getMessage(any(String.class), any(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
+        when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
     }
 
     @After
@@ -112,8 +112,8 @@ public class ChartServiceImplTest {
 
         when(applicationRepository.findById(any(Long.class))).thenReturn(Optional.empty());
 
-        when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
-                .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
+//        when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
+//                .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
 
         fluentThrown.expect(ChartException.class)
                 .hasMessage(TEST_MESSAGE_SOURCE_RETURN);
@@ -137,8 +137,8 @@ public class ChartServiceImplTest {
 
         when(applicationRepository.findById(any(Long.class))).thenReturn(Optional.of(testApplication));
 
-        when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
-                .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
+//        when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
+//                .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
 
         fluentThrown.expect(DataAccessException.class)
                 .hasMessage("Attempt to access forbidden resources");

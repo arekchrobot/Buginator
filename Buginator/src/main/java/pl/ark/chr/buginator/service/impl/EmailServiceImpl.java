@@ -80,7 +80,7 @@ public class EmailServiceImpl implements EmailService {
 //        String emailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, emailTemplate, UTF_8, emailData);
 
         //TODO: add new template
-        String emailBody = null;
+        String emailBody = "NULL TEMPLATE";
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, UTF_8);
 
