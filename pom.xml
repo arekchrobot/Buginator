@@ -18,6 +18,13 @@
         <version>2.1.0.M4</version>
     </parent>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <pieroxy-useragent.version>2015.10.31.06.50.GMT</pieroxy-useragent.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <java.release.version>11</java.release.version>
+    </properties>
+
     <modules>
         <module>Buginator</module>
         <module>BuginatorDomain</module>
@@ -60,16 +67,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <release>11</release>
+                    <release>${java.release.version}</release>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <pieroxy-useragent.version>2015.10.31.06.50.GMT</pieroxy-useragent.version>
-    </properties>
 </project>
