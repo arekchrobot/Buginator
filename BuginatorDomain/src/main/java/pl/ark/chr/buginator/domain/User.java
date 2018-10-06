@@ -1,18 +1,15 @@
 package pl.ark.chr.buginator.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Arek on 2016-09-25.
+ * An user thta can log in to portal and perform operations based on role
  */
 @Entity
 @Table(name = "buginator_user")
-public class User extends BaseEntity {
+public class User extends BaseEntity<User> {
 
     private static final long serialVersionUID = -2530893894458448440L;
 
@@ -87,7 +84,6 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
-    @JsonIgnore
     public Set<UserApplication> getUserApplications() {
         return userApplications;
     }

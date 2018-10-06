@@ -61,7 +61,7 @@ public class EmailServiceImplTest {
             MimeMessage msg = (MimeMessage) invocationOnMock.getArguments()[0];
 
             assertThat(msg.getFrom()[0].toString())
-                    .isEqualTo("buginator.noreply@gmail.com");
+                    .isEqualTo("buginator.app.noreply@gmail.com");
             assertThat(msg.getRecipients(Message.RecipientType.TO)[0].toString())
                     .isEqualTo(toMail);
             assertThat(msg.getSubject())
@@ -97,7 +97,7 @@ public class EmailServiceImplTest {
             MimeMessage msg = (MimeMessage) invocationOnMock.getArguments()[0];
 
             assertThat(msg.getFrom()[0].toString())
-                    .isEqualTo("buginator.noreply@gmail.com");
+                    .isEqualTo("buginator.app.noreply@gmail.com");
             assertThat(msg.getRecipients(Message.RecipientType.TO)[0].toString())
                     .isEqualTo(email);
             assertThat(msg.getSubject())

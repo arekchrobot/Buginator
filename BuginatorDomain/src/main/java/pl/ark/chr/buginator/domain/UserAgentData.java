@@ -8,11 +8,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Created by Arek on 2016-09-26.
+ * Stores information about ecosystem where error happened in case of web applications
  */
 @Entity
 @Table(name = "user_agent_data")
-public class UserAgentData extends BaseEntity {
+public class UserAgentData extends BaseEntity<UserAgentData> {
 
     private static final long serialVersionUID = -8089095071313692442L;
 
@@ -70,24 +70,24 @@ public class UserAgentData extends BaseEntity {
 
     public UserAgentData(UserAgentDetectionResult uadr) {
         if (uadr != null) {
-            this.manufacturer = uadr.getDevice().manufacturer.getLabel();
-            this.device = uadr.getDevice().device;
-            this.deviceType = uadr.getDevice().deviceType.getLabel();
-            this.deviceArchitecture = uadr.getDevice().architecture;
+            this.manufacturer = uadr.getDevice().getManufacturer().getLabel();
+            this.device = uadr.getDevice().getDevice();
+            this.deviceType = uadr.getDevice().getDeviceType().getLabel();
+            this.deviceArchitecture = uadr.getDevice().getArchitecture();
 
-            this.operatingSystem = uadr.getOperatingSystem().family.getLabel();
-            this.operatingSystemVersion = uadr.getOperatingSystem().version;
-            this.operatingSystemDescription = uadr.getOperatingSystem().description;
-            this.operatingSystemVendor = uadr.getOperatingSystem().vendor.getLabel();
+            this.operatingSystem = uadr.getOperatingSystem().getFamily().getLabel();
+            this.operatingSystemVersion = uadr.getOperatingSystem().getVersion();
+            this.operatingSystemDescription = uadr.getOperatingSystem().getDescription();
+            this.operatingSystemVendor = uadr.getOperatingSystem().getVendor().getLabel();
 
-            this.browser = uadr.getBrowser().description;
-            this.browserFamily = uadr.getBrowser().family.getLabel();
-            this.browserFullVersion = uadr.getBrowser().fullVersion;
-            this.browserVersion = uadr.getBrowser().version;
-            this.browserVendor = uadr.getBrowser().vendor.getLabel();
+            this.browser = uadr.getBrowser().getDescription();
+            this.browserFamily = uadr.getBrowser().getFamily().getLabel();
+            this.browserFullVersion = uadr.getBrowser().getFullVersion();
+            this.browserVersion = uadr.getBrowser().getVersion();
+            this.browserVendor = uadr.getBrowser().getVendor().getLabel();
 
-            this.country = uadr.getLocale().country.getLabel();
-            this.language = uadr.getLocale().lang.getLabel();
+            this.country = uadr.getLocale().getCountry().getLabel();
+            this.language = uadr.getLocale().getLanguage().getLabel();
 
             this.unknownTokens = uadr.getUnknownTokens();
         }

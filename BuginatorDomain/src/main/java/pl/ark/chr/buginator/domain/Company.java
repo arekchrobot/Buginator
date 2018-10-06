@@ -1,21 +1,19 @@
 package pl.ark.chr.buginator.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
- * Created by Arek on 2016-09-25.
+ * Represents the company that has many users and applications.
+ * This class also checks if user assigned to this company can log into portal.
  */
 @Entity
 @Table(name = "company")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "uniqueKey", "token"})
-public class Company extends BaseEntity {
+public class Company extends BaseEntity<Company> {
 
     private static final long serialVersionUID = 2863610043925637330L;
 
-    @Column(name = "unique_key")
+    @Column(name = "unique_key", unique = true)
     private String uniqueKey;
 
     @Column(name = "token")

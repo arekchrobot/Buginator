@@ -6,6 +6,7 @@ import java.util.Objects;
 
 /**
  * Basic representation for JPA Entity in Buginator application used for persistence in database.
+ *
  * @param <E> This should be the class that extends BaseEntity (ideally the same class) used for Comparable interface.
  */
 @MappedSuperclass
@@ -43,6 +44,7 @@ public abstract class BaseEntity<E extends BaseEntity<?>> implements Serializabl
     /**
      * Two entities are equal if their IDs are equal
      * Also support only equaling within same type. Is not made for multiple inheritance
+     *
      * @param o Object to be comared with
      * @return true if objects are equal
      */

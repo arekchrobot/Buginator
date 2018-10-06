@@ -1,6 +1,5 @@
 package pl.ark.chr.buginator.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.ark.chr.buginator.domain.filter.FilterData;
 
 import javax.persistence.*;
@@ -8,11 +7,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Arek on 2016-09-25.
+ * Application for which the bugs will be stored
  */
 @Entity
 @Table(name = "application")
-public class Application extends BaseEntity implements FilterData {
+public class Application extends BaseEntity<Application> implements FilterData {
 
     private static final long serialVersionUID = -2010034649811124041L;
 
@@ -25,12 +24,6 @@ public class Application extends BaseEntity implements FilterData {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.application")
     private Set<UserApplication> applicationUsers = new HashSet<>();
-
-    @Transient
-    private Long errorCount;
-
-    @Transient
-    private Long lastWeekErrorCount;
 
     public String getName() {
         return name;
@@ -48,7 +41,6 @@ public class Application extends BaseEntity implements FilterData {
         this.company = company;
     }
 
-    @JsonIgnore
     public Set<UserApplication> getApplicationUsers() {
         return applicationUsers;
     }
@@ -57,25 +49,8 @@ public class Application extends BaseEntity implements FilterData {
         this.applicationUsers = applicationUsers;
     }
 
-    public Long getErrorCount() {
-        return errorCount;
-    }
-
-    public void setErrorCount(Long errorCount) {
-        this.errorCount = errorCount;
-    }
-
-    public Long getLastWeekErrorCount() {
-        return lastWeekErrorCount;
-    }
-
-    public void setLastWeekErrorCount(Long lastWeekErrorCount) {
-        this.lastWeekErrorCount = lastWeekErrorCount;
-    }
-
     @Override
     @Transient
-    @JsonIgnore
     public Application getApplication() {
         return this;
     }

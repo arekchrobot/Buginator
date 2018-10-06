@@ -1,13 +1,10 @@
 package pl.ark.chr.buginator.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import pl.ark.chr.buginator.domain.serializer.UserApplicationIdSerializer;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by Arek on 2016-09-25.
+ * Mapping between User and Applications classes. Defines the action that user can do in the single application.
  */
 @Entity
 @Table(name = "user_application")
@@ -15,12 +12,11 @@ import java.io.Serializable;
         @AssociationOverride(name = "pk.user", joinColumns = @JoinColumn(name = "user_id")),
         @AssociationOverride(name = "pk.application", joinColumns = @JoinColumn(name = "application_id"))
 })
-public class UserApplication implements Serializable {
+public class UserApplication implements Serializable, Comparable<UserApplication> {
 
     private static final long serialVersionUID = 3322958058050699849L;
 
     @EmbeddedId
-    @JsonSerialize(using = UserApplicationIdSerializer.class)
     private UserApplicationId pk = new UserApplicationId();
 
     @Column(name = "view")
@@ -69,5 +65,33 @@ public class UserApplication implements Serializable {
 
     public void setModify(Boolean modify) {
         this.modify = modify;
+    }
+
+    @Override
+    public int hashCode() {
+        return pk.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        UserApplication ua = (UserApplication) obj;
+        return getPk().equals(ua.getPk());
+    }
+
+    @Override
+    public int compareTo(UserApplication userApplication) {
+        return getPk().compareTo(userApplication.getPk());
+    }
+
+    @Override
+    public String toString() {
+        return "UserApplication { " +
+                "pk = " + pk.toString() +
+                ", view = " + view +
+                ", modify = " + modify +
+                '}';
     }
 }

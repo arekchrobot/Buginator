@@ -4,12 +4,13 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
- * Created by Arek on 2016-09-25.
+ * Custom id for UserApplication
  */
 @Embeddable
-public class UserApplicationId implements Serializable {
+public class UserApplicationId implements Serializable, Comparable<UserApplicationId> {
 
     private static final long serialVersionUID = 3494068464951906271L;
 
@@ -39,12 +40,7 @@ public class UserApplicationId implements Serializable {
 
     @Override
     public int hashCode() {
-        int result;
-
-        result = (user != null ? user.hashCode() : 0);
-        result = 31 * result + (application != null ? application.hashCode() : 0);
-
-        return result;
+        return Objects.hash(user, application);
     }
 
     @Override
@@ -55,8 +51,27 @@ public class UserApplicationId implements Serializable {
         UserApplicationId uai = (UserApplicationId) obj;
 
         if (user != null ? !user.equals(uai.user) : uai.user != null) return false;
-        if (application != null ? !application.equals(uai.application) : uai.application != null) return false;
+        return application != null ? application.equals(uai.application) : uai.application == null;
+    }
 
-        return true;
+    @Override
+    public int compareTo(UserApplicationId userApplicationId) {
+        if (this == userApplicationId) return 0;
+
+        int userCompare = user.compareTo(userApplicationId.getUser());
+
+        if(userCompare == 0) {
+            return application.compareTo(userApplicationId.getApplication());
+        }
+
+        return userCompare;
+    }
+
+    @Override
+    public String toString() {
+        return "UserApplicationId { " +
+                "user = " + user.toString() +
+                ", application = " + application.toString() +
+                " }";
     }
 }

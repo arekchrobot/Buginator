@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Arek on 2016-09-25.
+ * Represents one role that has given permits in the portal
+ * Can be created by companies at free will
  */
 @Entity
 @Table(name = "buginator_role",
@@ -13,7 +14,7 @@ import java.util.Set;
                 @UniqueConstraint(name = "companyId_name", columnNames = {"name", "company_id"})
         }
 )
-public class Role extends BaseEntity implements Authority {
+public class Role extends BaseEntity<Role> implements Authority {
 
     private static final long serialVersionUID = -160920230822990299L;
 
@@ -57,20 +58,5 @@ public class Role extends BaseEntity implements Authority {
     @Override
     public String getAuthority() {
         return getName();
-    }
-
-    @Override
-    public int hashCode() {
-        return getAuthority().hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-
-        Authority auth = (Authority) obj;
-        return getAuthority().equals(auth.getAuthority());
     }
 }

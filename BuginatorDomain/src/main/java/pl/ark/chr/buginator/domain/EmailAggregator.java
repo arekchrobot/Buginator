@@ -4,12 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+//TODO: move this aggregator to external API
 /**
- * Created by Arek on 2017-03-11.
+ * Sends notifications via email to predefined recipients.
+ * If provided the language the email will be sent in one of supported translations
  */
 @Entity
 @Table(name = "email_aggregator")
-public class EmailAggregator extends Aggregator {
+public class EmailAggregator extends Aggregator<EmailAggregator> {
+
+    private static final long serialVersionUID = 9140655678253265412L;
 
     @Column(name = "recipients")
     private String recipients = "";

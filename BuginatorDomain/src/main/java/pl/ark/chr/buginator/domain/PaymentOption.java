@@ -1,24 +1,23 @@
 package pl.ark.chr.buginator.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Created by Arek on 2016-09-26.
+ * Representation of possible payment options for access to the portal
  */
 @Entity
 @Table(name = "payment_option")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class PaymentOption extends BaseEntity {
+public class PaymentOption extends BaseEntity<PaymentOption> {
 
     private static final long serialVersionUID = -1453981529749167170L;
 
+    /**
+     * Represents how long in days the payment is valid
+     */
     @Column(name = "duration")
-    private Integer duration;
+    private int duration;
 
     @Column(name = "max_users")
     private Integer maxUsers;

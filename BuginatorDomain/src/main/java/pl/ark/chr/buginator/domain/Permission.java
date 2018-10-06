@@ -6,11 +6,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Created by Arek on 2016-09-25.
+ * Represent single permit in the portal
  */
 @Entity
 @Table(name = "buginator_permission")
-public class Permission extends BaseEntity implements Authority {
+public class Permission extends BaseEntity<Permission> implements Authority {
 
     private static final long serialVersionUID = 5827480917177013654L;
 
@@ -28,20 +28,5 @@ public class Permission extends BaseEntity implements Authority {
     @Override
     public String getAuthority() {
         return getName();
-    }
-
-    @Override
-    public int hashCode() {
-        return getAuthority().hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj == null) {
-            return false;
-        }
-
-        Authority auth = (Authority) obj;
-        return getAuthority().equals(auth.getAuthority());
     }
 }

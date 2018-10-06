@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Arek on 2016-09-26.
+ * Stores the single error that occured in external application.
  */
 @Entity
 @Table(name = "buginator_error")
-public class Error extends BaseEntity implements FilterData {
+public class Error extends BaseEntity<Error> implements FilterData {
 
     private static final long serialVersionUID = -6062066697736318840L;
 

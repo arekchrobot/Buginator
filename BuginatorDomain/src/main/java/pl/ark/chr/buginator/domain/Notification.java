@@ -3,11 +3,12 @@ package pl.ark.chr.buginator.domain;
 import javax.persistence.*;
 
 /**
- * Created by Arek on 2016-09-26.
+ * Notifications for user about new errors in applications.
+ * This class should be used for notifying user via web platform or mobile app about the new problem
  */
 @Entity
 @Table(name = "buginator_notification")
-public class Notification extends BaseEntity {
+public class Notification extends BaseEntity<Notification> {
 
     private static final long serialVersionUID = -1058915386956441446L;
 

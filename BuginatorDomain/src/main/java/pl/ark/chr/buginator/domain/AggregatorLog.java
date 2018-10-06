@@ -6,11 +6,17 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * Created by Arek on 2017-04-01.
+ * Stores logs of statuses for communication with external platforms.
  */
 @Entity
-@Table(name = "aggregator_log")
-public class AggregatorLog extends BaseEntity {
+@Table(name = "aggregator_log",
+        indexes = {
+                @Index(name = "aggregator_index", columnList = "aggregator_id"),
+                @Index(name = "timestamp_index", columnList = "timestamp")
+        })
+public class AggregatorLog extends BaseEntity<AggregatorLog> {
+
+    private static final long serialVersionUID = -6299139410461999506L;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "aggregator_id", nullable = false)

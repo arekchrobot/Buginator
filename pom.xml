@@ -20,7 +20,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <pieroxy-useragent.version>2015.10.31.06.50.GMT</pieroxy-useragent.version>
+        <pieroxy-useragent.version>2017.09.24.17.00.GMT</pieroxy-useragent.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
         <java.release.version>11</java.release.version>
     </properties>

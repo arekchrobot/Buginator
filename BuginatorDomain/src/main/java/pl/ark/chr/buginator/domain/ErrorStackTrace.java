@@ -1,17 +1,15 @@
 package pl.ark.chr.buginator.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 /**
- * Created by Arek on 2016-09-26.
+ * Represents the whole stack trace of the Error
  */
 @Entity
 @Table(name = "buginator_error_stack_trace",
         indexes = {@Index(name = "error_index", columnList = "buginator_error_id")
         })
-public class ErrorStackTrace extends BaseEntity {
+public class ErrorStackTrace extends BaseEntity<ErrorStackTrace> {
 
     private static final long serialVersionUID = 5055088228557459563L;
 
@@ -20,11 +18,10 @@ public class ErrorStackTrace extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "buginator_error_id", nullable = false)
-    @JsonIgnore
     private Error error;
 
     @Column(name = "stack_trace_order")
-    private Integer stackTraceOrder;
+    private int stackTraceOrder;
 
     public String getStackTrace() {
         return stackTrace;
@@ -42,11 +39,11 @@ public class ErrorStackTrace extends BaseEntity {
         this.error = error;
     }
 
-    public Integer getStackTraceOrder() {
+    public int getStackTraceOrder() {
         return stackTraceOrder;
     }
 
-    public void setStackTraceOrder(Integer stackTraceOrder) {
+    public void setStackTraceOrder(int stackTraceOrder) {
         this.stackTraceOrder = stackTraceOrder;
     }
 }

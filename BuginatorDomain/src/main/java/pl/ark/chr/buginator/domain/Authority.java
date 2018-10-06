@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.domain;
 
 /**
- * Created by Arek on 2016-09-25.
+ * Authority should be used for securing access to content of the portal.
  */
 public interface Authority {
 
