@@ -4,18 +4,19 @@ import pl.ark.chr.buginator.domain.filter.FilterData;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * Application for which the bugs will be stored
  */
 @Entity
-@Table(name = "application")
+@Table(name = "buginator_application")
 public class Application extends BaseEntity<Application> implements FilterData {
 
     private static final long serialVersionUID = -2010034649811124041L;
 
-    @Column(name = "name", length = 100)
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
 
     @ManyToOne
@@ -24,6 +25,17 @@ public class Application extends BaseEntity<Application> implements FilterData {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.application")
     private Set<UserApplication> applicationUsers = new HashSet<>();
+
+    protected Application() {
+    }
+
+    public Application(String name, Company company) {
+        Objects.requireNonNull(company);
+        Objects.requireNonNull(name);
+
+        this.name = name;
+        this.company = company;
+    }
 
     public String getName() {
         return name;
@@ -37,15 +49,15 @@ public class Application extends BaseEntity<Application> implements FilterData {
         return company;
     }
 
-    public void setCompany(Company company) {
+    protected void setCompany(Company company) {
         this.company = company;
     }
 
     public Set<UserApplication> getApplicationUsers() {
-        return applicationUsers;
+        return Set.copyOf(applicationUsers);
     }
 
-    public void setApplicationUsers(Set<UserApplication> applicationUsers) {
+    protected void setApplicationUsers(Set<UserApplication> applicationUsers) {
         this.applicationUsers = applicationUsers;
     }
 

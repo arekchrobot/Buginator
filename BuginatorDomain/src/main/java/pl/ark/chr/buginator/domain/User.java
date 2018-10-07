@@ -22,8 +22,8 @@ public class User extends BaseEntity<User> {
     @Column(name = "pass", length = 100)
     private String password;
 
-    @Column(name = "active")
-    private Boolean active;
+    @Column(name = "active", nullable = false)
+    private boolean active;
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
@@ -33,7 +33,7 @@ public class User extends BaseEntity<User> {
     private Set<UserApplication> userApplications = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "buginator_role_id", nullable = false)
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     public String getName() {
@@ -60,11 +60,11 @@ public class User extends BaseEntity<User> {
         this.password = password;
     }
 
-    public Boolean getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
@@ -85,10 +85,10 @@ public class User extends BaseEntity<User> {
     }
 
     public Set<UserApplication> getUserApplications() {
-        return userApplications;
+        return Set.copyOf(userApplications);
     }
 
-    public void setUserApplications(Set<UserApplication> userApplications) {
+    protected void setUserApplications(Set<UserApplication> userApplications) {
         this.userApplications = userApplications;
     }
 }

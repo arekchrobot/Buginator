@@ -22,11 +22,22 @@ public class UserApplicationId implements Serializable, Comparable<UserApplicati
     @JoinColumn(name = "application_id", nullable = false)
     private Application application;
 
+    protected UserApplicationId() {
+    }
+
+    public UserApplicationId(User user, Application application) {
+        Objects.requireNonNull(user);
+        Objects.requireNonNull(application);
+
+        this.user = user;
+        this.application = application;
+    }
+
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    protected void setUser(User user) {
         this.user = user;
     }
 
@@ -34,7 +45,7 @@ public class UserApplicationId implements Serializable, Comparable<UserApplicati
         return application;
     }
 
-    public void setApplication(Application application) {
+    protected void setApplication(Application application) {
         this.application = application;
     }
 

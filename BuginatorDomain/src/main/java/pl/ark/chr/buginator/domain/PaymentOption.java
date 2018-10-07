@@ -8,7 +8,7 @@ import javax.persistence.Table;
  * Representation of possible payment options for access to the portal
  */
 @Entity
-@Table(name = "payment_option")
+@Table(name = "buginator_payment_option")
 public class PaymentOption extends BaseEntity<PaymentOption> {
 
     private static final long serialVersionUID = -1453981529749167170L;
@@ -20,15 +20,15 @@ public class PaymentOption extends BaseEntity<PaymentOption> {
     private int duration;
 
     @Column(name = "max_users")
-    private Integer maxUsers;
+    private int maxUsers;
 
     @Column(name = "price")
-    private Double price;
+    private double price;
 
     @Column(name = "name", length = 75, unique = true)
     private String name;
 
-    public Integer getDuration() {
+    public int getDuration() {
         return duration;
     }
 
@@ -36,19 +36,19 @@ public class PaymentOption extends BaseEntity<PaymentOption> {
         this.duration = duration;
     }
 
-    public Integer getMaxUsers() {
+    public int getMaxUsers() {
         return maxUsers;
     }
 
-    public void setMaxUsers(Integer maxUsers) {
+    public void setMaxUsers(int maxUsers) {
         this.maxUsers = maxUsers;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

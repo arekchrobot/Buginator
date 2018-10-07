@@ -4,6 +4,7 @@ import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
 import pl.ark.chr.buginator.domain.filter.FilterData;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Basic class for integrating notification to external platforms.
@@ -14,10 +15,11 @@ import javax.persistence.*;
  * @see pl.ark.chr.buginator.domain.BaseEntity
  */
 @Entity
-@Table(name = "aggregator",
+@Table(name = "buginator_aggregator",
         uniqueConstraints = {
-                @UniqueConstraint(name = "severity_count_application", columnNames = {"error_severity", "application_id", "count"})
-        }, indexes = {
+                @UniqueConstraint(name = "severity_count_application_unique", columnNames = {"error_severity", "application_id", "count"})
+        },
+        indexes = {
                 @Index(name = "application_index", columnList = "application_id")
         })
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -31,8 +33,8 @@ public class Aggregator<K extends Aggregator<?>> extends BaseEntity<K> implement
     @Column(name = "pass", length = 100)
     private String password = "";
 
-    @Column(name = "aggregator_class", length = 100)
-    private String aggregatorClass = "";
+    @Column(name = "aggregator_class", length = 100, nullable = false)
+    private String aggregatorClass;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "error_severity")
@@ -44,6 +46,27 @@ public class Aggregator<K extends Aggregator<?>> extends BaseEntity<K> implement
 
     @Column(name = "count")
     private int count;
+
+    protected Aggregator() {
+    }
+
+    /**
+     * Main constructor for Aggregator. Should be called in constructors of classes extending this one.
+     *
+     * @param aggregatorClass Not null aggregatorClass, should be filled automatically by extending class
+     *                        This field is used to get aggregator by reflection. Should follow following convention:
+     *                        XAggregator where X is the class prefix extending this aggregator
+     *                        Example:
+     *                        {@code EmailAggregator extends Aggregator}, so aggregatorClass should also be EmailAggregator
+     * @param application     Not null application
+     */
+    public Aggregator(String aggregatorClass, Application application) {
+        Objects.requireNonNull(aggregatorClass);
+        Objects.requireNonNull(aggregatorClass);
+
+        this.aggregatorClass = aggregatorClass;
+        this.application = application;
+    }
 
     public String getLogin() {
         return login;
@@ -65,7 +88,7 @@ public class Aggregator<K extends Aggregator<?>> extends BaseEntity<K> implement
         return aggregatorClass;
     }
 
-    public void setAggregatorClass(String aggregatorClass) {
+    protected void setAggregatorClass(String aggregatorClass) {
         this.aggregatorClass = aggregatorClass;
     }
 
@@ -81,7 +104,7 @@ public class Aggregator<K extends Aggregator<?>> extends BaseEntity<K> implement
         return application;
     }
 
-    public void setApplication(Application application) {
+    protected void setApplication(Application application) {
         this.application = application;
     }
 

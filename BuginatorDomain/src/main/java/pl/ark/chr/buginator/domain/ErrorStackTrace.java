@@ -1,13 +1,15 @@
 package pl.ark.chr.buginator.domain;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Represents the whole stack trace of the Error
  */
 @Entity
 @Table(name = "buginator_error_stack_trace",
-        indexes = {@Index(name = "error_index", columnList = "buginator_error_id")
+        indexes = {
+                @Index(name = "error_index", columnList = "error_id")
         })
 public class ErrorStackTrace extends BaseEntity<ErrorStackTrace> {
 
@@ -17,17 +19,28 @@ public class ErrorStackTrace extends BaseEntity<ErrorStackTrace> {
     private String stackTrace;
 
     @ManyToOne
-    @JoinColumn(name = "buginator_error_id", nullable = false)
+    @JoinColumn(name = "error_id", nullable = false)
     private Error error;
 
-    @Column(name = "stack_trace_order")
+    @Column(name = "stack_trace_order", nullable = false)
     private int stackTraceOrder;
+
+    protected ErrorStackTrace() {
+    }
+
+    public ErrorStackTrace(Error error, int stackTraceOrder, String stackTrace) {
+        Objects.requireNonNull(error);
+
+        this.stackTrace = stackTrace;
+        this.error = error;
+        this.stackTraceOrder = stackTraceOrder;
+    }
 
     public String getStackTrace() {
         return stackTrace;
     }
 
-    public void setStackTrace(String stackTrace) {
+    protected void setStackTrace(String stackTrace) {
         this.stackTrace = stackTrace;
     }
 
@@ -35,7 +48,7 @@ public class ErrorStackTrace extends BaseEntity<ErrorStackTrace> {
         return error;
     }
 
-    public void setError(Error error) {
+    protected void setError(Error error) {
         this.error = error;
     }
 
@@ -43,7 +56,7 @@ public class ErrorStackTrace extends BaseEntity<ErrorStackTrace> {
         return stackTraceOrder;
     }
 
-    public void setStackTraceOrder(int stackTraceOrder) {
+    protected void setStackTraceOrder(int stackTraceOrder) {
         this.stackTraceOrder = stackTraceOrder;
     }
 }

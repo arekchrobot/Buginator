@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: add builder and helper methods for Error
 /**
  * Stores the single error that occured in external application.
  */

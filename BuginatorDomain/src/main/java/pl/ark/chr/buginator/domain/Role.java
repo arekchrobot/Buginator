@@ -18,7 +18,7 @@ public class Role extends BaseEntity<Role> implements Authority {
 
     private static final long serialVersionUID = -160920230822990299L;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)

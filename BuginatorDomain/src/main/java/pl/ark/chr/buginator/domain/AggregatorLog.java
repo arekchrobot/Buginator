@@ -4,12 +4,13 @@ import pl.ark.chr.buginator.domain.enums.AggregatorLogStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Stores logs of statuses for communication with external platforms.
  */
 @Entity
-@Table(name = "aggregator_log",
+@Table(name = "buginator_aggregator_log",
         indexes = {
                 @Index(name = "aggregator_index", columnList = "aggregator_id"),
                 @Index(name = "timestamp_index", columnList = "timestamp")
@@ -39,11 +40,22 @@ public class AggregatorLog extends BaseEntity<AggregatorLog> {
     @Column(name = "retry_count")
     private int retryCount;
 
+    protected AggregatorLog() {
+    }
+
+    private AggregatorLog(Builder builder) {
+        setAggregator(builder.aggregator);
+        setError(builder.error);
+        setTimestamp(builder.timestamp);
+        setStatus(builder.status);
+        setErrorDescription(builder.errorDescription);
+    }
+
     public Aggregator getAggregator() {
         return aggregator;
     }
 
-    public void setAggregator(Aggregator aggregator) {
+    protected void setAggregator(Aggregator aggregator) {
         this.aggregator = aggregator;
     }
 
@@ -59,8 +71,12 @@ public class AggregatorLog extends BaseEntity<AggregatorLog> {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    protected void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public void updateTimestamp() {
+        this.timestamp = LocalDateTime.now();
     }
 
     public AggregatorLogStatus getStatus() {
@@ -79,11 +95,57 @@ public class AggregatorLog extends BaseEntity<AggregatorLog> {
         this.errorDescription = errorDescription;
     }
 
+    public void emptyErrorDescription() {
+        this.error = null;
+    }
+
     public int getRetryCount() {
         return retryCount;
     }
 
-    public void setRetryCount(int retryCount) {
+    protected void setRetryCount(int retryCount) {
         this.retryCount = retryCount;
+    }
+
+    public void incrementRetryCount() {
+        this.retryCount += 1;
+    }
+
+    public static final class Builder {
+        private Aggregator aggregator;
+        private Error error;
+        private LocalDateTime timestamp;
+        private AggregatorLogStatus status;
+        private String errorDescription;
+
+        public Builder() {
+            timestamp = LocalDateTime.now();
+        }
+
+        public Builder aggregator(Aggregator val) {
+            Objects.requireNonNull(val);
+            aggregator = val;
+            return this;
+        }
+
+        public Builder error(Error val) {
+            Objects.requireNonNull(val);
+            error = val;
+            return this;
+        }
+
+        public Builder status(AggregatorLogStatus val) {
+            status = val;
+            return this;
+        }
+
+        public Builder errorDescription(String val) {
+            errorDescription = val;
+            return this;
+        }
+
+        public AggregatorLog build() {
+            return new AggregatorLog(this);
+        }
     }
 }

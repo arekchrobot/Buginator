@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * Stores information about ecosystem where error happened in case of web applications
  */
 @Entity
-@Table(name = "user_agent_data")
+@Table(name = "buginator_user_agent_data")
 public class UserAgentData extends BaseEntity<UserAgentData> {
 
     private static final long serialVersionUID = -8089095071313692442L;

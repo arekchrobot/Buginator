@@ -3,7 +3,8 @@ package pl.ark.chr.buginator.domain.filter;
 import pl.ark.chr.buginator.domain.Application;
 
 /**
- * Created by Arek on 2016-12-01.
+ * Used for security reason. Each class implementing this interface should be filtered to return only
+ * this data that match given Application
  */
 public interface FilterData {
 

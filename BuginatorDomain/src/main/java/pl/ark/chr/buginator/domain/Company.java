@@ -2,21 +2,26 @@ package pl.ark.chr.buginator.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Represents the company that has many users and applications.
  * This class also checks if user assigned to this company can log into portal.
  */
 @Entity
-@Table(name = "company")
+@Table(name = "buginator_company",
+        indexes = {
+                @Index(name = "token_key_index", columnList = "token,unique_key"),
+                @Index(name = "name_index", columnList = "name")
+        })
 public class Company extends BaseEntity<Company> {
 
     private static final long serialVersionUID = 2863610043925637330L;
 
-    @Column(name = "unique_key", unique = true)
+    @Column(name = "unique_key", unique = true, nullable = false)
     private String uniqueKey;
 
-    @Column(name = "token")
+    @Column(name = "token", nullable = false)
     private String token;
 
     @Column(name = "user_limit")
@@ -35,11 +40,23 @@ public class Company extends BaseEntity<Company> {
     @JoinColumn(name = "payment_option_id", nullable = false)
     private PaymentOption selectedPaymentOption;
 
+    protected Company() {
+    }
+
+    public Company(String name, PaymentOption selectedPaymentOption) {
+        Objects.requireNonNull(name);
+
+        updateSelectedPaymentOptions(selectedPaymentOption);
+        this.uniqueKey = generateToken();
+        this.token = generateToken();
+        this.name = name;
+    }
+
     public String getUniqueKey() {
         return uniqueKey;
     }
 
-    public void setUniqueKey(String uniqueKey) {
+    protected void setUniqueKey(String uniqueKey) {
         this.uniqueKey = uniqueKey;
     }
 
@@ -47,7 +64,7 @@ public class Company extends BaseEntity<Company> {
         return token;
     }
 
-    public void setToken(String token) {
+    protected void setToken(String token) {
         this.token = token;
     }
 
@@ -55,7 +72,7 @@ public class Company extends BaseEntity<Company> {
         return userLimit;
     }
 
-    public void setUserLimit(Integer userLimit) {
+    protected void setUserLimit(Integer userLimit) {
         this.userLimit = userLimit;
     }
 
@@ -63,7 +80,7 @@ public class Company extends BaseEntity<Company> {
         return expiryDate;
     }
 
-    public void setExpiryDate(LocalDate expiryDate) {
+    protected void setExpiryDate(LocalDate expiryDate) {
         this.expiryDate = expiryDate;
     }
 
@@ -87,7 +104,28 @@ public class Company extends BaseEntity<Company> {
         return selectedPaymentOption;
     }
 
-    public void setSelectedPaymentOption(PaymentOption selectedPaymentOption) {
+    protected void setSelectedPaymentOption(PaymentOption selectedPaymentOption) {
         this.selectedPaymentOption = selectedPaymentOption;
+    }
+
+    public void updateSelectedPaymentOptions(PaymentOption selectedPaymentOption) {
+        Objects.requireNonNull(selectedPaymentOption);
+
+        this.selectedPaymentOption = selectedPaymentOption;
+        this.userLimit = selectedPaymentOption.getMaxUsers();
+        this.expiryDate = extendExpiryDate(selectedPaymentOption.getDuration());
+    }
+
+    private LocalDate extendExpiryDate(Integer duration) {
+        if (this.expiryDate == null) {
+            this.expiryDate = LocalDate.now();
+        }
+        return this.expiryDate.plusDays(duration);
+    }
+
+    private String generateToken() {
+        //TODO: fix generating token
+        return "NOT IMPLEMENTED TOKEN";
+//        return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
     }
 }

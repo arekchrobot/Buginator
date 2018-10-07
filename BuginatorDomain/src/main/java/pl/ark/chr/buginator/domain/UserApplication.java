@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Mapping between User and Applications classes. Defines the action that user can do in the single application.
  */
 @Entity
-@Table(name = "user_application")
+@Table(name = "buginator_user_application")
 @AssociationOverrides({
         @AssociationOverride(name = "pk.user", joinColumns = @JoinColumn(name = "user_id")),
         @AssociationOverride(name = "pk.application", joinColumns = @JoinColumn(name = "application_id"))
@@ -20,16 +20,23 @@ public class UserApplication implements Serializable, Comparable<UserApplication
     private UserApplicationId pk = new UserApplicationId();
 
     @Column(name = "view")
-    private Boolean view;
+    private boolean view;
 
     @Column(name = "modify")
-    private Boolean modify;
+    private boolean modify;
+
+    protected UserApplication() {
+    }
+
+    public UserApplication(User user, Application application) {
+        pk = new UserApplicationId(user, application);
+    }
 
     public UserApplicationId getPk() {
         return pk;
     }
 
-    public void setPk(UserApplicationId pk) {
+    protected void setPk(UserApplicationId pk) {
         this.pk = pk;
     }
 
@@ -38,32 +45,24 @@ public class UserApplication implements Serializable, Comparable<UserApplication
         return getPk().getUser();
     }
 
-    public void setUser(User user) {
-        getPk().setUser(user);
-    }
-
     @Transient
     public Application getApplication() {
         return getPk().getApplication();
     }
 
-    public void setApplication(Application application) {
-        getPk().setApplication(application);
-    }
-
-    public Boolean isView() {
+    public boolean isView() {
         return view;
     }
 
-    public void setView(Boolean view) {
+    public void setView(boolean view) {
         this.view = view;
     }
 
-    public Boolean isModify() {
+    public boolean isModify() {
         return modify;
     }
 
-    public void setModify(Boolean modify) {
+    public void setModify(boolean modify) {
         this.modify = modify;
     }
 
