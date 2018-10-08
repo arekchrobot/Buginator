@@ -28,6 +28,8 @@
     <modules>
         <module>Buginator</module>
         <module>BuginatorDomain</module>
+        <module>BuginatorAggregatorApi</module>
+        <module>EmailAggregator</module>
     </modules>
 
     <dependencyManagement>
