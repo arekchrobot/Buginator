@@ -3,7 +3,6 @@ package pl.ark.chr.buginator.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * Sends notifications via email to predefined recipients.
@@ -15,14 +14,27 @@ public class EmailAggregator extends Aggregator<EmailAggregator> {
 
     private static final long serialVersionUID = 9140655678253265412L;
 
-    @Transient
-    public static final String RECIPIENT_SPLIT_TOKEN = ",";
+    public static final String EMAIL_AGGREGATOR_NAME = "EmailAggregator";
 
-    @Column(name = "recipients")
+    private static final String RECIPIENT_SPLIT_TOKEN = ",";
+
+    @Column(name = "recipients", nullable = false)
     private String recipients = "";
 
     @Column(name = "language")
     private String language;
+
+
+    protected EmailAggregator() {
+        super();
+        this.setAggregatorClass(EMAIL_AGGREGATOR_NAME);
+    }
+
+    public EmailAggregator(String aggregatorClass, Application application, String recipients) {
+        super(aggregatorClass, application);
+        this.setAggregatorClass(EMAIL_AGGREGATOR_NAME);
+        this.recipients = recipients;
+    }
 
     public String getRecipients() {
         return recipients;
