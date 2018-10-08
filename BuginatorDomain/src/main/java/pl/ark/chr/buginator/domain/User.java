@@ -2,10 +2,11 @@ package pl.ark.chr.buginator.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
- * An user thta can log in to portal and perform operations based on role
+ * An user that can log in to portal and perform operations based on role
  */
 @Entity
 @Table(name = "buginator_user")
@@ -13,13 +14,13 @@ public class User extends BaseEntity<User> {
 
     private static final long serialVersionUID = -2530893894458448440L;
 
-    @Column(name = "name", length = 100)
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
 
-    @Column(name = "email", length = 100, unique = true)
+    @Column(name = "email", length = 100, unique = true, nullable = false)
     private String email;
 
-    @Column(name = "pass", length = 100)
+    @Column(name = "pass", length = 100, nullable = false)
     private String password;
 
     @Column(name = "active", nullable = false)
@@ -35,6 +36,18 @@ public class User extends BaseEntity<User> {
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
+
+    protected User() {
+    }
+
+    private User(Builder builder) {
+        setName(builder.name);
+        setEmail(builder.email);
+        setPassword(builder.password);
+        setActive(builder.active);
+        setCompany(builder.company);
+        setRole(builder.role);
+    }
 
     public String getName() {
         return name;
@@ -90,5 +103,57 @@ public class User extends BaseEntity<User> {
 
     protected void setUserApplications(Set<UserApplication> userApplications) {
         this.userApplications = userApplications;
+    }
+
+
+    public static final class Builder {
+        private String name;
+        private String email;
+        private String password;
+        private boolean active;
+        private Company company;
+        private Role role;
+
+        public Builder() {
+        }
+
+        public Builder name(String val) {
+            Objects.requireNonNull(val);
+            name = val;
+            return this;
+        }
+
+        public Builder email(String val) {
+            Objects.requireNonNull(val);
+            email = val;
+            return this;
+        }
+
+        public Builder password(String val) {
+            Objects.requireNonNull(val);
+            password = val;
+            return this;
+        }
+
+        public Builder active(boolean val) {
+            active = val;
+            return this;
+        }
+
+        public Builder company(Company val) {
+            Objects.requireNonNull(val);
+            company = val;
+            return this;
+        }
+
+        public Builder role(Role val) {
+            Objects.requireNonNull(val);
+            role = val;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 }
