@@ -17,9 +17,9 @@ public abstract class AbstractAggregatorSender<T extends Aggregator> implements 
     @Override
     public void notifyExternalAggregator(T aggregator, Error error) {
         if (AggregatorSenderValidator.contractNotMatch(aggregator, error)) {
-            logger.info("Error has invalid severity or counts does not match for id: " + error.getId());
-            //TODO: throw better error
-            throw new RuntimeException("Error has invalid severity or counts does not match for id: " + error.getId());
+            logger.info("Error has invalid severity or counts does not match for id: " + error.getId()
+                    + " for aggregator: " + aggregator.getId());
+            return;
         }
 
         sendData(aggregator, error);

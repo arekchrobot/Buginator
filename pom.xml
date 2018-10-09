@@ -23,6 +23,10 @@
         <pieroxy-useragent.version>2017.09.24.17.00.GMT</pieroxy-useragent.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
         <java.release.version>11</java.release.version>
+        <mockito.version>2.22.0</mockito.version>
+        <assertj.version>1.7.0</assertj.version>
+        <fluent.exception.version>1.0.1</fluent.exception.version>
+        <spring.boot.version>2.1.0.M4</spring.boot.version>
     </properties>
 
     <modules>
@@ -39,6 +43,36 @@
                 <artifactId>user-agent-detection</artifactId>
                 <version>${pieroxy-useragent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.wkr</groupId>
+                <artifactId>fluent-exception-rule</artifactId>
+                <version>${fluent.exception.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -46,7 +80,9 @@
         <repository>
             <id>spring-snapshots</id>
             <url>https://repo.spring.io/snapshot</url>
-            <snapshots><enabled>true</enabled></snapshots>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>spring-milestones</id>

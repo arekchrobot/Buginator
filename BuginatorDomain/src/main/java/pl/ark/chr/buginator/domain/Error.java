@@ -21,7 +21,6 @@ public class Error extends BaseEntity<Error> implements FilterData {
     private static final long serialVersionUID = -6062066697736318840L;
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Column(name = "title", length = 200, nullable = false)
     private String title;
@@ -219,7 +218,7 @@ public class Error extends BaseEntity<Error> implements FilterData {
     }
 
     public void parseAndSetLastOccurrence(String lastOccurence) {
-        this.lastOccurrence = LocalDate.parse(lastOccurence, DATE_FORMATTER);
+        this.lastOccurrence = LocalDateTime.parse(lastOccurence, DATE_TIME_FORMATTER).toLocalDate();
     }
 
     public static Builder builder(String title, ErrorSeverity severity, ErrorStatus status,
@@ -326,7 +325,7 @@ public class Error extends BaseEntity<Error> implements FilterData {
         }
 
         public Builder lastOccurrence(String val) {
-            lastOccurrence = LocalDate.parse(val, DATE_FORMATTER);
+            lastOccurrence = LocalDateTime.parse(val, DATE_TIME_FORMATTER).toLocalDate();
             return this;
         }
 

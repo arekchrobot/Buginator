@@ -3,6 +3,7 @@ package pl.ark.chr.buginator.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * Sends notifications via email to predefined recipients.
@@ -30,9 +31,11 @@ public class EmailAggregator extends Aggregator<EmailAggregator> {
         this.setAggregatorClass(EMAIL_AGGREGATOR_NAME);
     }
 
-    public EmailAggregator(String aggregatorClass, Application application, String recipients) {
-        super(aggregatorClass, application);
-        this.setAggregatorClass(EMAIL_AGGREGATOR_NAME);
+    public EmailAggregator(Application application, String recipients) {
+        super(EMAIL_AGGREGATOR_NAME, application);
+
+        Objects.requireNonNull(recipients);
+
         this.recipients = recipients;
     }
 
