@@ -12,12 +12,12 @@ import pl.ark.chr.buginator.domain.Error;
  */
 public abstract class AbstractAggregatorSender<T extends Aggregator> implements AggregatorSender<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(AbstractAggregatorSender.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAggregatorSender.class);
 
     @Override
     public void notifyExternalAggregator(T aggregator, Error error) {
         if (AggregatorSenderValidator.contractNotMatch(aggregator, error)) {
-            logger.info("Error has invalid severity or counts does not match for id: " + error.getId()
+            LOGGER.info("Error has invalid severity or counts does not match for id: " + error.getId()
                     + " for aggregator: " + aggregator.getId());
             return;
         }

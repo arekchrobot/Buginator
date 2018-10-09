@@ -1,5 +1,7 @@
 package pl.ark.chr.buginator.domain;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
 public class Company extends BaseEntity<Company> {
 
     private static final long serialVersionUID = 2863610043925637330L;
+    private static final int TOKEN_LENGTH = 15;
 
     @Column(name = "unique_key", unique = true, nullable = false)
     private String uniqueKey;
@@ -124,8 +127,6 @@ public class Company extends BaseEntity<Company> {
     }
 
     private String generateToken() {
-        //TODO: fix generating token
-        return "NOT IMPLEMENTED TOKEN";
-//        return RandomStringUtils.random(PASSWORD_LENGTH, true, true);
+        return RandomStringUtils.random(TOKEN_LENGTH, true, true);
     }
 }

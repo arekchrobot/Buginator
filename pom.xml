@@ -27,6 +27,7 @@
         <assertj.version>1.7.0</assertj.version>
         <fluent.exception.version>1.0.1</fluent.exception.version>
         <spring.boot.version>2.1.0.M4</spring.boot.version>
+        <apache.commons.version>3.8.1</apache.commons.version>
     </properties>
 
     <modules>
@@ -43,6 +44,15 @@
                 <artifactId>user-agent-detection</artifactId>
                 <version>${pieroxy-useragent.version}</version>
             </dependency>
+
+            <!--utility-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.commons.version}</version>
+            </dependency>
+
+            <!--test-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
