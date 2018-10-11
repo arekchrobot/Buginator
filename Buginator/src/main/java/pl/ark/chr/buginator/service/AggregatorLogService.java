@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.service;
 
-import pl.ark.chr.buginator.domain.AggregatorLog;
-import pl.ark.chr.buginator.domain.UserApplication;
+import pl.ark.chr.buginator.domain.aggregator.AggregatorLog;
+import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
 
 import java.util.List;

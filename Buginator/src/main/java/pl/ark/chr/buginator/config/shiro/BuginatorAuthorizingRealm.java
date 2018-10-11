@@ -7,11 +7,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.ark.chr.buginator.domain.Permission;
-import pl.ark.chr.buginator.domain.Role;
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
-import pl.ark.chr.buginator.repository.UserRepository;
+import pl.ark.chr.buginator.repository.auth.UserRepository;
 
 import java.util.HashSet;
 import java.util.NoSuchElementException;

@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.aggregator.service;
 
-import pl.ark.chr.buginator.domain.Aggregator;
-import pl.ark.chr.buginator.domain.Error;
+import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+import pl.ark.chr.buginator.domain.core.Error;
 
 /**
  * The strategy responsible for sending Error to an external notification platform

@@ -3,11 +3,11 @@ package pl.ark.chr.buginator.aggregator.util;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import pl.ark.chr.buginator.domain.Aggregator;
-import pl.ark.chr.buginator.domain.Application;
-import pl.ark.chr.buginator.domain.Error;
-import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
-import pl.ark.chr.buginator.domain.enums.ErrorStatus;
+import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+import pl.ark.chr.buginator.domain.core.Application;
+import pl.ark.chr.buginator.domain.core.Error;
+import pl.ark.chr.buginator.domain.core.ErrorSeverity;
+import pl.ark.chr.buginator.domain.core.ErrorStatus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

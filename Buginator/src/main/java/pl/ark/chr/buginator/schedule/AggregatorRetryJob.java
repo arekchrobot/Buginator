@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.BuginatorProperties;
 import pl.ark.chr.buginator.aggregator.service.AggregatorService;
 import pl.ark.chr.buginator.aggregator.util.AggregatorReflection;
-import pl.ark.chr.buginator.domain.Aggregator;
-import pl.ark.chr.buginator.domain.AggregatorLog;
-import pl.ark.chr.buginator.domain.enums.AggregatorLogStatus;
-import pl.ark.chr.buginator.repository.AggregatorLogRepository;
+import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+import pl.ark.chr.buginator.domain.aggregator.AggregatorLog;
+import pl.ark.chr.buginator.domain.aggregator.AggregatorLogStatus;
+import pl.ark.chr.buginator.repository.aggregator.AggregatorLogRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

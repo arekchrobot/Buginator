@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.service;
 
 import pl.ark.chr.buginator.data.ChartData;
-import pl.ark.chr.buginator.domain.UserApplication;
+import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.exceptions.ChartException;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
 

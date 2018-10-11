@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.ValidationException;
 import pl.ark.chr.buginator.rest.annotations.GET;

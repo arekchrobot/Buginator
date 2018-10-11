@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
-import pl.ark.chr.buginator.domain.Company;
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.exceptions.ValidationException;
-import pl.ark.chr.buginator.repository.CompanyRepository;
-import pl.ark.chr.buginator.repository.UserRepository;
+import pl.ark.chr.buginator.repository.auth.CompanyRepository;
+import pl.ark.chr.buginator.repository.auth.UserRepository;
 
 import java.util.Locale;
 

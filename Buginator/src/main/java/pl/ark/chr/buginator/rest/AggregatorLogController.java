@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import pl.ark.chr.buginator.domain.AggregatorLog;
+import pl.ark.chr.buginator.domain.aggregator.AggregatorLog;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.rest.annotations.GET;
 import pl.ark.chr.buginator.rest.annotations.RestController;

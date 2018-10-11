@@ -1,7 +1,6 @@
 package pl.ark.chr.buginator.data;
 
-import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
-import pl.ark.chr.buginator.domain.enums.ErrorStatus;
+import pl.ark.chr.buginator.domain.core.ErrorSeverity;
 
 import java.util.ArrayList;
 import java.util.List;

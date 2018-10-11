@@ -11,8 +11,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 //import org.springframework.ui.velocity.VelocityEngineUtils;
-import pl.ark.chr.buginator.domain.Company;
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.service.EmailService;
 
 import javax.mail.MessagingException;

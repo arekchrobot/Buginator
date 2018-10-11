@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.filter;
 
-import pl.ark.chr.buginator.domain.UserApplication;
-import pl.ark.chr.buginator.domain.filter.FilterData;
+import pl.ark.chr.buginator.domain.auth.UserApplication;
+import pl.ark.chr.buginator.persistence.security.FilterData;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
 
 import java.util.Set;

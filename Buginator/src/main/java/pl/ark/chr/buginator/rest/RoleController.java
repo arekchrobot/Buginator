@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import pl.ark.chr.buginator.domain.Permission;
-import pl.ark.chr.buginator.domain.Role;
+import pl.ark.chr.buginator.domain.auth.Permission;
+import pl.ark.chr.buginator.domain.auth.Role;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.ValidationException;
 import pl.ark.chr.buginator.rest.annotations.DELETE;
@@ -21,7 +21,6 @@ import pl.ark.chr.buginator.util.SessionUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Arek on 2017-03-22.

@@ -1,15 +1,13 @@
 package pl.ark.chr.buginator.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import pl.ark.chr.buginator.domain.Authority;
-import pl.ark.chr.buginator.domain.Company;
-import pl.ark.chr.buginator.domain.User;
-import pl.ark.chr.buginator.domain.UserApplication;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.User;
+import pl.ark.chr.buginator.domain.auth.UserApplication;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Created by Arek on 2016-09-29.

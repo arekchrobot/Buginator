@@ -1,8 +1,8 @@
 package pl.ark.chr.buginator.service;
 
-import pl.ark.chr.buginator.domain.Company;
-import pl.ark.chr.buginator.domain.Permission;
-import pl.ark.chr.buginator.domain.Role;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.Permission;
+import pl.ark.chr.buginator.domain.auth.Role;
 import pl.ark.chr.buginator.exceptions.ValidationException;
 
 import java.util.List;

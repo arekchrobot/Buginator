@@ -8,13 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.aggregator.util.AggregatorReflection;
 import pl.ark.chr.buginator.data.AggregatorData;
 import pl.ark.chr.buginator.data.UserWrapper;
-import pl.ark.chr.buginator.domain.Aggregator;
-import pl.ark.chr.buginator.domain.Application;
+import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
 import pl.ark.chr.buginator.filter.ClientFilter;
 import pl.ark.chr.buginator.filter.ClientFilterFactory;
-import pl.ark.chr.buginator.repository.AggregatorRepository;
-import pl.ark.chr.buginator.repository.ApplicationRepository;
+import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
+import pl.ark.chr.buginator.repository.core.ApplicationRepository;
 import pl.ark.chr.buginator.service.AggregatorService;
 
 import java.util.ArrayList;

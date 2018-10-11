@@ -10,12 +10,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
-import pl.ark.chr.buginator.domain.Application;
-import pl.ark.chr.buginator.domain.Error;
-import pl.ark.chr.buginator.domain.User;
-import pl.ark.chr.buginator.domain.UserApplication;
-import pl.ark.chr.buginator.repository.ApplicationRepository;
-import pl.ark.chr.buginator.repository.ErrorRepository;
+import pl.ark.chr.buginator.domain.core.Application;
+import pl.ark.chr.buginator.domain.core.Error;
+import pl.ark.chr.buginator.domain.auth.User;
+import pl.ark.chr.buginator.domain.auth.UserApplication;
+import pl.ark.chr.buginator.repository.core.ApplicationRepository;
+import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.service.ErrorService;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 

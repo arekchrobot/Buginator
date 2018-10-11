@@ -2,7 +2,7 @@ package pl.ark.chr.buginator.data;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import pl.ark.chr.buginator.domain.Aggregator;
+import pl.ark.chr.buginator.domain.aggregator.Aggregator;
 import pl.ark.chr.buginator.domain.EmailAggregator;
 
 /**

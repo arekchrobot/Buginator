@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import pl.ark.chr.buginator.aggregator.service.AggregatorService;
-import pl.ark.chr.buginator.domain.Aggregator;
+import pl.ark.chr.buginator.domain.aggregator.Aggregator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

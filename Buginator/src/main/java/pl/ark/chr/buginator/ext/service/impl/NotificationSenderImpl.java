@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ark.chr.buginator.domain.*;
-import pl.ark.chr.buginator.domain.Error;
+import pl.ark.chr.buginator.domain.core.Application;
+import pl.ark.chr.buginator.domain.core.Error;
+import pl.ark.chr.buginator.domain.auth.User;
+import pl.ark.chr.buginator.domain.messaging.Notification;
 import pl.ark.chr.buginator.ext.service.NotificationSender;
-import pl.ark.chr.buginator.repository.NotificationRepository;
+import pl.ark.chr.buginator.repository.messaging.NotificationRepository;
 import pl.ark.chr.buginator.util.TokenGenerator;
 //import pl.ark.chr.buginator.websocket.NotificationEndpoint;
 

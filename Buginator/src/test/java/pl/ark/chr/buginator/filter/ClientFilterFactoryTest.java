@@ -4,10 +4,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import pl.ark.chr.buginator.domain.Application;
-import pl.ark.chr.buginator.domain.UserApplication;
-import pl.ark.chr.buginator.domain.UserApplicationId;
-import pl.ark.chr.buginator.domain.filter.FilterData;
+import pl.ark.chr.buginator.domain.core.Application;
+import pl.ark.chr.buginator.domain.auth.UserApplication;
+import pl.ark.chr.buginator.domain.auth.UserApplicationId;
+import pl.ark.chr.buginator.persistence.security.FilterData;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 

@@ -1,14 +1,19 @@
 package pl.ark.chr.buginator;
 
 import pl.ark.chr.buginator.data.UserWrapper;
-import pl.ark.chr.buginator.domain.*;
-import pl.ark.chr.buginator.domain.Error;
-import pl.ark.chr.buginator.domain.enums.ErrorSeverity;
-import pl.ark.chr.buginator.domain.enums.ErrorStatus;
+import pl.ark.chr.buginator.domain.core.Application;
+import pl.ark.chr.buginator.domain.core.Error;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.Role;
+import pl.ark.chr.buginator.domain.auth.User;
+import pl.ark.chr.buginator.domain.auth.UserApplication;
+import pl.ark.chr.buginator.domain.core.ErrorStackTrace;
+import pl.ark.chr.buginator.domain.core.UserAgentData;
+import pl.ark.chr.buginator.domain.core.ErrorSeverity;
+import pl.ark.chr.buginator.domain.core.ErrorStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

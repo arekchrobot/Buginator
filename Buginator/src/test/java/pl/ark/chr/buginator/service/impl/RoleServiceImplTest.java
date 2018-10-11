@@ -9,10 +9,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
-import pl.ark.chr.buginator.domain.Company;
-import pl.ark.chr.buginator.domain.Role;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.Role;
 import pl.ark.chr.buginator.exceptions.ValidationException;
-import pl.ark.chr.buginator.repository.RoleRepository;
+import pl.ark.chr.buginator.repository.auth.RoleRepository;
 import pl.ark.chr.buginator.service.RoleService;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 

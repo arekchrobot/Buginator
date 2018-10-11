@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator.data;
 
-import pl.ark.chr.buginator.domain.Notification;
+import pl.ark.chr.buginator.domain.messaging.Notification;
 
 /**
  * Created by Arek on 2017-02-27.

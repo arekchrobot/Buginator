@@ -10,8 +10,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.ark.chr.buginator.TestApplicationConfiguration;
-import pl.ark.chr.buginator.domain.Company;
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.User;
 
 import javax.mail.Message;
 import javax.mail.Session;

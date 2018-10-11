@@ -11,11 +11,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.data.ChartData;
-import pl.ark.chr.buginator.domain.*;
+import pl.ark.chr.buginator.domain.auth.UserApplication;
+import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.exceptions.ChartException;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
-import pl.ark.chr.buginator.repository.ApplicationRepository;
-import pl.ark.chr.buginator.repository.ErrorRepository;
+import pl.ark.chr.buginator.repository.core.ApplicationRepository;
+import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.service.ChartService;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 

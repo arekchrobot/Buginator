@@ -7,15 +7,12 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.data.NotificationData;
-import pl.ark.chr.buginator.domain.Notification;
-import pl.ark.chr.buginator.domain.User;
-import pl.ark.chr.buginator.exceptions.TokenNotExistException;
-import pl.ark.chr.buginator.repository.NotificationRepository;
-import pl.ark.chr.buginator.repository.UserRepository;
+import pl.ark.chr.buginator.domain.auth.User;
+import pl.ark.chr.buginator.repository.messaging.NotificationRepository;
+import pl.ark.chr.buginator.repository.auth.UserRepository;
 import pl.ark.chr.buginator.service.NotificationService;
 import pl.ark.chr.buginator.util.TokenGenerator;
 
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

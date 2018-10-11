@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.service;
 
-import pl.ark.chr.buginator.domain.Company;
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;

@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator.data;
 
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.User;
 
 /**
  * Created by Arek on 2017-02-04.

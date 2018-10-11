@@ -11,9 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.ark.chr.buginator.TestApplicationConfiguration;
 import pl.ark.chr.buginator.aggregator.service.AggregatorService;
 import pl.ark.chr.buginator.aggregator.service.impl.EmailAggregatorServiceImpl;
-import pl.ark.chr.buginator.domain.Aggregator;
+import pl.ark.chr.buginator.domain.aggregator.Aggregator;
 import pl.ark.chr.buginator.domain.EmailAggregator;
-import pl.ark.chr.buginator.repository.AggregatorRepository;
+import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
 import pl.ark.chr.buginator.repository.EmailAggregatorRepository;
 
 import static org.assertj.core.api.Assertions.*;

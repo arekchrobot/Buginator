@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.ext.service;
 
-import pl.ark.chr.buginator.domain.Application;
-import pl.ark.chr.buginator.domain.Error;
+import pl.ark.chr.buginator.domain.core.Application;
+import pl.ark.chr.buginator.domain.core.Error;
 
 /**
  * Created by Arek on 2017-05-04.

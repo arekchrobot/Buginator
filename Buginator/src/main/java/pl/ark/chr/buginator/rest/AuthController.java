@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.ark.chr.buginator.data.Credentials;
 import pl.ark.chr.buginator.data.RegisterData;
 import pl.ark.chr.buginator.data.UserWrapper;
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
 import pl.ark.chr.buginator.exceptions.ValidationException;

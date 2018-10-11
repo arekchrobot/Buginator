@@ -1,8 +1,8 @@
 package pl.ark.chr.buginator.data;
 
 import org.apache.commons.lang3.StringEscapeUtils;
-import pl.ark.chr.buginator.domain.Error;
-import pl.ark.chr.buginator.domain.ErrorStackTrace;
+import pl.ark.chr.buginator.domain.core.Error;
+import pl.ark.chr.buginator.domain.core.ErrorStackTrace;
 
 import java.util.List;
 

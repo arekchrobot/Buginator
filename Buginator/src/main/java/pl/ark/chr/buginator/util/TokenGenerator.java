@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator.util;
 
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.User;
 
 import java.util.Base64;
 

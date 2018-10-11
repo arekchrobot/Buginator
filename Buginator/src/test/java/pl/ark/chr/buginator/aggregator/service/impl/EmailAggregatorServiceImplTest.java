@@ -11,9 +11,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.ark.chr.buginator.TestApplicationConfiguration;
 import pl.ark.chr.buginator.TestObjectCreator;
-import pl.ark.chr.buginator.domain.Application;
+import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.EmailAggregator;
-import pl.ark.chr.buginator.domain.Error;
+import pl.ark.chr.buginator.domain.core.Error;
 
 import javax.mail.Address;
 import javax.mail.Message;

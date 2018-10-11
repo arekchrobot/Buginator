@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.service;
 
 import pl.ark.chr.buginator.data.NotificationData;
-import pl.ark.chr.buginator.domain.User;
+import pl.ark.chr.buginator.domain.auth.User;
 
 import java.util.List;
 

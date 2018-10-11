@@ -14,12 +14,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import pl.ark.chr.buginator.aggregator.service.AggregatorServiceValidator;
 import pl.ark.chr.buginator.aggregator.service.impl.EmailAggregatorServiceImpl;
 import pl.ark.chr.buginator.domain.EmailAggregator;
-import pl.ark.chr.buginator.repository.AggregatorRepository;
+import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
 import pl.ark.chr.buginator.repository.EmailAggregatorRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.impl.EmailServiceImpl;
 
-import java.io.IOException;
 import java.util.Properties;
 
 /**

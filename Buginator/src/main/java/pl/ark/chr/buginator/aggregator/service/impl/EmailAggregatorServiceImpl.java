@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.aggregator.service.AbstractAggregatorService;
 import pl.ark.chr.buginator.aggregator.service.AggregatorService;
 import pl.ark.chr.buginator.domain.EmailAggregator;
-import pl.ark.chr.buginator.domain.Error;
+import pl.ark.chr.buginator.domain.core.Error;
 import pl.ark.chr.buginator.util.NetworkUtil;
 
 import javax.mail.MessagingException;
