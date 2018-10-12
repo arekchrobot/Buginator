@@ -3,7 +3,7 @@ package pl.ark.chr.buginator.aggregator.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+import pl.ark.chr.buginator.aggregator.domain.Aggregator;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.core.Error;
 import pl.ark.chr.buginator.domain.core.ErrorSeverity;

@@ -1,5 +1,6 @@
-package pl.ark.chr.buginator.domain.aggregator;
+package pl.ark.chr.buginator.aggregator.email.domain;
 
+import pl.ark.chr.buginator.aggregator.domain.Aggregator;
 import pl.ark.chr.buginator.domain.core.Application;
 
 import javax.persistence.Column;

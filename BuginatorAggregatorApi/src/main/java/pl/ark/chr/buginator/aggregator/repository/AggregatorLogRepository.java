@@ -1,10 +1,10 @@
-package pl.ark.chr.buginator.repository.aggregator;
+package pl.ark.chr.buginator.aggregator.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import pl.ark.chr.buginator.domain.aggregator.Aggregator;
-import pl.ark.chr.buginator.domain.aggregator.AggregatorLog;
+import pl.ark.chr.buginator.aggregator.domain.Aggregator;
+import pl.ark.chr.buginator.aggregator.domain.AggregatorLog;
+import pl.ark.chr.buginator.aggregator.domain.AggregatorLogStatus;
 import pl.ark.chr.buginator.domain.core.Error;
-import pl.ark.chr.buginator.domain.aggregator.AggregatorLogStatus;
 
 import java.util.List;
 

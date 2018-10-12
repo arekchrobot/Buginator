@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.domain.aggregator;
+package pl.ark.chr.buginator.aggregator.domain;
 
 /**
  * Indicates if call to Aggregator was a success or failure

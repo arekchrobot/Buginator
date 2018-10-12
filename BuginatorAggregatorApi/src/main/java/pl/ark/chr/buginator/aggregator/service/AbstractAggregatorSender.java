@@ -3,7 +3,7 @@ package pl.ark.chr.buginator.aggregator.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.ark.chr.buginator.aggregator.util.AggregatorSenderValidator;
-import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+import pl.ark.chr.buginator.aggregator.domain.Aggregator;
 import pl.ark.chr.buginator.domain.core.Error;
 
 /**

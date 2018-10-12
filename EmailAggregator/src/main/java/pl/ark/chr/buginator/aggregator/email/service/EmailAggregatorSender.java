@@ -1,9 +1,9 @@
 package pl.ark.chr.buginator.aggregator.email.service;
 
 import org.springframework.stereotype.Service;
+import pl.ark.chr.buginator.aggregator.email.domain.EmailAggregator;
 import pl.ark.chr.buginator.aggregator.service.AbstractAggregatorSender;
 import pl.ark.chr.buginator.aggregator.service.AggregatorSender;
-import pl.ark.chr.buginator.domain.aggregator.EmailAggregator;
 import pl.ark.chr.buginator.domain.core.Error;
 
 /**

@@ -1,6 +1,6 @@
-package pl.ark.chr.buginator.repository.aggregator;
+package pl.ark.chr.buginator.aggregator.repository;
 
-import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+import pl.ark.chr.buginator.aggregator.domain.Aggregator;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.core.ErrorSeverity;
 

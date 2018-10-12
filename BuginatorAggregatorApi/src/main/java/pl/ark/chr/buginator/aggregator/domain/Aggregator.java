@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.domain.aggregator;
+package pl.ark.chr.buginator.aggregator.domain;
 
 import pl.ark.chr.buginator.domain.BaseEntity;
 import pl.ark.chr.buginator.domain.core.Application;
