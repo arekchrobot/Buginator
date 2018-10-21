@@ -28,6 +28,8 @@
         <fluent.exception.version>1.0.1</fluent.exception.version>
         <spring.boot.version>2.1.0.M4</spring.boot.version>
         <apache.commons.version>3.8.1</apache.commons.version>
+        <javax.mail.version>1.4.7</javax.mail.version>
+        <artemis.jms.version>2.6.3</artemis.jms.version>
     </properties>
 
     <modules>
@@ -50,6 +52,19 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${apache.commons.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${javax.mail.version}</version>
+            </dependency>
+
+            <!--JMS-->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>artemis-jms-client</artifactId>
+                <version>${artemis.jms.version}</version>
             </dependency>
 
             <!--test-->

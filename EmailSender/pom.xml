@@ -10,21 +10,33 @@
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>EmailAggregator</artifactId>
+    <artifactId>EmailSender</artifactId>
 
-    <name>EmailAggregator</name>
-    <description>Notifies about error via email</description>
+    <name>EmailSender</name>
+    <description>Microservice that sends emails using Java Mail API</description>
 
     <dependencies>
         <dependency>
-            <groupId>pl.ark.chr.buginator</groupId>
-            <artifactId>BuginatorAggregatorApi</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
         </dependency>
         <dependency>
             <groupId>pl.ark.chr.buginator</groupId>
             <artifactId>BuginatorCommons</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-artemis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>artemis-jms-client</artifactId>
+        </dependency>
     </dependencies>
+
 </project>
