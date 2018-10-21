@@ -33,6 +33,8 @@ public class MailQueueListener {
         } else {
 
             LOGGER.info("Unknown message type");
+
+            throw new IllegalArgumentException("Unknown message type");
         }
     }
 }

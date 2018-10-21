@@ -10,10 +10,7 @@ import pl.ark.chr.buginator.email.sender.service.EmailSender;
 import pl.ark.chr.buginator.email.sender.service.jms.MailFailedQueueSender;
 import pl.ark.chr.buginator.email.sender.util.EmailUtils;
 
-import javax.mail.AuthenticationFailedException;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
+import javax.mail.*;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -43,25 +40,40 @@ public class JavaMailEmailSenderImpl implements EmailSender {
             Message message = EmailUtils.createMessage(mail, mailSession);
 
             LOGGER.info("Sending message from: {} to: {}", mail.getFrom(), mail.getTo());
-            EmailUtils.sendMessage(message);
-        } catch(AuthenticationFailedException aef) {
+            sendMessage(message);
+        } catch (MessagingException e) {
+            processMailException(mail, e);
+        }
+    }
+
+    void sendMessage(Message message) throws MessagingException {
+        Transport.send(message);
+    }
+
+    private void processMailException(EmailDTO mail, MessagingException e) {
+        if (e instanceof AuthenticationFailedException) {
             LOGGER.error("Authentication failed for message from: {} to: {}. Sending message to authFailedMailQueue. Error message: {}",
-                    mail.getFrom(), mail.getTo(), aef.getMessage());
+                    mail.getFrom(), mail.getTo(), e.getMessage());
 
             mailFailedQueueSender.sendAuthFailed(mail);
-        } catch(SMTPSendFailedException sfe) {
-            LOGGER.error("Message from: {} to: {} failed. Error message: {}", mail.getFrom(), mail.getTo(), sfe.getMessage());
+        } else if (e instanceof SMTPSendFailedException) {
+            SMTPSendFailedException sfe = (SMTPSendFailedException) e;
 
-            if(markedAsSpam(sfe)) {
-                LOGGER.error("Sending message from: {} to: {} to spamMailQueue", mail.getFrom(), mail.getTo());
-                mailFailedQueueSender.sendSpamRejected(mail);
-            }
-            else {
-                throw new RuntimeException(sfe);
-            }
-        } catch (MessagingException e) {
-            LOGGER.error("Error creating or seding message from: {} to: {}. Error message: {}", mail.getFrom(), mail.getTo(), e.getMessage());
+            processSMTPException(mail, sfe);
+        } else {
+            LOGGER.error("Error creating or sending message from: {} to: {}. Error message: {}", mail.getFrom(), mail.getTo(), e.getMessage());
             throw new RuntimeException(e);
+        }
+    }
+
+    private void processSMTPException(EmailDTO mail, SMTPSendFailedException sfe) {
+        LOGGER.error("Message from: {} to: {} failed. Error message: {}", mail.getFrom(), mail.getTo(), sfe.getMessage());
+
+        if (markedAsSpam(sfe)) {
+            LOGGER.error("Sending message from: {} to: {} to spamMailQueue", mail.getFrom(), mail.getTo());
+            mailFailedQueueSender.sendSpamRejected(mail);
+        } else {
+            throw new RuntimeException(sfe);
         }
     }
 

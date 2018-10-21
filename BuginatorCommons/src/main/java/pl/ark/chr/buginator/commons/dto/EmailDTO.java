@@ -1,6 +1,7 @@
 package pl.ark.chr.buginator.commons.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Mail configuration used in JMS connections to send email
@@ -114,6 +115,9 @@ public class EmailDTO implements Serializable {
         return sb.toString();
     }
 
+    public static Builder builder(String from, String to) {
+        return new Builder(from, to);
+    }
 
     public static final class Builder {
         private String emailBody;
@@ -129,7 +133,16 @@ public class EmailDTO implements Serializable {
         private String smtpHost;
         private boolean ssl;
 
-        public Builder() {
+        public Builder(String from, String to) {
+            Objects.requireNonNull(to);
+            Objects.requireNonNull(from);
+
+            if(to.isBlank() || from.isBlank()) {
+                throw new IllegalArgumentException("One of the following parameters is empty: to - " + to + ", from - " + from);
+            }
+
+            this.from = from;
+            this.to = to;
         }
 
         public Builder emailBody(String val) {
@@ -142,11 +155,6 @@ public class EmailDTO implements Serializable {
             return this;
         }
 
-        public Builder to(String val) {
-            to = val;
-            return this;
-        }
-
         public Builder cc(String val) {
             cc = val;
             return this;
@@ -154,11 +162,6 @@ public class EmailDTO implements Serializable {
 
         public Builder bcc(String val) {
             bcc = val;
-            return this;
-        }
-
-        public Builder from(String val) {
-            from = val;
             return this;
         }
 

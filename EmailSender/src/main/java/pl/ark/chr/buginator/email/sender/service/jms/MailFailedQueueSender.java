@@ -30,7 +30,7 @@ public class MailFailedQueueSender {
         sendToQueue(mail, spamMailQueue);
     }
 
-    void sendToQueue(EmailDTO mail, String queueName) {
+    private void sendToQueue(EmailDTO mail, String queueName) {
         jmsTemplate.convertAndSend(queueName, mail);
     }
 }
