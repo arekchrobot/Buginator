@@ -53,7 +53,7 @@ public abstract class BaseEntity<E extends BaseEntity<?>> implements Serializabl
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BaseEntity that = (BaseEntity) o;
-        if (id == null) return false;
+        if (getId() == null) return false;
         return getId().equals(that.getId());
     }
 
@@ -65,7 +65,7 @@ public abstract class BaseEntity<E extends BaseEntity<?>> implements Serializabl
     @Override
     public String toString() {
         return this.getClass().getName() + " { " +
-                "id = " + id +
+                "id = " + getId() +
                 ", version = " + version +
                 " }";
     }
