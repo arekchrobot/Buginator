@@ -73,6 +73,8 @@
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <release>${java.release.version}</release>
+                    <source>${java.release.version}</source>
+                    <target>${java.release.version}</target>
                 </configuration>
             </plugin>
             <plugin>
