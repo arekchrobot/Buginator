@@ -16,6 +16,7 @@ public class EmailAggregatorConfiguration {
                 new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:/i18n/aggregatorEmail");
         messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setFallbackToSystemLocale(false);
 
         return messageSource;
     }

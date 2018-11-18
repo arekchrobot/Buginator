@@ -92,4 +92,24 @@ public class EmailAggregatorSenderIT {
         assertThat(result.getEmailBody()).isEqualTo(EXPECTED_BODY_PL);
         assertThat(result.getSubject()).isEqualTo("Nowy błąd w systemie Buginator");
     }
+
+    @Test
+    public void shouldUseEnWHenLangNotSupported() {
+        //given
+        Application app = TestObjectCreator.createTestApplication();
+        Error error = TestObjectCreator.createTestError(app);
+        error.setId(3L);
+        EmailAggregator emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app)
+                .language("ru")
+                .build();
+
+        //when
+        emailAggregatorSender.sendData(emailAggregator, error);
+
+        //then
+        EmailDTO result = (EmailDTO) jmsTemplate.receiveAndConvert(mailQueue);
+        assertThat(result).isNotNull();
+        assertThat(result.getEmailBody()).isEqualTo(EXPECTED_BODY_EN);
+        assertThat(result.getSubject()).isEqualTo("New error in Buginator");
+    }
 }
