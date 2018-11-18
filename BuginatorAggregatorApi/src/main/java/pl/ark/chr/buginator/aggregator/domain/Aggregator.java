@@ -64,7 +64,7 @@ public class Aggregator<K extends Aggregator<?>> extends BaseEntity<K> implement
      */
     public Aggregator(String aggregatorClass, Application application) {
         Objects.requireNonNull(aggregatorClass);
-        Objects.requireNonNull(aggregatorClass);
+        Objects.requireNonNull(application);
 
         this.aggregatorClass = aggregatorClass;
         this.application = application;

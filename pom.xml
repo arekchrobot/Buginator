@@ -30,10 +30,22 @@
         <apache.commons.version>3.8.1</apache.commons.version>
         <javax.mail.version>1.4.7</javax.mail.version>
         <artemis.jms.version>2.6.3</artemis.jms.version>
+        <maven.failsafe.plugin.version>2.22.1</maven.failsafe.plugin.version>
+        <integration.tests.skip>true</integration.tests.skip>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>integration</id>
+            <properties>
+                <integration.tests.skip>false</integration.tests.skip>
+            </properties>
+        </profile>
+    </profiles>
 
     <modules>
         <module>Buginator</module>
+        <module>BuginatorCommons</module>
         <module>BuginatorDomain</module>
         <module>BuginatorAggregatorApi</module>
         <module>EmailAggregator</module>
@@ -98,6 +110,11 @@
                 <artifactId>fluent-exception-rule</artifactId>
                 <version>${fluent.exception.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>artemis-jms-server</artifactId>
+                <version>${artemis.jms.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -135,6 +152,14 @@
                     <release>${java.release.version}</release>
                     <source>${java.release.version}</source>
                     <target>${java.release.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.failsafe.plugin.version}</version>
+                <configuration>
+                    <skipTests>${integration.tests.skip}</skipTests>
                 </configuration>
             </plugin>
         </plugins>
