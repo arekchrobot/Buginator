@@ -1,7 +1,6 @@
 package pl.ark.chr.buginator.aggregator.email;
 
 import freemarker.template.Configuration;
-import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +54,7 @@ public class EmailAggregatorSender extends AbstractAggregatorSender<EmailAggrega
 
     @Override
     protected void sendData(EmailAggregator aggregator, Error error) {
-        Locale locale = new Locale(aggregator.getLanguage() == null ? "en" : aggregator.getLanguage());
+        var locale = new Locale(aggregator.getLanguage() == null ? "en" : aggregator.getLanguage());
 
         Map<String, Object> model = createTemplateModel(error, locale);
 
@@ -85,7 +84,7 @@ public class EmailAggregatorSender extends AbstractAggregatorSender<EmailAggrega
     }
 
     String createUrl(Error error) {
-        StringBuilder sb = new StringBuilder(50)
+        var sb = new StringBuilder(50)
                 .append("http://")
                 .append(NetworkUtil.getHostIP());
         if (NetworkUtil.getHostPort() > 0) {
@@ -100,7 +99,7 @@ public class EmailAggregatorSender extends AbstractAggregatorSender<EmailAggrega
     }
 
     String constructEmailBody(Map model) throws IOException, TemplateException {
-        Template template = freeMarkerConfig.getTemplate(TEMPLATE_PATH);
+        var template = freeMarkerConfig.getTemplate(TEMPLATE_PATH);
         return FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
     }
 

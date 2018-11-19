@@ -28,7 +28,7 @@ public class EmailUtils {
      * @return Minimal required properties to send email
      */
     public static Properties createEmailProperties(EmailDTO mail) {
-        Properties props = new Properties();
+        var props = new Properties();
         props.put(SMTP_HOST, mail.getSmtpHost() == null ? "" : mail.getSmtpHost());
         if (mail.isSsl()) {
             props.put(SOCKET_PORT, mail.getSmtpPort() == null ? "" : mail.getSmtpPort());

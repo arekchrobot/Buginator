@@ -59,10 +59,10 @@ public class EmailAggregatorSenderIT {
     @Test
     public void shouldCreateCorrectEnEmailAndSendToJms() {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        Error error = TestObjectCreator.createTestError(app);
+        var app = TestObjectCreator.createTestApplication();
+        var error = TestObjectCreator.createTestError(app);
         error.setId(3L);
-        EmailAggregator emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app).build();
+        var emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app).build();
 
         //when
         emailAggregatorSender.sendData(emailAggregator, error);
@@ -77,9 +77,9 @@ public class EmailAggregatorSenderIT {
     @Test
     public void shouldCreateCorrectPlEmailAndSendToJms() {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        Error error = TestObjectCreator.createTestError(app);
-        EmailAggregator emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app)
+        var app = TestObjectCreator.createTestApplication();
+        var error = TestObjectCreator.createTestError(app);
+        var emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app)
                 .language("pl")
                 .build();
 
@@ -96,10 +96,10 @@ public class EmailAggregatorSenderIT {
     @Test
     public void shouldUseEnWHenLangNotSupported() {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        Error error = TestObjectCreator.createTestError(app);
+        var app = TestObjectCreator.createTestApplication();
+        var error = TestObjectCreator.createTestError(app);
         error.setId(3L);
-        EmailAggregator emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app)
+        var emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app)
                 .language("ru")
                 .build();
 

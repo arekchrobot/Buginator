@@ -19,14 +19,14 @@ public class TestObjectCreator {
     }
 
     static Application createTestApplication() {
-        Company company = new Company("company", new PaymentOption());
-        Application app = new Application("app", company);
+        var company = new Company("company", new PaymentOption());
+        var app = new Application("app", company);
         app.setId(1L);
         return app;
     }
 
     static Error createTestError(Application app) {
-        Error error = Error.builder("error", ErrorSeverity.ERROR, ErrorStatus.CREATED,
+        var error = Error.builder("error", ErrorSeverity.ERROR, ErrorStatus.CREATED,
                 "2018-11-11 11:11:11", app)
                 .build();
         error.setId(2L);

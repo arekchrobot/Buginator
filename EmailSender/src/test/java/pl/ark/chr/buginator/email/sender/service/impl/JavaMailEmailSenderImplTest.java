@@ -41,7 +41,7 @@ public class JavaMailEmailSenderImplTest {
     @Test
     public void shouldCorrectlySendEmail() throws Exception {
         //given
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")
@@ -65,7 +65,7 @@ public class JavaMailEmailSenderImplTest {
     public void shouldSendToAuthQueue() throws Exception {
         //given
         doThrow(new AuthenticationFailedException()).when(emailSender).sendMessage(any(Message.class));
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")
@@ -89,7 +89,7 @@ public class JavaMailEmailSenderImplTest {
     public void shouldSendToSpamQueue() throws Exception {
         //given
         doThrow(new SMTPSendFailedException("", 552, null, null, null, null, null)).when(emailSender).sendMessage(any(Message.class));
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")
@@ -113,7 +113,7 @@ public class JavaMailEmailSenderImplTest {
     public void shouldThrowRuntimeExceptionWhenNotSpam() throws Exception {
         //given
         doThrow(new SMTPSendFailedException("", 551, "SMTP ERROR", null, null, null, null)).when(emailSender).sendMessage(any(Message.class));
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")
@@ -141,7 +141,7 @@ public class JavaMailEmailSenderImplTest {
     public void shouldThrowRuntimeExceptionWhenGeneralMessagingError() throws Exception {
         //given
         doThrow(new MessagingException("GeneralError")).when(emailSender).sendMessage(any(Message.class));
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")

@@ -32,12 +32,12 @@ public class JavaMailEmailSenderImpl implements EmailSender {
 
         LOGGER.info("Preparing mail configuration from: {} to: {}", mail.getFrom(), mail.getTo());
 
-        Properties emailProperties = EmailUtils.createEmailProperties(mail);
-        Session mailSession = EmailUtils.createMailSession(mail, emailProperties);
+        var emailProperties = EmailUtils.createEmailProperties(mail);
+        var mailSession = EmailUtils.createMailSession(mail, emailProperties);
 
         try {
             LOGGER.info("Creating email message from: {} to: {}", mail.getFrom(), mail.getTo());
-            Message message = EmailUtils.createMessage(mail, mailSession);
+            var message = EmailUtils.createMessage(mail, mailSession);
 
             LOGGER.info("Sending message from: {} to: {}", mail.getFrom(), mail.getTo());
             sendMessage(message);

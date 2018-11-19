@@ -16,13 +16,13 @@ public class EmailUtilsTest {
     @Test
     public void shouldCreateNonSslProperties() {
         //given
-        EmailDTO mail = EmailDTO.builder("from", "to")
+        var mail = EmailDTO.builder("from", "to")
                 .smtpHost("host")
                 .smtpPort("547")
                 .build();
 
         //when
-        Properties result = EmailUtils.createEmailProperties(mail);
+        var result = EmailUtils.createEmailProperties(mail);
 
         //then
         assertThat(result.getProperty(EmailUtils.SMTP_HOST)).isEqualTo("host");
@@ -34,14 +34,14 @@ public class EmailUtilsTest {
     @Test
     public void shouldCreateSslProperties() {
         //given
-        EmailDTO mail = EmailDTO.builder("from", "to")
+        var mail = EmailDTO.builder("from", "to")
                 .smtpHost("host")
                 .smtpPort("547")
                 .ssl(true)
                 .build();
 
         //when
-        Properties result = EmailUtils.createEmailProperties(mail);
+        var result = EmailUtils.createEmailProperties(mail);
 
         //then
         assertThat(result.getProperty(EmailUtils.SMTP_HOST)).isEqualTo("host");
@@ -54,12 +54,12 @@ public class EmailUtilsTest {
     @Test
     public void shouldSetEmptyIfMissingPropertyParam() {
         //given
-        EmailDTO mail = EmailDTO.builder("from", "to")
+        var mail = EmailDTO.builder("from", "to")
                 .smtpHost("host")
                 .build();
 
         //when
-        Properties result = EmailUtils.createEmailProperties(mail);
+        var result = EmailUtils.createEmailProperties(mail);
 
         //then
         assertThat(result.getProperty(EmailUtils.SMTP_HOST)).isEqualTo("host");
@@ -69,10 +69,10 @@ public class EmailUtilsTest {
     @Test
     public void shouldCorrectlyParseRecipients() throws Exception {
         //given
-        Address address = new InternetAddress("to@gmail.com");
-        Address address2 = new InternetAddress("abc@gmail.com");
+        var address = new InternetAddress("to@gmail.com");
+        var address2 = new InternetAddress("abc@gmail.com");
 
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com,abc@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com,abc@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")
@@ -81,11 +81,11 @@ public class EmailUtilsTest {
                 .subject("Subject")
                 .build();
 
-        Properties props = EmailUtils.createEmailProperties(mail);
-        Session mailSession = EmailUtils.createMailSession(mail, props);
+        var props = EmailUtils.createEmailProperties(mail);
+        var mailSession = EmailUtils.createMailSession(mail, props);
 
         //when
-        Message result = EmailUtils.createMessage(mail, mailSession);
+        var result = EmailUtils.createMessage(mail, mailSession);
 
         //then
         assertThat(result.getRecipients(Message.RecipientType.TO))
@@ -99,11 +99,11 @@ public class EmailUtilsTest {
     @Test
     public void shouldSetCcAndBccRecipients() throws Exception {
         //given
-        Address cc = new InternetAddress("toCC@gmail.com");
-        Address cc2 = new InternetAddress("abc@gmail.com");
-        Address bcc = new InternetAddress("abc2@gmail.com");
+        var cc = new InternetAddress("toCC@gmail.com");
+        var cc2 = new InternetAddress("abc@gmail.com");
+        var bcc = new InternetAddress("abc2@gmail.com");
 
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")
@@ -114,11 +114,11 @@ public class EmailUtilsTest {
                 .bcc("abc2@gmail.com")
                 .build();
 
-        Properties props = EmailUtils.createEmailProperties(mail);
-        Session mailSession = EmailUtils.createMailSession(mail, props);
+        var props = EmailUtils.createEmailProperties(mail);
+        var mailSession = EmailUtils.createMailSession(mail, props);
 
         //when
-        Message result = EmailUtils.createMessage(mail, mailSession);
+        var result = EmailUtils.createMessage(mail, mailSession);
 
         //then
         assertThat(result.getRecipients(Message.RecipientType.CC))
@@ -134,7 +134,7 @@ public class EmailUtilsTest {
     @Test
     public void shouldCorrectlySetSubjectAndTextContent() throws Exception {
         //given
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com,abc@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com,abc@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")
@@ -143,11 +143,11 @@ public class EmailUtilsTest {
                 .subject("Subject")
                 .build();
 
-        Properties props = EmailUtils.createEmailProperties(mail);
-        Session mailSession = EmailUtils.createMailSession(mail, props);
+        var props = EmailUtils.createEmailProperties(mail);
+        var mailSession = EmailUtils.createMailSession(mail, props);
 
         //when
-        Message result = EmailUtils.createMessage(mail, mailSession);
+        var result = EmailUtils.createMessage(mail, mailSession);
 
         //then
         assertThat(result.getSubject()).isEqualTo("Subject");
@@ -158,7 +158,7 @@ public class EmailUtilsTest {
     @Test
     public void shouldCorrectlySetHtmlContent() throws Exception {
         //given
-        EmailDTO mail = EmailDTO.builder("from@gmail.com", "to@gmail.com,abc@gmail.com")
+        var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com,abc@gmail.com")
                 .smtpHost("host")
                 .smtpPort("547")
                 .username("usename")
@@ -168,11 +168,11 @@ public class EmailUtilsTest {
                 .subject("Subject")
                 .build();
 
-        Properties props = EmailUtils.createEmailProperties(mail);
-        Session mailSession = EmailUtils.createMailSession(mail, props);
+        var props = EmailUtils.createEmailProperties(mail);
+        var mailSession = EmailUtils.createMailSession(mail, props);
 
         //when
-        Message result = EmailUtils.createMessage(mail, mailSession);
+        var result = EmailUtils.createMessage(mail, mailSession);
 
         //then
         assertThat(result.getContent()).isEqualTo("TEST MESSAGE");

@@ -67,9 +67,9 @@ public class EmailAggregatorSenderTest {
     @Test
     public void shouldCreateCorrectTemplateModel() {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        Error error = TestObjectCreator.createTestError(app);
-        Locale locale = new Locale("en");
+        var app = TestObjectCreator.createTestApplication();
+        var error = TestObjectCreator.createTestError(app);
+        var locale = new Locale("en");
 
         //when
         Map<String, Object> result = emailAggregatorSender.createTemplateModel(error, locale);
@@ -86,11 +86,11 @@ public class EmailAggregatorSenderTest {
     @Test
     public void shouldCreateTemplateModelAndFillNull() {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        Error error = Error.builder(null, ErrorSeverity.ERROR, ErrorStatus.CREATED,
+        var app = TestObjectCreator.createTestApplication();
+        var error = Error.builder(null, ErrorSeverity.ERROR, ErrorStatus.CREATED,
                 "2018-11-11 11:11:11", app)
                 .build();
-        Locale locale = new Locale("en");
+        var locale = new Locale("en");
 
         //when
         Map<String, Object> result = emailAggregatorSender.createTemplateModel(error, locale);
@@ -107,8 +107,8 @@ public class EmailAggregatorSenderTest {
     @Test
     public void shouldCreateUrlWithoutPort() {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        Error error = TestObjectCreator.createTestError(app);
+        var app = TestObjectCreator.createTestApplication();
+        var error = TestObjectCreator.createTestError(app);
         error.setId(2L);
         NetworkUtil.setHostIP("buginator.com");
         NetworkUtil.setHostPort(0);
@@ -125,9 +125,9 @@ public class EmailAggregatorSenderTest {
     @Test
     public void shouldConstructProperEmailDTO() {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        EmailAggregator emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app).build();
-        Locale locale = new Locale("en");
+        var app = TestObjectCreator.createTestApplication();
+        var emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app).build();
+        var locale = new Locale("en");
 
         //when
         EmailDTO result = emailAggregatorSender.constructEmail(emailAggregator, locale, "testMessageBody");
@@ -146,9 +146,9 @@ public class EmailAggregatorSenderTest {
     @Test
     public void shouldSendDataToJmsQueue() throws Exception {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        Error error = TestObjectCreator.createTestError(app);
-        EmailAggregator emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app).build();
+        var app = TestObjectCreator.createTestApplication();
+        var error = TestObjectCreator.createTestError(app);
+        var emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app).build();
 
         //when
         emailAggregatorSender.sendData(emailAggregator, error);
@@ -161,9 +161,9 @@ public class EmailAggregatorSenderTest {
     @Test
     public void shouldThrowExceptionWhenUnableToCreateEmailBody() throws Exception {
         //given
-        Application app = TestObjectCreator.createTestApplication();
-        Error error = TestObjectCreator.createTestError(app);
-        EmailAggregator emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app).build();
+        var app = TestObjectCreator.createTestApplication();
+        var error = TestObjectCreator.createTestError(app);
+        var emailAggregator = TestObjectCreator.getPrecofiguredEmailAggregatorBuilder(app).build();
 
         doThrow(new IOException("Error")).when(emailAggregatorSender).constructEmailBody(anyMap());
 
