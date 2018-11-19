@@ -93,8 +93,8 @@ public class RegisterServiceImplTest {
 
         when(paymentOptionRepository.findByName(any(String.class))).thenReturn(defaultPayment);
 
-        Permission permission = new Permission();
-        permission.setName("TEST PERM");
+        Permission permission = new Permission("TEST PERM");
+//        permission.setName("TEST PERM");
         Role defaultRole = new Role();
         defaultRole.setName("TEST ROLE");
         defaultRole.getPermissions().add(permission);
@@ -104,16 +104,16 @@ public class RegisterServiceImplTest {
         when(companyRepository.findByName(any(String.class))).thenReturn(Optional.empty());
 
 
-        Company company = new Company();
-        company.setName("TEST COMPANY");
+        Company company = new Company("TEST COMPANY", new PaymentOption());
+//        company.setName("TEST COMPANY");
         company.setAddress("TEST ADDRESS");
 
         String email = "testEmail@gmail.com";
 
-        User user = new User();
-        user.setEmail(email);
-        user.setName("TEST USER");
-        user.setPassword("TEST_PASSWORD");
+        User user = new User.Builder().email(email).name("TEST USER").password("TEST_PASSWORD").build();
+//        user.setEmail(email);
+//        user.setName("TEST USER");
+//        user.setPassword("TEST_PASSWORD");
 
         RegisterData registerData = new RegisterData();
         registerData.setCompany(company);
@@ -175,7 +175,7 @@ public class RegisterServiceImplTest {
     @Test
     public void testRegisterUser__CompanyNameIsNull() throws ValidationException {
         //given
-        Company company = new Company();
+        Company company = new Company("", new PaymentOption());
         company.setAddress("TEST ADDRESS");
 
         RegisterData registerData = new RegisterData();
@@ -194,7 +194,7 @@ public class RegisterServiceImplTest {
     @Test
     public void testRegisterUser__CompanyAddressIsBlank() throws ValidationException {
         //given
-        Company company = new Company();
+        Company company = new Company("", new PaymentOption());
         company.setName("TEST");
         company.setAddress("");
 
@@ -214,7 +214,7 @@ public class RegisterServiceImplTest {
     @Test
     public void testRegisterUser__CompanyExists() throws ValidationException {
         //given
-        Company company = new Company();
+        Company company = new Company("", new PaymentOption());
         company.setName("TEST");
         company.setAddress("TEST ADDRESS");
 
@@ -236,13 +236,13 @@ public class RegisterServiceImplTest {
     @Test
     public void testRegisterUser__UserEmailIsNull() throws ValidationException {
         //given
-        Company company = new Company();
+        Company company = new Company("", new PaymentOption());
         company.setName("TEST");
         company.setAddress("TEST ADDRESS");
 
-        User user = new User();
-        user.setName("TEST USER");
-        user.setPassword("TEST_PASSWORD");
+        User user = new User.Builder().name("TEST USER").password("TEST_PASSWORD").build();
+//        user.setName("TEST USER");
+//        user.setPassword("TEST_PASSWORD");
 
         RegisterData registerData = new RegisterData();
         registerData.setCompany(company);
@@ -263,14 +263,14 @@ public class RegisterServiceImplTest {
     @Test
     public void testRegisterUser__UserUsernameIsBlank() throws ValidationException {
         //given
-        Company company = new Company();
-        company.setName("TEST");
+        Company company = new Company("TEST", new PaymentOption());
+//        company.setName("TEST");
         company.setAddress("TEST ADDRESS");
 
-        User user = new User();
-        user.setEmail("testEmail@gmail.com");
-        user.setName("");
-        user.setPassword("TEST_PASSWORD");
+        User user = new User.Builder().email("testEmail@gmail.com").name("").password("TEST_PASSWORD").build();
+//        user.setEmail("testEmail@gmail.com");
+//        user.setName("");
+//        user.setPassword("TEST_PASSWORD");
 
         RegisterData registerData = new RegisterData();
         registerData.setCompany(company);
@@ -291,13 +291,13 @@ public class RegisterServiceImplTest {
     @Test
     public void testRegisterUser__UserPasswordIsNull() throws ValidationException {
         //given
-        Company company = new Company();
-        company.setName("TEST");
+        Company company = new Company("TEST", new PaymentOption());
+//        company.setName("TEST");
         company.setAddress("TEST ADDRESS");
 
-        User user = new User();
-        user.setEmail("testEmail@gmail.com");
-        user.setName("TEST NAME");
+        User user = new User.Builder().email("testEmail@gmail.com").name("TEST NAME").build();
+//        user.setEmail("testEmail@gmail.com");
+//        user.setName("TEST NAME");
 
         RegisterData registerData = new RegisterData();
         registerData.setCompany(company);
@@ -318,14 +318,14 @@ public class RegisterServiceImplTest {
     @Test
     public void testRegisterUser__UserExists() throws ValidationException {
         //given
-        Company company = new Company();
-        company.setName("TEST");
+        Company company = new Company("TEST", new PaymentOption());
+//        company.setName("TEST");
         company.setAddress("TEST ADDRESS");
 
-        User user = new User();
-        user.setEmail("testEmail@gmail.com");
-        user.setName("TEST NAME");
-        user.setPassword("TEST_PASSWORD");
+        User user = new User.Builder().email("testEmail@gmail.com").name("TEST NAME").password("TEST_PASSWORD").build();
+//        user.setEmail("testEmail@gmail.com");
+//        user.setName("TEST NAME");
+//        user.setPassword("TEST_PASSWORD");
 
         RegisterData registerData = new RegisterData();
         registerData.setCompany(company);

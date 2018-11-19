@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.PaymentOption;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.core.Error;
 import pl.ark.chr.buginator.domain.auth.User;
@@ -66,7 +68,7 @@ public class ErrorServiceImplTest {
         User user = TestObjectCreator.createUser(email, null, null, "");
 
         String appName = "Test App";
-        Application app = new Application();
+        Application app = new Application("", new Company("", new PaymentOption()));
         app.setId(1L);
         app.setName(appName);
 

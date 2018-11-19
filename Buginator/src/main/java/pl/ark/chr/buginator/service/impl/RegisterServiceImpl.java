@@ -68,14 +68,15 @@ public class RegisterServiceImpl implements RegisterService {
         userCompanyValidator.validateCompanyData(registerData.getCompany(), locale);
         userCompanyValidator.validateUserData(registerData.getUser(), locale);
 
-        Company company = registerData.getCompany();
-        company.setToken(generateToken());
-        company.setUniqueKey(generateToken());
-
         PaymentOption defaultPayment = paymentOptionRepository.findByName(DEFAULT_PAYMENT);
-        company.setSelectedPaymentOption(defaultPayment);
-        company.setExpiryDate(generateExpiryDate(defaultPayment.getDuration()));
-        company.setUserLimit(defaultPayment.getMaxUsers());
+        //TODO: move to DTO
+        Company company = new Company(registerData.getCompany().getName(), defaultPayment);
+//        company.setToken(generateToken());
+//        company.setUniqueKey(generateToken());
+
+//        company.setSelectedPaymentOption(defaultPayment);
+//        company.setExpiryDate(generateExpiryDate(defaultPayment.getDuration()));
+//        company.setUserLimit(defaultPayment.getMaxUsers());
 
         company = companyRepository.save(company);
 

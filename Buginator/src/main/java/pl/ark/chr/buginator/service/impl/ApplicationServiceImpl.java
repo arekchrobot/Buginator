@@ -84,9 +84,7 @@ public class ApplicationServiceImpl extends RestrictedAccessCrudServiceImpl<Appl
 
         User user = userRepository.findByEmail(userWrapper.getEmail()).get();
 
-        UserApplication userApplication = new UserApplication();
-        userApplication.setApplication(savedApp);
-        userApplication.setUser(user);
+        UserApplication userApplication = new UserApplication(user, savedApp);
         userApplication.setModify(true);
 
         userApplication = userApplicationRepository.save(userApplication);
@@ -120,9 +118,10 @@ public class ApplicationServiceImpl extends RestrictedAccessCrudServiceImpl<Appl
                 .collect(Collectors.toList());
     }
 
+    //TODO: move to DTO!!!
     private Application countErrors(Application application, LocalDate lastWeek) {
-        application.setErrorCount(errorRepository.countByApplication(application));
-        application.setLastWeekErrorCount(errorRepository.countByApplicationAndLastOccurrenceGreaterThanEqual(application, lastWeek));
+//        application.setErrorCount(errorRepository.countByApplication(application));
+//        application.setLastWeekErrorCount(errorRepository.countByApplicationAndLastOccurrenceGreaterThanEqual(application, lastWeek));
         return application;
     }
 

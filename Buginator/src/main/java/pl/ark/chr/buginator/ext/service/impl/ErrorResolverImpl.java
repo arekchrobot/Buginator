@@ -75,16 +75,17 @@ public class ErrorResolverImpl implements ErrorResolver {
     }
 
     private Error createNewError(ExternalData externalData, Application application) {
-        Error error = new Error();
+        Error error = Error.builder(externalData.getErrorTitle(), externalData.getErrorSeverity(), ErrorStatus.CREATED,
+                externalData.getDateTimeString(),application).build();
 
-        error.setTitle(externalData.getErrorTitle());
+//        error.setTitle(externalData.getErrorTitle());
         error.setDescription(externalData.getErrorDescription());
-        error.setStatus(ErrorStatus.CREATED);
-        error.setSeverity(externalData.getErrorSeverity());
-        error.setLastOccurrence(LocalDate.parse(externalData.getDateString(), dateFormatter));
-        error.setDateTime(LocalDateTime.parse(externalData.getDateTimeString(), dateTimeFormatter));
-        error.setApplication(application);
-        error.setCount(1);
+//        error.setStatus(ErrorStatus.CREATED);
+//        error.setSeverity(externalData.getErrorSeverity());
+//        error.setLastOccurrence(LocalDate.parse(externalData.getDateString(), dateFormatter));
+//        error.setDateTime(LocalDateTime.parse(externalData.getDateTimeString(), dateTimeFormatter));
+//        error.setApplication(application);
+//        error.setCount(1);
 
         updatePossibleNullValues(error, externalData);
 
@@ -132,10 +133,10 @@ public class ErrorResolverImpl implements ErrorResolver {
         List<ErrorStackTrace> stackTraces = new ArrayList<>();
 
         extStackTraces.forEach(externalStackTrace -> {
-            ErrorStackTrace errorStackTrace = new ErrorStackTrace();
-            errorStackTrace.setError(error);
-            errorStackTrace.setStackTrace(externalStackTrace.getDescription());
-            errorStackTrace.setStackTraceOrder(externalStackTrace.getOrder());
+            ErrorStackTrace errorStackTrace = new ErrorStackTrace(error, externalStackTrace.getOrder(), externalStackTrace.getDescription());
+//            errorStackTrace.setError(error);
+//            errorStackTrace.setStackTrace(externalStackTrace.getDescription());
+//            errorStackTrace.setStackTraceOrder(externalStackTrace.getOrder());
 
             stackTraces.add(errorStackTrace);
         });
@@ -163,8 +164,9 @@ public class ErrorResolverImpl implements ErrorResolver {
 
         for (Error possibleDuplicate : foundDuplicates) {
             if (checkStackTrace(externalData, possibleDuplicate)) {
-                possibleDuplicate.setLastOccurrence(LocalDate.parse(externalData.getDateString(), dateFormatter));
-                possibleDuplicate.setCount(possibleDuplicate.getCount() + 1);
+//                possibleDuplicate.setLastOccurrence(LocalDate.parse(externalData.getDateString(), dateFormatter));
+                possibleDuplicate.parseAndSetLastOccurrence(externalData.getDateString());
+                possibleDuplicate.incrementCount();
                 if (possibleDuplicate.getStatus().equals(ErrorStatus.RESOLVED)) {
                     possibleDuplicate.setStatus(ErrorStatus.REOPENED);
                 }

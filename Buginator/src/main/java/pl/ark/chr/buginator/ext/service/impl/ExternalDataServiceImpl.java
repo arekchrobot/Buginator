@@ -6,20 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ark.chr.buginator.aggregator.service.AggregatorService;
-import pl.ark.chr.buginator.aggregator.util.AggregatorReflection;
+import pl.ark.chr.buginator.aggregator.domain.Aggregator;
+import pl.ark.chr.buginator.aggregator.domain.AggregatorLog;
+import pl.ark.chr.buginator.aggregator.domain.AggregatorLogStatus;
+import pl.ark.chr.buginator.aggregator.repository.AggregatorLogRepository;
+import pl.ark.chr.buginator.aggregator.repository.AggregatorRepository;
 import pl.ark.chr.buginator.data.ExternalData;
-import pl.ark.chr.buginator.domain.aggregator.Aggregator;
-import pl.ark.chr.buginator.domain.aggregator.AggregatorLog;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.core.Error;
-import pl.ark.chr.buginator.domain.aggregator.AggregatorLogStatus;
 import pl.ark.chr.buginator.ext.service.ApplicationResolver;
 import pl.ark.chr.buginator.ext.service.ErrorResolver;
 import pl.ark.chr.buginator.ext.service.ExternalDataService;
 import pl.ark.chr.buginator.ext.service.NotificationSender;
-import pl.ark.chr.buginator.repository.aggregator.AggregatorLogRepository;
-import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
+import pl.ark.chr.buginator.service.AggregatorService;
 import pl.ark.chr.buginator.util.ValidationUtil;
 
 import java.time.LocalDateTime;
@@ -35,8 +34,8 @@ public class ExternalDataServiceImpl implements ExternalDataService {
 
     private static final Logger logger = LoggerFactory.getLogger(ExternalDataServiceImpl.class);
 
-    @Autowired
-    private AggregatorReflection aggregatorReflection;
+//    @Autowired
+//    private AggregatorReflection aggregatorReflection;
 
     @Autowired
     private AggregatorRepository aggregatorRepository;
@@ -81,9 +80,10 @@ public class ExternalDataServiceImpl implements ExternalDataService {
     private void launchSingleNotification(Aggregator aggregator, Error error) {
         innerJobScheduler.submit(() -> {
             try {
-                AggregatorService aggregatorService = aggregatorReflection.getAggregatorService(aggregator, applicationContext);
-
-                aggregatorService.notifyExternalAggregator(aggregator, error);
+                //TODO: import list of services
+//                AggregatorService aggregatorService = aggregatorReflection.getAggregatorService(aggregator, applicationContext);
+//
+//                aggregatorService.notifyExternalAggregator(aggregator, error);
 
                 saveSuccessAggregatorLog(aggregator, error);
             } catch (Exception e) {
@@ -102,15 +102,19 @@ public class ExternalDataServiceImpl implements ExternalDataService {
     }
 
     private void createAggregatorLog(Aggregator aggregator, Error error, AggregatorLogStatus status, String errorDescription) {
-        AggregatorLog aggregatorLog = new AggregatorLog();
+        AggregatorLog aggregatorLog = new AggregatorLog.Builder()
+                .aggregator(aggregator)
+                .error(error)
+                .status(status)
+                .build();
         if (!ValidationUtil.isBlank(errorDescription)) {
             aggregatorLog.setErrorDescription(errorDescription);
         }
-        aggregatorLog.setError(error);
-        aggregatorLog.setStatus(status);
-        aggregatorLog.setAggregator(aggregator);
-        aggregatorLog.setRetryCount(0);
-        aggregatorLog.setTimestamp(LocalDateTime.now());
+//        aggregatorLog.setError(error);
+//        aggregatorLog.setStatus(status);
+//        aggregatorLog.setAggregator(aggregator);
+//        aggregatorLog.setRetryCount(0);
+//        aggregatorLog.setTimestamp(LocalDateTime.now());
 
         aggregatorLogRepository.save(aggregatorLog);
     }

@@ -112,10 +112,10 @@ public class ManageUserServiceImpl implements ManageUserService {
     }
 
     private void createPermissionForUser(User user, Application application, List<UserApplication> permissionsToApp, List<ManageUserData> usersToAdd) {
-        UserApplication ua = new UserApplication();
+        UserApplication ua = new UserApplication(user, application);
 
-        ua.setApplication(application);
-        ua.setUser(user);
+//        ua.setApplication(application);
+//        ua.setUser(user);
         ua.setModify(usersToAdd.stream()
                 .filter(u -> u.getUserId() == user.getId())
                 .map(u -> u.isModify())

@@ -1,6 +1,6 @@
 package pl.ark.chr.buginator;
 
-//import org.apache.velocity.app.VelocityEngine;
+//import org.apache.templates.app.VelocityEngine;
 import org.mockito.Mockito;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -10,12 +10,14 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
-//import org.springframework.ui.velocity.VelocityEngineFactoryBean;
-import pl.ark.chr.buginator.aggregator.service.AggregatorServiceValidator;
-import pl.ark.chr.buginator.aggregator.service.impl.EmailAggregatorServiceImpl;
-import pl.ark.chr.buginator.domain.EmailAggregator;
-import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
-import pl.ark.chr.buginator.repository.EmailAggregatorRepository;
+//import org.springframework.ui.templates.VelocityEngineFactoryBean;
+import pl.ark.chr.buginator.aggregator.email.EmailAggregator;
+import pl.ark.chr.buginator.aggregator.repository.AggregatorRepository;
+//import pl.ark.chr.buginator.aggregator.service.AggregatorServiceValidator;
+//import pl.ark.chr.buginator.aggregator.service.impl.EmailAggregatorServiceImpl;
+//import pl.ark.chr.buginator.domain.EmailAggregator;
+//import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
+//import pl.ark.chr.buginator.repository.EmailAggregatorRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.impl.EmailServiceImpl;
 
@@ -45,12 +47,12 @@ public class TestApplicationConfiguration {
 //    @Primary
 //    public VelocityEngine velocityEngine() throws IOException {
 //        VelocityEngineFactoryBean fb = new VelocityEngineFactoryBean();
-//        fb.setResourceLoaderPath("classpath:/velocity/");
+//        fb.setResourceLoaderPath("classpath:/templates/");
 //
 //        Properties props = new Properties();
 //        props.setProperty("resource.loader", "file");
-//        props.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
-//        props.setProperty("class.resource.loader.path", "classpath:/velocity");
+//        props.setProperty("file.resource.loader.class", "org.apache.templates.runtime.resource.loader.FileResourceLoader");
+//        props.setProperty("class.resource.loader.path", "classpath:/templates");
 //
 //        fb.setVelocityProperties(props);
 //        return fb.createVelocityEngine();
@@ -79,25 +81,25 @@ public class TestApplicationConfiguration {
         return new EmailServiceImpl();
     }
 
-    @Bean
-    public EmailAggregator emailAggregator() {
-        return new EmailAggregator();
-    }
+//    @Bean
+//    public EmailAggregator emailAggregator() {
+//        return new EmailAggregator();
+//    }
 
-    @Bean
-    public AggregatorServiceValidator aggregatorServiceValidator() {
-        return new AggregatorServiceValidator();
-    }
+//    @Bean
+//    public AggregatorServiceValidator aggregatorServiceValidator() {
+//        return new AggregatorServiceValidator();
+//    }
 
-    @Bean
-    public EmailAggregatorServiceImpl emailAggregatorService() {
-        return new EmailAggregatorServiceImpl();
-    }
+//    @Bean
+//    public EmailAggregatorServiceImpl emailAggregatorService() {
+//        return new EmailAggregatorServiceImpl();
+//    }
 
-    @Bean
-    public EmailAggregatorRepository emailAggregatorRepository() {
-        return Mockito.mock(EmailAggregatorRepository.class);
-    }
+//    @Bean
+//    public EmailAggregatorRepository emailAggregatorRepository() {
+//        return Mockito.mock(EmailAggregatorRepository.class);
+//    }
 
     @Bean
     public AggregatorRepository aggregatorRepository() {

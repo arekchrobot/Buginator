@@ -52,7 +52,7 @@ public class Application extends BaseEntity<Application> implements FilterData {
         return company;
     }
 
-    protected void setCompany(Company company) {
+    public void setCompany(Company company) {
         this.company = company;
     }
 

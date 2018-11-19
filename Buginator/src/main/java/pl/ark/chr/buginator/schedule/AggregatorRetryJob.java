@@ -8,14 +8,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.BuginatorProperties;
-import pl.ark.chr.buginator.aggregator.service.AggregatorService;
-import pl.ark.chr.buginator.aggregator.util.AggregatorReflection;
-import pl.ark.chr.buginator.domain.aggregator.Aggregator;
-import pl.ark.chr.buginator.domain.aggregator.AggregatorLog;
-import pl.ark.chr.buginator.domain.aggregator.AggregatorLogStatus;
-import pl.ark.chr.buginator.repository.aggregator.AggregatorLogRepository;
+import pl.ark.chr.buginator.aggregator.domain.Aggregator;
+import pl.ark.chr.buginator.aggregator.domain.AggregatorLog;
+import pl.ark.chr.buginator.aggregator.domain.AggregatorLogStatus;
+import pl.ark.chr.buginator.aggregator.repository.AggregatorLogRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
@@ -34,9 +31,6 @@ public class AggregatorRetryJob {
 
     @Autowired
     private AggregatorLogRepository aggregatorLogRepository;
-
-    @Autowired
-    private AggregatorReflection aggregatorReflection;
 
     @Autowired
     private BuginatorProperties buginatorProperties;
@@ -62,8 +56,9 @@ public class AggregatorRetryJob {
         innerJobScheduler.submit(() -> {
             try {
                 Aggregator aggregator = aggregatorLog.getAggregator();
-                AggregatorService aggregatorService = aggregatorReflection.getAggregatorService(aggregator, applicationContext);
-                aggregatorService.notifyExternalAggregator(aggregator, aggregatorLog.getError());
+                //TODO: reimplement
+//                AggregatorService aggregatorService = aggregatorReflection.getAggregatorService(aggregator, applicationContext);
+//                aggregatorService.notifyExternalAggregator(aggregator, aggregatorLog.getError());
 
                 saveAggregatorLogSuccess(aggregatorLog);
             } catch (Exception e) {
@@ -74,7 +69,7 @@ public class AggregatorRetryJob {
     }
 
     private void saveAggregatorLogSuccess(AggregatorLog aggregatorLog) {
-        aggregatorLog.setTimestamp(LocalDateTime.now());
+        aggregatorLog.updateTimestamp();
         aggregatorLog.setStatus(AggregatorLogStatus.SUCCESS);
         aggregatorLog.setErrorDescription(null);
 
@@ -82,9 +77,9 @@ public class AggregatorRetryJob {
     }
 
     private void saveAggregatorLogError(AggregatorLog aggregatorLog, String errorDescription) {
-        aggregatorLog.setRetryCount(aggregatorLog.getRetryCount() + 1);
+        aggregatorLog.incrementRetryCount();
         aggregatorLog.setErrorDescription(errorDescription);
-        aggregatorLog.setTimestamp(LocalDateTime.now());
+        aggregatorLog.updateTimestamp();
 
         aggregatorLogRepository.save(aggregatorLog);
     }

@@ -19,7 +19,7 @@ public class Error extends BaseEntity<Error> implements FilterData {
 
     private static final long serialVersionUID = -6062066697736318840L;
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Column(name = "title", length = 200, nullable = false)
     private String title;
@@ -112,7 +112,8 @@ public class Error extends BaseEntity<Error> implements FilterData {
         return List.copyOf(stackTrace);
     }
 
-    protected void setStackTrace(List<ErrorStackTrace> stackTrace) {
+    //TODO: rethink solution
+    public void setStackTrace(List<ErrorStackTrace> stackTrace) {
         this.stackTrace = stackTrace;
     }
 

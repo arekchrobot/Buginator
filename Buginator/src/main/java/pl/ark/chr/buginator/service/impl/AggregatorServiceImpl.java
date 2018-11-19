@@ -5,22 +5,26 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ark.chr.buginator.aggregator.util.AggregatorReflection;
+//import pl.ark.chr.buginator.aggregator.util.AggregatorReflection;
+import pl.ark.chr.buginator.aggregator.domain.Aggregator;
+import pl.ark.chr.buginator.aggregator.repository.AggregatorRepository;
 import pl.ark.chr.buginator.data.AggregatorData;
 import pl.ark.chr.buginator.data.UserWrapper;
-import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+//import pl.ark.chr.buginator.domain.aggregator.Aggregator;
+import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.PaymentOption;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
 import pl.ark.chr.buginator.filter.ClientFilter;
 import pl.ark.chr.buginator.filter.ClientFilterFactory;
-import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
+//import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
 import pl.ark.chr.buginator.repository.core.ApplicationRepository;
 import pl.ark.chr.buginator.service.AggregatorService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//import static org.apache.velocity.util.StringUtils.capitalizeFirstLetter;
+//import static org.apache.templates.util.StringUtils.capitalizeFirstLetter;
 
 /**
  * Created by Arek on 2017-03-15.
@@ -34,8 +38,8 @@ public class AggregatorServiceImpl implements AggregatorService {
 
     private static final String AGGREGATOR_SUFFIX = "Aggregator";
 
-    @Autowired
-    private AggregatorReflection aggregatorReflection;
+//    @Autowired
+//    private AggregatorReflection aggregatorReflection;
 
     @Autowired
     private ApplicationContext springContext;
@@ -57,8 +61,8 @@ public class AggregatorServiceImpl implements AggregatorService {
         List<AggregatorData> concreteAggregators = new ArrayList<>();
 
         for(Aggregator aggregator : allApplicationAggregators) {
-            CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
-            concreteAggregators.add(new AggregatorData((Aggregator) aggregatorRepository.findById(aggregator.getId()).get()));
+//            CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
+//            concreteAggregators.add(new AggregatorData((Aggregator) aggregatorRepository.findById(aggregator.getId()).get()));
         }
 
         return concreteAggregators;
@@ -70,22 +74,22 @@ public class AggregatorServiceImpl implements AggregatorService {
 
         Aggregator aggregator = aggregatorData.getAggregator();
 
-        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
+//        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
 
-        return new AggregatorData((Aggregator) aggregatorRepository.save(aggregatorData.getAggregator()));
+        return new AggregatorData(aggregator);
     }
 
     @Override
     public AggregatorData getEmptyAggregator(String aggregatorType) throws ClassNotFoundException {
-        Aggregator aggregator = new Aggregator();
+        Aggregator aggregator = new Aggregator("", new Application("", new Company("", new PaymentOption())));
         //TODO: fix capitalize
 //        aggregator.setAggregatorClass(capitalizeFirstLetter(aggregatorType) + AGGREGATOR_SUFFIX);
 
-        aggregator = aggregatorReflection.createEmptyAggregator(aggregator);
+//        aggregator = aggregatorReflection.createEmptyAggregator(aggregator);
 
 
 
-        return new AggregatorData(aggregatorReflection.createEmptyAggregator(aggregator));
+        return new AggregatorData(aggregator);
     }
 
     @Override
@@ -94,18 +98,18 @@ public class AggregatorServiceImpl implements AggregatorService {
 
         clientFilter.validateAccess(aggregator, userWrapper.getUserApplications());
 
-        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
+//        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
 
-        return new AggregatorData((Aggregator) aggregatorRepository.findById(aggregatorId).get());
+        return new AggregatorData(aggregator);
     }
 
     @Override
     public AggregatorData updateAggregator(AggregatorData aggregatorData, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
         clientFilter.validateAccess(aggregatorData.getAggregator(), userWrapper.getUserApplications());
 
-        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregatorData.getAggregator(), springContext);
+//        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregatorData.getAggregator(), springContext);
 
-        return new AggregatorData((Aggregator) aggregatorRepository.save(aggregatorData.getAggregator()));
+        return new AggregatorData(aggregatorData.getAggregator());
     }
 
     @Override
@@ -114,8 +118,8 @@ public class AggregatorServiceImpl implements AggregatorService {
 
         clientFilter.validateAccess(aggregator, userWrapper.getUserApplications());
 
-        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
+//        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
 
-        aggregatorRepository.delete(aggregatorId);
+//        aggregatorRepository.delete(aggregatorId);
     }
 }

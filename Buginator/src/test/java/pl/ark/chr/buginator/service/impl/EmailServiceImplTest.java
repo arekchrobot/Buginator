@@ -11,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.ark.chr.buginator.TestApplicationConfiguration;
 import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.PaymentOption;
 import pl.ark.chr.buginator.domain.auth.User;
 
 import javax.mail.Message;
@@ -49,11 +50,11 @@ public class EmailServiceImplTest {
     @Test
     public void testSendRegister__Success() {
         //given
-        Company company = new Company();
+        Company company = new Company("Test Company", new PaymentOption());
         company.setId(1L);
         company.setName("Test Company");
-        company.setToken("TOKEN");
-        company.setUniqueKey("UNIQUE");
+//        company.setToken("TOKEN");
+//        company.setUniqueKey("UNIQUE");
 
         String toMail = "test@gmail.com";
 
@@ -88,7 +89,7 @@ public class EmailServiceImplTest {
         String username = "Test User";
         String email = "testEmail@gmail.com";
 
-        User user = new User();
+        User user = new User.Builder().build();
         user.setName(username);
         user.setEmail(email);
 

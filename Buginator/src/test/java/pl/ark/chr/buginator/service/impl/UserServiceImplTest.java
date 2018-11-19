@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.BuginatorProperties;
 import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.PaymentOption;
 import pl.ark.chr.buginator.domain.auth.Role;
 import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.exceptions.RestException;
@@ -79,7 +80,7 @@ public class UserServiceImplTest {
         role.setId(1L);
         role.setName("Test role");
 
-        User user = new User();
+        User user = new User.Builder().build();
         user.setEmail(login);
         user.setId(1L);
         user.setRole(role);
@@ -119,7 +120,7 @@ public class UserServiceImplTest {
         //given
         String login = "test@gmail.com";
 
-        User user = new User();
+        User user = new User.Builder().build();
         user.setEmail(login);
         user.setId(1L);
 
@@ -139,8 +140,10 @@ public class UserServiceImplTest {
     public void testValidateUserLogin__ExpiryDate() throws RestException {
         //given
         LocalDate yesterday = LocalDate.now().minusDays(1L);
-        Company company = new Company();
-        company.setExpiryDate(yesterday);
+        PaymentOption po = new PaymentOption();
+        po.setDuration(-1);
+        Company company = new Company("Test compy", po);
+//        company.setExpiryDate(yesterday);
 
         String login = "test@gmail.com";
 
@@ -148,7 +151,7 @@ public class UserServiceImplTest {
         role.setId(1L);
         role.setName("Test role");
 
-        User user = new User();
+        User user = new User.Builder().build();
         user.setEmail(login);
         user.setId(1L);
         user.setRole(role);
@@ -178,8 +181,8 @@ public class UserServiceImplTest {
     public void testValidateUserLogin__ExpiryDateIsToday() throws RestException {
         //given
         LocalDate today = LocalDate.now();
-        Company company = new Company();
-        company.setExpiryDate(today);
+        Company company = new Company("Test", new PaymentOption());
+//        company.setExpiryDate(today);
 
         String login = "test@gmail.com";
 
@@ -187,7 +190,7 @@ public class UserServiceImplTest {
         role.setId(1L);
         role.setName("Test role");
 
-        User user = new User();
+        User user = new User.Builder().build();
         user.setEmail(login);
         user.setId(1L);
         user.setRole(role);
@@ -211,7 +214,7 @@ public class UserServiceImplTest {
         String login = "test@gmail.com";
         String oldPassword = "shouldBeChanged";
 
-        User user = new User();
+        User user = new User.Builder().build();
         user.setEmail(login);
         user.setPassword(oldPassword);
 

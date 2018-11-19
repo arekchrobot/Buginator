@@ -27,7 +27,7 @@
         <fluent.exception.version>1.0.1</fluent.exception.version>
         <ehcache.version>2.6.11</ehcache.version>
         <postgres.version>42.2.5</postgres.version>
-        <!--<mysql.version>5.1.19</mysql.version>-->
+        <mysql.version>5.1.47</mysql.version>
     </properties>
 
     <profiles>
@@ -61,17 +61,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-velocity</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-websocket</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
         <!--Support for java 8 Date & Time api serialization -->
@@ -90,21 +86,9 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <!--<version>${mysql.version}</version>-->
+            <version>${mysql.version}</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!--wro4j-->
-        <!--<dependency>-->
-            <!--<groupId>ro.isdc.wro4j</groupId>-->
-            <!--<artifactId>wro4j-core</artifactId>-->
-            <!--<version>${wro4.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>ro.isdc.wro4j</groupId>-->
-            <!--<artifactId>wro4j-extensions</artifactId>-->
-            <!--<version>${wro4.version}</version>-->
-        <!--</dependency>-->
 
         <!--Shiro security-->
         <dependency>
@@ -133,34 +117,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mockito</groupId>
-                    <artifactId>mockito-core</artifactId>
-                </exclusion>
-            </exclusions>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.22.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>pl.wkr</groupId>
             <artifactId>fluent-exception-rule</artifactId>
-            <version>${fluent.exception.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -168,6 +139,18 @@
         <dependency>
             <groupId>pl.ark.chr.buginator</groupId>
             <artifactId>BuginatorDomain</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.ark.chr.buginator</groupId>
+            <artifactId>BuginatorAggregatorApi</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!--Buginator Aggregator implementations-->
+        <dependency>
+            <groupId>pl.ark.chr.buginator</groupId>
+            <artifactId>EmailAggregator</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
@@ -190,152 +173,6 @@
             <version>${ehcache.version}</version>
         </dependency>
 
-        <!--wro4j webjars dependency-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>jquery</artifactId>-->
-            <!--<version>2.1.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angularjs</artifactId>-->
-            <!--<version>1.4.7</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>angular-resource</artifactId>-->
-            <!--<version>1.4.7</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>bootstrap</artifactId>-->
-            <!--<version>3.1.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angular-ui-bootstrap</artifactId>-->
-            <!--<version>0.14.3</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>angular-animate</artifactId>-->
-            <!--<version>1.4.7</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>lodash</artifactId>-->
-            <!--<version>3.10.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>angular-simple-logger</artifactId>-->
-            <!--<version>0.1.4</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>ngSmoothScroll</artifactId>-->
-            <!--<version>1.7.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angular-local-storage</artifactId>-->
-            <!--<version>0.2.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>angular-cookie-law</artifactId>-->
-            <!--<version>0.2.3</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angular-ui-router</artifactId>-->
-            <!--<version>0.2.18</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>ng-dialog</artifactId>-->
-            <!--<version>0.5.9</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>angular-smart-table</artifactId>-->
-            <!--<version>2.1.8</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angular-translate</artifactId>-->
-            <!--<version>2.11.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angular-translate-loader-static-files</artifactId>-->
-            <!--<version>2.6.1-1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angular-translate-storage-local</artifactId>-->
-            <!--<version>2.10.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angular-translate-storage-cookie</artifactId>-->
-            <!--<version>2.5.2</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>angular-cookies</artifactId>-->
-            <!--<version>1.4.7</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>angular-sanitize</artifactId>-->
-            <!--<version>1.4.7</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>datatables</artifactId>-->
-            <!--<version>1.10.12</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>chartjs</artifactId>-->
-            <!--<version>2.1.3</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>angular-chart.js</artifactId>-->
-            <!--<version>1.0.3</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>ng-idle</artifactId>-->
-            <!--<version>1.3.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.bower</groupId>-->
-            <!--<artifactId>angular-bootstrap-switch</artifactId>-->
-            <!--<version>0.5.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>bootstrap-switch</artifactId>-->
-            <!--<version>3.3.2</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars.npm</groupId>-->
-            <!--<artifactId>angular-bootstrap-checkbox</artifactId>-->
-            <!--<version>1.0.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>sockjs-client</artifactId>-->
-            <!--<version>1.1.2</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>stomp-websocket</artifactId>-->
-            <!--<version>2.3.3</version>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>

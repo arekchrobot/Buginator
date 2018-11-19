@@ -45,10 +45,7 @@ public class NotificationSenderImpl implements NotificationSender {
     private void createNotification(User user, Error error) {
         Optional<Notification> possibleDuplicate = notificationRepository.findByUserAndError(user, error);
         if(!possibleDuplicate.isPresent()) {
-            Notification notification = new Notification();
-            notification.setError(error);
-            notification.setSeen(false);
-            notification.setUser(user);
+            Notification notification = new Notification(user, error);
 
             notificationRepository.save(notification);
         }
