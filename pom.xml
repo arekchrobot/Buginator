@@ -32,6 +32,7 @@
         <artemis.jms.version>2.6.3</artemis.jms.version>
         <maven.failsafe.plugin.version>2.22.1</maven.failsafe.plugin.version>
         <integration.tests.skip>true</integration.tests.skip>
+        <ṃutations.tests.skip>true</ṃutations.tests.skip>
     </properties>
 
     <profiles>
@@ -39,6 +40,12 @@
             <id>integration</id>
             <properties>
                 <integration.tests.skip>false</integration.tests.skip>
+            </properties>
+        </profile>
+        <profile>
+            <id>mutation</id>
+            <properties>
+                <ṃutations.tests.skip>false</ṃutations.tests.skip>
             </properties>
         </profile>
     </profiles>
@@ -161,6 +168,42 @@
                 <configuration>
                     <skipTests>${integration.tests.skip}</skipTests>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.4.3</version>
+                <configuration>
+                    <skip>${ṃutations.tests.skip}</skip>
+                    <timestampedReports>false</timestampedReports>
+                    <targetClasses>
+                        <param>pl.ark.chr.buginator.*</param>
+                    </targetClasses>
+                    <excludedClasses>
+                        <param>pl.ark.chr.buginator.domain.*</param>
+                        <param>pl.ark.chr.buginator.persistence.*</param>
+                        <param>pl.ark.chr.buginator.**.config.*</param>
+                    </excludedClasses>
+                    <excludedTestClasses>
+                        <param>pl.ark.chr.buginator.**.*IT</param>
+                    </excludedTestClasses>
+                    <excludedMethods>
+                        <param>hashCode</param>
+                        <param>toString</param>
+                    </excludedMethods>
+                    <jvmArgs>
+                        <value>-Dfile.encoding=${project.build.sourceEncoding}</value>
+                    </jvmArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>mutation-tests</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
