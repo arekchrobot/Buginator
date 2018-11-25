@@ -33,6 +33,7 @@
         <maven.failsafe.plugin.version>2.22.1</maven.failsafe.plugin.version>
         <integration.tests.skip>true</integration.tests.skip>
         <ṃutations.tests.skip>true</ṃutations.tests.skip>
+        <pitest.version>1.4.3</pitest.version>
     </properties>
 
     <profiles>
@@ -172,7 +173,7 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.4.3</version>
+                <version>${pitest.version}</version>
                 <configuration>
                     <skip>${ṃutations.tests.skip}</skip>
                     <timestampedReports>false</timestampedReports>
