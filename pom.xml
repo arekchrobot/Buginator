@@ -34,6 +34,8 @@
         <integration.tests.skip>true</integration.tests.skip>
         <ṃutations.tests.skip>true</ṃutations.tests.skip>
         <pitest.version>1.4.3</pitest.version>
+        <spring.security.oauth2.version>2.3.4.RELEASE</spring.security.oauth2.version>
+        <jedis.version>2.9.0</jedis.version>
     </properties>
 
     <profiles>
@@ -55,6 +57,7 @@
         <module>Buginator</module>
         <module>core/BuginatorCommons</module>
         <module>core/BuginatorDomain</module>
+        <module>core/RedisResourceServer</module>
         <module>aggregator/BuginatorAggregatorApi</module>
         <module>aggregator/EmailAggregator</module>
     </modules>
@@ -85,6 +88,18 @@
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>artemis-jms-client</artifactId>
                 <version>${artemis.jms.version}</version>
+            </dependency>
+
+            <!--security-->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring.security.oauth2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
             </dependency>
 
             <!--test-->
