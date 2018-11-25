@@ -53,10 +53,10 @@
 
     <modules>
         <module>Buginator</module>
-        <module>BuginatorCommons</module>
-        <module>BuginatorDomain</module>
-        <module>BuginatorAggregatorApi</module>
-        <module>EmailAggregator</module>
+        <module>core/BuginatorCommons</module>
+        <module>core/BuginatorDomain</module>
+        <module>aggregator/BuginatorAggregatorApi</module>
+        <module>aggregator/EmailAggregator</module>
     </modules>
 
     <dependencyManagement>

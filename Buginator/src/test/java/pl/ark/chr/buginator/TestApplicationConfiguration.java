@@ -11,7 +11,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 //import org.springframework.ui.templates.VelocityEngineFactoryBean;
-import pl.ark.chr.buginator.aggregator.email.EmailAggregator;
 import pl.ark.chr.buginator.aggregator.repository.AggregatorRepository;
 //import pl.ark.chr.buginator.aggregator.service.AggregatorServiceValidator;
 //import pl.ark.chr.buginator.aggregator.service.impl.EmailAggregatorServiceImpl;

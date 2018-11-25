@@ -2,7 +2,6 @@ package pl.ark.chr.buginator.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 //import pl.ark.chr.buginator.aggregator.util.AggregatorReflection;

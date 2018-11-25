@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import pl.ark.chr.buginator.commons.util.NetworkUtil;
 //import pl.ark.chr.buginator.util.NetworkUtil;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  * Created by Arek on 2017-05-21.

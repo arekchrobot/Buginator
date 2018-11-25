@@ -2,19 +2,14 @@ package pl.ark.chr.buginator.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import pl.ark.chr.buginator.domain.BaseEntity;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.rest.annotations.DELETE;
 import pl.ark.chr.buginator.rest.annotations.GET;
 import pl.ark.chr.buginator.rest.annotations.POST;
 import pl.ark.chr.buginator.service.CrudService;
-import pl.ark.chr.buginator.util.HttpUtil;
 import pl.ark.chr.buginator.util.SessionUtil;
 
 import javax.annotation.PostConstruct;

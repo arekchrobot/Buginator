@@ -18,10 +18,8 @@ import pl.ark.chr.buginator.ext.service.ApplicationResolver;
 import pl.ark.chr.buginator.ext.service.ErrorResolver;
 import pl.ark.chr.buginator.ext.service.ExternalDataService;
 import pl.ark.chr.buginator.ext.service.NotificationSender;
-import pl.ark.chr.buginator.service.AggregatorService;
 import pl.ark.chr.buginator.util.ValidationUtil;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 

@@ -12,7 +12,6 @@ import pl.ark.chr.buginator.email.sender.util.EmailUtils;
 
 import javax.mail.*;
 import java.util.Objects;
-import java.util.Properties;
 
 @Service
 public class JavaMailEmailSenderImpl implements EmailSender {

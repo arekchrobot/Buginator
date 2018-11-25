@@ -3,11 +3,8 @@ package pl.ark.chr.buginator.email.sender.util;
 import org.junit.Test;
 import pl.ark.chr.buginator.commons.dto.EmailDTO;
 
-import javax.mail.Address;
 import javax.mail.Message;
-import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
-import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

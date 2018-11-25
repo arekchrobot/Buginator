@@ -10,8 +10,6 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.ark.chr.buginator.commons.dto.EmailDTO;
 import pl.ark.chr.buginator.commons.util.NetworkUtil;
-import pl.ark.chr.buginator.domain.core.Application;
-import pl.ark.chr.buginator.domain.core.Error;
 
 import static org.assertj.core.api.Assertions.*;
 
