@@ -11,7 +11,10 @@ import java.util.Set;
  * An user that can log in to portal and perform operations based on role
  */
 @Entity
-@Table(name = "buginator_user")
+@Table(name = "buginator_user",
+        indexes = {
+                @Index(name = "email_index", columnList = "email")
+        })
 public class User extends BaseEntity<User> {
 
     private static final long serialVersionUID = -2530893894458448440L;
@@ -75,7 +78,7 @@ public class User extends BaseEntity<User> {
         this.password = password;
     }
 
-    public boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
