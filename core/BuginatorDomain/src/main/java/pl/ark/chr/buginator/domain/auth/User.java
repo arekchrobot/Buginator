@@ -110,6 +110,9 @@ public class User extends BaseEntity<User> {
         this.userApplications = userApplications;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public static final class Builder {
         private String name;

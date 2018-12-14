@@ -13,9 +13,10 @@ import java.util.Set;
 
 public class OAuth2UserDetails implements UserDetails {
 
+    private static final long serialVersionUID = 4827073795172925833L;
     private User user;
 
-    public OAuth2UserDetails(User user) {
+    OAuth2UserDetails(User user) {
         Objects.requireNonNull(user);
         this.user = user;
     }

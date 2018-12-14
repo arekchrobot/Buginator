@@ -8,10 +8,12 @@ import java.util.*;
 
 public class OAuth2ClientDetails implements ClientDetails {
 
+    private static final long serialVersionUID = 7037913737782889343L;
+
     private OAuth2Client client;
     private int defaultExpiration;
 
-    public OAuth2ClientDetails(OAuth2Client client, int defaultExpiration) {
+    OAuth2ClientDetails(OAuth2Client client, int defaultExpiration) {
         Objects.requireNonNull(client);
         this.defaultExpiration = defaultExpiration;
         this.client = client;
@@ -29,7 +31,7 @@ public class OAuth2ClientDetails implements ClientDetails {
 
     @Override
     public boolean isSecretRequired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -54,12 +56,12 @@ public class OAuth2ClientDetails implements ClientDetails {
 
     @Override
     public Set<String> getRegisteredRedirectUri() {
-        return null;
+        return new HashSet<>();
     }
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return null;
+        return new LinkedHashSet<>();
     }
 
     @Override
@@ -69,7 +71,7 @@ public class OAuth2ClientDetails implements ClientDetails {
 
     @Override
     public Integer getRefreshTokenValiditySeconds() {
-        return null;
+        return defaultExpiration;
     }
 
     @Override
@@ -84,9 +86,8 @@ public class OAuth2ClientDetails implements ClientDetails {
                 return Collections.singletonMap("allowedIPs", client.getAllowedIPs());
             case WEB:
                 return Collections.singletonMap("allowedDomains", client.getAllowedDomains());
-            case MOBILE:
             default:
-                return null;
+                return new HashMap<>();
         }
     }
 }
