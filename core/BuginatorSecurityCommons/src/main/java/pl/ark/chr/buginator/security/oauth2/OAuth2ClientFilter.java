@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.security;
+package pl.ark.chr.buginator.security.oauth2;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

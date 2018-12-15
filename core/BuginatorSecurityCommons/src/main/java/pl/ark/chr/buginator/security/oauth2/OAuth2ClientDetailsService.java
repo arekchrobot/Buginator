@@ -1,13 +1,10 @@
-package pl.ark.chr.buginator.security;
+package pl.ark.chr.buginator.security.oauth2;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.NoSuchClientException;
-import org.springframework.stereotype.Service;
 import pl.ark.chr.buginator.repository.auth.OAuth2ClientRepository;
 
 //@Service

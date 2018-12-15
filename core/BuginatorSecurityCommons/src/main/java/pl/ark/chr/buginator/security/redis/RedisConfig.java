@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.redis;
+package pl.ark.chr.buginator.security.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

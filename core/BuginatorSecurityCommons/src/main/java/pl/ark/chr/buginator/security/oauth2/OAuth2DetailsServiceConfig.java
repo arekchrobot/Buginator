@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.security;
+package pl.ark.chr.buginator.security.oauth2;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
