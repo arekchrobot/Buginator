@@ -25,10 +25,10 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     public OAuth2Config(@Qualifier("redisTokenStore") TokenStore tokenStore,
-                        AuthenticationManager authenticationManager, ClientDetailsService clientDetailsService) {
+                        AuthenticationManager authenticationManager, ClientDetailsService oauth2ClientDetailsService) {
         this.tokenStore = tokenStore;
         this.authenticationManager = authenticationManager;
-        this.clientDetailsService = clientDetailsService;
+        this.clientDetailsService = oauth2ClientDetailsService;
     }
 
     @Override

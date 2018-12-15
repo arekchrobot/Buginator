@@ -1,6 +1,7 @@
 package pl.ark.chr.buginator.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import pl.ark.chr.buginator.security.OAuth2DetailsServiceConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,14 +28,15 @@ import java.util.Map;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@ImportAutoConfiguration(classes = OAuth2DetailsServiceConfig.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService oauth2UserDetailsService;
 
     @Autowired
     public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(oauth2UserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -64,7 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/oauth/token").permitAll();
-
     }
 
     @Bean

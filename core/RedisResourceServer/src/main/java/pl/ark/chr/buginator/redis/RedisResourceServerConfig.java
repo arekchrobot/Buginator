@@ -11,7 +11,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
-@PropertySource({"classpath:redis_${spring.profiles.active:dev}.properties"})
 @EnableResourceServer
 @ImportAutoConfiguration(RedisConfig.class)
 public class RedisResourceServerConfig extends ResourceServerConfigurerAdapter {

@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.auth;
+package pl.ark.chr.buginator.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -8,13 +8,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.ark.chr.buginator.repository.auth.UserRepository;
 
-@Service
-@Primary
+//@Service
+//@Primary
 public class OAuth2UserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
 
-    @Autowired
+//    @Autowired
     public OAuth2UserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.auth;
+package pl.ark.chr.buginator.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -9,6 +9,9 @@ import java.util.*;
 public class OAuth2ClientDetails implements ClientDetails {
 
     private static final long serialVersionUID = 7037913737782889343L;
+
+    static final String ALLOWED_DOMAINS = "allowedDomains";
+    static final String ALLOWED_IPS = "allowedIPs";
 
     private OAuth2Client client;
     private int defaultExpiration;
@@ -83,9 +86,9 @@ public class OAuth2ClientDetails implements ClientDetails {
     public Map<String, Object> getAdditionalInformation() {
         switch (client.getType()) {
             case API:
-                return Collections.singletonMap("allowedIPs", client.getAllowedIPs());
+                return Collections.singletonMap(ALLOWED_IPS, client.getAllowedIPs());
             case WEB:
-                return Collections.singletonMap("allowedDomains", client.getAllowedDomains());
+                return Collections.singletonMap(ALLOWED_DOMAINS, client.getAllowedDomains());
             default:
                 return new HashMap<>();
         }

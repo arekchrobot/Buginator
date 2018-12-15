@@ -59,6 +59,7 @@
         <module>core/BuginatorCommons</module>
         <module>core/BuginatorDomain</module>
         <module>core/RedisResourceServer</module>
+        <module>core/BuginatorSecurityCommons</module>
         <module>aggregator/BuginatorAggregatorApi</module>
         <module>aggregator/EmailAggregator</module>
         <module>BuginatorAuth</module>

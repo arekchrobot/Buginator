@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.auth;
+package pl.ark.chr.buginator.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
