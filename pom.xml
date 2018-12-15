@@ -37,6 +37,7 @@
         <spring.security.oauth2.version>2.3.4.RELEASE</spring.security.oauth2.version>
         <jedis.version>2.9.0</jedis.version>
         <redis.lettuce.version>4.5.0.Final</redis.lettuce.version>
+        <h2.version>1.4.197</h2.version>
     </properties>
 
     <profiles>
@@ -144,6 +145,12 @@
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>artemis-jms-server</artifactId>
                 <version>${artemis.jms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -7,14 +7,11 @@ import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.NoSuchClientException;
 import pl.ark.chr.buginator.repository.auth.OAuth2ClientRepository;
 
-//@Service
-//@Primary
 public class OAuth2ClientDetailsService implements ClientDetailsService {
 
     private OAuth2ClientRepository oAuth2ClientRepository;
     private int expiration;
 
-//    @Autowired
     public OAuth2ClientDetailsService(OAuth2ClientRepository oAuth2ClientRepository,
                                       @Value("${oauth.expiration:3600}") int expiration) {
         this.oAuth2ClientRepository = oAuth2ClientRepository;
