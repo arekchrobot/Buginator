@@ -56,13 +56,13 @@
     </profiles>
 
     <modules>
-        <module>Buginator</module>
         <module>core/BuginatorCommons</module>
         <module>core/BuginatorDomain</module>
         <module>core/BuginatorSecurityCommons</module>
         <module>aggregator/BuginatorAggregatorApi</module>
         <module>aggregator/EmailAggregator</module>
-        <module>BuginatorAuth</module>
+        <module>services/BuginatorAuth</module>
+        <module>services/Buginator</module>
     </modules>
 
     <dependencyManagement>

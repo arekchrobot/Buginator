@@ -180,7 +180,7 @@
 
         <resources>
             <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
+                <directory>src/main/resources</directory>
             </resource>
             <resource>
                 <directory>${project.build.directory}/generated-resources</directory>
