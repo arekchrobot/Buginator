@@ -1,0 +1,12 @@
+server:
+  port: 8100
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: oauth
+          uri: http://localhost:8080
+          predicates:
+            - Path=/oauth/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
