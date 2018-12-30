@@ -15,6 +15,8 @@ public class PaymentOption extends BaseEntity<PaymentOption> {
 
     private static final long serialVersionUID = -1453981529749167170L;
 
+    public static final long TRIAL = 1L;
+
     /**
      * Represents how long in days the payment is valid
      */
@@ -60,5 +62,11 @@ public class PaymentOption extends BaseEntity<PaymentOption> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static PaymentOption getPaymentOption(long id) {
+        var paymentOption = new PaymentOption();
+        paymentOption.setId(PaymentOption.TRIAL);
+        return paymentOption;
     }
 }

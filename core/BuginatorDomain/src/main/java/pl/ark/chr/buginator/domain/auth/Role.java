@@ -20,6 +20,8 @@ public class Role extends BaseEntity<Role> implements Authority {
 
     private static final long serialVersionUID = -160920230822990299L;
 
+    public static final long MANAGER = 2L;
+
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
@@ -60,5 +62,11 @@ public class Role extends BaseEntity<Role> implements Authority {
     @Override
     public String getAuthority() {
         return getName();
+    }
+
+    public static Role getRole(long roleId) {
+        var role = new Role();
+        role.setId(roleId);
+        return role;
     }
 }

@@ -133,7 +133,7 @@ public class User extends BaseEntity<User> {
 
         public Builder email(String val) {
             Objects.requireNonNull(val);
-            email = val;
+            email = val.toLowerCase();
             return this;
         }
 

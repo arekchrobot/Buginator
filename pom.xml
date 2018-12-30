@@ -121,12 +121,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.cloud</groupId>-->
-                <!--<artifactId>spring-cloud-starter-gateway</artifactId>-->
-                <!--<version>${spring.cloud.version}</version>-->
-            <!--</dependency>-->
-
             <!--test-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

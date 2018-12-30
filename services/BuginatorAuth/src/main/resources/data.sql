@@ -6,6 +6,8 @@ INSERT INTO buginator_permission(id, name, version) VALUES (1, 'ACCESS', 1);
 
 INSERT INTO buginator_role(id, name, version) VALUES (1, 'USER', 1);
 
+INSERT INTO buginator_role(id, name, version) VALUES (2, 'MANAGER', 1);
+
 INSERT INTO buginator_role_permission(role_id, permission_id) VALUES (1, 1);
 
 INSERT INTO buginator_user(id, name, email, active, company_id, pass, role_id, version) VALUES (1, 'TestUser', 'test@gmail.com', true, 1, '{def}$2a$10$ra/Scxal23zJrh.sh8nQP.LreuuTp0Ez8L9/aeQCA4AzRXct6zlea', 1, 1); --pass: 123
