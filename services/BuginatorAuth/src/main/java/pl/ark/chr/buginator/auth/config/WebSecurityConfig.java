@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.auth;
+package pl.ark.chr.buginator.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;

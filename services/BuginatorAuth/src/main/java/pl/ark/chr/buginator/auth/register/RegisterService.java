@@ -1,5 +1,7 @@
 package pl.ark.chr.buginator.auth.register;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import pl.ark.chr.buginator.repository.auth.UserRepository;
 
 @Service
 class RegisterService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterService.class);
 
     private CompanyRepository companyRepository;
     private UserRepository userRepository;
@@ -72,6 +76,7 @@ class RegisterService {
     private void validateDuplicateEmail(String userEmail) {
         userRepository.findByEmail(userEmail.toLowerCase())
                 .ifPresent(user -> {
+                    LOGGER.warn("Attempt to create duplicate user: " + userEmail);
                     throw new DuplicateException("user.duplicate");
                 });
     }
@@ -79,6 +84,7 @@ class RegisterService {
     private void validateDuplicateCompany(String companyName) {
         companyRepository.findByName(companyName)
                 .ifPresent(company -> {
+                    LOGGER.warn("Attempt to create duplicate company: " + companyName);
                     throw new DuplicateException("company.duplicate");
                 });
     }

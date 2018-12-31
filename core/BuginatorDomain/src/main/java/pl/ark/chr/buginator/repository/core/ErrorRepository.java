@@ -1,7 +1,7 @@
 package pl.ark.chr.buginator.repository.core;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.core.Error;
@@ -11,7 +11,7 @@ import pl.ark.chr.buginator.domain.core.ErrorStatus;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ErrorRepository extends CrudRepository<Error, Long> {
+public interface ErrorRepository extends JpaRepository<Error, Long> {
 
     Long countByApplication(Application application);
 
