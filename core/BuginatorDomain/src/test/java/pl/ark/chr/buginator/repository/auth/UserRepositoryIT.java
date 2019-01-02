@@ -1,12 +1,13 @@
 package pl.ark.chr.buginator.repository.auth;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.repository.TestApplicationContext;
 import pl.ark.chr.buginator.repository.util.TestObjectCreator;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @ContextConfiguration(classes= TestApplicationContext.class)
 public class UserRepositoryIT {
@@ -27,6 +28,7 @@ public class UserRepositoryIT {
     private UserRepository userRepository;
 
     @Test
+    @DisplayName("should return active user by given email")
     public void shouldGetUserByEmailAndActive() {
         //given
         var trialPaymentOption = TestObjectCreator.createPaymentOption("Trial");
@@ -46,6 +48,7 @@ public class UserRepositoryIT {
     }
 
     @Test
+    @DisplayName("should return empty when user is not active")
     public void shouldReturnEmptyWhenUserNotActive() {
         //given
         var trialPaymentOption = TestObjectCreator.createPaymentOption("Trial");
@@ -65,6 +68,7 @@ public class UserRepositoryIT {
     }
 
     @Test
+    @DisplayName("should return empty when no user exists with given email")
     public void shouldReturnEmptyWhenWrongEmailPassed() {
         //given
         var trialPaymentOption = TestObjectCreator.createPaymentOption("Trial");

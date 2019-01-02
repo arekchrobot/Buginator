@@ -1,10 +1,15 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.data.UserWrapper;
@@ -16,20 +21,21 @@ import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.repository.auth.UserApplicationRepository;
 import pl.ark.chr.buginator.repository.auth.UserRepository;
 import pl.ark.chr.buginator.service.ApplicationService;
-import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created by Arek on 2016-12-26.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class ApplicationServiceImplTest {
 
     private static final String TEST_MESSAGE_SOURCE_RETURN = "TEST INFO";
@@ -52,17 +58,9 @@ public class ApplicationServiceImplTest {
     @Mock
     private MessageSource messageSource;
 
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
-
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
     @Test
@@ -128,17 +126,18 @@ public class ApplicationServiceImplTest {
 //        when(applicationRepository.save(any(Application.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
 //        when(userApplicationRepository.save(any(UserApplication.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
 
-        fluentThrown.expect(IllegalArgumentException.class)
-                .hasMessage(TEST_MESSAGE_SOURCE_RETURN + " " + appName + " " + TEST_MESSAGE_SOURCE_RETURN);
-
         //when
-        UserApplication result = sut.save(testApp, userWrapper);
+        Executable codeUnderException = () -> sut.save(testApp, userWrapper);
 
         //then
+        var illegalArgumentException = assertThrows(IllegalArgumentException.class, codeUnderException,
+                "should throw DataAccessException");
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(TEST_MESSAGE_SOURCE_RETURN + " "
+                + appName + " " + TEST_MESSAGE_SOURCE_RETURN);
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testGetUserApplications__ErrorsProperlySet() {
         //given
         String companyName = "Test Company";

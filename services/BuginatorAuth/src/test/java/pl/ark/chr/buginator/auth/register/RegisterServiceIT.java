@@ -1,13 +1,15 @@
 package pl.ark.chr.buginator.auth.register;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.auth.AuthApplication;
 import pl.ark.chr.buginator.auth.util.TestApplicationContext;
@@ -19,23 +21,20 @@ import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.repository.auth.CompanyRepository;
 import pl.ark.chr.buginator.repository.auth.PaymentOptionRepository;
 import pl.ark.chr.buginator.repository.auth.UserRepository;
-import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {AuthApplication.class, TestApplicationContext.class})
 @Transactional
 public class RegisterServiceIT {
-
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
 
     @Autowired
     private RegisterService registerService;
@@ -52,7 +51,13 @@ public class RegisterServiceIT {
     @Autowired
     private EntityManager testEntityManager;
 
+    @AfterEach
+    void tearDown() {
+        reset(delegatedMockCompanyRepository, delegatedMockUserRepository, delegatedMockPaymentOptionRepository);
+    }
+
     @Test
+    @DisplayName("should correctly save company and user in database")
     public void shouldCorrectlyRegister() {
         //given
         var registerDTO = RegisterDTO.builder()
@@ -89,6 +94,7 @@ public class RegisterServiceIT {
     }
 
     @Test
+    @DisplayName("should throw DuplicateException when company exists in database")
     public void shouldThrowExceptionWhenCompanyIsDuplicated() {
         //given
         PaymentOption paymentOption = PaymentOption.getPaymentOption(PaymentOption.TRIAL);
@@ -104,14 +110,13 @@ public class RegisterServiceIT {
                 .userPassword("password123")
                 .build();
 
-        fluentThrown
-                .expect(DuplicateException.class)
-                .hasMessage("company.duplicate");
-
         //when
-        registerService.registerCompanyAndUser(registerDTO);
+        Executable codeUnderException = () -> registerService.registerCompanyAndUser(registerDTO);
 
         //then
+        var duplicateException = assertThrows(DuplicateException.class, codeUnderException,
+                "Should throw DuplicateException");
+        assertThat(duplicateException.getMessage()).isEqualTo("company.duplicate");
         verify(delegatedMockCompanyRepository, times(1)).findByName(eq(registerDTO.getCompanyName()));
         verify(delegatedMockUserRepository, never()).findByEmail(eq(registerDTO.getUserEmail().toLowerCase()));
         verify(delegatedMockPaymentOptionRepository, never()).findById(eq(PaymentOption.TRIAL));
@@ -120,6 +125,7 @@ public class RegisterServiceIT {
     }
 
     @Test
+    @DisplayName("should throw DuplicateException when user exists in database")
     public void shouldThrowExceptionWhenUserIsDuplicated() {
         //given
         PaymentOption paymentOption = PaymentOption.getPaymentOption(PaymentOption.TRIAL);
@@ -145,14 +151,13 @@ public class RegisterServiceIT {
                 .userPassword("password123")
                 .build();
 
-        fluentThrown
-                .expect(DuplicateException.class)
-                .hasMessage("user.duplicate");
-
         //when
-        registerService.registerCompanyAndUser(registerDTO);
+        Executable codeUnderException = () -> registerService.registerCompanyAndUser(registerDTO);
 
         //then
+        var duplicateException = assertThrows(DuplicateException.class, codeUnderException,
+                "Should throw DuplicateException");
+        assertThat(duplicateException.getMessage()).isEqualTo("user.duplicate");
         verify(delegatedMockCompanyRepository, times(1)).findByName(eq(registerDTO.getCompanyName()));
         verify(delegatedMockUserRepository, times(1)).findByEmail(eq(registerDTO.getUserEmail().toLowerCase()));
         verify(delegatedMockPaymentOptionRepository, never()).findById(eq(PaymentOption.TRIAL));

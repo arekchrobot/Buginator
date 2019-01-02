@@ -1,17 +1,17 @@
 package pl.ark.chr.buginator.filter;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import pl.ark.chr.buginator.domain.auth.*;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.persistence.security.FilterData;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
-import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Created by Arek on 2016-12-01.
@@ -19,19 +19,6 @@ import java.util.Set;
 public class ApplicationAccessClientFilterTest {
 
     private ApplicationAccessClientFilter sut = new ApplicationAccessClientFilter();
-
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-    }
 
     @Test
     public void testValidateAccess__AccessGranted() throws DataAccessException {
@@ -84,14 +71,13 @@ public class ApplicationAccessClientFilterTest {
         Set<UserApplication> userApplications = new HashSet<>();
         userApplications.add(userApplication1);
 
-        fluentThrown
-                .expect(DataAccessException.class)
-                .hasMessage("Attempt to access forbidden resources");
-
         //when
-        sut.validate(filterData, userApplications);
+        Executable codeUnderException = () -> sut.validate(filterData, userApplications);
 
         //then
+        var dataAccessException = assertThrows(DataAccessException.class, codeUnderException,
+                "should throw DataAccessException.class");
+        assertThat(dataAccessException.getMessage()).isEqualTo("Attempt to access forbidden resources");
     }
 
 }

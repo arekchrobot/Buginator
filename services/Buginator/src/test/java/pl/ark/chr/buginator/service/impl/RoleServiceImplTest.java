@@ -1,12 +1,14 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.domain.auth.Company;
@@ -14,18 +16,19 @@ import pl.ark.chr.buginator.domain.auth.Role;
 import pl.ark.chr.buginator.exceptions.ValidationException;
 import pl.ark.chr.buginator.repository.auth.RoleRepository;
 import pl.ark.chr.buginator.service.RoleService;
-import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.time.LocalDate;
 import java.util.Locale;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created by Arek on 2017-03-22.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class RoleServiceImplTest {
 
     private static final String TEST_MESSAGE_SOURCE_RETURN = "TEST INFO";
@@ -39,10 +42,7 @@ public class RoleServiceImplTest {
     @Mock
     private MessageSource messageSource;
 
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
-
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
     }
@@ -101,14 +101,13 @@ public class RoleServiceImplTest {
 
 //        when(roleRepository.save(any(Role.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
 
-        fluentThrown
-                .expect(ValidationException.class)
-                .hasMessage(TEST_MESSAGE_SOURCE_RETURN);
-
         //when
-        sut.save(role, company2);
+        Executable codeUnderException = () -> sut.save(role, company2);
 
         //then
+        var validationException = assertThrows(ValidationException.class, codeUnderException,
+                "should throw ValidationException");
+        assertThat(validationException.getMessage()).isEqualTo(TEST_MESSAGE_SOURCE_RETURN);
     }
 
     @Test
@@ -124,13 +123,12 @@ public class RoleServiceImplTest {
 
 //        when(roleRepository.save(any(Role.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
 
-        fluentThrown
-                .expect(ValidationException.class)
-                .hasMessage(TEST_MESSAGE_SOURCE_RETURN);
-
         //when
-        sut.save(role, company);
+        Executable codeUnderException = () -> sut.save(role, company);
 
         //then
+        var validationException = assertThrows(ValidationException.class, codeUnderException,
+                "should throw ValidationException");
+        assertThat(validationException.getMessage()).isEqualTo(TEST_MESSAGE_SOURCE_RETURN);
     }
 }

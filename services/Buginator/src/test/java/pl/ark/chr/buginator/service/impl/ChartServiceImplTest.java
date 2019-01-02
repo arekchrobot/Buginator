@@ -1,10 +1,15 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.data.ChartData;
@@ -18,19 +23,20 @@ import pl.ark.chr.buginator.exceptions.DataAccessException;
 import pl.ark.chr.buginator.repository.core.ApplicationRepository;
 import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.service.ChartService;
-import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created by Arek on 2016-12-26.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class ChartServiceImplTest {
 
     private static final String TEST_MESSAGE_SOURCE_RETURN = "TEST INFO";
@@ -47,21 +53,13 @@ public class ChartServiceImplTest {
     @Mock
     private MessageSource messageSource;
 
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
-
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
     @Test
-    @Ignore
+    @Disabled
     public void testGenerateLastWeekErrorsForApplication__ProperValues() throws ChartException, DataAccessException {
         //given
         Application testApplication = TestObjectCreator.createApplication(new Company("", new PaymentOption()), "App1");
@@ -117,13 +115,13 @@ public class ChartServiceImplTest {
 //        when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
 //                .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
 
-        fluentThrown.expect(ChartException.class)
-                .hasMessage(TEST_MESSAGE_SOURCE_RETURN);
-
         //when
-        sut.generateLastWeekErrorsForApplication(1L, userApps);
+        Executable codeUnderException = () -> sut.generateLastWeekErrorsForApplication(1L, userApps);
 
         //then
+        var chartException = assertThrows(ChartException.class, codeUnderException,
+                "should throw ChartException");
+        assertThat(chartException.getMessage()).isEqualTo(TEST_MESSAGE_SOURCE_RETURN);
     }
 
     @Test
@@ -142,17 +140,17 @@ public class ChartServiceImplTest {
 //        when(errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(any(Application.class), any(LocalDate.class)))
 //                .thenReturn(TestObjectCreator.generateErrorListForLastWeekForApplication(testApplication));
 
-        fluentThrown.expect(DataAccessException.class)
-                .hasMessage("Attempt to access forbidden resources");
-
         //when
-        sut.generateLastWeekErrorsForApplication(1L, userApps);
+        Executable codeUnderException = () -> sut.generateLastWeekErrorsForApplication(1L, userApps);
 
         //then
+        var dataAccessException = assertThrows(DataAccessException.class, codeUnderException,
+                "should throw DataAccessException");
+        assertThat(dataAccessException.getMessage()).isEqualTo("Attempt to access forbidden resources");
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testGenerateLastWeekErrorsForApplication__NoErrorsFound() throws ChartException, DataAccessException {
         //given
         Application testApplication = TestObjectCreator.createApplication(new Company("", new PaymentOption()), "App1");

@@ -1,7 +1,8 @@
 package pl.ark.chr.buginator.aggregator.util;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import pl.ark.chr.buginator.aggregator.domain.Aggregator;
 import pl.ark.chr.buginator.domain.core.Application;
@@ -17,7 +18,7 @@ public class AggregatorSenderValidatorTest {
     private Aggregator aggregator;
     private Error error;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         Application application = Mockito.mock(Application.class);
         aggregator = new Aggregator("testCLass", application);
@@ -27,7 +28,8 @@ public class AggregatorSenderValidatorTest {
     }
 
     @Test
-    public void testErrorSeverityDoesNotMatch__True() {
+    @DisplayName("should successfully not match severities")
+    public void testErrorSeverityDoesNotMatchTrue() {
         //given
         aggregator.setErrorSeverity(ErrorSeverity.CRITICAL);
 
@@ -39,6 +41,7 @@ public class AggregatorSenderValidatorTest {
     }
 
     @Test
+    @DisplayName("should return false since severity is matched to be equal")
     public void testErrorSeverityDoesNotMatch__False() {
         //given
         aggregator.setErrorSeverity(ErrorSeverity.ERROR);
@@ -51,7 +54,8 @@ public class AggregatorSenderValidatorTest {
     }
 
     @Test
-    public void testErrorCountLessThan__False() {
+    @DisplayName("should return false since error count is >= aggregator count")
+    public void testErrorCountLessThanFalse() {
         //given
         aggregator.setCount(1);
 
@@ -63,6 +67,7 @@ public class AggregatorSenderValidatorTest {
     }
 
     @Test
+    @DisplayName("should return true since error count <= aggregator count")
     public void testErrorCountLessThan__True() {
         //given
         aggregator.setCount(5);

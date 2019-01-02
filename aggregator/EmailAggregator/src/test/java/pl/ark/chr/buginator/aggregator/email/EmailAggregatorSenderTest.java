@@ -1,14 +1,17 @@
 package pl.ark.chr.buginator.aggregator.email;
 
 import freemarker.template.Configuration;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.context.MessageSource;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -17,23 +20,21 @@ import pl.ark.chr.buginator.commons.util.NetworkUtil;
 import pl.ark.chr.buginator.domain.core.Error;
 import pl.ark.chr.buginator.domain.core.ErrorSeverity;
 import pl.ark.chr.buginator.domain.core.ErrorStatus;
-import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class EmailAggregatorSenderTest {
-
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
 
     @Mock
     private Configuration freeMarkerConfig;
@@ -46,7 +47,7 @@ public class EmailAggregatorSenderTest {
     @InjectMocks
     private EmailAggregatorSender emailAggregatorSender;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         doReturn("").when(emailAggregatorSender).constructEmailBody(anyMap());
         doReturn("BASIC_TOPIC").when(aggregatorEmailMessageSource)
@@ -59,11 +60,13 @@ public class EmailAggregatorSenderTest {
     }
 
     @Test
+    @DisplayName("should be a valid strategy")
     public void shouldBeValidStrategy() {
         assertThat(emailAggregatorSender.isValid(EmailAggregator.EMAIL_AGGREGATOR_NAME)).isTrue();
     }
 
     @Test
+    @DisplayName("should create not null values in template model")
     public void shouldCreateCorrectTemplateModel() {
         //given
         var app = TestObjectCreator.createTestApplication();
@@ -83,6 +86,7 @@ public class EmailAggregatorSenderTest {
     }
 
     @Test
+    @DisplayName("should create template model with error title as null")
     public void shouldCreateTemplateModelAndFillNull() {
         //given
         var app = TestObjectCreator.createTestApplication();
@@ -104,6 +108,7 @@ public class EmailAggregatorSenderTest {
     }
 
     @Test
+    @DisplayName("should create url without port when port not available")
     public void shouldCreateUrlWithoutPort() {
         //given
         var app = TestObjectCreator.createTestApplication();
@@ -122,6 +127,7 @@ public class EmailAggregatorSenderTest {
     }
 
     @Test
+    @DisplayName("should construct proper EmailDTO from aggregator")
     public void shouldConstructProperEmailDTO() {
         //given
         var app = TestObjectCreator.createTestApplication();
@@ -143,6 +149,7 @@ public class EmailAggregatorSenderTest {
     }
 
     @Test
+    @DisplayName("should send data to jms queue")
     public void shouldSendDataToJmsQueue() throws Exception {
         //given
         var app = TestObjectCreator.createTestApplication();
@@ -158,6 +165,7 @@ public class EmailAggregatorSenderTest {
     }
 
     @Test
+    @DisplayName("should throw EmailCreationException when no email body can be constructed")
     public void shouldThrowExceptionWhenUnableToCreateEmailBody() throws Exception {
         //given
         var app = TestObjectCreator.createTestApplication();
@@ -166,11 +174,13 @@ public class EmailAggregatorSenderTest {
 
         doThrow(new IOException("Error")).when(emailAggregatorSender).constructEmailBody(anyMap());
 
-        fluentThrown.expect(EmailCreationException.class)
-                .hasMessage("Error creating email body template for error: 2")
-                .hasCauseInstanceOf(IOException.class);
-
         //when
-        emailAggregatorSender.sendData(emailAggregator, error);
+        Executable codeUnderException = () -> emailAggregatorSender.sendData(emailAggregator, error);
+
+        //then
+        var emailCreationException = assertThrows(EmailCreationException.class, codeUnderException,
+                "Should throw EmailCreationException");
+        assertThat(emailCreationException.getCause()).isInstanceOf(IOException.class);
+        assertThat(emailCreationException.getMessage()).isEqualTo("Error creating email body template for error: 2");
     }
 }

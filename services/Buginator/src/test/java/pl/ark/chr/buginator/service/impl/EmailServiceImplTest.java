@@ -1,14 +1,15 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.ark.chr.buginator.TestApplicationConfiguration;
 import pl.ark.chr.buginator.domain.auth.Company;
 import pl.ark.chr.buginator.domain.auth.PaymentOption;
@@ -28,7 +29,8 @@ import static org.assertj.core.api.Assertions.*;
  */
 @ActiveProfiles("UNIT_TEST")
 @SpringBootTest(classes = TestApplicationConfiguration.class)
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class EmailServiceImplTest {
 
     @Autowired
@@ -37,14 +39,9 @@ public class EmailServiceImplTest {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(mailSender.createMimeMessage()).thenReturn(new MimeMessage(Session.getDefaultInstance(new Properties())));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
     @Test

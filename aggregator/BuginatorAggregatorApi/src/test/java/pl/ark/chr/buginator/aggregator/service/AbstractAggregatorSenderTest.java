@@ -1,7 +1,8 @@
 package pl.ark.chr.buginator.aggregator.service;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import pl.ark.chr.buginator.aggregator.domain.Aggregator;
 import pl.ark.chr.buginator.domain.core.Application;
@@ -19,7 +20,7 @@ public class AbstractAggregatorSenderTest {
     private Aggregator aggregator;
     private Error error;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         sut = Mockito.spy(AbstractAggregatorSender.class);
         Application application = Mockito.mock(Application.class);
@@ -30,7 +31,8 @@ public class AbstractAggregatorSenderTest {
     }
 
     @Test
-    public void testSendData__Success() {
+    @DisplayName("should successfully execute sendData()")
+    public void testSendDataSuccess() {
         //given
         aggregator.setCount(1);
         aggregator.setErrorSeverity(ErrorSeverity.ERROR);
@@ -43,7 +45,8 @@ public class AbstractAggregatorSenderTest {
     }
 
     @Test
-    public void testSendData__CountLessThan() {
+    @DisplayName("should not execute sendData() since aggregator count is greater than error count")
+    public void testSendDataCountLessThan() {
         //given
         aggregator.setCount(5);
         aggregator.setErrorSeverity(ErrorSeverity.ERROR);
@@ -56,7 +59,8 @@ public class AbstractAggregatorSenderTest {
     }
 
     @Test
-    public void testSendData__SeverityNotMatch() {
+    @DisplayName("should not execute sendData() since error severities do not match")
+    public void testSendDataSeverityNotMatch() {
         //given
         aggregator.setCount(5);
         aggregator.setErrorSeverity(ErrorSeverity.CRITICAL);

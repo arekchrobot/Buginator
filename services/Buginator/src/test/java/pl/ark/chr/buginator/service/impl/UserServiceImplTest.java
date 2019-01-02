@@ -1,13 +1,14 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.BuginatorProperties;
 import pl.ark.chr.buginator.domain.auth.Company;
@@ -20,21 +21,20 @@ import pl.ark.chr.buginator.repository.auth.UserRepository;
 import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.UserService;
 import pl.ark.chr.buginator.data.Credentials;
-import pl.wkr.fluentrule.api.CheckExpectedException;
-import pl.wkr.fluentrule.api.FluentExpectedException;
-import pl.wkr.fluentrule.api.check.SafeCheck;
 
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created by Arek on 2016-11-28.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class UserServiceImplTest {
 
     private static final String TEST_MESSAGE_SOURCE_RETURN = "TEST INFO";
@@ -54,21 +54,10 @@ public class UserServiceImplTest {
     @Mock
     private MessageSource messageSource;
 
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
-
-    @Rule
-    public CheckExpectedException checkThrown = CheckExpectedException.none();
-
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
         when(buginatorProperties.getBcryptStrength()).thenReturn(11);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
     @Test
@@ -105,14 +94,13 @@ public class UserServiceImplTest {
 
         when(userRepository.findByEmail(any(String.class))).thenReturn(Optional.empty());
 
-        fluentThrown
-                .expect(UsernameNotFoundException.class)
-                .hasMessage(TEST_MESSAGE_SOURCE_RETURN + " " + login);
-
         //when
-        User loadedUser = sut.loadUserByEmail(login, new Locale("en"));
+        Executable codeUnderException = () -> sut.loadUserByEmail(login, new Locale("en"));
 
         //then
+        var illegalArgumentException = assertThrows(UsernameNotFoundException.class, codeUnderException,
+                "should throw UsernameNotFoundException");
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(TEST_MESSAGE_SOURCE_RETURN + " " + login);
     }
 
     @Test
@@ -126,14 +114,13 @@ public class UserServiceImplTest {
 
         when(userRepository.findByEmail(any(String.class))).thenReturn(Optional.of(user));
 
-        fluentThrown
-                .expect(UsernameNotFoundException.class)
-                .hasMessage(TEST_MESSAGE_SOURCE_RETURN + " " + login + " " + TEST_MESSAGE_SOURCE_RETURN);
-
         //when
-        User loadedUser = sut.loadUserByEmail(login, new Locale("en"));
+        Executable codeUnderException = () -> sut.loadUserByEmail(login, new Locale("en"));
 
         //then
+        var illegalArgumentException = assertThrows(UsernameNotFoundException.class, codeUnderException,
+                "should throw UsernameNotFoundException");
+        assertThat(illegalArgumentException.getMessage()).isEqualTo(TEST_MESSAGE_SOURCE_RETURN + " " + login + " " + TEST_MESSAGE_SOURCE_RETURN);
     }
 
     @Test
@@ -162,19 +149,15 @@ public class UserServiceImplTest {
 
         when(userRepository.findByEmail(any(String.class))).thenReturn(Optional.of(user));
 
-        checkThrown.check(new SafeCheck<RestException>() {
-            @Override
-            protected void safeCheck(RestException e) {
-                assertThat(e.getStatus().value()).isEqualTo(403);
-                assertThat(e).hasMessage(TEST_MESSAGE_SOURCE_RETURN);
-                assertThat(e.getRequestBody()).isInstanceOf(Credentials.class).isEqualTo(credentials);
-            }
-        });
-
         //when
-        User loaded = sut.validateUserLogin(credentials, new Locale("en"));
+        Executable codeUnderException = () -> sut.validateUserLogin(credentials, new Locale("en"));
 
         //then
+        var restException = assertThrows(RestException.class, codeUnderException,
+                "should throw RestException");
+        assertThat(restException.getMessage()).isEqualTo(TEST_MESSAGE_SOURCE_RETURN);
+        assertThat(restException.getRequestBody()).isInstanceOf(Credentials.class).isEqualTo(credentials);
+        assertThat(restException.getStatus().value()).isEqualTo(403);
     }
 
     @Test

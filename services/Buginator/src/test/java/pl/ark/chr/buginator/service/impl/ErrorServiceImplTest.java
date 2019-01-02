@@ -1,13 +1,11 @@
 package pl.ark.chr.buginator.service.impl;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.MessageSource;
 import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.domain.auth.Company;
@@ -19,7 +17,6 @@ import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.repository.core.ApplicationRepository;
 import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.service.ErrorService;
-import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.util.*;
 
@@ -31,7 +28,7 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * Created by Arek on 2017-01-29.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ErrorServiceImplTest {
 
     private static final String TEST_MESSAGE_SOURCE_RETURN = "TEST INFO";
@@ -48,17 +45,9 @@ public class ErrorServiceImplTest {
     @Mock
     private MessageSource messageSource;
 
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
-
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 //        when(messageSource.getMessage(any(String.class), nullable(Object[].class), any(Locale.class))).thenReturn(TEST_MESSAGE_SOURCE_RETURN);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
     @Test

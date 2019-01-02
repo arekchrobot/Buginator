@@ -1,6 +1,7 @@
 package pl.ark.chr.buginator.email.sender.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import pl.ark.chr.buginator.commons.dto.EmailDTO;
 
 import javax.mail.Message;
@@ -11,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class EmailUtilsTest {
 
     @Test
+    @DisplayName("shuold create email properties without ssl configuration")
     public void shouldCreateNonSslProperties() {
         //given
         var mail = EmailDTO.builder("from", "to")
@@ -29,6 +31,7 @@ public class EmailUtilsTest {
     }
 
     @Test
+    @DisplayName("should create email properties and append ssl configuration")
     public void shouldCreateSslProperties() {
         //given
         var mail = EmailDTO.builder("from", "to")
@@ -49,6 +52,7 @@ public class EmailUtilsTest {
     }
 
     @Test
+    @DisplayName("should set empty smtp_port when not present in DTO")
     public void shouldSetEmptyIfMissingPropertyParam() {
         //given
         var mail = EmailDTO.builder("from", "to")
@@ -64,6 +68,7 @@ public class EmailUtilsTest {
     }
 
     @Test
+    @DisplayName("should correctly detect and parse multiple recipients")
     public void shouldCorrectlyParseRecipients() throws Exception {
         //given
         var address = new InternetAddress("to@gmail.com");
@@ -94,6 +99,7 @@ public class EmailUtilsTest {
     }
 
     @Test
+    @DisplayName("should set correct cc and bcc recipients")
     public void shouldSetCcAndBccRecipients() throws Exception {
         //given
         var cc = new InternetAddress("toCC@gmail.com");
@@ -129,6 +135,7 @@ public class EmailUtilsTest {
     }
 
     @Test
+    @DisplayName("should correctly set subject and text contents")
     public void shouldCorrectlySetSubjectAndTextContent() throws Exception {
         //given
         var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com,abc@gmail.com")
@@ -153,6 +160,7 @@ public class EmailUtilsTest {
     }
 
     @Test
+    @DisplayName("should correctly set html content when htmlBody flag is true")
     public void shouldCorrectlySetHtmlContent() throws Exception {
         //given
         var mail = EmailDTO.builder("from@gmail.com", "to@gmail.com,abc@gmail.com")

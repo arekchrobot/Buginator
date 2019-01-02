@@ -1,19 +1,20 @@
 package pl.ark.chr.buginator.aggregator.email;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.ark.chr.buginator.commons.dto.EmailDTO;
 import pl.ark.chr.buginator.commons.util.NetworkUtil;
 
 import static org.assertj.core.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestApplicationContext.class)
 public class EmailAggregatorSenderIT {
 
@@ -48,13 +49,14 @@ public class EmailAggregatorSenderIT {
             "    </body>\n" +
             "</html>";
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         NetworkUtil.setHostIP("buginator.com");
         jmsTemplate.setReceiveTimeout(10_000);
     }
 
     @Test
+    @DisplayName("should build proper email and send it to jms queue")
     public void shouldCreateCorrectEnEmailAndSendToJms() {
         //given
         var app = TestObjectCreator.createTestApplication();
@@ -73,6 +75,7 @@ public class EmailAggregatorSenderIT {
     }
 
     @Test
+    @DisplayName("should use correct locale for creating email and send it to jms queue")
     public void shouldCreateCorrectPlEmailAndSendToJms() {
         //given
         var app = TestObjectCreator.createTestApplication();
@@ -92,7 +95,8 @@ public class EmailAggregatorSenderIT {
     }
 
     @Test
-    public void shouldUseEnWHenLangNotSupported() {
+    @DisplayName("should use default EN locale when passing not supported lang")
+    public void shouldUseEnWhenLangNotSupported() {
         //given
         var app = TestObjectCreator.createTestApplication();
         var error = TestObjectCreator.createTestError(app);

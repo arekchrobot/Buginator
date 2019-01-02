@@ -1,12 +1,12 @@
 package pl.ark.chr.buginator.ext.service.impl;
 
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.data.ExternalData;
 import pl.ark.chr.buginator.domain.core.Application;
@@ -18,7 +18,6 @@ import pl.ark.chr.buginator.domain.core.ErrorStatus;
 import pl.ark.chr.buginator.ext.service.ErrorResolver;
 import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.repository.core.UserAgentDataRepository;
-import pl.wkr.fluentrule.api.FluentExpectedException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,13 +25,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created by Arek on 2017-04-05.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ErrorResolverImplTest {
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -46,9 +46,6 @@ public class ErrorResolverImplTest {
 
     @Mock
     private UserAgentDataRepository userAgentDataRepository;
-
-    @Rule
-    public FluentExpectedException fluentThrown = FluentExpectedException.none();
 
     @Test
     public void testResolveError__createNew() {
@@ -93,14 +90,13 @@ public class ErrorResolverImplTest {
 //        when(errorRepository.findDuplicateError(any(String.class),any(String.class), any(ErrorSeverity.class),any(String.class),any(String.class),any(Application.class)))
 //                .thenReturn(new ArrayList<>());
 
-        fluentThrown
-                .expect(IllegalArgumentException.class)
-                .hasMessage("Title is empty");
-
         //when
-        sut.resolveError(externalData, testApp);
+        Executable codeUnderException = () -> sut.resolveError(externalData, testApp);
 
         //then
+        var illegalArgumentException = assertThrows(IllegalArgumentException.class, codeUnderException,
+                "should throw DataAccessException");
+        assertThat(illegalArgumentException.getMessage()).isEqualTo("Title is empty");
     }
 
     @Test
@@ -117,14 +113,13 @@ public class ErrorResolverImplTest {
 //        when(errorRepository.findDuplicateError(any(String.class),any(String.class), any(ErrorSeverity.class),any(String.class),any(String.class),any(Application.class)))
 //                .thenReturn(new ArrayList<>());
 
-        fluentThrown
-                .expect(IllegalArgumentException.class)
-                .hasMessage("Description is empty");
-
         //when
-        sut.resolveError(externalData, testApp);
+        Executable codeUnderException = () -> sut.resolveError(externalData, testApp);
 
         //then
+        var illegalArgumentException = assertThrows(IllegalArgumentException.class, codeUnderException,
+                "should throw DataAccessException");
+        assertThat(illegalArgumentException.getMessage()).isEqualTo("Description is empty");
     }
 
     @Test
@@ -188,7 +183,7 @@ public class ErrorResolverImplTest {
 
     //TODO: fix comparing Objects!!!
     @Test
-    @Ignore
+    @Disabled("fix comparing Objects!!!")
     public void testResolveError__returnDuplicatedWithIncreasedCount__statusNotChanged() {
         //given
         Company company = TestObjectCreator.createCompany(LocalDate.now(), "", "", "");
@@ -227,7 +222,7 @@ public class ErrorResolverImplTest {
 
     //TODO: fix comparing Objects!!!
     @Test
-    @Ignore
+    @Disabled("fix comparing Objects!!!")
     public void testResolveError__returnDuplicatedWithIncreasedCount__statusChanged() {
         //given
         Company company = TestObjectCreator.createCompany(LocalDate.now(), "", "", "");
