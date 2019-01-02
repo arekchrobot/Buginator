@@ -4,12 +4,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+import pl.ark.chr.buginator.auth.AuthApplication;
+import pl.ark.chr.buginator.auth.util.TestApplicationContext;
 import pl.ark.chr.buginator.commons.exceptions.DuplicateException;
 import pl.ark.chr.buginator.domain.auth.Company;
 import pl.ark.chr.buginator.domain.auth.PaymentOption;
@@ -20,6 +21,7 @@ import pl.ark.chr.buginator.repository.auth.PaymentOptionRepository;
 import pl.ark.chr.buginator.repository.auth.UserRepository;
 import pl.wkr.fluentrule.api.FluentExpectedException;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,8 +30,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = TestRegisterApplicationContext.class)
-@DataJpaTest
+@SpringBootTest(classes = {AuthApplication.class, TestApplicationContext.class})
+@Transactional
 public class RegisterServiceIT {
 
     @Rule
@@ -48,7 +50,7 @@ public class RegisterServiceIT {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private TestEntityManager testEntityManager;
+    private EntityManager testEntityManager;
 
     @Test
     public void shouldCorrectlyRegister() {
