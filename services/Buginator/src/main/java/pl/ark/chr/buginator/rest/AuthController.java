@@ -11,18 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.ark.chr.buginator.data.Credentials;
-import pl.ark.chr.buginator.data.RegisterData;
 import pl.ark.chr.buginator.data.UserWrapper;
 import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.exceptions.RestException;
 import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
-import pl.ark.chr.buginator.exceptions.ValidationException;
 import pl.ark.chr.buginator.rest.annotations.GET;
 import pl.ark.chr.buginator.rest.annotations.POST;
 import pl.ark.chr.buginator.rest.annotations.PUT;
 import pl.ark.chr.buginator.rest.annotations.RestController;
 import pl.ark.chr.buginator.service.NotificationService;
-import pl.ark.chr.buginator.service.RegisterService;
 import pl.ark.chr.buginator.service.UserService;
 import pl.ark.chr.buginator.util.*;
 
@@ -45,9 +42,6 @@ public class AuthController {
 
     @Autowired
     private SessionUtil sessionUtil;
-
-    @Autowired
-    private RegisterService registerService;
 
     @Autowired
     private MessageSource messageSource;
@@ -91,17 +85,6 @@ public class AuthController {
     @GET("/logged")
     public UserWrapper isLogged(HttpServletRequest request, HttpServletResponse response) {
         return sessionUtil.getCurrentUser(request);
-    }
-
-    @POST("/register")
-    public boolean registerUser(HttpServletRequest request, HttpServletResponse response, Locale locale, @RequestBody RegisterData registerData) throws RestException {
-        logger.info("Creating new company: " + registerData.getCompany().getName() + " with user: " + registerData.getUser().getEmail());
-        try {
-            registerService.registerUser(registerData, locale);
-        } catch (ValidationException | IllegalArgumentException ex) {
-            throw new RestException(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, HttpUtil.generateOriginalUrl(request), registerData);
-        }
-        return true;
     }
 
     @PUT("/reset")
