@@ -7,6 +7,7 @@ import pl.ark.chr.buginator.domain.auth.Company;
 import pl.ark.chr.buginator.domain.auth.PaymentOption;
 import pl.ark.chr.buginator.domain.auth.Role;
 import pl.ark.chr.buginator.domain.auth.User;
+import pl.ark.chr.buginator.domain.messaging.EmailMessage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,5 +51,16 @@ public class TestObjectCreator {
         delegatingPasswordEncoder.setDefaultPasswordEncoderForMatches(encoders.get("def"));
 
         return delegatingPasswordEncoder;
+    }
+
+    public static EmailMessage createEmailMessage() {
+        return EmailMessage.builder()
+                .from("test.junit@junit.com")
+                .username("test.junit@junit.com")
+                .password("pass")
+                .smtpHost("host.test.com")
+                .smtpPort("455")
+                .ssl(false)
+                .build();
     }
 }

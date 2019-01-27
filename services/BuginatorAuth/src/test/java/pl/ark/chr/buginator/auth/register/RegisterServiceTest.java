@@ -8,6 +8,8 @@ import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import pl.ark.chr.buginator.auth.email.sender.EmailSender;
+import pl.ark.chr.buginator.auth.email.template.EmailType;
 import pl.ark.chr.buginator.auth.util.TestObjectCreator;
 import pl.ark.chr.buginator.commons.exceptions.DuplicateException;
 import pl.ark.chr.buginator.domain.auth.Company;
@@ -40,12 +42,14 @@ public class RegisterServiceTest {
     private UserRepository userRepository;
     @Mock
     private PaymentOptionRepository paymentOptionRepository;
+    @Mock
+    private EmailSender emailSender;
 
     private PasswordEncoder passwordEncoder = TestObjectCreator.passwordEncoder();
 
     @BeforeEach
     public void setUp() throws Exception {
-        registerService = new RegisterService(companyRepository, userRepository, paymentOptionRepository, passwordEncoder);
+        registerService = new RegisterService(companyRepository, userRepository, paymentOptionRepository, passwordEncoder, emailSender);
     }
 
     @Test
@@ -63,7 +67,7 @@ public class RegisterServiceTest {
         when(paymentOptionRepository.findById(eq(PaymentOption.TRIAL))).thenReturn(Optional.of(paymentOption));
 
         doAnswer(invocationOnMock -> {
-            Company companyToSave = (Company) invocationOnMock.getArguments()[0];
+            Company companyToSave = invocationOnMock.getArgument(0);
 
             LocalDate expectedExpiryDate = LocalDate.now().plusDays(paymentOption.getDuration());
 
@@ -85,7 +89,7 @@ public class RegisterServiceTest {
         }).when(companyRepository).save(any(Company.class));
 
         doAnswer(invocationOnMock -> {
-            User userToSave = (User) invocationOnMock.getArguments()[0];
+            User userToSave = invocationOnMock.getArgument(0);
 
             assertThat(userToSave)
                     .isNotNull();
@@ -116,6 +120,7 @@ public class RegisterServiceTest {
         verify(paymentOptionRepository, times(1)).findById(eq(PaymentOption.TRIAL));
         verify(companyRepository, times(1)).save(any(Company.class));
         verify(userRepository, times(1)).save(any(User.class));
+        verify(emailSender, times(1)).composeAndSendEmail(any(User.class), any(Company.class), eq(EmailType.REGISTER));
     }
 
     @Test
@@ -135,7 +140,7 @@ public class RegisterServiceTest {
         when(companyRepository.save(any(Company.class))).then(returnsFirstArg());
 
         doAnswer(invocationOnMock -> {
-            User userToSave = (User) invocationOnMock.getArguments()[0];
+            User userToSave = invocationOnMock.getArgument(0);
 
             assertThat(userToSave)
                     .isNotNull();
@@ -158,6 +163,7 @@ public class RegisterServiceTest {
         verify(paymentOptionRepository, times(1)).findById(eq(PaymentOption.TRIAL));
         verify(companyRepository, times(1)).save(any(Company.class));
         verify(userRepository, times(1)).save(any(User.class));
+        verify(emailSender, times(1)).composeAndSendEmail(any(User.class), any(Company.class), eq(EmailType.REGISTER));
     }
 
     @Test
@@ -184,6 +190,7 @@ public class RegisterServiceTest {
         verify(paymentOptionRepository, never()).findById(eq(PaymentOption.TRIAL));
         verify(companyRepository, never()).save(any(Company.class));
         verify(userRepository, never()).save(any(User.class));
+        verify(emailSender, never()).composeAndSendEmail(any(User.class), any(Company.class), eq(EmailType.REGISTER));
     }
 
     @Test
@@ -213,5 +220,6 @@ public class RegisterServiceTest {
         verify(paymentOptionRepository, never()).findById(eq(PaymentOption.TRIAL));
         verify(companyRepository, never()).save(any(Company.class));
         verify(userRepository, never()).save(any(User.class));
+        verify(emailSender, never()).composeAndSendEmail(any(User.class), any(Company.class), eq(EmailType.REGISTER));
     }
 }

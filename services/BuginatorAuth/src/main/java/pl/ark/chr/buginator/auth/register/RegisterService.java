@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.ark.chr.buginator.auth.email.sender.EmailSender;
+import pl.ark.chr.buginator.auth.email.template.EmailType;
 import pl.ark.chr.buginator.commons.exceptions.DuplicateException;
 import pl.ark.chr.buginator.domain.auth.Company;
 import pl.ark.chr.buginator.domain.auth.PaymentOption;
@@ -23,14 +25,17 @@ class RegisterService {
     private UserRepository userRepository;
     private PaymentOptionRepository paymentOptionRepository;
     private PasswordEncoder passwordEncoder;
+    private EmailSender emailSender;
 
     @Autowired
     public RegisterService(CompanyRepository companyRepository, UserRepository userRepository,
-                           PaymentOptionRepository paymentOptionRepository, PasswordEncoder passwordEncoder) {
+                           PaymentOptionRepository paymentOptionRepository, PasswordEncoder passwordEncoder,
+                           EmailSender emailSender) {
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
         this.paymentOptionRepository = paymentOptionRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailSender = emailSender;
     }
 
     void registerCompanyAndUser(RegisterDTO registerDTO) {
@@ -41,7 +46,7 @@ class RegisterService {
 
         User user = createAndSaveUser(registerDTO, company);
 
-        //TODO: Send registerEmail
+        emailSender.composeAndSendEmail(user, company, EmailType.REGISTER);
     }
 
     User createAndSaveUser(RegisterDTO registerDTO, Company company) {
