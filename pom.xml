@@ -12,6 +12,29 @@
     <name>BuginatorPOM</name>
     <description>Super project for Buginator app</description>
 
+    <url>https://github.com/arekchrobot/Buginator</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>author</id>
+            <name>Arkadiusz Chrobot</name>
+        </developer>
+    </developers>
+
+    <scm>
+        <developerConnection>scm:git@github.com:arekchrobot/Buginator.git</developerConnection>
+        <url>scm:git@github.com:arekchrobot/Buginator.git</url>
+        <connection>scm:git@github.com:arekchrobot/Buginator.git</connection>
+        <tag>HEAD</tag>
+    </scm>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
