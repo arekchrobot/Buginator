@@ -41,6 +41,9 @@
         <spring.cloud.version>Greenwich.M3</spring.cloud.version>
         <junit.jupiter.version>5.3.2</junit.jupiter.version>
         <pitest.junit.jupiter.version>0.8</pitest.junit.jupiter.version>
+        <sonar.maven.plugin.version>3.6.0.1398</sonar.maven.plugin.version>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
     </properties>
 
     <profiles>
@@ -281,6 +284,12 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar.maven.plugin.version}</version>
             </plugin>
         </plugins>
     </build>

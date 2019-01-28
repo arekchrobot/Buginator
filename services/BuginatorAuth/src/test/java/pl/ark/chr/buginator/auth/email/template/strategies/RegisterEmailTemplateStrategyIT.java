@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.auth.AuthApplication;
@@ -22,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {AuthApplication.class, TestApplicationContext.class})
 @Transactional
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class RegisterEmailTemplateStrategyIT {
 
     @Autowired

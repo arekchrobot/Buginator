@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.auth.AuthApplication;
@@ -30,6 +31,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {AuthApplication.class, TestApplicationContext.class})
 @Transactional
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class EmailJmsSenderIT {
 
     @Autowired
