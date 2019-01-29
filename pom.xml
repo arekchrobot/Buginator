@@ -67,6 +67,8 @@
         <sonar.maven.plugin.version>3.6.0.1398</sonar.maven.plugin.version>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
         <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
+        <sonar.junit.reportPaths>${project.build.directory}../target/surefire-reports,${project.build.directory}../target/failsafe-reports</sonar.junit.reportPaths>
+        <sonar.coverage.exclusions>**/domain/**,**/persistence/**,**/*Config.java,**/*Application.java,**/*DTO.java,**/*Exception.java</sonar.coverage.exclusions>
     </properties>
 
     <profiles>
