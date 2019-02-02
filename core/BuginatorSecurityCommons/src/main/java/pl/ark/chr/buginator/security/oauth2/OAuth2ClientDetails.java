@@ -86,9 +86,13 @@ public class OAuth2ClientDetails implements ClientDetails {
     public Map<String, Object> getAdditionalInformation() {
         switch (client.getType()) {
             case API:
-                return Collections.singletonMap(ALLOWED_IPS, client.getAllowedIPs());
+                Map<String, Object> allowedIps = new HashMap<>();
+                allowedIps.put(ALLOWED_IPS, client.getAllowedIPs());
+                return allowedIps;
             case WEB:
-                return Collections.singletonMap(ALLOWED_DOMAINS, client.getAllowedDomains());
+                Map<String, Object> allowedDomains = new HashMap<>();
+                allowedDomains.put(ALLOWED_DOMAINS, client.getAllowedDomains());
+                return allowedDomains;
             default:
                 return new HashMap<>();
         }

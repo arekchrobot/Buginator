@@ -14,6 +14,8 @@ public class OAuth2ClientFilter implements Filter {
 
     private ClientDetailsService clientDetailsService;
 
+    static final String X_FORWARDED_FOR_HEADER = "X-FORWARDED-FOR";
+
     public OAuth2ClientFilter(ClientDetailsService clientDetailsService) {
         this.clientDetailsService = clientDetailsService;
     }
@@ -41,7 +43,7 @@ public class OAuth2ClientFilter implements Filter {
     }
 
     private String validateIP(HttpServletRequest servletRequest, String allowedIps) {
-        String requestIp = getRequestIpAddres(servletRequest);
+        String requestIp = getRequestIpAddress(servletRequest);
         if (!allowedIps.contains(requestIp)) {
             throw new RuntimeException("IP not supported for given client");
         }
@@ -56,8 +58,8 @@ public class OAuth2ClientFilter implements Filter {
         return allowedDomains;
     }
 
-    String getRequestIpAddres(HttpServletRequest request) {
-        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+    String getRequestIpAddress(HttpServletRequest request) {
+        String ipAddress = request.getHeader(X_FORWARDED_FOR_HEADER);
         if (ipAddress == null) {
             ipAddress = request.getRemoteAddr();
         }
@@ -71,6 +73,6 @@ public class OAuth2ClientFilter implements Filter {
     }
 
     private boolean portNotDefault(HttpServletRequest request) {
-        return request.getServerPort() != 80 || request.getServerPort() != 443;
+        return request.getServerPort() != 80 && request.getServerPort() != 443;
     }
 }
