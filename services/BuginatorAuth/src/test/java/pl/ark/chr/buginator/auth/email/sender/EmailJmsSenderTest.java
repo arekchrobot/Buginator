@@ -60,7 +60,7 @@ public class EmailJmsSenderTest {
                 Collections.singletonList(emailTemplateStrategy));
 
         doReturn(true).when(emailTemplateStrategy).isValid(any(EmailType.class));
-        doReturn(TEST_EMAIL_BODY).when(emailTemplateStrategy).constructEmailBody(any(Company.class), any(Locale.class));
+        doReturn(TEST_EMAIL_BODY).when(emailTemplateStrategy).constructEmailBody(any(User.class), any(Company.class), any(Locale.class));
         doReturn(TEST_SUBJECT).when(emailTemplateStrategy).getSubject(any(Locale.class));
     }
 
@@ -98,7 +98,7 @@ public class EmailJmsSenderTest {
         //then
         verify(jmsTemplate, times(1)).convertAndSend(eq(mailQueue), any(EmailDTO.class));
         verify(emailTemplateStrategy, times(1)).isValid(any(EmailType.class));
-        verify(emailTemplateStrategy, times(1)).constructEmailBody(any(Company.class), any(Locale.class));
+        verify(emailTemplateStrategy, times(1)).constructEmailBody(any(User.class), any(Company.class), any(Locale.class));
         verify(emailTemplateStrategy, times(1)).getSubject(any(Locale.class));
         verify(emailMessageRepository, times(1)).findById(eq(EmailMessage.BUGINATOR));
     }
@@ -121,13 +121,13 @@ public class EmailJmsSenderTest {
 
         verify(jmsTemplate, never()).convertAndSend(eq(mailQueue), any(EmailDTO.class));
         verify(emailTemplateStrategy, times(1)).isValid(any(EmailType.class));
-        verify(emailTemplateStrategy, times(1)).constructEmailBody(any(Company.class), any(Locale.class));
+        verify(emailTemplateStrategy, times(1)).constructEmailBody(any(User.class), any(Company.class), any(Locale.class));
         verify(emailTemplateStrategy, times(1)).getSubject(any(Locale.class));
         verify(emailMessageRepository, times(1)).findById(eq(EmailMessage.BUGINATOR));
     }
 
     @Test
-    @DisplayName("should not send message to jsm when expection occurs during executing template strategy method")
+    @DisplayName("should not send message to jsm when exception occurs during executing template strategy method")
     public void shouldNotSendMessageWhenTemplateStrategyError() throws Exception {
         //given
         var company = TestObjectCreator.createCompany(TestObjectCreator.createPaymentOption("test"));
@@ -135,7 +135,7 @@ public class EmailJmsSenderTest {
         var emailMessage = TestObjectCreator.createEmailMessage();
         doReturn(Optional.of(emailMessage)).when(emailMessageRepository).findById(eq(EmailMessage.BUGINATOR));
 
-        doThrow(new TemplateException(null)).when(emailTemplateStrategy).constructEmailBody(any(Company.class), any(Locale.class));
+        doThrow(new TemplateException(null)).when(emailTemplateStrategy).constructEmailBody(any(User.class), any(Company.class), any(Locale.class));
 
         //when
         emailJmsSender.composeAndSendEmail(user, company, EmailType.REGISTER);
@@ -143,7 +143,7 @@ public class EmailJmsSenderTest {
         //then
         verify(jmsTemplate, never()).convertAndSend(eq(mailQueue), any(EmailDTO.class));
         verify(emailTemplateStrategy, times(1)).isValid(any(EmailType.class));
-        verify(emailTemplateStrategy, times(1)).constructEmailBody(any(Company.class), any(Locale.class));
+        verify(emailTemplateStrategy, times(1)).constructEmailBody(any(User.class), any(Company.class), any(Locale.class));
         verify(emailTemplateStrategy, never()).getSubject(any(Locale.class));
         verify(emailMessageRepository, never()).findById(eq(EmailMessage.BUGINATOR));
     }
@@ -160,7 +160,7 @@ public class EmailJmsSenderTest {
                 "Should throw NullPointerException");
         verify(jmsTemplate, never()).convertAndSend(eq(mailQueue), any(EmailDTO.class));
         verify(emailTemplateStrategy, never()).isValid(any(EmailType.class));
-        verify(emailTemplateStrategy, never()).constructEmailBody(any(Company.class), any(Locale.class));
+        verify(emailTemplateStrategy, never()).constructEmailBody(any(User.class), any(Company.class), any(Locale.class));
         verify(emailTemplateStrategy, never()).getSubject(any(Locale.class));
         verify(emailMessageRepository, never()).findById(eq(EmailMessage.BUGINATOR));
     }

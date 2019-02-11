@@ -13,7 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.auth.AuthApplication;
 import pl.ark.chr.buginator.auth.util.TestApplicationContext;
 import pl.ark.chr.buginator.auth.util.TestObjectCreator;
+import pl.ark.chr.buginator.commons.util.NetworkUtil;
+import pl.ark.chr.buginator.domain.auth.Role;
 
+import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.stream.Stream;
 
@@ -23,20 +27,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = {AuthApplication.class, TestApplicationContext.class})
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-public class RegisterEmailTemplateStrategyIT {
+public class PasswordResetEmailTemplateStrategyIT {
 
     @Autowired
-    private RegisterEmailTemplateStrategy registerEmailTemplateStrategy;
+    private PasswordResetEmailTemplateStrategy passwordResetEmailTemplateStrategy;
+
+    @Autowired
+    private EntityManager entityManager;
 
     private static final String EN_BODY = "<html>\n" +
             "    <body>\n" +
             "        <p style=\"margin:15px 0;\">\n" +
-            "            <b>Thank you for registering to Buginator</b>\n" +
+            "            <b>There has been a request to reset your password</b>\n" +
             "        </p>\n" +
-            "        <p style=\"margin:15px 0;\">Welcome to Buginator application, TEST!</p>\n" +
-            "        <p style=\"margin:15px 0;\">Here are your api keys to authenticate:</p>\n" +
-            "        <p style=\"margin:15px 0;\">Unique key: ${uniqueKey}</p>\n" +
-            "        <p style=\"margin:15px 0;\">Token: ${token}</p>\n" +
+            "        <p style=\"margin:15px 0;\">Hello, TEST_USER!</p>\n" +
+            "        <p style=\"margin:15px 0;\">In order to reset your password please open the following link in browser. Given link is available for 24 hours:</p>\n" +
+            "        <p style=\"margin:15px 0;\"><a href=\"${passwordResetUrl}\">${passwordResetUrl}</a></p>\n" +
             "        Buginator.com</p>\n" +
             "    </body>\n" +
             "</html>";
@@ -44,28 +50,41 @@ public class RegisterEmailTemplateStrategyIT {
     private static final String PL_BODY = "<html>\n" +
             "    <body>\n" +
             "        <p style=\"margin:15px 0;\">\n" +
-            "            <b>Dziękujemy za rejestrację w aplikacji Buginator</b>\n" +
+            "            <b>Zostało zgłoszone żadanie resetu twojego hasła</b>\n" +
             "        </p>\n" +
-            "        <p style=\"margin:15px 0;\">Witaj w aplikacji Buginator, TEST!</p>\n" +
-            "        <p style=\"margin:15px 0;\">Poniżej znajdują się klucze do uwierzytelniania twojego api:</p>\n" +
-            "        <p style=\"margin:15px 0;\">Unikalny klucz: ${uniqueKey}</p>\n" +
-            "        <p style=\"margin:15px 0;\">Token: ${token}</p>\n" +
+            "        <p style=\"margin:15px 0;\">Witaj, TEST_USER!</p>\n" +
+            "        <p style=\"margin:15px 0;\">W celu zresetowania hasła otwórz poniższy adres w przeglądarce. Link jest ważny przez 24 godziny:</p>\n" +
+            "        <p style=\"margin:15px 0;\"><a href=\"${passwordResetUrl}\">${passwordResetUrl}</a></p>\n" +
             "        Buginator.com</p>\n" +
             "    </body>\n" +
             "</html>";
 
     @ParameterizedTest(name = "For locale: \"{0}\"")
     @MethodSource("emailBodyConstructProvider")
-    @DisplayName("should correctly build register email body")
+    @DisplayName("should correctly build password reset email body")
     void shouldCorrectlyConstructEmailBody(Locale locale, String templateBody) throws Exception {
         //given
-        var company = TestObjectCreator.createCompany(TestObjectCreator.createPaymentOption("test"));
+        NetworkUtil.setHostIP("127.0.0.1");
+        NetworkUtil.setHostPort(80);
+
+        var paymentOption = TestObjectCreator.createPaymentOption("test");
+        entityManager.persist(paymentOption);
+        var company = TestObjectCreator.createCompany(paymentOption);
+        entityManager.persist(company);
+        var user = TestObjectCreator.createUser(company, Role.getRole(Role.MANAGER));
+        entityManager.persist(user);
+
+        String token = "123_TOKEN";
+        var passwordReset = TestObjectCreator.createPasswordReset(user, token, LocalDateTime.now());
+        entityManager.persist(passwordReset);
+
+        String passwordResetUrl = "http://127.0.0.1:80/changePassword?token=" + token;
+
         String emailBody = templateBody
-                .replace("${uniqueKey}", company.getUniqueKey())
-                .replace("${token}", company.getToken());
+                .replace("${passwordResetUrl}", passwordResetUrl);
 
         //when
-        String constructedEmailBody = registerEmailTemplateStrategy.constructEmailBody(null, company, locale);
+        String constructedEmailBody = passwordResetEmailTemplateStrategy.constructEmailBody(user, company, locale);
 
         //then
         assertThat(constructedEmailBody).isEqualTo(emailBody);
@@ -80,16 +99,16 @@ public class RegisterEmailTemplateStrategyIT {
 
     @ParameterizedTest(name = "For locale: \"{0}\"")
     @MethodSource("subjectLocaleProvider")
-    @DisplayName("should correctly return register email subject")
+    @DisplayName("should correctly return password reset email subject")
     void shouldCorrectlyReturnSubject(Locale locale, String expected) {
         //expect
-        assertThat(registerEmailTemplateStrategy.getSubject(locale)).isEqualTo(expected);
+        assertThat(passwordResetEmailTemplateStrategy.getSubject(locale)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> subjectLocaleProvider() {
         return Stream.of(
-                Arguments.of(new Locale("en"), "Buginator registration confirmation"),
-                Arguments.of(new Locale("pl"), "Potwierdzenie rejestracji na platformie Buginator")
+                Arguments.of(new Locale("en"), "Buginator password reset"),
+                Arguments.of(new Locale("pl"), "Reset hasła na platformie Buginator")
         );
     }
 }

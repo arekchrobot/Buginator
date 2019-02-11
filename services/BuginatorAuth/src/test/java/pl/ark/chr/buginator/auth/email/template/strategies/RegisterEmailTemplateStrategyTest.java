@@ -89,7 +89,7 @@ public class RegisterEmailTemplateStrategyTest {
         }).when(registerEmailTemplateStrategy).constructEmailBody(any(Map.class));
 
         //when
-        registerEmailTemplateStrategy.constructEmailBody(company, locale);
+        registerEmailTemplateStrategy.constructEmailBody(null, company, locale);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class RegisterEmailTemplateStrategyTest {
         Locale locale = new Locale("en");
 
         //when
-        Executable codeUnderException = () -> registerEmailTemplateStrategy.constructEmailBody(null, locale);
+        Executable codeUnderException = () -> registerEmailTemplateStrategy.constructEmailBody(null, null, locale);
 
         //then
         assertThrows(NullPointerException.class, codeUnderException,

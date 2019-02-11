@@ -9,6 +9,7 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import pl.ark.chr.buginator.auth.email.template.EmailTemplateStrategy;
 import pl.ark.chr.buginator.auth.email.template.EmailType;
 import pl.ark.chr.buginator.domain.auth.Company;
+import pl.ark.chr.buginator.domain.auth.User;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class RegisterEmailTemplateStrategy implements EmailTemplateStrategy {
     }
 
     @Override
-    public String constructEmailBody(Company company, Locale locale) throws IOException, TemplateException {
+    public String constructEmailBody(User user, Company company, Locale locale) throws IOException, TemplateException {
         Objects.requireNonNull(company);
 
         Map<String, Object> model = new HashMap<>();

@@ -11,8 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import pl.ark.chr.buginator.auth.email.sender.EmailSender;
 import pl.ark.chr.buginator.auth.email.template.EmailTemplateStrategy;
+import pl.ark.chr.buginator.auth.email.template.strategies.PasswordResetEmailTemplateStrategy;
 import pl.ark.chr.buginator.auth.email.template.strategies.RegisterEmailTemplateStrategy;
 import pl.ark.chr.buginator.repository.auth.CompanyRepository;
+import pl.ark.chr.buginator.repository.auth.PasswordResetRepository;
 import pl.ark.chr.buginator.repository.auth.PaymentOptionRepository;
 import pl.ark.chr.buginator.repository.auth.UserRepository;
 import pl.ark.chr.buginator.repository.messaging.EmailMessageRepository;
@@ -59,5 +61,17 @@ public class TestApplicationContext {
     @Bean(name = "delegatedMockRegisterEmailTemplateStrategy")
     public RegisterEmailTemplateStrategy delegatedMockRegisterEmailTemplateStrategy(final RegisterEmailTemplateStrategy real) {
         return Mockito.mock(RegisterEmailTemplateStrategy.class, AdditionalAnswers.delegatesTo(real));
+    }
+
+    @Primary
+    @Bean(name = "delegatedMockPasswordResetEmailTemplateStrategy")
+    public PasswordResetEmailTemplateStrategy delegatedMockPasswordResetEmailTemplateStrategy(final PasswordResetEmailTemplateStrategy real) {
+        return Mockito.mock(PasswordResetEmailTemplateStrategy.class, AdditionalAnswers.delegatesTo(real));
+    }
+
+    @Primary
+    @Bean(name = "delegatedMockPasswordResetRepository")
+    public PasswordResetRepository delegatedMockPasswordResetRepository(final PasswordResetRepository real) {
+        return Mockito.mock(PasswordResetRepository.class, AdditionalAnswers.delegatesTo(real));
     }
 }

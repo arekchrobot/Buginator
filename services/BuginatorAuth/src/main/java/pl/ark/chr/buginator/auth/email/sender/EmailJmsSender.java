@@ -53,7 +53,7 @@ public class EmailJmsSender implements EmailSender {
         for (var emailTemplateStrategy : emailTemplateStrategies) {
             if (emailTemplateStrategy.isValid(emailType)) {
                 try {
-                    emailBody = emailTemplateStrategy.constructEmailBody(company, locale);
+                    emailBody = emailTemplateStrategy.constructEmailBody(user, company, locale);
                     subject = emailTemplateStrategy.getSubject(locale);
                 } catch (IOException | TemplateException e) {
                     LOGGER.error("Error creating email body for type: " + emailType + " for user: " + user.getEmail());

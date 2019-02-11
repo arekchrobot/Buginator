@@ -47,6 +47,7 @@ class OAuth2UserDetailsServiceIT {
         reset(delegatedMockUserRepository);
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     @DisplayName("should correctly build UserDetails based on User class returned from database by user email")
     void shouldReturnUserDetailsBasedOnUserEmail() {
@@ -79,7 +80,7 @@ class OAuth2UserDetailsServiceIT {
     void shouldThrowExceptionWhenUserIsNotActive() {
         //given
         Role role = Role.getRole(Role.MANAGER);
-        Company company = companyRepository.findById(1L).get();
+        @SuppressWarnings("OptionalGetWithoutIsPresent") Company company = companyRepository.findById(1L).get();
         User user = TestObjectCreator.createUser(company, role, false);
         delegatedMockUserRepository.save(user);
 

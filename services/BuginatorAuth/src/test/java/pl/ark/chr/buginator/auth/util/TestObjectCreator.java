@@ -3,12 +3,10 @@ package pl.ark.chr.buginator.auth.util;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.ark.chr.buginator.domain.auth.Company;
-import pl.ark.chr.buginator.domain.auth.PaymentOption;
-import pl.ark.chr.buginator.domain.auth.Role;
-import pl.ark.chr.buginator.domain.auth.User;
+import pl.ark.chr.buginator.domain.auth.*;
 import pl.ark.chr.buginator.domain.messaging.EmailMessage;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,5 +60,9 @@ public class TestObjectCreator {
                 .smtpPort("455")
                 .ssl(false)
                 .build();
+    }
+
+    public static PasswordReset createPasswordReset(User user, String token, LocalDateTime createdAt) {
+        return new PasswordReset(user, token, createdAt);
     }
 }

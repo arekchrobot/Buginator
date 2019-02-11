@@ -1,9 +1,8 @@
 package pl.ark.chr.buginator.repository.util;
 
-import pl.ark.chr.buginator.domain.auth.Company;
-import pl.ark.chr.buginator.domain.auth.PaymentOption;
-import pl.ark.chr.buginator.domain.auth.Role;
-import pl.ark.chr.buginator.domain.auth.User;
+import pl.ark.chr.buginator.domain.auth.*;
+
+import java.time.LocalDateTime;
 
 public class TestObjectCreator {
 
@@ -39,5 +38,13 @@ public class TestObjectCreator {
                 .company(company)
                 .role(role)
                 .build();
+    }
+
+    public static PasswordReset createPasswordReset(User user, String token) {
+        return createPasswordReset(user, token, LocalDateTime.now());
+    }
+
+    public static PasswordReset createPasswordReset(User user, String token, LocalDateTime createdAt) {
+        return new PasswordReset(user, token, createdAt);
     }
 }
