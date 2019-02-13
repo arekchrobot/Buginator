@@ -67,8 +67,10 @@
         <sonar.maven.plugin.version>3.6.0.1398</sonar.maven.plugin.version>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
         <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
-        <sonar.junit.reportPaths>${project.build.directory}../target/surefire-reports,${project.build.directory}../target/failsafe-reports</sonar.junit.reportPaths>
+        <sonar.junit.reportPaths>${project.basedir}/target/surefire-reports,${project.basedir}/target/failsafe-reports</sonar.junit.reportPaths>
         <sonar.coverage.exclusions>**/domain/**,**/persistence/**,**/*Config.java,**/*Application.java,**/*DTO.java,**/*Exception.java</sonar.coverage.exclusions>
+        <sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
+        <jacoco.version>0.8.2</jacoco.version>
     </properties>
 
     <profiles>
@@ -316,6 +318,23 @@
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>${sonar.maven.plugin.version}</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <append>true</append>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
