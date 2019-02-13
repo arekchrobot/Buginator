@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import pl.ark.chr.buginator.repository.auth.OAuth2ClientRepository;
 import pl.ark.chr.buginator.repository.auth.UserRepository;
+import pl.ark.chr.buginator.security.session.LoggedUserService;
 
 @Configuration
 @EntityScan({"pl.ark.chr.buginator.domain", "pl.ark.chr.buginator.persistence"})
@@ -27,5 +28,11 @@ public class OAuth2DetailsServiceConfig {
     @Primary
     public UserDetailsService oauth2UserDetailsService(UserRepository userRepository) {
         return new OAuth2UserDetailsService(userRepository);
+    }
+
+    @Bean
+    @Primary
+    public LoggedUserService loggedUserService() {
+        return new LoggedUserService();
     }
 }

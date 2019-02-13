@@ -12,11 +12,12 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import pl.ark.chr.buginator.security.redis.RedisConfig;
+import pl.ark.chr.buginator.security.redis.RedisResourceServerConfig;
 
 
 @Configuration
 @EnableAuthorizationServer
-@ImportAutoConfiguration(classes = RedisConfig.class)
+@ImportAutoConfiguration(classes = RedisResourceServerConfig.class)
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     private TokenStore tokenStore;

@@ -22,6 +22,11 @@
             <artifactId>BuginatorDomain</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>pl.ark.chr.buginator</groupId>
+            <artifactId>BuginatorCommons</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
         <!--Spring boot dependencies-->
         <dependency>

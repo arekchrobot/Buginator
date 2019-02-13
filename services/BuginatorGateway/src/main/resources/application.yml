@@ -10,3 +10,9 @@ spring:
             - Path=/oauth/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
+        - id: auth
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}

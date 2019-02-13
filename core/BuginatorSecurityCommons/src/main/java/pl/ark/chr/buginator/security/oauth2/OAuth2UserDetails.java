@@ -60,4 +60,8 @@ public class OAuth2UserDetails implements UserDetails {
     public boolean isEnabled() {
         return user.isActive();
     }
+
+    public String getName() {
+        return user.getName();
+    }
 }
