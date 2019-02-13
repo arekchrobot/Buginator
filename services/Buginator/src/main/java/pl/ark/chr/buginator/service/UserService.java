@@ -20,8 +20,6 @@ public interface UserService {
 
     User validateUserLogin(Credentials credentials, Locale locale) throws RestException;
 
-    void resetPassword(String login, Locale locale) throws UsernameNotFoundException;
-
     List<User> getAllByCompany(Company company);
 
     User save(User user, Company company) throws DataAccessException, ValidationException;

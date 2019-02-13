@@ -190,35 +190,4 @@ public class UserServiceImplTest {
         //then
         assertThat(loaded.getEmail()).isEqualTo(login);
     }
-
-    @Test
-    public void testSendResetPassword__Success() {
-        //given
-        String login = "test@gmail.com";
-        String oldPassword = "shouldBeChanged";
-
-        User user = new User.Builder().build();
-        user.setEmail(login);
-        user.setPassword(oldPassword);
-
-        when(userRepository.findByEmail(any(String.class))).thenReturn(Optional.of(user));
-        when(userRepository.save(any(User.class))).thenAnswer(invocationOnMock1 -> invocationOnMock1.getArguments()[0]);
-
-//        doAnswer(invocationOnMock -> {
-//            User passedUser = (User) invocationOnMock.getArguments()[0];
-//            String generatedPassword = (String) invocationOnMock.getArguments()[2];
-//
-//            assertThat(passedUser.getEmail()).isEqualTo(login);
-//            assertThat(generatedPassword).isNotEqualTo(oldPassword);
-//
-//            assertThat(BCrypt.checkpw(generatedPassword, passedUser.getPassword())).isTrue();
-//
-//            return null;
-//        }).when(emailService).sendResetPassword(any(User.class), any(Locale.class), any(String.class));
-
-        //when
-        sut.resetPassword(login, new Locale("pl"));
-
-        //then
-    }
 }
