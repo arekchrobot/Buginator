@@ -18,6 +18,6 @@ public class LoggedUserService {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
-        return new LoggedUserDTO(userDetails.getName(), userDetails.getUsername(), permissions);
+        return new LoggedUserDTO(userDetails.getName(), userDetails.getUsername(), permissions, userDetails.getCompanyId());
     }
 }

@@ -64,4 +64,8 @@ public class OAuth2UserDetails implements UserDetails {
     public String getName() {
         return user.getName();
     }
+
+    public Long getCompanyId() {
+        return user.getCompany().getId();
+    }
 }

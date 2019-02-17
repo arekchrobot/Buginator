@@ -71,6 +71,7 @@
         <sonar.coverage.exclusions>**/domain/**,**/persistence/**,**/*Config.java,**/*Application.java,**/*DTO.java,**/*Exception.java</sonar.coverage.exclusions>
         <sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
         <jacoco.version>0.8.2</jacoco.version>
+        <fasterxml.jackson.annotations.version>2.9.8</fasterxml.jackson.annotations.version>
     </properties>
 
     <profiles>
@@ -105,6 +106,12 @@
                 <groupId>pieroxy</groupId>
                 <artifactId>user-agent-detection</artifactId>
                 <version>${pieroxy-useragent.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${fasterxml.jackson.annotations.version}</version>
             </dependency>
 
             <!--utility-->
