@@ -1,0 +1,27 @@
+<div class="alert alert-danger" *ngIf="isLoginError()" translate>
+  auth.login.error
+</div>
+<form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+  <p class="text-muted text-center" translate>auth.login.info</p>
+  <div class="form-group" [ngClass]="{'has-error': (logForm.username.invalid && logForm.username.touched)}">
+    <input type="text" [attr.placeholder]="'auth.login.input.username' | translate"
+           class="form-control top" formControlName="username">
+    <span class="help-block" translate
+          *ngIf="logForm.username.invalid && logForm.username.touched && logForm.username.errors.required">
+      auth.login.form.username.required
+    </span>
+    <span class="help-block" translate
+          *ngIf="logForm.username.invalid && logForm.username.touched && logForm.username.errors.email">
+      auth.login.form.username.email
+    </span>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': (logForm.password.invalid && logForm.password.touched)}">
+    <input type="password" [attr.placeholder]="'auth.login.input.password' | translate"
+           class="form-control bottom" formControlName="password">
+    <span class="help-block" translate
+          *ngIf="logForm.password.invalid && logForm.password.touched && logForm.password.errors.required">
+      auth.login.form.password.required
+    </span>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" translate [disabled]="!loginForm.valid">auth.login.submit</button>
+</form>

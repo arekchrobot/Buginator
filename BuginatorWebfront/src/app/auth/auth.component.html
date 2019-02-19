@@ -1,0 +1,25 @@
+<div class="form-signin">
+  <div class="text-center">
+    <img src="../../assets/images/logo2.png" alt="Metis Logo">
+  </div>
+  <hr>
+  <div class="tab-content">
+    <div id="login" class="tab-pane" [ngClass]="{'active':activeTab === 'login'}">
+      <buginator-auth-login></buginator-auth-login>
+    </div>
+    <div id="forgot" class="tab-pane" [ngClass]="{'active':activeTab === 'forgot'}">
+      <buginator-auth-password-reset></buginator-auth-password-reset>
+    </div>
+    <div id="signup" class="tab-pane" [ngClass]="{'active':activeTab === 'register'}">
+      <buginator-auth-register></buginator-auth-register>
+    </div>
+  </div>
+  <hr>
+  <div class="text-center">
+    <ul class="list-inline">
+      <li><a class="text-muted" (click)="changeTab('login')" translate>auth.tab.toggle.login</a></li>
+      <li><a class="text-muted" (click)="changeTab('forgot')" translate>auth.tab.toggle.forgot</a></li>
+      <li><a class="text-muted" (click)="changeTab('register')" translate>auth.tab.toggle.register</a></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="alert alert-danger" ng-if="registerError">
+  {{registerErrorMsg}}
+</div>
+<form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
+  <!--<div class="form-group"-->
+       <!--ng-class="{'has-error':forms.registerForm.companyName.$error.required && forms.registerForm.companyName.$touched, 'has-success':!forms.registerForm.companyName.$error.required}">-->
+    <!--<input type="text" placeholder="company name" class="form-control top" ng-model="registerData.company.name"-->
+           <!--id="companyName" name="companyName" required translate translate-attr-placeholder="SIGNUP_COMPANY_NAME">-->
+    <!--<span class="help-block"-->
+          <!--ng-show="forms.registerForm.companyName.$error.required && forms.registerForm.companyName.$touched" translate>SIGNUP_COMPANY_NAME_REQUIRED</span>-->
+  <!--</div>-->
+  <!--<div class="form-group"-->
+       <!--ng-class="{'has-error':forms.registerForm.companyAddress.$error.required && forms.registerForm.companyAddress.$touched, 'has-success':!forms.registerForm.companyAddress.$error.required}">-->
+    <!--<input type="text" placeholder="address " class="form-control middle" ng-model="registerData.company.address"-->
+           <!--id="companyAddress" name="companyAddress" required translate-->
+           <!--translate-attr-placeholder="SIGNUP_COMPANY_ADDRESS">-->
+    <!--<span class="help-block"-->
+          <!--ng-show="forms.registerForm.companyAddress.$error.required && forms.registerForm.companyAddress.$touched"-->
+          <!--translate>SIGNUP_COMPANY_ADDRESS_REQUIRED</span>-->
+  <!--</div>-->
+  <!--<div class="form-group"-->
+       <!--ng-class="{'has-error':forms.registerForm.userName.$error.required && forms.registerForm.userName.$touched, 'has-success':!forms.registerForm.userName.$error.required}">-->
+    <!--<input type="text" placeholder="username" class="form-control middle" ng-model="registerData.user.name"-->
+           <!--id="userName" name="userName" required translate translate-attr-placeholder="SIGNUP_USERNAME">-->
+    <!--<span class="help-block"-->
+          <!--ng-show="forms.registerForm.userName.$error.required && forms.registerForm.userName.$touched" translate>SIGNUP_USERNAME_REQUIRED</span>-->
+  <!--</div>-->
+  <!--<div class="form-group"-->
+       <!--ng-class="{'has-error':(forms.registerForm.userEmail.$error.required && forms.registerForm.userEmail.$touched) || forms.registerForm.userEmail.$error.email, 'has-success':!forms.registerForm.userEmail.$error.required || (!forms.registerForm.userEmail.$error.email && forms.registerForm.userEmail.$touched)}">-->
+    <!--<input type="email" placeholder="mail@domain.com" class="form-control middle" ng-model="registerData.user.email"-->
+           <!--id="userEmail" name="userEmail" required>-->
+    <!--<span class="help-block"-->
+          <!--ng-show="forms.registerForm.userEmail.$error.required && forms.registerForm.userEmail.$touched" translate>SIGNUP_EMAIL_REQUIRED</span>-->
+    <!--<span class="help-block"-->
+          <!--ng-show="forms.registerForm.userEmail.$error.email && forms.registerForm.userEmail.$touched" translate>SIGNUP_EMAIL_INVALID</span>-->
+  <!--</div>-->
+  <!--<div class="form-group"-->
+       <!--ng-class="{'has-error':forms.registerForm.pass.$error.required && forms.registerForm.pass.$touched, 'has-success':!forms.registerForm.pass.$error.required}">-->
+    <!--<input type="password" placeholder="password" class="form-control middle" ng-model="registerData.user.password"-->
+           <!--id="pass" name="pass" required translate translate-attr-placeholder="SIGNUP_PASSWORD">-->
+    <!--<span class="help-block" ng-show="forms.registerForm.pass.$error.required && forms.registerForm.pass.$touched"-->
+          <!--translate>SIGNUP_PASSWORD_REQUIRED</span>-->
+  <!--</div>-->
+  <!--<div class="form-group"-->
+       <!--ng-class="{'has-error':forms.registerForm.rePass.$error.pwmatch, 'has-success':!forms.registerForm.rePass.$error.pwmatch && forms.registerForm.pass.$touched && !forms.registerForm.userEmail.$error.required && !forms.registerForm.userEmail.$error.email}">-->
+    <!--<input type="password" placeholder="re-password" class="form-control bottom" ng-model="rePassword" id="rePass"-->
+           <!--pw-check="pass" name="rePass" translate translate-attr-placeholder="SIGNUP_RE_PASSWORD">-->
+    <!--<span class='help-block' ng-show='forms.registerForm.rePass.$error.pwmatch' translate>SIGNUP_PASSWORD_MATCH</span>-->
+  <!--</div>-->
+  <button class="btn btn-lg btn-success btn-block" ng-disabled="!forms.registerForm.$valid" translate>
+    SIGNUP_SUBMIT_BUTTON
+  </button>
+</form>

@@ -1,0 +1,29 @@
+{
+  "auth": {
+    "login": {
+      "submit": "Zaloguj",
+      "info": "Podaj nazwę użytkownika oraz hasło",
+      "error": "Nazwa użytkownika bądź hasło jest niepoprawne",
+      "input": {
+        "password": "hasło",
+        "username": "mail@domain.com"
+      },
+      "form": {
+        "username": {
+          "required": "Nazwa użytkownika jest wymagana",
+          "email": "Nazwa użytkownika musi być emailem"
+        },
+        "password": {
+          "required": "Hasło jest wymagane"
+        }
+      }
+    },
+    "tab": {
+      "toggle": {
+        "login": "Zaloguj",
+        "forgot": "Zapomniałem hasła",
+        "register": "Zarejestruj"
+      }
+    }
+  }
+}

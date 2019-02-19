@@ -1,0 +1,29 @@
+{
+  "auth": {
+    "login": {
+      "submit": "Sign in",
+      "info": "Enter your username and password",
+      "error": "Username or password is invalid",
+      "input": {
+        "password": "password",
+        "username": "mail@domain.com"
+      },
+      "form": {
+        "username": {
+          "required": "Username is required",
+          "email": "Username must be a valid email"
+        },
+        "password": {
+          "required": "Password is required"
+        }
+      }
+    },
+    "tab": {
+      "toggle": {
+        "login": "Login",
+        "forgot": "Forgot Password",
+        "register": "Signup"
+      }
+    }
+  }
+}

@@ -3,6 +3,20 @@ server:
 spring:
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - OPTIONS
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - HEAD
+              - TRACE
+            allowedHeaders: "*"
       routes:
         - id: oauth
           uri: http://localhost:8080
