@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthComponent} from './auth/auth.component';
@@ -9,8 +8,11 @@ import {LoginComponent} from './auth/login/login.component';
 import {PasswordResetComponent} from './auth/password-reset/password-reset.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {CookieService} from "ngx-cookie-service";
+import {TokenInterceptor} from "./auth/interceptors/token.interceptor";
+import {AuthService} from "./auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,20 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
       }
     })
   ],
-  providers: [],
+  providers: [
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => function() {return authService.getLoggedUser()},
+      deps: [AuthService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

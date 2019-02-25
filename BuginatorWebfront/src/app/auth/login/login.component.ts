@@ -35,9 +35,14 @@ export class LoginComponent implements OnInit {
     console.log('login submit');
     console.log(this.loginForm);
     this.authService.oauth2Login(this.loginForm.value)
-      .then(res => console.log(res),
+      .then(res => this.getLoggedUser(),
         error => {
           this.loginError = true;
         });
+  }
+
+  private getLoggedUser() {
+    return this.authService.getLoggedUser()
+      .then(res => console.log(res));
   }
 }
