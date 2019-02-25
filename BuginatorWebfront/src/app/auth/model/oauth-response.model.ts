@@ -1,0 +1,4 @@
+export class OAuthResponseDTO {
+  access_token: string;
+  expires_in: number;
+}

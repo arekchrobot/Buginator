@@ -11,7 +11,7 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {CookieService} from "ngx-cookie-service";
-import {TokenInterceptor} from "./auth/interceptors/token.interceptor";
+import {OAuthTokenInterceptor} from "./auth/interceptors/oauth-token.interceptor";
 import {AuthService} from "./auth/auth.service";
 
 @NgModule({
@@ -39,7 +39,7 @@ import {AuthService} from "./auth/auth.service";
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: OAuthTokenInterceptor,
       multi: true
     },
     {

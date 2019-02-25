@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {LoginDTO} from "./model/loginDTO";
+import {LoginRequestDTO} from "./model/login-request.model";
 import {environment} from "../../environments/environment";
 import {CookieService} from "ngx-cookie-service";
 import {LoggedUserDTO} from "./model/logged-user.model";
+import {OAuthResponseDTO} from "./model/oauth-response.model";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {
   }
 
-  oauth2Login(loginCredentials: LoginDTO): Promise<any> {
+  oauth2Login(loginCredentials: LoginRequestDTO): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const headers = new HttpHeaders()
         .append("Authorization", "Basic " + this.clientBtoa)
@@ -32,7 +33,7 @@ export class AuthService {
 
       return this.httpClient.post(`${environment.api.url}/oauth/token`, body, {headers: headers})
         .toPromise()
-        .then(res => {
+        .then((res: OAuthResponseDTO) => {
             this.saveAuthToken(res);
             resolve();
           },
@@ -40,9 +41,9 @@ export class AuthService {
     });
   }
 
-  private saveAuthToken(result: Object) {
-    const expiresIn = new Date(Date.now() + (result["expires_in"] * 1000));
-    this.cookieService.set("access_token", result["access_token"], expiresIn);
+  private saveAuthToken(result: OAuthResponseDTO) {
+    const expiresIn = new Date(Date.now() + (result.expires_in * 1000));
+    this.cookieService.set("access_token", result.access_token, expiresIn);
   }
 
   getLoggedUser(): Promise<any> {

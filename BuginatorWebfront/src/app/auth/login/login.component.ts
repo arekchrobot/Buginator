@@ -32,17 +32,12 @@ export class LoginComponent implements OnInit {
 
   onLoginSubmit() {
     this.loginError = false;
-    console.log('login submit');
-    console.log(this.loginForm);
     this.authService.oauth2Login(this.loginForm.value)
       .then(res => this.getLoggedUser(),
-        error => {
-          this.loginError = true;
-        });
+          error => this.loginError = true);
   }
 
   private getLoggedUser() {
-    return this.authService.getLoggedUser()
-      .then(res => console.log(res));
+    return this.authService.getLoggedUser();
   }
 }
