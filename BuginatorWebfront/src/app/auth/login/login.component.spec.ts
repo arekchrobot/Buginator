@@ -70,6 +70,12 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     let button = fixture.debugElement.query(By.css('button')).nativeElement;
     expect(button.disabled).toBeFalsy();
+
+    let usernameErrors = username.errors || {};
+    let passwordErrors = password.errors || {};
+    expect(usernameErrors['required']).toBeFalsy();
+    expect(usernameErrors['email']).toBeFalsy();
+    expect(passwordErrors['required']).toBeFalsy();
   });
 
   it('should show required messages for inputs', () => {
@@ -87,7 +93,7 @@ describe('LoginComponent', () => {
     let usernameRequiredError = fixture.debugElement.queryAll(By.css('span'))[0].nativeElement;
     let passwordRequiredError = fixture.debugElement.queryAll(By.css('span'))[1].nativeElement;
     let usernameErrors = username.errors || {};
-    let passwordErrors = username.errors || {};
+    let passwordErrors = password.errors || {};
 
     expect(button.disabled).toBeTruthy();
     expect(usernameRequiredError.innerText).toBe('Username is required');
