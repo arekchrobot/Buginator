@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   api: {
-    url: 'http://localhost:8100'
+    url: 'http://localhost:8100',
+    accessTokenCookie: 'access_token'
   }
 };
 

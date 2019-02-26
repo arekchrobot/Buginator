@@ -43,7 +43,7 @@ export class AuthService {
 
   private saveAuthToken(result: OAuthResponseDTO) {
     const expiresIn = new Date(Date.now() + (result.expires_in * 1000));
-    this.cookieService.set("access_token", result.access_token, expiresIn);
+    this.cookieService.set(environment.api.accessTokenCookie, result.access_token, expiresIn);
   }
 
   getLoggedUser(): Promise<any> {
