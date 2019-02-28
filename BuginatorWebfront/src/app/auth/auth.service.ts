@@ -52,13 +52,13 @@ export class AuthService {
         .toPromise()
         .then((res: LoggedUserDTO) => {
             this.saveLoggedUserInSession(res);
-            resolve();
+            resolve(res);
           },
           error => resolve());
     });
   }
 
   private saveLoggedUserInSession(loggedUser: LoggedUserDTO) {
-    sessionStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+    sessionStorage.setItem(environment.api.loggedUserStorage, JSON.stringify(loggedUser));
   }
 }

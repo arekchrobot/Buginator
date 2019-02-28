@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   api: {
     url: 'http://localhost:8100',
-    accessTokenCookie: 'access_token'
+    accessTokenCookie: 'access_token',
+    loggedUserStorage: 'loggedUser'
   }
 };
 
