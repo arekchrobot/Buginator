@@ -1,2 +1,6 @@
-<buginator-auth></buginator-auth>
+<buginator-auth *ngIf="!isAuthenticated"></buginator-auth>
+<buginator-dashboard *ngIf="isAuthenticated"></buginator-dashboard>
 <!--<router-outlet></router-outlet>-->
+<footer class="Footer bg-dark dker" *ngIf="isAuthenticated">
+  <p>2019 &copy; Arkadiusz Chrobot, <a href="http://onokumus.com/metis-bootstrap-admin-template/" target="_blank">Metis Bootstrap Admin Template</a></p>
+</footer>

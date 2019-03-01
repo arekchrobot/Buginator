@@ -13,6 +13,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {CookieService} from "ngx-cookie-service";
 import {OAuthTokenInterceptor} from "./auth/interceptors/oauth-token.interceptor";
 import {AuthService} from "./auth/auth.service";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {AuthService} from "./auth/auth.service";
     AuthComponent,
     LoginComponent,
     PasswordResetComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,2 +1,211 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~font-awesome/css/font-awesome.css';
+
+/*
+ * metismenu - v2.5.2
+ * A jQuery menu plugin
+ * https://github.com/onokumus/metisMenu#readme
+ *
+ * Made by Osman Nuri Okumuş <onokumus@gmail.com> (https://github.com/onokumus)
+ * Under MIT License
+ */
+
+.metismenu .arrow {
+  float: right;
+  line-height: 1.42857;
+}
+*[dir="rtl"] .metismenu .arrow {
+  float: left;
+}
+
+/*
+ * Require Bootstrap
+ * https://github.com/twbs/bootstrap
+*/
+
+.metismenu .glyphicon.arrow:before {
+  content: "\e079";
+}
+.metismenu .active > a > .glyphicon.arrow:before {
+  content: "\e114";
+}
+
+/*
+ * Require Font-Awesome
+ * http://fortawesome.github.io/Font-Awesome/
+*/
+
+.metismenu .fa.arrow:before {
+  content: "\f104";
+}
+.metismenu .active > a > .fa.arrow:before {
+  content: "\f107";
+}
+
+/*
+ * Require Ionicons
+ * http://ionicons.com/
+*/
+
+.metismenu .ion.arrow:before {
+  content: "\f3d2"
+}
+.metismenu .active > a > .ion.arrow:before {
+  content: "\f3d0";
+}
+.metismenu .plus-times {
+  float: right;
+}
+*[dir="rtl"] .metismenu .plus-times {
+  float: left;
+}
+.metismenu .fa.plus-times:before {
+  content: "\f067";
+}
+.metismenu .active > a > .fa.plus-times {
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.metismenu .plus-minus {
+  float: right;
+}
+*[dir="rtl"] .metismenu .plus-minus {
+  float: left;
+}
+.metismenu .fa.plus-minus:before {
+  content: "\f067";
+}
+.metismenu .active > a > .fa.plus-minus:before {
+  content: "\f068";
+}
+.metismenu .collapse {
+  display: none;
+}
+.metismenu .collapse.in {
+  display: block;
+}
+.metismenu .collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: .35s;
+  -o-transition-duration: .35s;
+  transition-duration: .35s;
+  -webkit-transition-property: height, visibility;
+  -o-transition-property: height, visibility;
+  transition-property: height, visibility;
+}
+
+body.boxed {
+  background: url("./assets/images/arches.png") repeat;
+}
+
+#top > .navbar {
+  border-top: 3px solid #333;
+}
+#top > .navbar .dropdown-menu > li > a:hover,
+#top > .navbar .dropdown-menu > li > a:focus {
+  background-color: #333;
+  color: #fff;
+}
+#menu {
+  background-color: #333 !important;
+}
+#menu > li > a {
+  color: #fff;
+  text-shadow: none !important;
+}
+.sidebar-left-mini #menu > li > a > .link-title {
+  background-color: #292929 !important;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 48px;
+}
+.Footer,
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 48px;
+}
+.bg-dark {
+  background-color: #444;
+  color: #fff !important;
+}
+.bg-dark.dker,
+.bg-dark > .dker {
+  background-color: #303030 !important;
+}
+.bg-dark.dk,
+.bg-dark > .dk {
+  background-color: #3a3a3a !important;
+}
+.bg-dark.lt,
+.bg-dark > .lt {
+  background-color: #4e4e4e !important;
+}
+.bg-dark.lter,
+.bg-dark > .lter {
+  background-color: #585858 !important;
+}
+#wrap:before,
+#top:before,
+.head:before,
+.Footer:before,
+#wrap:after,
+#top:after,
+.head:after,
+.Footer:after {
+  content: " ";
+  display: table;
+}
+#wrap:after,
+#top:after,
+.head:after,
+.Footer:after {
+  clear: both;
+}
+
+.Footer,
+#footer {
+  margin: 0 auto;
+  color: #f4f4f4;
+  border-top: 1px solid #222;
+}
+.Footer p,
+#footer p {
+  padding: 1.2rem 0;
+  margin: 0;
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  body.boxed {
+    margin-bottom: 0;
+  }
+  body.boxed .Wrap,
+  body.boxed #wrap,
+  body.boxed .Footer,
+  body.boxed #top .navbar.navbar-fixed-top {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  body.boxed .Footer,
+  body.boxed #footer {
+    position: relative;
+  }
+}

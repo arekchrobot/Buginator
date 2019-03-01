@@ -1,0 +1,141 @@
+<div class="bg-dark dk" id="wrap" ng-if="!$state.includes('login')">
+  <div id="top">
+    <!-- .navbar -->
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <header class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target=".navbar-ex1-collapse" (click)="setCollapse()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/" class="navbar-brand"><img src="../../assets/images/logo.png" alt=""></a>
+        </header>
+
+        <div class="topnav">
+          <div class="btn-group" ng-controller="notificationController">
+            <a data-placement="bottom" data-original-title="Notifications" data-toggle="dropdown"
+               class="btn btn-default btn-sm">
+              <i class="fa fa-envelope"></i>
+              <span class="label label-warning" ng-if="notifications.length > 0">
+                <!--{{notifications.length}}-->0
+              </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right media user-media bg-dark nav navbar-nav" ng-if="notifications.length > 0">
+              <li style="width: 100%">
+                <a ng-click="removeAllNotifications()"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              </li>
+              <li ng-repeat="notification in notifications" style="width: 100%">
+                <a ng-redirect-to-url=""
+                   ng-click="removeNotification($index, notification)">
+                  <!--{{notification.errorTitle}}-->
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <a ng-click="logout()" data-toggle="tooltip" data-original-title="Logout"
+               data-placement="bottom"
+               class="btn btn-metis-1 btn-sm">
+              <i class="fa fa-power-off"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-collapse navbar-ex1-collapse" [ngClass]="{'collapse': collapsed}">
+          <!-- .nav -->
+          <ul class="nav navbar-nav">
+            <li><a href="" ng-redirect-to="dashboard" translate ng-if="user.perms['not_show']">DASHBOARD</a></li>
+            <li><a href="" ng-redirect-to="applications" ng-if="user.perms['read_application']" translate>APPLICATIONS</a></li>
+            <li><a href="" ng-redirect-to="roles" ng-if="user.perms['manage_role']" translate>ROLES</a></li>
+            <li><a href="" ng-redirect-to="users" ng-if="user.perms['manage_role'] && user.perms['manage_user']" translate>USERS</a></li>
+          </ul>
+          <!-- /.nav -->
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <!-- /.navbar -->
+    <header class="head">
+      <div class="main-bar">
+        <h3>
+          <i class="fa fa-home"></i>&nbsp;
+          Buginator
+        </h3>
+      </div>
+      <!-- /.main-bar -->
+    </header>
+    <!-- /.head -->
+  </div>
+
+  <div id="left">
+    <div class="media user-media bg-dark dker">
+      <div class="user-media-toggleHover">
+        <span class="fa fa-user"></span>
+      </div>
+      <div class="user-wrapper bg-dark">
+        <a class="user-link" href="">
+          <img class="media-object img-thumbnail user-img" alt="User Picture" src="../../assets/images/user.gif">
+          <!--<span class="label label-danger user-label">16</span>-->
+        </a>
+
+        <div class="media-body">
+          <h5 class="media-heading">
+            <!--{{$root.user.username}}-->AREK
+          </h5>
+          <ul class="list-unstyled user-info">
+            <li><a href="" ng-bind="$root.user.role"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- #menu -->
+    <ul id="menu" class="bg-blue dker">
+      <li class="nav-header">Menu</li>
+      <li class="nav-divider"></li>
+      <li class="" ng-if="user.perms['not_show']">
+        <a href="" ng-redirect-to="dashboard">
+          <i class="fa fa-dashboard"></i>&nbsp;<span class="link-title" translate>DASHBOARD</span>
+        </a>
+      </li>
+      <li ng-if="user.perms['read_application']">
+        <a href="" ng-redirect-to="applications">
+          <i class="fa fa-desktop" ></i>
+          <span class="link-title" translate>APPLICATIONS</span>
+        </a>
+      </li>
+      <li class="nav-divider"></li>
+      <li ng-if="user.perms['manage_role']">
+        <a href="" ng-redirect-to="roles">
+          <i class="fa fa-tasks" ></i>
+          <span class="link-title" translate>ROLES</span>
+        </a>
+      </li>
+      <li ng-if="user.perms['manage_role'] && user.perms['manage_user']">
+        <a href="" ng-redirect-to="users">
+          <i class="fa fa-users" ></i>
+          <span class="link-title" translate>USERS</span>
+        </a>
+      </li>
+    </ul>
+    <!-- /#menu -->
+  </div>
+  <!-- /#left -->
+  <div id="content">
+    <div class="outer">
+      <div class="inner bg-light lter">
+        <div class="col-lg-12">
+
+          <router-outlet></router-outlet>
+
+        </div>
+      </div>
+      <!-- /.inner -->
+    </div>
+    <!-- /.outer -->
+  </div>
+  <!-- /#content -->
+</div>
