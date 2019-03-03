@@ -18,7 +18,7 @@ Additionaly it provides a notification system that can be configured for easier 
 6. Weekly statistics about errors frequency
 
 ## Usage
-Currently working working version is **1.0.0**. The 2.0.0-SNAPSHOT is currently under development and some features may not work (front-end is currently not working).
+Currently working working version is **1.0.0**. The 2.0.0-SNAPSHOT is currently under development and some features may not work.
  
 
 ## Prerequisites

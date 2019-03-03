@@ -10,7 +10,6 @@ services:
       ARTEMIS_PASSWORD: artemis
     ports:
       - 8161:8161
-      - 61616:61616
     volumes:
       - ./docker_init_files/artemis:/var/lib/artemis/etc-override
 
@@ -24,8 +23,6 @@ services:
       POSTGRES_DB: Buginator
     volumes:
       - ./docker_init_files/postgres:/docker-entrypoint-initdb.d/
-    ports:
-      - 5437:5432
 
   redis:
     image: redis:5.0.3
@@ -36,8 +33,6 @@ services:
     build: ./services/BuginatorAuth
     container_name: buginator-auth
     restart: always
-#    ports:
-#      - 8080:8080
     depends_on:
       - artemis
       - postgres
