@@ -62,3 +62,10 @@ services:
     depends_on:
       - buginator-gateway
     command: ng serve --host 0.0.0.0
+
+  email-sender:
+    build: ./EmailSender
+    container_name: email-sender
+    restart: always
+    depends_on:
+      - artemis

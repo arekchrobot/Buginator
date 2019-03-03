@@ -19,7 +19,7 @@
         </rollingPolicy>
     </appender>
 
-    <springProfile name="dev">
+    <springProfile name="dev, default, docker">
         <root level="info">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="FILE" />
