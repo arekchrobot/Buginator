@@ -27,6 +27,7 @@ To successfully build the application you must have:
 2. Maven *3*
 3. JDK **11**
 4. Apache ArtemisMQ running
+5. Redis running
 
 ## Installation
 To install download or clone the project and run `mvn install` on the root project. This should execute and perform all tests.
@@ -52,3 +53,7 @@ To run a project you need to execute following command:
 mvn spring-boot:run
 ```
 On all projects in *services* subdirectory.
+Alternatively you can run application in docker containers after building the maven project locally with following command:
+``` sh
+docker-compose up
+```
