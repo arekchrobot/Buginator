@@ -21,7 +21,7 @@
         </rollingPolicy>
     </appender>
 
-    <springProfile name="dev,default">
+    <springProfile name="dev,default, docker">
         <root level="info">
             <appender-ref ref="CONSOLE" />
         </root>

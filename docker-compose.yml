@@ -1,0 +1,69 @@
+version: '2'
+
+services:
+  artemis:
+    image: vromero/activemq-artemis:2.6.3-alpine
+    container_name: artemis
+    restart: always
+    environment:
+      ARTEMIS_USERNAME: artemis
+      ARTEMIS_PASSWORD: artemis
+    ports:
+      - 8161:8161
+      - 61616:61616
+    volumes:
+      - ./docker_init_files/artemis:/var/lib/artemis/etc-override
+
+  postgres:
+    image: postgres:9.5
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: buginator
+      POSTGRES_USER: Buginator
+      POSTGRES_DB: Buginator
+    volumes:
+      - ./docker_init_files/postgres:/docker-entrypoint-initdb.d/
+    ports:
+      - 5437:5432
+
+  redis:
+    image: redis:5.0.3
+    container_name: redis
+    restart: always
+
+  buginator-auth:
+    build: ./services/BuginatorAuth
+    container_name: buginator-auth
+    restart: always
+#    ports:
+#      - 8080:8080
+    depends_on:
+      - artemis
+      - postgres
+      - redis
+
+  buginator-gateway:
+    build: ./services/BuginatorGateway
+    container_name: buginator-gateway
+    restart: always
+    ports:
+      - 8100:8100
+    depends_on:
+      - artemis
+      - postgres
+      - redis
+      - buginator-auth
+
+  buginator-angular:
+    image: alexsuch/angular-cli:7.2.2
+    container_name: buginator-angular
+    restart: always
+    volumes:
+      - ./BuginatorWebfront:/opt/apps
+    working_dir: /opt/apps/
+    ports:
+      - 4200:4200
+    depends_on:
+      - buginator-gateway
+    command: ng serve --host 0.0.0.0

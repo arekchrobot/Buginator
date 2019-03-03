@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<configuration xmlns="urn:activemq"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xi="http://www.w3.org/2001/XInclude"
+               xsi:schemaLocation="urn:activemq /schema/artemis-configuration.xsd">
+    <!-- from 1.0.0 to 1.5.5 the following line should be : <core xmlns="urn:activemq:core"> -->
+    <core xmlns="urn:activemq:core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="urn:activemq:core ">
+
+        <addresses>
+            <address name="mailQueue">
+                <anycast>
+                    <queue name="mailQueue"/>
+                </anycast>
+            </address>
+            <address name="authFailedMailQueue">
+                <anycast>
+                    <queue name="authFailedMailQueue"/>
+                </anycast>
+            </address>
+            <address name="spamMailQueue">
+                <anycast>
+                    <queue name="spamMailQueue"/>
+                </anycast>
+            </address>
+        </addresses>
+    </core>
+</configuration>

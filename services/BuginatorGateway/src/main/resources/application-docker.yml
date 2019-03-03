@@ -1,0 +1,32 @@
+server:
+  port: 8100
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - OPTIONS
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - HEAD
+              - TRACE
+            allowedHeaders: "*"
+      routes:
+        - id: oauth
+          uri: http://buginator-auth:8080
+          predicates:
+            - Path=/oauth/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+        - id: auth
+          uri: http://buginator-auth:8080
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
