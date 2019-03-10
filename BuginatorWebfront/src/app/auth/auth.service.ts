@@ -61,4 +61,13 @@ export class AuthService {
   private saveLoggedUserInSession(loggedUser: LoggedUserDTO) {
     sessionStorage.setItem(environment.api.loggedUserStorage, JSON.stringify(loggedUser));
   }
+
+  passwordReset(email: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      return this.httpClient.post(`${environment.api.url}/api/auth/password/reset`, email)
+        .toPromise()
+        .then(res => resolve(res),
+          error => reject(error));
+    });
+  }
 }

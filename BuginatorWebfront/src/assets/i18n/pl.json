@@ -18,6 +18,21 @@
         }
       }
     },
+    "forgot": {
+      "info": "Podaj poprawny adres e-mail",
+      "input": {
+        "email": "mail@domain.com"
+      },
+      "form": {
+        "email": {
+          "required": "Email jest wymagany",
+          "email": "Niepoprawny adres email"
+        }
+      },
+      "submit": "Odzyskaj hasło",
+      "success": "Email z tokenem do reset został wysłany",
+      "error": "Wystąpił błąd podczas wysyłania tokenu resetującego hasło"
+    },
     "tab": {
       "toggle": {
         "login": "Zaloguj",

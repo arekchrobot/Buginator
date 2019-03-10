@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'buginator-auth-password-reset',
@@ -9,13 +10,15 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 export class PasswordResetComponent implements OnInit {
 
   private passwordResetForm: FormGroup;
+  private passwordResetError: boolean = false;
+  private passwordResetSuccess: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.passwordResetForm = this.formBuilder.group({
-      email: ['']
+      email: ['', [Validators.email, Validators.required]]
     });
   }
 
@@ -23,9 +26,20 @@ export class PasswordResetComponent implements OnInit {
     return this.passwordResetForm.controls;
   }
 
+  isPasswordResetError(): boolean {
+    return this.passwordResetError;
+  }
+
+  isPasswordResetSuccess(): boolean {
+    return this.passwordResetSuccess;
+  }
+
   onPasswordResetSubmit() {
-    console.log('password reset submit');
-    console.log(this.passwordResetForm);
+    this.passwordResetError = false;
+    this.passwordResetSuccess = false;
+    this.authService.passwordReset(this.passwordResetForm.value.email)
+      .then(res => this.passwordResetSuccess = true,
+        error => this.passwordResetError = true);
   }
 
 }

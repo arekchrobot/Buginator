@@ -18,6 +18,21 @@
         }
       }
     },
+    "forgot": {
+      "info": "Enter your valid e-mail",
+      "input": {
+        "email": "mail@domain.com"
+      },
+      "form": {
+        "email": {
+          "required": "Email is required",
+          "email": "Not a valid email"
+        }
+      },
+      "submit": "Recover Password",
+      "success": "An email with password reset token has been sent",
+      "error": "There has been error while sending reset token"
+    },
     "tab": {
       "toggle": {
         "login": "Login",

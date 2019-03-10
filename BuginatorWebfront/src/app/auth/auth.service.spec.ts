@@ -134,4 +134,40 @@ describe('AuthService', () => {
 
     httpMock.verify();
   }));
+
+  it('should send reset password token', fakeAsync(() => {
+    //given
+    let email: string = "emailToReset@gmail.com";
+
+    //when
+    authService.passwordReset(email).then(res => expect(res).toBeDefined(),
+        error => fail('should not throw error'));
+
+    //then
+    const passwordResetRequest = httpMock.expectOne(`${environment.api.url}/api/auth/password/reset`);
+    expect(passwordResetRequest.request.method).toBe('POST');
+    passwordResetRequest.flush({}, {status: 201, statusText: ''});
+
+    tick();
+
+    httpMock.verify();
+  }));
+
+  it('should not send reset password token', fakeAsync(() => {
+    //given
+    let email: string = "emailToReset@gmail.com";
+
+    //when
+    authService.passwordReset(email).then(res => fail('should throw error'),
+      error => expect(error).toBeDefined());
+
+    //then
+    const passwordResetRequest = httpMock.expectOne(`${environment.api.url}/api/auth/password/reset`);
+    expect(passwordResetRequest.request.method).toBe('POST');
+    passwordResetRequest.error(new ErrorEvent('JMS not responding'));
+
+    tick();
+
+    httpMock.verify();
+  }));
 });
