@@ -33,6 +33,32 @@
       "success": "Email z tokenem do reset został wysłany",
       "error": "Wystąpił błąd podczas wysyłania tokenu resetującego hasło"
     },
+    "register": {
+      "input": {
+        "companyName": "nazwa firmy",
+        "companyAddress": "adres",
+        "userEmail": "mail@domain.com",
+        "userName": "nazwa użytkownika",
+        "password": "hasło",
+        "passwordConfirm": "powtórz hasło"
+      },
+      "form": {
+        "companyName": {
+          "required": "Nazwa firmy jest wymagana"
+        },
+        "userEmail": {
+          "required": "Email jest wymagany",
+          "email": "Niepoprawny adres email"
+        },
+        "userPassword": {
+          "required": "Hasło jest wymagane"
+        },
+        "userPasswordConfirm": {
+          "passwordNotMatch": "Hasła nie są identyczne"
+        }
+      },
+      "submit": "Zarejestruj"
+    },
     "tab": {
       "toggle": {
         "login": "Zaloguj",

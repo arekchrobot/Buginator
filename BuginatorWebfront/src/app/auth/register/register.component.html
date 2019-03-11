@@ -1,53 +1,52 @@
-<div class="alert alert-danger" ng-if="registerError">
-  {{registerErrorMsg}}
+<div class="alert alert-danger" *ngIf="isRegisterError()">
+  {{regErrorMessage | translate}}
 </div>
 <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
-  <!--<div class="form-group"-->
-       <!--ng-class="{'has-error':forms.registerForm.companyName.$error.required && forms.registerForm.companyName.$touched, 'has-success':!forms.registerForm.companyName.$error.required}">-->
-    <!--<input type="text" placeholder="company name" class="form-control top" ng-model="registerData.company.name"-->
-           <!--id="companyName" name="companyName" required translate translate-attr-placeholder="SIGNUP_COMPANY_NAME">-->
-    <!--<span class="help-block"-->
-          <!--ng-show="forms.registerForm.companyName.$error.required && forms.registerForm.companyName.$touched" translate>SIGNUP_COMPANY_NAME_REQUIRED</span>-->
-  <!--</div>-->
-  <!--<div class="form-group"-->
-       <!--ng-class="{'has-error':forms.registerForm.companyAddress.$error.required && forms.registerForm.companyAddress.$touched, 'has-success':!forms.registerForm.companyAddress.$error.required}">-->
-    <!--<input type="text" placeholder="address " class="form-control middle" ng-model="registerData.company.address"-->
-           <!--id="companyAddress" name="companyAddress" required translate-->
-           <!--translate-attr-placeholder="SIGNUP_COMPANY_ADDRESS">-->
-    <!--<span class="help-block"-->
-          <!--ng-show="forms.registerForm.companyAddress.$error.required && forms.registerForm.companyAddress.$touched"-->
-          <!--translate>SIGNUP_COMPANY_ADDRESS_REQUIRED</span>-->
-  <!--</div>-->
-  <!--<div class="form-group"-->
-       <!--ng-class="{'has-error':forms.registerForm.userName.$error.required && forms.registerForm.userName.$touched, 'has-success':!forms.registerForm.userName.$error.required}">-->
-    <!--<input type="text" placeholder="username" class="form-control middle" ng-model="registerData.user.name"-->
-           <!--id="userName" name="userName" required translate translate-attr-placeholder="SIGNUP_USERNAME">-->
-    <!--<span class="help-block"-->
-          <!--ng-show="forms.registerForm.userName.$error.required && forms.registerForm.userName.$touched" translate>SIGNUP_USERNAME_REQUIRED</span>-->
-  <!--</div>-->
-  <!--<div class="form-group"-->
-       <!--ng-class="{'has-error':(forms.registerForm.userEmail.$error.required && forms.registerForm.userEmail.$touched) || forms.registerForm.userEmail.$error.email, 'has-success':!forms.registerForm.userEmail.$error.required || (!forms.registerForm.userEmail.$error.email && forms.registerForm.userEmail.$touched)}">-->
-    <!--<input type="email" placeholder="mail@domain.com" class="form-control middle" ng-model="registerData.user.email"-->
-           <!--id="userEmail" name="userEmail" required>-->
-    <!--<span class="help-block"-->
-          <!--ng-show="forms.registerForm.userEmail.$error.required && forms.registerForm.userEmail.$touched" translate>SIGNUP_EMAIL_REQUIRED</span>-->
-    <!--<span class="help-block"-->
-          <!--ng-show="forms.registerForm.userEmail.$error.email && forms.registerForm.userEmail.$touched" translate>SIGNUP_EMAIL_INVALID</span>-->
-  <!--</div>-->
-  <!--<div class="form-group"-->
-       <!--ng-class="{'has-error':forms.registerForm.pass.$error.required && forms.registerForm.pass.$touched, 'has-success':!forms.registerForm.pass.$error.required}">-->
-    <!--<input type="password" placeholder="password" class="form-control middle" ng-model="registerData.user.password"-->
-           <!--id="pass" name="pass" required translate translate-attr-placeholder="SIGNUP_PASSWORD">-->
-    <!--<span class="help-block" ng-show="forms.registerForm.pass.$error.required && forms.registerForm.pass.$touched"-->
-          <!--translate>SIGNUP_PASSWORD_REQUIRED</span>-->
-  <!--</div>-->
-  <!--<div class="form-group"-->
-       <!--ng-class="{'has-error':forms.registerForm.rePass.$error.pwmatch, 'has-success':!forms.registerForm.rePass.$error.pwmatch && forms.registerForm.pass.$touched && !forms.registerForm.userEmail.$error.required && !forms.registerForm.userEmail.$error.email}">-->
-    <!--<input type="password" placeholder="re-password" class="form-control bottom" ng-model="rePassword" id="rePass"-->
-           <!--pw-check="pass" name="rePass" translate translate-attr-placeholder="SIGNUP_RE_PASSWORD">-->
-    <!--<span class='help-block' ng-show='forms.registerForm.rePass.$error.pwmatch' translate>SIGNUP_PASSWORD_MATCH</span>-->
-  <!--</div>-->
-  <button class="btn btn-lg btn-success btn-block" ng-disabled="!forms.registerForm.$valid" translate>
-    SIGNUP_SUBMIT_BUTTON
+  <div class="form-group" [ngClass]="{'has-error': regForm.companyName.invalid && regForm.companyName.touched}">
+    <input type="text" [attr.placeholder]="'auth.register.input.companyName' | translate"
+           class="form-control top" formControlName="companyName">
+    <span class="help-block" translate
+          *ngIf="regForm.companyName.invalid && regForm.companyName.touched && regForm.companyName.errors.required">
+      auth.register.form.companyName.required
+    </span>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': regForm.companyAddress.invalid && regForm.companyAddress.touched}">
+    <input type="text" [attr.placeholder]="'auth.register.input.companyAddress' | translate"
+           class="form-control middle" formControlName="companyAddress">
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': regForm.userEmail.invalid && regForm.userEmail.touched}">
+    <input type="email" [attr.placeholder]="'auth.register.input.userEmail' | translate"
+           class="form-control middle" formControlName="userEmail">
+    <span class="help-block" translate
+          *ngIf="regForm.userEmail.invalid && regForm.userEmail.touched && regForm.userEmail.errors.required">
+      auth.register.form.userEmail.required
+    </span>
+    <span class="help-block" translate
+          *ngIf="regForm.userEmail.invalid && regForm.userEmail.touched && regForm.userEmail.errors.email">
+      auth.register.form.userEmail.email
+    </span>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': regForm.userName.invalid && regForm.userName.touched}">
+    <input type="text" [attr.placeholder]="'auth.register.input.userName' | translate"
+           class="form-control middle" formControlName="userName">
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': regForm.userPassword.invalid && regForm.userPassword.touched}">
+    <input type="password" [attr.placeholder]="'auth.register.input.password' | translate"
+           class="form-control middle" formControlName="userPassword">
+    <span class="help-block" translate
+          *ngIf="regForm.userPassword.invalid && regForm.userPassword.touched && regForm.userPassword.errors.required">
+      auth.register.form.userPassword.required
+    </span>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': regForm.userPasswordConfirm.invalid && regForm.userPasswordConfirm.touched}">
+    <input type="password" [attr.placeholder]="'auth.register.input.passwordConfirm' | translate"
+           class="form-control bottom" formControlName="userPasswordConfirm">
+    <span class='help-block' translate
+          *ngIf="regForm.userPasswordConfirm.invalid && regForm.userPasswordConfirm.touched && regForm.userPasswordConfirm.errors.passwordNotMatch">
+      auth.register.form.userPasswordConfirm.passwordNotMatch
+    </span>
+  </div>
+  <button class="btn btn-lg btn-success btn-block" [disabled]="!registerForm.valid" translate>
+    auth.register.submit
   </button>
 </form>

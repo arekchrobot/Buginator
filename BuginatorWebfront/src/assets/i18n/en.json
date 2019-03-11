@@ -33,6 +33,32 @@
       "success": "An email with password reset token has been sent",
       "error": "There has been error while sending reset token"
     },
+    "register": {
+      "input": {
+        "companyName": "company name",
+        "companyAddress": "address",
+        "userEmail": "mail@domain.com",
+        "userName": "username",
+        "password": "password",
+        "passwordConfirm": "password confirm"
+      },
+      "form": {
+        "companyName": {
+          "required": "Company name is required"
+        },
+        "userEmail": {
+          "required": "Email is required",
+          "email": "Not a valid email"
+        },
+        "userPassword": {
+          "required": "Password is required"
+        },
+        "userPasswordConfirm": {
+          "passwordNotMatch": "Passwords don't match"
+        }
+      },
+      "submit": "Register"
+    },
     "tab": {
       "toggle": {
         "login": "Login",
