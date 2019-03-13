@@ -5,6 +5,9 @@
   <hr>
   <div class="tab-content">
     <div id="login" class="tab-pane" [ngClass]="{'active':activeTab === 'login'}">
+      <div class="alert alert-success" *ngIf="isRegisterSuccess()" translate>
+        auth.register.success
+      </div>
       <buginator-auth-login></buginator-auth-login>
     </div>
     <div id="forgot" class="tab-pane" [ngClass]="{'active':activeTab === 'forgot'}">

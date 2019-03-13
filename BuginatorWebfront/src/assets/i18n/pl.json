@@ -57,7 +57,8 @@
           "passwordNotMatch": "Hasła nie są identyczne"
         }
       },
-      "submit": "Zarejestruj"
+      "submit": "Zarejestruj",
+      "success": "Dziękujemy za rejestrację. Szczegóły zostały wysłane na adres email"
     },
     "tab": {
       "toggle": {
@@ -66,5 +67,11 @@
         "register": "Zarejestruj"
       }
     }
+  },
+  "user": {
+    "duplicate": "Podany adres email już istnieje"
+  },
+  "company": {
+    "duplicate": "Podana firma już istnieje"
   }
 }

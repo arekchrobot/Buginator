@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PasswordValidator} from "../validators/password.validator";
+import {AuthService} from "../auth.service";
+import {ErrorResponseDTO} from "../../shared/model/error-response.model";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'buginator-auth-register',
@@ -13,7 +16,8 @@ export class RegisterComponent implements OnInit {
   private registerError: boolean = false;
   private registerErrorMessage: string;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -35,8 +39,19 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegisterFormSubmit() {
-    console.log('register form submit');
-    console.log(this.registerForm);
+    this.registerError = false;
+    this.registerErrorMessage = null;
+    this.authService.register(this.registerForm.value)
+      .then(res => {
+        this.authService.registerSuccessSubject.next(true);
+      }, (error: ErrorResponseDTO) => {
+        this.registerError = true;
+          this.translateService.get(error.message.split(',')).subscribe(result => {
+            this.registerErrorMessage = Object.keys(result)
+              .map(key => result[key])
+              .join(',');
+          });
+      });
   }
 
   isRegisterError() {

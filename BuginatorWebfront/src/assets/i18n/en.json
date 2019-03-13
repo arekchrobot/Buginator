@@ -57,7 +57,8 @@
           "passwordNotMatch": "Passwords don't match"
         }
       },
-      "submit": "Register"
+      "submit": "Register",
+      "success": "Thank you for registering. Details has been sent to mail"
     },
     "tab": {
       "toggle": {
@@ -66,5 +67,11 @@
         "register": "Signup"
       }
     }
+  },
+  "user": {
+    "duplicate": "Given email already exists"
+  },
+  "company": {
+    "duplicate": "Given company already exists"
   }
 }

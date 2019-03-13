@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import { PasswordResetComponent } from './password-reset.component';
+import {PasswordResetComponent} from './password-reset.component';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {AuthService} from "../auth.service";
 import {RouterTestingModule} from "@angular/router/testing";
@@ -8,6 +8,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {TranslateTestingModule} from "ngx-translate-testing";
 import {CookieService} from "ngx-cookie-service";
 import {By} from "@angular/platform-browser";
+import {environment} from "../../../environments/environment";
 
 describe('PasswordResetComponent', () => {
   let component: PasswordResetComponent;
@@ -17,7 +18,7 @@ describe('PasswordResetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PasswordResetComponent ],
+      declarations: [PasswordResetComponent],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
@@ -105,4 +106,62 @@ describe('PasswordResetComponent', () => {
     expect(emailErrors['required']).toBeFalsy();
     expect(emailErrors['email']).toBeTruthy();
   });
+
+  it('should correctly send password reset and show success message', fakeAsync(() => {
+    //given
+    let authServicePasswordResetSpy = spyOn(authService, 'passwordReset').and.callThrough();
+    let email = component.passResetForm.email;
+    email.setValue('test@gmail.com');
+
+    //when
+    component.onPasswordResetSubmit();
+
+    //then
+    const passwordResetRequest = httpMock.expectOne(`${environment.api.url}/api/auth/password/reset`);
+    expect(passwordResetRequest.request.method).toBe('POST');
+    passwordResetRequest.flush({}, {status: 201, statusText: ''});
+
+    expect(authServicePasswordResetSpy).toHaveBeenCalled();
+
+    tick();
+
+    fixture.detectChanges();
+
+    let passwordResetSuccess = fixture.debugElement.query(By.css('.alert-success')).nativeElement;
+    expect(passwordResetSuccess.innerText).toBe('An email with password reset token has been sent');
+
+    expect(component.isPasswordResetSuccess()).toBeTruthy();
+    expect(component.isPasswordResetError()).toBeFalsy();
+
+    httpMock.verify();
+  }));
+
+  it('should not send password reset and show error message', fakeAsync(() => {
+    //given
+    let authServicePasswordResetSpy = spyOn(authService, 'passwordReset').and.callThrough();
+    let email = component.passResetForm.email;
+    email.setValue('test@gmail.com');
+
+    //when
+    component.onPasswordResetSubmit();
+
+    //then
+    const passwordResetRequest = httpMock.expectOne(`${environment.api.url}/api/auth/password/reset`);
+    expect(passwordResetRequest.request.method).toBe('POST');
+    passwordResetRequest.error(new ErrorEvent('JMS not responding'));
+
+    expect(authServicePasswordResetSpy).toHaveBeenCalled();
+
+    tick();
+
+    fixture.detectChanges();
+
+    let passwordResetSuccess = fixture.debugElement.query(By.css('.alert-danger')).nativeElement;
+    expect(passwordResetSuccess.innerText).toBe('There has been error while sending reset token');
+
+    expect(component.isPasswordResetSuccess()).toBeFalsy();
+    expect(component.isPasswordResetError()).toBeTruthy();
+
+    httpMock.verify();
+  }));
 });

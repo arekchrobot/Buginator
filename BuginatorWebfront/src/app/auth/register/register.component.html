@@ -1,5 +1,5 @@
 <div class="alert alert-danger" *ngIf="isRegisterError()">
-  {{regErrorMessage | translate}}
+  {{regErrorMessage}}
 </div>
 <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
   <div class="form-group" [ngClass]="{'has-error': regForm.companyName.invalid && regForm.companyName.touched}">

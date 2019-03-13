@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {AuthComponent} from './auth.component';
 import {RouterTestingModule} from "@angular/router/testing";
@@ -10,10 +10,12 @@ import {PasswordResetComponent} from "./password-reset/password-reset.component"
 import {RegisterComponent} from "./register/register.component";
 import {CookieService} from "ngx-cookie-service";
 import {By} from "@angular/platform-browser";
+import {AuthService} from "./auth.service";
 
 describe('AuthComponent', () => {
   let component: AuthComponent;
   let fixture: ComponentFixture<AuthComponent>;
+  let authService: AuthService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,6 +36,8 @@ describe('AuthComponent', () => {
         CookieService
       ]
     }).compileComponents();
+
+    authService = TestBed.get(AuthService);
   }));
 
   beforeEach(() => {
@@ -92,4 +96,18 @@ describe('AuthComponent', () => {
     let expectedDiv = elements[0].nativeElement;
     expect(expectedDiv.id).toBe('forgot');
   });
+
+  it('should change tab to login and show register success message', fakeAsync(() => {
+    //when
+    authService.registerSuccessSubject.next(true);
+
+    //then
+    tick();
+
+    fixture.detectChanges();
+
+    expect(component.activeTab).toBe('login');
+    const registerSuccessMessage = fixture.debugElement.query(By.css('.alert-success')).nativeElement;
+    expect(registerSuccessMessage.innerText).toBe('Thank you for registering. Details has been sent to mail');
+  }));
 });

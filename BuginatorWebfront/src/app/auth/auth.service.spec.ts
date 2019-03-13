@@ -7,6 +7,8 @@ import {LoginRequestDTO} from "./model/login-request.model";
 import {environment} from "../../environments/environment";
 import {OAuthResponseDTO} from "./model/oauth-response.model";
 import {LoggedUserDTO} from "./model/logged-user.model";
+import {RegisterDTO} from "./model/register.model";
+import {ErrorResponseDTO} from "../shared/model/error-response.model";
 
 describe('AuthService', () => {
 
@@ -165,6 +167,53 @@ describe('AuthService', () => {
     const passwordResetRequest = httpMock.expectOne(`${environment.api.url}/api/auth/password/reset`);
     expect(passwordResetRequest.request.method).toBe('POST');
     passwordResetRequest.error(new ErrorEvent('JMS not responding'));
+
+    tick();
+
+    httpMock.verify();
+  }));
+
+  it('should correctly register new user and company', fakeAsync(() => {
+    //given
+    let registerDTO: RegisterDTO = new RegisterDTO();
+    registerDTO.companyName = "testCompanyName";
+    registerDTO.userEmail = "test@email.com";
+    registerDTO.userPassword = "hardPassHardPass";
+
+    //when
+    authService.register(registerDTO).then(res => expect(res).toBeDefined(),
+        error => fail('should not throw error'));
+
+    //then
+    const registerRequest = httpMock.expectOne(`${environment.api.url}/api/auth/register`);
+    expect(registerRequest.request.method).toBe('POST');
+    registerRequest.flush({}, {status: 201, statusText: ''});
+
+    tick();
+
+    httpMock.verify();
+  }));
+
+  it('should fail to register new user and company', fakeAsync(() => {
+    //given
+    let registerDTO: RegisterDTO = new RegisterDTO();
+    registerDTO.companyName = "testCompanyName";
+
+    let errorResponseDTO: ErrorResponseDTO = new ErrorResponseDTO();
+    errorResponseDTO.message = "user.email.blank,user.password.blank";
+
+    //when
+    authService.register(registerDTO).then(res => fail('should throw error'),
+      (error: ErrorResponseDTO) => {
+      expect(error).toBeDefined();
+      expect(error.message).toBe(errorResponseDTO.message);
+    });
+
+    //then
+    const registerRequest = httpMock.expectOne(`${environment.api.url}/api/auth/register`);
+    expect(registerRequest.request.method).toBe('POST');
+
+    registerRequest.flush(errorResponseDTO, {status: 400, statusText: ''});
 
     tick();
 

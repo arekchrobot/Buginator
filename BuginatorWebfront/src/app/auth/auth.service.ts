@@ -5,6 +5,8 @@ import {environment} from "../../environments/environment";
 import {CookieService} from "ngx-cookie-service";
 import {LoggedUserDTO} from "./model/logged-user.model";
 import {OAuthResponseDTO} from "./model/oauth-response.model";
+import {RegisterDTO} from "./model/register.model";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ export class AuthService {
   private clientId: string = "buginatorWebApp";
   private clientSecret: string = "$2a$10$yQKiHrX2tKiyDo7WODXk6OkpdVcpAXFTLPG62hlCdbL2qEQ62uqZC";
   private clientBtoa: string = "YnVnaW5hdG9yV2ViQXBwOnNlY3JldA==";
+
+  registerSuccessSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {
   }
@@ -69,5 +73,14 @@ export class AuthService {
         .then(res => resolve(res),
           error => reject(error));
     });
+  }
+
+  register(registerDTO: RegisterDTO): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      return this.httpClient.post(`${environment.api.url}/api/auth/register`, registerDTO)
+        .toPromise()
+        .then(res => resolve(res),
+          (error) => reject(error.error));
+    })
   }
 }
