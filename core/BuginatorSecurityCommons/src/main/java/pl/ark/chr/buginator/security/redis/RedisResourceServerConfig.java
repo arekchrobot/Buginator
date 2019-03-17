@@ -8,18 +8,16 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import pl.ark.chr.buginator.security.actuator.ActuatorSecurityConfig;
 
 @Configuration
 @EnableResourceServer
-@ImportAutoConfiguration(RedisConfig.class)
+@ImportAutoConfiguration({RedisConfig.class, ActuatorSecurityConfig.class})
 public class RedisResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    private TokenStore redisTokenStore;
-
     @Autowired
-    public RedisResourceServerConfig(@Qualifier("redisTokenStore") TokenStore redisTokenStore) {
-        this.redisTokenStore = redisTokenStore;
-    }
+    @Qualifier("redisTokenStore")
+    private TokenStore redisTokenStore;
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
