@@ -57,7 +57,7 @@
         <integration.tests.skip>true</integration.tests.skip>
         <ṃutations.tests.skip>true</ṃutations.tests.skip>
         <pitest.version>1.4.3</pitest.version>
-        <spring.security.oauth2.version>2.3.4.RELEASE</spring.security.oauth2.version>
+        <spring.security.oauth2.version>2.3.5.RELEASE</spring.security.oauth2.version>
         <jedis.version>2.9.0</jedis.version>
         <redis.lettuce.version>4.5.0.Final</redis.lettuce.version>
         <h2.version>1.4.197</h2.version>
