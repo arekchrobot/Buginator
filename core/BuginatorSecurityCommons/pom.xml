@@ -50,6 +50,12 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!--Actuator-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!--Test dependencies-->
         <dependency>
             <groupId>org.mockito</groupId>

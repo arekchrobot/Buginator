@@ -8,11 +8,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import pl.ark.chr.buginator.security.actuator.ActuatorSecurityConfig;
+import pl.ark.chr.buginator.security.actuator.ActuatorConfig;
 
 @Configuration
 @EnableResourceServer
-@ImportAutoConfiguration({RedisConfig.class, ActuatorSecurityConfig.class})
+@ImportAutoConfiguration({RedisConfig.class, ActuatorConfig.class})
 public class RedisResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Autowired
