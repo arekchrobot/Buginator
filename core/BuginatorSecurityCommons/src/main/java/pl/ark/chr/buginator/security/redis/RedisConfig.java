@@ -19,8 +19,8 @@ public class RedisConfig {
     private int port;
 
     @Autowired
-    public RedisConfig(@Value("${redis.host:localhost}") String host,
-                       @Value("${redis.port:6379}") int port) {
+    public RedisConfig(@Value("${spring.redis.host:localhost}") String host,
+                       @Value("${spring.redis.port:6379}") int port) {
         this.host = host;
         this.port = port;
     }

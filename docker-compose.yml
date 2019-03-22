@@ -29,8 +29,8 @@ services:
     container_name: redis
     restart: always
     volumes:
-      - ./docker_init_files/redis/redis.conf:/etc/redis/redis.conf
-      - ./docker_init_files/redis/6379.conf:/etc/redis/6379.conf
+      - ./docker_init_files/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
 
   buginator-auth:
     build: ./services/BuginatorAuth
@@ -81,6 +81,6 @@ services:
       - ./docker_init_files/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
-    depends_on:
-      - buginator-auth
+#    depends_on:
+#      - buginator-auth
     command: "--config.file=/etc/prometheus/prometheus.yml"
