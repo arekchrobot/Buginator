@@ -74,13 +74,23 @@ services:
       - artemis
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:v2.8.0
     container_name: prometheus
     restart: always
     volumes:
       - ./docker_init_files/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
-#    depends_on:
-#      - buginator-auth
     command: "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana:6.0.2
+    container_name: grafana
+    restart: always
+    env_file:
+      - ./docker_init_files/grafana/enviornment.properties
+    ports:
+      - 3000:3000
+    volumes:
+      - ./docker_init_files/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./docker_init_files/grafana/dashboards:/var/lib/grafana/dashboards

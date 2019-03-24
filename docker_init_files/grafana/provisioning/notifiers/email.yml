@@ -1,0 +1,13 @@
+delete_notifiers:
+  - name: email-channel-1
+    uid: email-channel-1
+    org_id: 1
+
+notifiers:
+  - name: email-channel
+    type: email
+    uid: email-channel
+    org_id: 1
+    is_default: true
+    settings:
+      addresses: INVALID
