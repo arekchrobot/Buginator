@@ -11,11 +11,11 @@ scrape_configs:
     static_configs:
       - targets: ['127.0.0.1:9090']
 
-  - job_name: 'buginator-auth-metrics'
+  - job_name: 'buginator-metrics'
     metrics_path: '/actuator/prometheus'
     scrape_interval: 5s
     basic_auth:
       username: 'actuator'
       password: 'actuator'
     static_configs:
-      - targets: ['buginator-auth:8080']
+      - targets: ['buginator-auth:8080', 'buginator-gateway:8100']

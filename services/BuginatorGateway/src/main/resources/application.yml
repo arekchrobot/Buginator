@@ -1,3 +1,16 @@
+buginator:
+  actuator:
+    credentials:
+      username: actuator
+      password: actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,caches,metrics,env,prometheus
+  endpoint:
+    health:
+      show-details: always
 server:
   port: 8100
 spring:
