@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.filter;
+package pl.ark.chr.buginator.core.security.filter;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

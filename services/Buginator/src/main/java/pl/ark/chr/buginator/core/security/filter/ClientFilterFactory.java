@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.filter;
+package pl.ark.chr.buginator.core.security.filter;
 
 import java.util.Arrays;
 import java.util.Collections;

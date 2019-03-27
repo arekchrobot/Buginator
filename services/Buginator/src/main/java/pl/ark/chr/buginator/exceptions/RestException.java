@@ -3,11 +3,10 @@ package pl.ark.chr.buginator.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-/**
- * Created by Arek on 2016-09-28.
- */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class RestException extends Exception {
+public class RestException extends RuntimeException {
+
+    private static final long serialVersionUID = 7486292258238172906L;
 
     private HttpStatus status;
     private String originalUrl;

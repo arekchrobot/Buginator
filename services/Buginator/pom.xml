@@ -130,6 +130,11 @@
             <artifactId>BuginatorAggregatorApi</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>pl.ark.chr.buginator</groupId>
+            <artifactId>BuginatorSecurityCommons</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
         <!--Buginator Aggregator implementations-->
         <dependency>

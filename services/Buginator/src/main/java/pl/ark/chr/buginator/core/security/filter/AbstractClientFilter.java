@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.filter;
+package pl.ark.chr.buginator.core.security.filter;
 
 import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.persistence.security.FilterData;
@@ -6,10 +6,7 @@ import pl.ark.chr.buginator.exceptions.DataAccessException;
 
 import java.util.Set;
 
-/**
- * Created by Arek on 2016-12-01.
- */
-public abstract class AbstractClientFilter implements ClientFilter {
+abstract class AbstractClientFilter implements ClientFilter {
 
     private ClientFilter nextClientFilter;
 

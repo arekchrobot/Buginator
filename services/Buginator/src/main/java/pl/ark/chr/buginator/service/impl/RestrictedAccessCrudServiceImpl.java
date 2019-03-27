@@ -4,7 +4,7 @@ import pl.ark.chr.buginator.domain.BaseEntity;
 import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.persistence.security.FilterData;
 import pl.ark.chr.buginator.exceptions.DataAccessException;
-import pl.ark.chr.buginator.filter.ClientFilter;
+import pl.ark.chr.buginator.core.security.filter.ClientFilter;
 import pl.ark.chr.buginator.service.RestrictedAccessCrudService;
 
 import java.util.Set;

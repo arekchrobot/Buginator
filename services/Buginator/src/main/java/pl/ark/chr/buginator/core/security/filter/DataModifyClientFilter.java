@@ -1,4 +1,4 @@
-package pl.ark.chr.buginator.filter;
+package pl.ark.chr.buginator.core.security.filter;
 
 import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.persistence.security.FilterData;
@@ -6,10 +6,7 @@ import pl.ark.chr.buginator.exceptions.DataAccessException;
 
 import java.util.Set;
 
-/**
- * Created by Arek on 2016-12-01.
- */
-public class DataModifyClientFilter extends AbstractClientFilter {
+class DataModifyClientFilter extends AbstractClientFilter {
 
     DataModifyClientFilter() {
     }
@@ -19,7 +16,6 @@ public class DataModifyClientFilter extends AbstractClientFilter {
         userApplications.stream()
                 .filter(ua -> ua.getApplication().getId().equals(filterData.getApplication().getId()) && ua.isModify())
                 .findAny()
-                .map(ua -> ua)
                 .orElseThrow(() -> new DataAccessException("User is not permitted to modify application",""));
     }
 }

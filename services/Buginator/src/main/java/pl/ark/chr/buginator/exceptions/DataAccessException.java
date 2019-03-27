@@ -2,10 +2,9 @@ package pl.ark.chr.buginator.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-/**
- * Created by Arek on 2016-12-01.
- */
 public class DataAccessException extends RestException {
+
+    private static final long serialVersionUID = 4809651147043471877L;
 
     public DataAccessException(String message, String originalUrl) {
         super(message, HttpStatus.FORBIDDEN, originalUrl);
