@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.ark.chr.buginator.data.NotificationData;
-import pl.ark.chr.buginator.exceptions.RestException;
+import pl.ark.chr.buginator.app.exceptions.RestException;
 import pl.ark.chr.buginator.rest.annotations.DELETE;
 import pl.ark.chr.buginator.rest.annotations.RestController;
 import pl.ark.chr.buginator.service.NotificationService;

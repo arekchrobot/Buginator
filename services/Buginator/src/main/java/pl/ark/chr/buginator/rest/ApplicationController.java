@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.auth.UserApplication;
-import pl.ark.chr.buginator.exceptions.RestException;
+import pl.ark.chr.buginator.app.exceptions.RestException;
 import pl.ark.chr.buginator.rest.annotations.GET;
 import pl.ark.chr.buginator.rest.annotations.POST;
 import pl.ark.chr.buginator.rest.annotations.RestController;

@@ -3,7 +3,7 @@ package pl.ark.chr.buginator.service;
 import pl.ark.chr.buginator.domain.auth.Company;
 import pl.ark.chr.buginator.domain.auth.Permission;
 import pl.ark.chr.buginator.domain.auth.Role;
-import pl.ark.chr.buginator.exceptions.ValidationException;
+import pl.ark.chr.buginator.app.exceptions.ValidationException;
 
 import java.util.List;
 

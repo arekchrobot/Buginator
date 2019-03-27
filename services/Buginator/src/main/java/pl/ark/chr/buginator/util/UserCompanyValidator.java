@@ -7,7 +7,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import pl.ark.chr.buginator.domain.auth.Company;
 import pl.ark.chr.buginator.domain.auth.User;
-import pl.ark.chr.buginator.exceptions.ValidationException;
+import pl.ark.chr.buginator.app.exceptions.ValidationException;
 import pl.ark.chr.buginator.repository.auth.CompanyRepository;
 import pl.ark.chr.buginator.repository.auth.UserRepository;
 

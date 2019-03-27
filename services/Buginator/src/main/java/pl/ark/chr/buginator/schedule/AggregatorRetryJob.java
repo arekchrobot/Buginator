@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ark.chr.buginator.BuginatorProperties;
+import pl.ark.chr.buginator.app.BuginatorProperties;
 import pl.ark.chr.buginator.aggregator.domain.Aggregator;
 import pl.ark.chr.buginator.aggregator.domain.AggregatorLog;
 import pl.ark.chr.buginator.aggregator.domain.AggregatorLogStatus;

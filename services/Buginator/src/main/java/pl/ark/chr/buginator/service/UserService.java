@@ -2,11 +2,11 @@ package pl.ark.chr.buginator.service;
 
 import pl.ark.chr.buginator.domain.auth.Company;
 import pl.ark.chr.buginator.domain.auth.User;
-import pl.ark.chr.buginator.exceptions.DataAccessException;
-import pl.ark.chr.buginator.exceptions.RestException;
-import pl.ark.chr.buginator.exceptions.UsernameNotFoundException;
+import pl.ark.chr.buginator.app.exceptions.DataAccessException;
+import pl.ark.chr.buginator.app.exceptions.RestException;
+import pl.ark.chr.buginator.app.exceptions.UsernameNotFoundException;
 import pl.ark.chr.buginator.data.Credentials;
-import pl.ark.chr.buginator.exceptions.ValidationException;
+import pl.ark.chr.buginator.app.exceptions.ValidationException;
 
 import java.util.List;
 import java.util.Locale;

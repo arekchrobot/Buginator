@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.ark.chr.buginator.domain.BaseEntity;
-import pl.ark.chr.buginator.exceptions.RestException;
+import pl.ark.chr.buginator.app.exceptions.RestException;
 import pl.ark.chr.buginator.rest.annotations.DELETE;
 import pl.ark.chr.buginator.rest.annotations.GET;
 import pl.ark.chr.buginator.rest.annotations.POST;

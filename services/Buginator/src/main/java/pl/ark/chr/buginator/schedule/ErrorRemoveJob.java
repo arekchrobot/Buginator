@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ark.chr.buginator.BuginatorProperties;
+import pl.ark.chr.buginator.app.BuginatorProperties;
 import pl.ark.chr.buginator.aggregator.domain.AggregatorLog;
 import pl.ark.chr.buginator.aggregator.repository.AggregatorLogRepository;
 import pl.ark.chr.buginator.domain.core.Error;

@@ -10,9 +10,9 @@ import pl.ark.chr.buginator.aggregator.domain.AggregatorLog;
 import pl.ark.chr.buginator.aggregator.repository.AggregatorLogRepository;
 import pl.ark.chr.buginator.aggregator.repository.AggregatorRepository;
 import pl.ark.chr.buginator.domain.auth.UserApplication;
-import pl.ark.chr.buginator.exceptions.DataAccessException;
-import pl.ark.chr.buginator.core.security.filter.ClientFilter;
-import pl.ark.chr.buginator.core.security.filter.ClientFilterFactory;
+import pl.ark.chr.buginator.app.exceptions.DataAccessException;
+import pl.ark.chr.buginator.app.core.security.filter.ClientFilter;
+import pl.ark.chr.buginator.app.core.security.filter.ClientFilterFactory;
 import pl.ark.chr.buginator.service.AggregatorLogService;
 
 import java.util.ArrayList;

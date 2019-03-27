@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.ark.chr.buginator.data.AggregatorData;
-import pl.ark.chr.buginator.exceptions.RestException;
+import pl.ark.chr.buginator.app.exceptions.RestException;
 import pl.ark.chr.buginator.rest.annotations.*;
 import pl.ark.chr.buginator.service.AggregatorService;
 import pl.ark.chr.buginator.util.SessionUtil;

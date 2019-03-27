@@ -15,7 +15,7 @@ import pl.ark.chr.buginator.TestObjectCreator;
 import pl.ark.chr.buginator.data.UserWrapper;
 import pl.ark.chr.buginator.domain.auth.*;
 import pl.ark.chr.buginator.domain.core.Application;
-import pl.ark.chr.buginator.exceptions.DataAccessException;
+import pl.ark.chr.buginator.app.exceptions.DataAccessException;
 import pl.ark.chr.buginator.repository.core.ApplicationRepository;
 import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.repository.auth.UserApplicationRepository;

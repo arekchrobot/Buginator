@@ -8,7 +8,7 @@ import pl.ark.chr.buginator.data.UserWrapper;
 import pl.ark.chr.buginator.domain.BaseEntity;
 import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.persistence.security.FilterData;
-import pl.ark.chr.buginator.exceptions.RestException;
+import pl.ark.chr.buginator.app.exceptions.RestException;
 import pl.ark.chr.buginator.rest.annotations.DELETE;
 import pl.ark.chr.buginator.rest.annotations.GET;
 import pl.ark.chr.buginator.rest.annotations.POST;

@@ -7,7 +7,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.ark.chr.buginator.data.ManageUserData;
-import pl.ark.chr.buginator.exceptions.RestException;
+import pl.ark.chr.buginator.app.exceptions.RestException;
 import pl.ark.chr.buginator.rest.annotations.*;
 import pl.ark.chr.buginator.service.ManageUserService;
 import pl.ark.chr.buginator.util.SessionUtil;

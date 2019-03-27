@@ -2,7 +2,7 @@ package pl.ark.chr.buginator.service;
 
 import pl.ark.chr.buginator.data.AggregatorData;
 import pl.ark.chr.buginator.data.UserWrapper;
-import pl.ark.chr.buginator.exceptions.DataAccessException;
+import pl.ark.chr.buginator.app.exceptions.DataAccessException;
 
 import java.util.List;
 
