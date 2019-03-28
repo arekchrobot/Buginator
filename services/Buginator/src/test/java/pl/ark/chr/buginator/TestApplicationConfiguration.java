@@ -17,8 +17,6 @@ import pl.ark.chr.buginator.aggregator.repository.AggregatorRepository;
 //import pl.ark.chr.buginator.domain.EmailAggregator;
 //import pl.ark.chr.buginator.repository.aggregator.AggregatorRepository;
 //import pl.ark.chr.buginator.repository.EmailAggregatorRepository;
-import pl.ark.chr.buginator.service.EmailService;
-import pl.ark.chr.buginator.service.impl.EmailServiceImpl;
 
 import java.util.Properties;
 
@@ -73,11 +71,6 @@ public class TestApplicationConfiguration {
     @Bean
     public JavaMailSender javaMailSender() {
         return Mockito.mock(JavaMailSender.class);
-    }
-
-    @Bean
-    public EmailService emailService() {
-        return new EmailServiceImpl();
     }
 
 //    @Bean

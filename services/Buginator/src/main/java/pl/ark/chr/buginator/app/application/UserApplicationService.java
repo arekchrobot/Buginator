@@ -1,6 +1,7 @@
 package pl.ark.chr.buginator.app.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import pl.ark.chr.buginator.commons.dto.LoggedUserDTO;
@@ -33,7 +34,8 @@ public class UserApplicationService {
         return userApplicationRepository.findByPk_User_Email(email);
     }
 
-    UserApplicationDTO linkApplicationToUser(Application application, LoggedUserDTO currentUser) {
+    @CacheEvict(value = "userApplications", key = "#currentUser.email")
+    public UserApplicationDTO linkApplicationToUser(Application application, LoggedUserDTO currentUser) {
         User user = userRepository.findByEmail(currentUser.getEmail())
                 .orElseThrow(() -> new DataNotFoundException("user.notFound"));
 
@@ -42,6 +44,6 @@ public class UserApplicationService {
 
         userApplicationRepository.save(userApplication);
 
-        return new UserApplicationDTO();
+        return new UserApplicationDTO(application.getName(), userApplication.isModify());
     }
 }

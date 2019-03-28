@@ -2,20 +2,15 @@ package pl.ark.chr.buginator.app.application;
 
 import java.util.Objects;
 
-public class ApplicationDTO {
+public class ApplicationDTO extends UserApplicationDTO {
 
-    private String name;
     private int allErrorCount;
     private int lastWeekErrorCount;
 
     private ApplicationDTO(Builder builder) {
-        name = builder.name;
+        super(builder.name, builder.modify);
         allErrorCount = builder.allErrorCount;
         lastWeekErrorCount = builder.lastWeekErrorCount;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getAllErrorCount() {
@@ -29,9 +24,16 @@ public class ApplicationDTO {
     public static Builder builder(String name) {
         return new Builder(name);
     }
+    public static Builder builder(String name, boolean modify) {
+        return new Builder(name, modify);
+    }
+    public static Builder builder(UserApplicationDTO base) {
+        return new Builder(base);
+    }
 
     public static final class Builder {
         private String name;
+        private boolean modify;
         private int allErrorCount;
         private int lastWeekErrorCount;
 
@@ -39,6 +41,17 @@ public class ApplicationDTO {
             Objects.requireNonNull(val);
 
             name = val;
+        }
+
+        private Builder(UserApplicationDTO base) {
+            this(base.getName(), base.isModify());
+        }
+
+        private Builder(String val1, boolean val2) {
+            Objects.requireNonNull(val1);
+
+            name = val1;
+            modify = val2;
         }
 
         public Builder allErrorCount(int val) {

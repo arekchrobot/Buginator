@@ -13,9 +13,9 @@ import java.util.List;
 
 public interface ErrorRepository extends JpaRepository<Error, Long> {
 
-    Long countByApplication(Application application);
+    int countByApplication(Application application);
 
-    Long countByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
+    int countByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
 
     List<Error> findByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
 

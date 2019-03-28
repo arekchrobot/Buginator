@@ -18,7 +18,6 @@ import pl.ark.chr.buginator.domain.auth.User;
 import pl.ark.chr.buginator.app.exceptions.RestException;
 import pl.ark.chr.buginator.app.exceptions.UsernameNotFoundException;
 import pl.ark.chr.buginator.repository.auth.UserRepository;
-import pl.ark.chr.buginator.service.EmailService;
 import pl.ark.chr.buginator.service.UserService;
 import pl.ark.chr.buginator.data.Credentials;
 
@@ -44,9 +43,6 @@ public class UserServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
-
-    @Mock
-    private EmailService emailService;
 
     @Mock
     private BuginatorProperties buginatorProperties;

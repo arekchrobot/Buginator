@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>%-5p %d{dd-MM-yyyy HH:mm:ss} [%c{1}]: %m%n</Pattern>
+            <Pattern>%clr(%5p) %d{dd-MM-yyyy HH:mm:ss} [%cyan(%c{1})]: %m%n</Pattern>
         </layout>
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/buginator.log</file>
+        <file>logs/buginatorApp.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%-5p %d{dd-MM-yyyy HH:mm:ss} [%c{1}]: %m%n</Pattern>
+            <Pattern>%clr(%5p) %d{dd-MM-yyyy HH:mm:ss} [%cyan(%c{1})]: %m%n</Pattern>
         </encoder>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>logs/buginator.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/buginatorApp.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
     </appender>
 
-    <springProfile name="dev">
+    <springProfile name="dev,default,docker">
         <root level="info">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="FILE" />
         </root>
     </springProfile>
-    <springProfile name="prodmysql,prodpostgres">
+    <springProfile name="prod">
         <root level="info">
             <appender-ref ref="FILE" />
         </root>
