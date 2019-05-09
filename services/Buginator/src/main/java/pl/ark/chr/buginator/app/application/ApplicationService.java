@@ -6,17 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import pl.ark.chr.buginator.app.error.ErrorService;
 import pl.ark.chr.buginator.commons.dto.LoggedUserDTO;
 import pl.ark.chr.buginator.commons.exceptions.DuplicateException;
 import pl.ark.chr.buginator.app.core.security.AbstractApplicationAccessRestricted;
-import pl.ark.chr.buginator.commons.util.Pair;
 import pl.ark.chr.buginator.domain.auth.Company;
-import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.app.exceptions.DataNotFoundException;
 import pl.ark.chr.buginator.repository.auth.CompanyRepository;
 import pl.ark.chr.buginator.repository.core.ApplicationRepository;
-import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.security.session.LoggedUserService;
 
 import java.time.LocalDate;
@@ -31,22 +29,21 @@ public class ApplicationService extends AbstractApplicationAccessRestricted<Appl
     private static final int NUMBER_OF_DAYS = 7;
 
     private ApplicationRepository applicationRepository;
-    //TODO: replace by services!!!
+    private ErrorService errorService;
     private CompanyRepository companyRepository;
-    private ErrorRepository errorRepository;
 
     @Autowired
     public ApplicationService(LoggedUserService loggedUserService, UserApplicationService userApplicationService,
                               ApplicationRepository applicationRepository, CompanyRepository companyRepository,
-                              ErrorRepository errorRepository) {
+                              ErrorService errorService) {
         super(loggedUserService, userApplicationService);
         this.applicationRepository = applicationRepository;
         this.companyRepository = companyRepository;
-        this.errorRepository = errorRepository;
+        this.errorService = errorService;
     }
 
     @CacheEvict(value = "applications", allEntries = true)
-    public UserApplicationDTO createApplication(ApplicationRequestDTO applicationRequestDTO) {
+    public UserApplicationDTO create(ApplicationRequestDTO applicationRequestDTO) {
         LoggedUserDTO currentUser = loggedUserService.getCurrentUser();
         Company company = companyRepository.findById(currentUser.getCompanyId())
                 .orElseThrow(() -> new DataNotFoundException("company.notFound"));
@@ -70,18 +67,41 @@ public class ApplicationService extends AbstractApplicationAccessRestricted<Appl
                 });
     }
 
-    @Cacheable(value = "applications", key = "#root.target.loggedUserService.getCurrentUser().email")
-    public Set<ApplicationDTO> getUserApplications() {
+    /**
+     * Used in spring SpEL to getForUser current user key for cached applications.
+     * For method: {@link #getUserApps() getUserApps}
+     *
+     * @return Current logged user email
+     */
+    public String getUserAppCacheKey() {
+        return loggedUserService.getCurrentUser().getEmail();
+    }
+
+    @Cacheable(value = "applications", key = "#root.target.getUserAppCacheKey()")
+    public Set<ApplicationDTO> getUserApps() {
         LocalDate lastWeek = LocalDate.now().minusDays(NUMBER_OF_DAYS);
         LoggedUserDTO currentUser = loggedUserService.getCurrentUser();
 
-        return userApplicationService.getCachedUserApplications(currentUser.getEmail())
+        return userApplicationService.getAllForUser(currentUser.getEmail())
                 .stream()
-                .map(userApplication -> new Pair<>(userApplication.getApplication(), userApplication.isModify()))
-                .map(pair -> ApplicationDTO.builder(pair._1.getName(), pair._2)
-                        .allErrorCount(errorRepository.countByApplication(pair._1))
-                        .lastWeekErrorCount(errorRepository.countByApplicationAndLastOccurrenceGreaterThanEqual(pair._1, lastWeek))
+                .map(userApplication -> ApplicationDTO.builder(userApplication)
+                        .allErrorCount(errorService.countByApplication(userApplication))
+                        .lastWeekErrorCount(errorService.countSince(userApplication, lastWeek))
                         .build())
                 .collect(Collectors.toSet());
+    }
+
+    public ApplicationDetailsDTO get(Long id) {
+        Application application = applicationRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("application.notFound"));
+
+        readAccessAllowed(application);
+
+        LoggedUserDTO currentUser = loggedUserService.getCurrentUser();
+        UserApplicationDTO userApplication = userApplicationService.getForUser(currentUser.getEmail(), id);
+
+        return ApplicationDetailsDTO.builder(userApplication)
+                .errors(errorService.getAllByApplication(application))
+                .build();
     }
 }

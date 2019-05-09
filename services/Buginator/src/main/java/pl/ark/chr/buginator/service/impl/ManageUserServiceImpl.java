@@ -128,7 +128,7 @@ public class ManageUserServiceImpl implements ManageUserService {
     private Application validateAccessAndReturnApplication(Long appId, Set<UserApplication> userApplications) throws DataAccessException {
         Application application = applicationRepository.findById(appId).get();
 
-        clientFilter.validateAccess(application, userApplications);
+//        clientFilter.validateAccess(application, userApplications);
 
         return application;
     }

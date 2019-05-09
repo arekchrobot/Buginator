@@ -60,7 +60,7 @@ public class ChartServiceImpl implements ChartService {
 
         validateNullApplication(application, locale, appId);
 
-        clientFilter.validateAccess(application, userApplications);
+//        clientFilter.validateAccess(application, userApplications);
 
         List<Error> applicationErrors = errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(application, lastSevenDays);
 

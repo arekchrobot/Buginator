@@ -9,4 +9,5 @@
     <cache name="users" maxElementsInMemory="1000" eternal="true" overflowToDisk="false"/>
     <cache name="applications" maxElementsInMemory="5000" eternal="false" timeToLiveSeconds="300" overflowToDisk="false"/>
     <cache name="userApplications" maxElementsInMemory="5000" eternal="true" overflowToDisk="false"/>
+    <cache name="userApplication" maxElementsInMemory="5000" eternal="true" overflowToDisk="false"/>
 </ehcache>

@@ -159,13 +159,13 @@ public class ApplicationServiceImplTest {
 
         UserWrapper userWrapper = TestObjectCreator.createUserWrapper(user);
 
-        Long errorCount = 11L;
-        Long lastWeekErrorCountApp1 = 7L;
-        Long lastWeekErrorCountApp2 = 6L;
+        int errorCount = 11;
+        int lastWeekErrorCountApp1 = 7;
+        int lastWeekErrorCountApp2 = 6;
 
-        when(errorRepository.countByApplication(any(Application.class))).thenReturn(errorCount);
-        when(errorRepository.countByApplicationAndLastOccurrenceGreaterThanEqual(eq(testApp), any(LocalDate.class))).thenReturn(lastWeekErrorCountApp1);
-        when(errorRepository.countByApplicationAndLastOccurrenceGreaterThanEqual(eq(testApp2), any(LocalDate.class))).thenReturn(lastWeekErrorCountApp2);
+//        when(errorRepository.countByApplication(any(Application.class))).thenReturn(errorCount);
+//        when(errorRepository.countByApplicationAndLastOccurrenceGreaterThanEqual(eq(testApp), any(LocalDate.class))).thenReturn(lastWeekErrorCountApp1);
+//        when(errorRepository.countByApplicationAndLastOccurrenceGreaterThanEqual(eq(testApp2), any(LocalDate.class))).thenReturn(lastWeekErrorCountApp2);
 
         //when
         List<Application> applications = sut.getUserApplications(userWrapper);

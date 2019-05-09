@@ -10,16 +10,17 @@ import pl.ark.chr.buginator.domain.core.ErrorStatus;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface ErrorRepository extends JpaRepository<Error, Long> {
 
-    int countByApplication(Application application);
+    int countByApplication_Id(Long id);
 
-    int countByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
+    int countByApplication_IdAndLastOccurrenceGreaterThanEqual(Long id, LocalDate lastOccurrence);
 
     List<Error> findByApplicationAndLastOccurrenceGreaterThanEqual(Application application, LocalDate lastOccurrence);
 
-    List<Error> findByApplication(Application application);
+    Stream<Error> findByApplication(Application application);
 
     List<Error> findByStatusAndLastOccurrenceLessThanEqual(ErrorStatus status, LocalDate lastOccurrence);
 

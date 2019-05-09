@@ -1,5 +1,6 @@
 package pl.ark.chr.buginator.app.core.security;
 
+import pl.ark.chr.buginator.app.application.UserApplicationDTO;
 import pl.ark.chr.buginator.app.application.UserApplicationService;
 import pl.ark.chr.buginator.commons.dto.LoggedUserDTO;
 import pl.ark.chr.buginator.domain.BaseEntity;
@@ -29,18 +30,18 @@ public abstract class AbstractApplicationAccessRestricted<T extends BaseEntity &
 
     @Override
     public void readAccessAllowed(T entity) throws DataAccessException {
-        Set<UserApplication> userApps = getUserApplications();
+        Set<UserApplicationDTO> userApps = getUserApplications();
         readClientFilter.validateAccess(entity, userApps);
     }
 
     @Override
     public void writeAccessAllowed(T entity) throws DataAccessException {
-        Set<UserApplication> userApps = getUserApplications();
+        Set<UserApplicationDTO> userApps = getUserApplications();
         writeClientFilter.validateAccess(entity, userApps);
     }
 
-    private Set<UserApplication> getUserApplications() {
+    private Set<UserApplicationDTO> getUserApplications() {
         LoggedUserDTO currentUser = loggedUserService.getCurrentUser();
-        return userApplicationService.getCachedUserApplications(currentUser.getEmail());
+        return userApplicationService.getAllForUser(currentUser.getEmail());
     }
 }

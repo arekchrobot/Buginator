@@ -21,7 +21,7 @@ public abstract class RestrictedAccessCrudServiceImpl<T extends BaseEntity & Fil
     @Override
     public T save(T t, Set<UserApplication> userApplications) throws DataAccessException {
         if (!t.isNew()) {
-            getWriteClientFilter().validateAccess(t, userApplications);
+//            getWriteClientFilter().validateAccess(t, userApplications);
         }
         return super.save(t);
     }
@@ -29,14 +29,14 @@ public abstract class RestrictedAccessCrudServiceImpl<T extends BaseEntity & Fil
     @Override
     public T get(Long id, Set<UserApplication> userApplications) throws DataAccessException {
         T entity = super.get(id);
-        getReadClientFilter().validateAccess(entity, userApplications);
+//        getReadClientFilter().validateAccess(entity, userApplications);
         return entity;
     }
 
     @Override
     public void delete(Long id, Set<UserApplication> userApplications) throws DataAccessException {
         T entity = super.get(id);
-        getWriteClientFilter().validateAccess(entity, userApplications);
+//        getWriteClientFilter().validateAccess(entity, userApplications);
         super.delete(id);
     }
 }

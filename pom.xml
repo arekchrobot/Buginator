@@ -72,6 +72,7 @@
         <sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
         <jacoco.version>0.8.2</jacoco.version>
         <fasterxml.jackson.annotations.version>2.9.8</fasterxml.jackson.annotations.version>
+        <mapstruct.version>1.3.0.Final</mapstruct.version>
     </properties>
 
     <profiles>
@@ -125,6 +126,12 @@
                 <groupId>javax.mail</groupId>
                 <artifactId>mail</artifactId>
                 <version>${javax.mail.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
 
             <!--JMS-->

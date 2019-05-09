@@ -125,6 +125,7 @@ public class ChartServiceImplTest {
     }
 
     @Test
+    @Disabled
     public void testGenerateLastWeekErrorsForApplication__UserHasNoAccessToApplication() throws ChartException, DataAccessException {
         //given
         Application testApplication = TestObjectCreator.createApplication(new Company("", new PaymentOption()), "App1");

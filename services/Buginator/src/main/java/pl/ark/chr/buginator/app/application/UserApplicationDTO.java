@@ -1,24 +1,46 @@
 package pl.ark.chr.buginator.app.application;
 
-import java.util.Objects;
+public class UserApplicationDTO extends BaseApplicationDTO {
 
-public class UserApplicationDTO {
-
-    private String name;
     private boolean modify;
 
-    public UserApplicationDTO(String name, boolean modify) {
-        Objects.requireNonNull(name);
-
-        this.name = name;
-        this.modify = modify;
+    protected UserApplicationDTO(Builder builder) {
+        super(builder);
+        modify = builder.modify;
     }
 
-    public String getName() {
-        return name;
+    public static Builder2 builder() {
+        return new Builder2();
     }
 
     public boolean isModify() {
         return modify;
+    }
+
+    static abstract class Builder<T extends UserApplicationDTO.Builder<T>> extends BaseApplicationDTO.Builder<T> {
+        protected boolean modify;
+
+        Builder() {
+        }
+
+        public T modify(boolean val) {
+            modify = val;
+            return self();
+        }
+
+        public UserApplicationDTO build() {
+            return new UserApplicationDTO(this);
+        }
+    }
+
+    public static final class Builder2 extends Builder<Builder2> {
+
+        Builder2() {
+        }
+
+        @Override
+        protected Builder2 self() {
+            return this;
+        }
     }
 }

@@ -8,7 +8,7 @@ import pl.ark.chr.buginator.domain.auth.UserApplicationId;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.stream.Stream;
 
 public interface UserApplicationRepository extends JpaRepository<UserApplication, UserApplicationId> {
 
@@ -16,5 +16,7 @@ public interface UserApplicationRepository extends JpaRepository<UserApplication
 
     Optional<UserApplication> findByPk_ApplicationAndPk_User(Application application, User user);
 
-    Set<UserApplication> findByPk_User_Email(String userEmail);
+    Stream<UserApplication> findByPk_User_Email(String userEmail);
+
+    Optional<UserApplication> findByPk_User_EmailAndPk_Application_Id(String userEmail, Long id);
 }

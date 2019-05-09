@@ -2,6 +2,7 @@ package pl.ark.chr.buginator.app.core.security.filter;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import pl.ark.chr.buginator.app.application.UserApplicationDTO;
 import pl.ark.chr.buginator.domain.auth.*;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.persistence.security.FilterData;
@@ -29,13 +30,12 @@ public class ClientFilterFactoryTest {
 
         FilterData filterData = () -> application;
 
-        UserApplication userApplication1 = new UserApplication(new User.Builder().build(), application2);
-//        UserApplicationId userApplicationId1 = new UserApplicationId();
-//        userApplicationId1.setApplication(application2);
-//        userApplication1.setPk(userApplicationId1);
+        UserApplicationDTO userApplication1 = UserApplicationDTO.builder()
+                .id(application2.getId())
+                .modify(false)
+                .build();
 
-
-        Set<UserApplication> userApplications = new HashSet<>();
+        Set<UserApplicationDTO> userApplications = new HashSet<>();
         userApplications.add(userApplication1);
 
         ClientFilter sut = ClientFilterFactory
@@ -61,20 +61,18 @@ public class ClientFilterFactoryTest {
 
         FilterData filterData = () -> application;
 
-        UserApplication userApplication1 = new UserApplication(new User.Builder().build(), application2);
-//        UserApplicationId userApplicationId1 = new UserApplicationId();
-//        userApplicationId1.setApplication(application2);
-//        userApplication1.setPk(userApplicationId1);
-        userApplication1.setModify(true);
+        UserApplicationDTO userApplication1 = UserApplicationDTO.builder()
+                .id(application2.getId())
+                .modify(true)
+                .build();
 
-        UserApplication userApplication2 = new UserApplication(new User.Builder().build(), application);
-//        UserApplicationId userApplicationId2 = new UserApplicationId();
-//        userApplicationId2.setApplication(application);
-//        userApplication2.setPk(userApplicationId2);
-        userApplication2.setModify(false);
+        UserApplicationDTO userApplication2 = UserApplicationDTO.builder()
+                .id(application.getId())
+                .modify(false)
+                .build();
 
 
-        Set<UserApplication> userApplications = new HashSet<>();
+        Set<UserApplicationDTO> userApplications = new HashSet<>();
         userApplications.add(userApplication1);
         userApplications.add(userApplication2);
 

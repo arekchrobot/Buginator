@@ -45,7 +45,7 @@ public class AggregatorLogServiceImpl implements AggregatorLogService {
             return new ArrayList<>();
         }
 
-        clientFilter.validateAccess(aggregator, userApplications);
+//        clientFilter.validateAccess(aggregator, userApplications);
 
         return aggregatorLogRepository.findByAggregator(aggregator);
     }

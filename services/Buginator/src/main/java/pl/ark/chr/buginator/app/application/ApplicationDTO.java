@@ -1,14 +1,12 @@
 package pl.ark.chr.buginator.app.application;
 
-import java.util.Objects;
-
 public class ApplicationDTO extends UserApplicationDTO {
 
     private int allErrorCount;
     private int lastWeekErrorCount;
 
     private ApplicationDTO(Builder builder) {
-        super(builder.name, builder.modify);
+        super(builder);
         allErrorCount = builder.allErrorCount;
         lastWeekErrorCount = builder.lastWeekErrorCount;
     }
@@ -21,47 +19,33 @@ public class ApplicationDTO extends UserApplicationDTO {
         return lastWeekErrorCount;
     }
 
-    public static Builder builder(String name) {
-        return new Builder(name);
-    }
-    public static Builder builder(String name, boolean modify) {
-        return new Builder(name, modify);
-    }
     public static Builder builder(UserApplicationDTO base) {
         return new Builder(base);
     }
 
-    public static final class Builder {
-        private String name;
-        private boolean modify;
+    static final class Builder extends UserApplicationDTO.Builder<Builder> {
         private int allErrorCount;
         private int lastWeekErrorCount;
 
-        private Builder(String val) {
-            Objects.requireNonNull(val);
-
-            name = val;
+        @Override
+        protected Builder self() {
+            return this;
         }
 
         private Builder(UserApplicationDTO base) {
-            this(base.getName(), base.isModify());
-        }
-
-        private Builder(String val1, boolean val2) {
-            Objects.requireNonNull(val1);
-
-            name = val1;
-            modify = val2;
+            this.id = base.getId();
+            this.name = base.getName();
+            this.modify = base.isModify();
         }
 
         public Builder allErrorCount(int val) {
             allErrorCount = val;
-            return this;
+            return self();
         }
 
         public Builder lastWeekErrorCount(int val) {
             lastWeekErrorCount = val;
-            return this;
+            return self();
         }
 
         public ApplicationDTO build() {

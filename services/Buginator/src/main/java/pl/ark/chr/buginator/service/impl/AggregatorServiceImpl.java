@@ -53,7 +53,7 @@ public class AggregatorServiceImpl implements AggregatorService {
     public List<AggregatorData> getAllAggregatorsForApplication(Long applicationId, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
         Application application = applicationRepository.findById(applicationId).get();
 
-        clientFilter.validateAccess(application, userWrapper.getUserApplications());
+//        clientFilter.validateAccess(application, userWrapper.getUserApplications());
 
         List<Aggregator> allApplicationAggregators = baseAggregatorRepository.findByApplication( application);
 
@@ -61,7 +61,7 @@ public class AggregatorServiceImpl implements AggregatorService {
 
         for(Aggregator aggregator : allApplicationAggregators) {
 //            CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
-//            concreteAggregators.add(new AggregatorData((Aggregator) aggregatorRepository.findById(aggregator.getId()).get()));
+//            concreteAggregators.add(new AggregatorData((Aggregator) aggregatorRepository.findById(aggregator.getId()).getForUser()));
         }
 
         return concreteAggregators;
@@ -69,7 +69,7 @@ public class AggregatorServiceImpl implements AggregatorService {
 
     @Override
     public AggregatorData saveNewAggregator(AggregatorData aggregatorData, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
-        clientFilter.validateAccess(aggregatorData.getAggregator(), userWrapper.getUserApplications());
+//        clientFilter.validateAccess(aggregatorData.getAggregator(), userWrapper.getUserApplications());
 
         Aggregator aggregator = aggregatorData.getAggregator();
 
@@ -95,7 +95,7 @@ public class AggregatorServiceImpl implements AggregatorService {
     public AggregatorData getAggregator(Long aggregatorId, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
         Aggregator aggregator = baseAggregatorRepository.findById(aggregatorId).get();
 
-        clientFilter.validateAccess(aggregator, userWrapper.getUserApplications());
+//        clientFilter.validateAccess(aggregator, userWrapper.getUserApplications());
 
 //        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
 
@@ -104,7 +104,7 @@ public class AggregatorServiceImpl implements AggregatorService {
 
     @Override
     public AggregatorData updateAggregator(AggregatorData aggregatorData, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
-        clientFilter.validateAccess(aggregatorData.getAggregator(), userWrapper.getUserApplications());
+//        clientFilter.validateAccess(aggregatorData.getAggregator(), userWrapper.getUserApplications());
 
 //        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregatorData.getAggregator(), springContext);
 
@@ -115,7 +115,7 @@ public class AggregatorServiceImpl implements AggregatorService {
     public void removeAggregator(Long aggregatorId, UserWrapper userWrapper) throws DataAccessException, ClassNotFoundException {
         Aggregator aggregator = baseAggregatorRepository.findById(aggregatorId).get();
 
-        clientFilter.validateAccess(aggregator, userWrapper.getUserApplications());
+//        clientFilter.validateAccess(aggregator, userWrapper.getUserApplications());
 
 //        CrudRepository aggregatorRepository = aggregatorReflection.getAggregatorRepository(aggregator, springContext);
 
