@@ -21,6 +21,7 @@ public class WebSecurityConfig  extends RedisResourceServerConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/actuator/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated();
     }

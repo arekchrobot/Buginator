@@ -1,13 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
-         updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
 
-    <defaultCache eternal="true" maxElementsInMemory="400" overflowToDisk="false" />
+    <service>
+        <jsr107:defaults />
+    </service>
 
-    <cache name="permissions" maxElementsInMemory="50" eternal="true" overflowToDisk="false"/>
-    <cache name="roles" maxElementsInMemory="500" eternal="true" overflowToDisk="false"/>
-    <cache name="users" maxElementsInMemory="1000" eternal="true" overflowToDisk="false"/>
-    <cache name="applications" maxElementsInMemory="5000" eternal="false" timeToLiveSeconds="300" overflowToDisk="false"/>
-    <cache name="userApplications" maxElementsInMemory="5000" eternal="true" overflowToDisk="false"/>
-    <cache name="userApplication" maxElementsInMemory="5000" eternal="true" overflowToDisk="false"/>
-</ehcache>
+    <cache alias="permissions"  uses-template="permissions-template"/>
+    <cache alias="roles"  uses-template="roles-template"/>
+    <cache alias="users"  uses-template="users-template"/>
+    <cache alias="applications"  uses-template="application-template"/>
+    <cache alias="userApplications"  uses-template="userApplication-template"/>
+    <cache alias="userApplication"  uses-template="userApplication-template"/>
+
+    <cache-template name="permissions-template">
+        <resources>
+            <heap unit="entries">50</heap>
+        </resources>
+    </cache-template>
+
+    <cache-template name="roles-template">
+        <resources>
+            <heap unit="entries">500</heap>
+        </resources>
+    </cache-template>
+
+    <cache-template name="users-template">
+        <resources>
+            <heap unit="entries">1000</heap>
+        </resources>
+    </cache-template>
+
+    <cache-template name="application-template">
+        <expiry>
+            <ttl unit="seconds">300</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">5000</heap>
+        </resources>
+    </cache-template>
+    <cache-template name="userApplication-template">
+        <resources>
+            <heap unit="entries">5000</heap>
+        </resources>
+    </cache-template>
+</config>

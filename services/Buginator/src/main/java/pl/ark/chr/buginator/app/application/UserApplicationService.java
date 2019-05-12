@@ -63,7 +63,7 @@ public class UserApplicationService {
                 .build();
     }
 
-    @Cacheable(value = "userApplications", key = "#email+'_'+#appId")
+    @Cacheable(value = "userApplication", key = "#email+'_'+#appId")
     public UserApplicationDTO getForUser(String email, Long appId) {
         Objects.requireNonNull(email);
         Objects.requireNonNull(appId);
