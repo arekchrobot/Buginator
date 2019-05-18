@@ -18,6 +18,7 @@ import pl.ark.chr.buginator.repository.core.ApplicationRepository;
 import pl.ark.chr.buginator.security.session.LoggedUserService;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,8 @@ public class ApplicationService extends AbstractApplicationAccessRestricted<Appl
 
     @CacheEvict(value = "applications", allEntries = true)
     public UserApplicationDTO create(ApplicationRequestDTO applicationRequestDTO) {
+        Objects.requireNonNull(applicationRequestDTO);
+
         LoggedUserDTO currentUser = loggedUserService.getCurrentUser();
         Company company = companyRepository.findById(currentUser.getCompanyId())
                 .orElseThrow(() -> new DataNotFoundException("company.notFound"));

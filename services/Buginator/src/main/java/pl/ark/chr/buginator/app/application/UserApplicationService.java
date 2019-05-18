@@ -48,6 +48,9 @@ public class UserApplicationService {
 
     @CacheEvict(value = "userApplications", key = "#currentUser.email")
     public UserApplicationDTO linkApplicationToUser(Application application, LoggedUserDTO currentUser) {
+        Objects.requireNonNull(application);
+        Objects.requireNonNull(currentUser);
+
         User user = userRepository.findByEmail(currentUser.getEmail())
                 .orElseThrow(() -> new DataNotFoundException("user.notFound"));
 

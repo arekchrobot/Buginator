@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {BuginatorApplication.class, TestApplicationContext.class})
 @Transactional
-public class ApplicationServiceIT {
+class ApplicationServiceIT {
 
     @Autowired
     private ApplicationService applicationService;
@@ -171,11 +171,43 @@ public class ApplicationServiceIT {
                 .hasSize(5);
     }
 
+    @Test
+    @DisplayName("should create application with duplicated name if for different company")
+    void shouldCreateAppWhenOneExist() {
+        //given
+        PaymentOption paymentOption = setupPaymentOption();
+        var company = TestObjectCreator.createCompany(paymentOption);
+        var secondCompany = TestObjectCreator.createCompany("AnotherComp", paymentOption);
+
+        testEntityManager.persist(company);
+        testEntityManager.persist(secondCompany);
+
+        var testUserEmail = "testdupicatedappname@gmail.com";
+
+        var role = roleRepository.findById(Role.MANAGER).orElseThrow();
+        var user = TestObjectCreator.createUser(company, role, testUserEmail);
+        testEntityManager.persist(user);
+
+        TestObjectCreator.setAuthentication(authenticationManager, testUserEmail);
+
+        var appName = "ExistingAppName";
+
+        var existingApp = TestObjectCreator.createApplication(appName, secondCompany);
+
+        testEntityManager.persist(existingApp);
+
+        ApplicationRequestDTO applicationRequest = new ApplicationRequestDTO(appName);
+
+        //when
+        UserApplicationDTO userApplication = applicationService.create(applicationRequest);
+
+        //then
+        assertThat(userApplication).isNotNull();
+    }
+
     private PaymentOption setupPaymentOption() {
-        var paymentOption = PaymentOption.getPaymentOption(PaymentOption.TRIAL);
-        paymentOption.setDuration(30);
-        paymentOption.setMaxUsers(5);
-        paymentOption.setPrice(0.0);
+        var paymentOption = TestObjectCreator.createPaymentOption("Trial");
+        paymentOption.setId(PaymentOption.TRIAL);
         return paymentOption;
     }
 

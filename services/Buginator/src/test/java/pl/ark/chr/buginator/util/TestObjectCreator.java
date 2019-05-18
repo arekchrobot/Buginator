@@ -3,6 +3,7 @@ package pl.ark.chr.buginator.util;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import pl.ark.chr.buginator.commons.dto.LoggedUserDTO;
 import pl.ark.chr.buginator.commons.util.Pair;
 import pl.ark.chr.buginator.domain.auth.*;
 import pl.ark.chr.buginator.domain.core.Application;
@@ -11,6 +12,7 @@ import pl.ark.chr.buginator.domain.core.ErrorSeverity;
 import pl.ark.chr.buginator.domain.core.ErrorStatus;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class TestObjectCreator {
 
@@ -24,7 +26,11 @@ public class TestObjectCreator {
     }
 
     public static Company createCompany(PaymentOption paymentOption) {
-        return new Company("TEST", paymentOption);
+        return createCompany("TEST", paymentOption);
+    }
+
+    public static Company createCompany(String name, PaymentOption paymentOption) {
+        return new Company(name, paymentOption);
     }
 
     public static User createUser(Company company, Role role, String email) {
@@ -59,9 +65,17 @@ public class TestObjectCreator {
         return new Pair<>(application, userApplication);
     }
 
-    public static Error createError(Application application, String title, LocalDateTime occurence) {
-        return Error.builder(title, ErrorSeverity.ERROR, ErrorStatus.CREATED,
-                occurence.format(Error.DATE_TIME_FORMATTER), application)
+    public static Error createError(Application application, String title, LocalDateTime occurrence) {
+        return createErrorBuilder(title, ErrorSeverity.ERROR, ErrorStatus.CREATED, occurrence, application)
                 .build();
+    }
+
+    public static LoggedUserDTO loggedUser(String email, Long companyId) {
+        return new LoggedUserDTO(email, email, Set.of("MANAGER"), companyId);
+    }
+
+    public static Error.Builder createErrorBuilder(String title, ErrorSeverity severity, ErrorStatus status,
+                                                   LocalDateTime occurrence, Application application) {
+        return Error.builder(title, severity, status, occurrence.format(Error.DATE_TIME_FORMATTER), application);
     }
 }

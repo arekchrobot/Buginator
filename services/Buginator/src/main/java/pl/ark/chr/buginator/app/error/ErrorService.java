@@ -14,6 +14,7 @@ import pl.ark.chr.buginator.security.session.LoggedUserService;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -46,6 +47,8 @@ public class ErrorService extends AbstractApplicationAccessRestricted<Applicatio
 
     @Transactional(readOnly = true)
     public List<ErrorDTO> getAllByApplication(Application application) {
+        Objects.requireNonNull(application);
+
         readAccessAllowed(application);
 
         try (Stream<Error> errors = errorRepository.findByApplication(application)) {

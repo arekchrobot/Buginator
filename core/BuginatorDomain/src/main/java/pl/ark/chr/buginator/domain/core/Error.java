@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Stores the single error that occured in external application.
@@ -75,6 +76,7 @@ public class Error extends BaseEntity<Error> implements FilterData {
     }
 
     private Error(Builder builder) {
+        setId(builder.id);
         setTitle(builder.title);
         setDescription(builder.description);
         setStackTrace(builder.stackTrace);
@@ -234,6 +236,7 @@ public class Error extends BaseEntity<Error> implements FilterData {
 
 
     public static final class Builder {
+        private Long id;
         private String title;
         private String description;
         private List<ErrorStackTrace> stackTrace;
@@ -252,6 +255,12 @@ public class Error extends BaseEntity<Error> implements FilterData {
 
         private Builder() {
             count = 1;
+        }
+
+        public Builder id(Long val) {
+            Objects.requireNonNull(val);
+            id = val;
+            return this;
         }
 
         public Builder title(String val) {
