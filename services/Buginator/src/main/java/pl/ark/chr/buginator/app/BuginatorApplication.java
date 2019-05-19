@@ -20,7 +20,7 @@ import java.util.concurrent.*;
 @EnableCaching
 public class BuginatorApplication {
 
-    @Autowired
+//    @Autowired
     private BuginatorProperties buginatorProperties;
 
 //    @Bean(destroyMethod = "shutdown")
@@ -31,7 +31,8 @@ public class BuginatorApplication {
 
     @Bean(destroyMethod = "shutdown")
     public ExecutorService innerJobScheduler() {
-        return Executors.newFixedThreadPool(buginatorProperties.getInnerJobExecutorThreads());
+//        return Executors.newFixedThreadPool(buginatorProperties.getInnerJobExecutorThreads());
+        return Executors.newFixedThreadPool(7);
     }
 
     @Bean

@@ -18,6 +18,7 @@ import pl.ark.chr.buginator.repository.core.ApplicationRepository;
 import pl.ark.chr.buginator.security.session.LoggedUserService;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -91,7 +92,7 @@ public class ApplicationService extends AbstractApplicationAccessRestricted<Appl
                         .allErrorCount(errorService.countByApplication(userApplication))
                         .lastWeekErrorCount(errorService.countSince(userApplication, lastWeek))
                         .build())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public ApplicationDetailsDTO get(Long id) {

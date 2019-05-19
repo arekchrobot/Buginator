@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Set;
 
 @RestController
@@ -23,7 +24,7 @@ public class ApplicationResource {
 
     @PostMapping("/api/application")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserApplicationDTO create(@RequestBody ApplicationRequestDTO applicationRequest) {
+    public UserApplicationDTO create(@Valid @RequestBody ApplicationRequestDTO applicationRequest) {
         return applicationService.create(applicationRequest);
     }
 
