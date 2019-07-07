@@ -14,6 +14,7 @@ import {CookieService} from "ngx-cookie-service";
 import {OAuthTokenInterceptor} from "./auth/interceptors/oauth-token.interceptor";
 import {AuthService} from "./auth/auth.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ApplicationListComponent } from './application/application-list/application-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     PasswordResetComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    ApplicationListComponent
   ],
   imports: [
     BrowserModule,

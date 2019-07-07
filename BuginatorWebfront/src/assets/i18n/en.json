@@ -73,5 +73,18 @@
   },
   "company": {
     "duplicate": "Given company already exists"
+  },
+  "application": {
+    "list": {
+      "title": "Applications",
+      "search": "Search",
+      "name": "Name",
+      "allErrors": "Errors",
+      "lastWeekErrors": "Errors last 7 days",
+      "buttons": {
+        "create": "Create",
+        "details": "Details"
+      }
+    }
   }
 }

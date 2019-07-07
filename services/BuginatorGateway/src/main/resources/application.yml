@@ -43,3 +43,9 @@ spring:
             - Path=/api/auth/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
+        - id: application
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/application/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
