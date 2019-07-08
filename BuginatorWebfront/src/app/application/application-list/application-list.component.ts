@@ -14,6 +14,7 @@ export class ApplicationListComponent implements OnInit {
   private applications: Array<Application>;
   private loggedUser: LoggedUserDTO;
   applicationFilter: string = "";
+  page: number = 0;
 
   constructor(private applicationService: ApplicationService) {
   }
@@ -39,5 +40,13 @@ export class ApplicationListComponent implements OnInit {
         .filter((element) => element.name.startsWith(this.applicationFilter));
     }
     return this.applications;
+  }
+
+  changePage(event) {
+    this.page = event;
+  }
+
+  setFilter(event) {
+    this.applicationFilter = event.target.value;
   }
 }

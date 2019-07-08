@@ -13,8 +13,9 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {CookieService} from "ngx-cookie-service";
 import {OAuthTokenInterceptor} from "./auth/interceptors/oauth-token.interceptor";
 import {AuthService} from "./auth/auth.service";
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ApplicationListComponent } from './application/application-list/application-list.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {ApplicationListComponent} from './application/application-list/application-list.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ApplicationListComponent } from './application/application-list/applica
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    NgxPaginationModule
   ],
   providers: [
     CookieService,

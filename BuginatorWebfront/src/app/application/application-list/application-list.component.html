@@ -18,11 +18,11 @@
             </div>
             <div class="col-sm-12">
               <div>
-                <label style="width: 100%">
+                <label style="float: right !important">
                   <span translate>application.list.search</span>:
                   <input class="form-control input-sm-12" placeholder="" type="search"
                          [value]="applicationFilter"
-                         (input)="applicationFilter = $event.target.value">
+                         (input)="setFilter($event)">
                 </label>
               </div>
             </div>
@@ -37,7 +37,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let userApp of userApps">
+            <tr *ngFor="let userApp of userApps | paginate: { itemsPerPage: 10, currentPage: page }">
               <td>{{userApp.name}}</td>
               <td>{{userApp.allErrorCount}}</td>
               <td>{{userApp.lastWeekErrorCount}}</td>
@@ -45,6 +45,9 @@
             </tr>
             </tbody>
           </table>
+          <pagination-controls (pageChange)="changePage($event)" autoHide="true"
+                               previousLabel="{{'common.pagination.previous' | translate}}"
+                               nextLabel="{{'common.pagination.next' | translate}}"></pagination-controls>
         </div>
       </div>
     </div>
