@@ -13,7 +13,7 @@ export class ApplicationService {
 
   getUserApplications(): Promise<Array<Application>> {
     return new Promise<Array<Application>>((resolve, reject) => {
-      return this.httpClient.get(`${environment.api.url}/api/application/by-user`)
+      return this.httpClient.get(`${environment.api.url}/api/buginator/application/by-user`)
         .toPromise()
         .then((res: Array<Application>) => resolve(res),
             error => reject(error));

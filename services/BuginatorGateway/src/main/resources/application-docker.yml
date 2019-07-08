@@ -43,9 +43,9 @@ spring:
             - Path=/api/auth/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
-        - id: application
-          uri: http://localhost:8081
+        - id: buginator
+          uri: http://buginator-app:8081
           predicates:
-            - Path=/api/application/**
+            - Path=/api/buginator/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}

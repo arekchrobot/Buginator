@@ -56,7 +56,7 @@ class ApplicationResourceIT {
                 .getResource("/json/createApplication.json").toURI())));
 
         //when
-        mockMvc.perform(post("/api/application")
+        mockMvc.perform(post("/api/buginator/application")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(applicationRequestDTO))
                 .andExpect(status().isCreated());
@@ -73,7 +73,7 @@ class ApplicationResourceIT {
                 .getResource("/json/empty.json").toURI())));
 
         //when
-        String errorResult = mockMvc.perform(post("/api/application")
+        String errorResult = mockMvc.perform(post("/api/buginator/application")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(registerDTO))
                 .andExpect(status().isBadRequest())
@@ -111,7 +111,7 @@ class ApplicationResourceIT {
         doReturn(userApps).when(applicationService).getUserApps();
 
         //when
-        String result = mockMvc.perform(get("/api/application/by-user")
+        String result = mockMvc.perform(get("/api/buginator/application/by-user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andReturn()
@@ -164,7 +164,7 @@ class ApplicationResourceIT {
 
         doReturn(applicationDetailsDTO).when(applicationService).get(eq(appId));
 
-        String result = mockMvc.perform(get("/api/application/" + appId)
+        String result = mockMvc.perform(get("/api/buginator/application/" + appId)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andReturn()

@@ -17,18 +17,18 @@ public class ApplicationResource {
         this.applicationService = applicationService;
     }
 
-    @GetMapping("/api/application/by-user")
+    @GetMapping("/api/buginator/application/by-user")
     public Set<ApplicationDTO> getForLoggedUser() {
         return applicationService.getUserApps();
     }
 
-    @PostMapping("/api/application")
+    @PostMapping("/api/buginator/application")
     @ResponseStatus(HttpStatus.CREATED)
     public UserApplicationDTO create(@Valid @RequestBody ApplicationRequestDTO applicationRequest) {
         return applicationService.create(applicationRequest);
     }
 
-    @GetMapping("/api/application/{id}")
+    @GetMapping("/api/buginator/application/{id}")
     public ApplicationDetailsDTO getById(@PathVariable Long id) {
         return applicationService.get(id);
     }
