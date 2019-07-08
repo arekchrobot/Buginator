@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
-import {environment} from "../environments/environment";
+import {SessionService} from "./shared/service/session.service";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ export class AppComponent {
 
   private supportedLanguages = ['en', 'pl'];
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService, private sessionService: SessionService) {
     translateService.addLangs(this.supportedLanguages);
     translateService.setDefaultLang('en');
     const browserLang = translateService.getBrowserLang();
@@ -19,6 +19,6 @@ export class AppComponent {
   }
 
   get isAuthenticated() {
-    return sessionStorage.getItem(environment.api.loggedUserStorage);
+    return this.sessionService.isAuthenticated();
   }
 }

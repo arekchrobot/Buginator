@@ -80,7 +80,8 @@ describe('AppComponent', () => {
 
   it('should show dashboard and footer screen when authenticated', () => {
     //given
-    sessionStorage.setItem(environment.api.loggedUserStorage, "test");
+    sessionStorage.setItem(environment.api.loggedUserStorage,
+      '{"name":"test@gmail.com","email":"test@gmail.com","permissions":[]}');
     //when
     fixture.detectChanges();
     //then

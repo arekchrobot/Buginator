@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Application} from "../model/application.model";
 import {ApplicationService} from "../application.service";
-import {LoggedUserDTO} from "../../auth/model/logged-user.model";
-import {environment} from "../../../environments/environment";
 import {PageableComponent} from "../../shared/component/pageable.component";
 import {ToastrService} from "ngx-toastr";
 import {ErrorResponseDTO} from "../../shared/model/error-response.model";
+import {SessionService} from "../../shared/service/session.service";
 
 @Component({
   selector: 'buginator-application-list',
@@ -15,10 +14,10 @@ import {ErrorResponseDTO} from "../../shared/model/error-response.model";
 export class ApplicationListComponent extends PageableComponent implements OnInit {
 
   private applications: Array<Application>;
-  private loggedUser: LoggedUserDTO;
   applicationFilter: string = "";
 
-  constructor(private applicationService: ApplicationService, private toastr: ToastrService) {
+  constructor(private applicationService: ApplicationService, private toastr: ToastrService,
+              private sessionService: SessionService) {
     super();
   }
 
@@ -26,19 +25,14 @@ export class ApplicationListComponent extends PageableComponent implements OnIni
     this.applicationService.getUserApplications()
       .then(apps => this.applications = apps,
         (error: ErrorResponseDTO) => this.toastr.error(error.message, 'Error'));
-    //TODO: move to some separate service!
-    let loggedUserStorage = sessionStorage.getItem(environment.api.loggedUserStorage);
-    if(loggedUserStorage != null) {
-      this.loggedUser = JSON.parse(loggedUserStorage);
-    }
   }
 
   get canCreateApps(): boolean {
-    return this.loggedUser != null && this.loggedUser.permissions.includes("create_application");
+    return this.sessionService.hasPermission("create_application");
   }
 
   get userApps() {
-    if(this.applicationFilter != "") {
+    if (this.applicationFilter != "") {
       return this.applications
         .filter((element) => element.name.startsWith(this.applicationFilter));
     }
