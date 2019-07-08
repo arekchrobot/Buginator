@@ -37,7 +37,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let userApp of userApps | paginate: { itemsPerPage: 10, currentPage: page }">
+            <tr *ngFor="let userApp of userApps | paginate: { itemsPerPage: pageSize, currentPage: page }">
               <td>{{userApp.name}}</td>
               <td>{{userApp.allErrorCount}}</td>
               <td>{{userApp.lastWeekErrorCount}}</td>

@@ -3,26 +3,29 @@ import {Application} from "../model/application.model";
 import {ApplicationService} from "../application.service";
 import {LoggedUserDTO} from "../../auth/model/logged-user.model";
 import {environment} from "../../../environments/environment";
+import {PageableComponent} from "../../shared/component/pageable.component";
+import {ToastrService} from "ngx-toastr";
+import {ErrorResponseDTO} from "../../shared/model/error-response.model";
 
 @Component({
   selector: 'buginator-application-list',
   templateUrl: './application-list.component.html',
   styleUrls: ['./application-list.component.css']
 })
-export class ApplicationListComponent implements OnInit {
+export class ApplicationListComponent extends PageableComponent implements OnInit {
 
   private applications: Array<Application>;
   private loggedUser: LoggedUserDTO;
   applicationFilter: string = "";
-  page: number = 0;
 
-  constructor(private applicationService: ApplicationService) {
+  constructor(private applicationService: ApplicationService, private toastr: ToastrService) {
+    super();
   }
 
   ngOnInit() {
-    //TODO: handle failure!!!
     this.applicationService.getUserApplications()
-      .then(apps => this.applications = apps);
+      .then(apps => this.applications = apps,
+        (error: ErrorResponseDTO) => this.toastr.error(error.message, 'Error'));
     //TODO: move to some separate service!
     let loggedUserStorage = sessionStorage.getItem(environment.api.loggedUserStorage);
     if(loggedUserStorage != null) {
@@ -40,10 +43,6 @@ export class ApplicationListComponent implements OnInit {
         .filter((element) => element.name.startsWith(this.applicationFilter));
     }
     return this.applications;
-  }
-
-  changePage(event) {
-    this.page = event;
   }
 
   setFilter(event) {

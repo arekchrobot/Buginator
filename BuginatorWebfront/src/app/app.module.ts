@@ -16,6 +16,8 @@ import {AuthService} from "./auth/auth.service";
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ApplicationListComponent} from './application/application-list/application-list.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -39,7 +41,14 @@ import {NgxPaginationModule} from "ngx-pagination";
         deps: [HttpClient]
       }
     }),
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      maxOpened: 3,
+      preventDuplicates: true,
+      countDuplicates: true,
+      positionClass: 'toast-top-right'
+    })
   ],
   providers: [
     CookieService,
