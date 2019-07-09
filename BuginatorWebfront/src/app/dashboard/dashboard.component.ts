@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {SessionService} from "../shared/service/session.service";
 
 @Component({
   selector: 'buginator-dashboard',
@@ -9,7 +10,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   collapsed: boolean = true;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private sessionService: SessionService) { }
 
   ngOnInit() {
     this.renderer.addClass(document.body, 'dashboard');
@@ -21,6 +22,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   setCollapse() {
     this.collapsed = !this.collapsed;
+  }
+
+  get canViewApplications() {
+    return this.sessionService.hasPermission("read_application");
   }
 
 }

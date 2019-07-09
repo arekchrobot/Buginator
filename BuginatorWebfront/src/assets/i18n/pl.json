@@ -73,5 +73,27 @@
   },
   "company": {
     "duplicate": "Podana firma już istnieje"
+  },
+  "application": {
+    "menu": {
+      "name": "Aplikacje"
+    },
+    "list": {
+      "title": "Aplikacje",
+      "search": "Szukaj",
+      "name": "Nazwa",
+      "allErrors": "Błędy",
+      "lastWeekErrors": "Błędy z ostatnich 7 dni",
+      "buttons": {
+        "create": "Utwórz aplikację",
+        "details": "Szczegóły"
+      }
+    }
+  },
+  "common": {
+    "pagination": {
+      "previous": "Poprzednia",
+      "next": "Następna"
+    }
   }
 }

@@ -75,6 +75,9 @@
     "duplicate": "Given company already exists"
   },
   "application": {
+    "menu": {
+      "name": "Applications"
+    },
     "list": {
       "title": "Applications",
       "search": "Search",
@@ -82,7 +85,7 @@
       "allErrors": "Errors",
       "lastWeekErrors": "Errors last 7 days",
       "buttons": {
-        "create": "Create",
+        "create": "Create application",
         "details": "Details"
       }
     }
