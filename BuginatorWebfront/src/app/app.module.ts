@@ -18,6 +18,10 @@ import {ApplicationListComponent} from './application/application-list/applicati
 import {NgxPaginationModule} from "ngx-pagination";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import { ApplicationCreateComponent } from './application/application-create/application-create.component';
+import {SessionService} from "./shared/service/session.service";
+import {Router} from "@angular/router";
+import {UnauthorizedInterceptor} from "./auth/interceptors/unauthorized.interceptor";
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import {ToastrModule} from "ngx-toastr";
     PasswordResetComponent,
     RegisterComponent,
     DashboardComponent,
-    ApplicationListComponent
+    ApplicationListComponent,
+    ApplicationCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +67,13 @@ import {ToastrModule} from "ngx-toastr";
       useFactory: (authService: AuthService) => function() {return authService.getLoggedUser()},
       deps: [AuthService],
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useFactory: UnauthorizedInterceptorFactory,
+      deps:[Router, SessionService],
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
@@ -71,4 +82,8 @@ export class AppModule {
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+
+export function UnauthorizedInterceptorFactory(router: Router, sessionService: SessionService) {
+  return new UnauthorizedInterceptor(router, sessionService);
 }

@@ -23,6 +23,11 @@ export class SessionService {
     return this.getLoggedUser() != null;
   }
 
+  logout() {
+    this.loggedUser = null;
+    sessionStorage.removeItem(environment.api.loggedUserStorage);
+  }
+
   hasPermission(permission: string): boolean {
     return this.getLoggedUser() != null && this.getLoggedUser().permissions.includes(permission);
   }

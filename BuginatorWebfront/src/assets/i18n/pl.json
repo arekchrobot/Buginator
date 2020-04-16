@@ -88,12 +88,28 @@
         "create": "Utwórz aplikację",
         "details": "Szczegóły"
       }
+    },
+    "create": {
+      "title": "Utwórz aplikację",
+      "input": {
+        "label": "Nazwa",
+        "name": "Nazwa aplikacji"
+      },
+      "form": {
+        "name": {
+          "required": "Nazwa jest wymagana"
+        }
+      },
+      "submit": "Stwórz"
     }
   },
   "common": {
     "pagination": {
       "previous": "Poprzednia",
       "next": "Następna"
+    },
+    "buttons": {
+      "back": "Powrót"
     }
   }
 }

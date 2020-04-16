@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Application} from "./model/application.model";
+import {Application, BaseApplication} from "./model/application.model";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -17,6 +17,14 @@ export class ApplicationService {
         .toPromise()
         .then((res: Array<Application>) => resolve(res),
             error => reject(error));
+    })
+  }
+
+  createApplication(newApplication: BaseApplication): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      return this.httpClient.post(`${environment.api.url}/api/buginator/application`, newApplication)
+        .toPromise()
+        .then(res => resolve(), error => reject(error));
     })
   }
 }

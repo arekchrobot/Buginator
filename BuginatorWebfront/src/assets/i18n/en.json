@@ -88,12 +88,28 @@
         "create": "Create application",
         "details": "Details"
       }
+    },
+    "create": {
+      "title": "Create application",
+      "input": {
+        "label": "Name",
+        "name": "Application name"
+      },
+      "form": {
+        "name": {
+          "required": "Name is required"
+        }
+      },
+      "submit": "Create"
     }
   },
   "common": {
     "pagination": {
       "previous": "Previous",
       "next": "Next"
+    },
+    "buttons": {
+      "back": "Return"
     }
   }
 }
