@@ -1,5 +1,7 @@
 import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {SessionService} from "../shared/service/session.service";
+import {CookieService} from "ngx-cookie-service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'buginator-dashboard',
@@ -10,7 +12,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   collapsed: boolean = true;
 
-  constructor(private renderer: Renderer2, private sessionService: SessionService) { }
+  constructor(private renderer: Renderer2, private sessionService: SessionService,
+              private cookieService: CookieService) { }
 
   ngOnInit() {
     this.renderer.addClass(document.body, 'dashboard');
@@ -22,6 +25,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   setCollapse() {
     this.collapsed = !this.collapsed;
+  }
+
+  get loggedUsername() {
+    return this.sessionService.username;
+  }
+
+  logout() {
+    this.cookieService.delete(environment.api.accessTokenCookie);
+    this.sessionService.logout();
   }
 
   get canViewApplications() {

@@ -9,6 +9,7 @@ import {HttpClientTestingModule, HttpTestingController} from "@angular/common/ht
 import {ApplicationService} from "../application.service";
 import {environment} from "../../../environments/environment";
 import {Application} from "../model/application.model";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('ApplicationListComponent', () => {
   let component: ApplicationListComponent;
@@ -22,6 +23,7 @@ describe('ApplicationListComponent', () => {
         ToastrModule.forRoot(),
         NgxPaginationModule,
         BrowserAnimationsModule,
+        RouterTestingModule,
         HttpClientTestingModule,
         TranslateTestingModule
           .withTranslations('en', require('../../../assets/i18n/en.json'))

@@ -12,7 +12,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="/" class="navbar-brand"><img src="../../assets/images/logo.png" alt=""></a>
+          <a routerLink="/" class="navbar-brand"><img src="../../assets/images/logo.png" alt=""></a>
         </header>
 
         <div class="topnav">
@@ -37,7 +37,7 @@
             </ul>
           </div>
           <div class="btn-group">
-            <a ng-click="logout()" data-toggle="tooltip" data-original-title="Logout"
+            <a (click)="logout()" data-toggle="tooltip" data-original-title="Logout"
                data-placement="bottom"
                class="btn btn-metis-1 btn-sm">
               <i class="fa fa-power-off"></i>
@@ -48,7 +48,7 @@
         <div class="navbar-collapse navbar-ex1-collapse" [ngClass]="{'collapse': collapsed}">
           <!-- .nav -->
           <ul class="nav navbar-nav">
-            <li><a href="" ng-redirect-to="dashboard" translate ng-if="user.perms['not_show']">DASHBOARD</a></li>
+            <li><a routerLink="/" translate ng-if="user.perms['not_show']">DASHBOARD</a></li>
             <li><a routerLink="/application" *ngIf="canViewApplications" translate>application.menu.name</a></li>
             <li><a href="" ng-redirect-to="roles" ng-if="user.perms['manage_role']" translate>ROLES</a></li>
             <li><a href="" ng-redirect-to="users" ng-if="user.perms['manage_role'] && user.perms['manage_user']" translate>USERS</a></li>
@@ -84,7 +84,7 @@
 
         <div class="media-body">
           <h5 class="media-heading">
-            <!--{{$root.user.username}}-->AREK
+            {{loggedUsername}}
           </h5>
           <ul class="list-unstyled user-info">
             <li><a href="" ng-bind="$root.user.role"></a></li>
@@ -97,7 +97,7 @@
       <li class="nav-header">Menu</li>
       <li class="nav-divider"></li>
       <li class="" ng-if="user.perms['not_show']">
-        <a href="" ng-redirect-to="dashboard">
+        <a routerLink="/">
           <i class="fa fa-dashboard"></i>&nbsp;<span class="link-title" translate>DASHBOARD</span>
         </a>
       </li>

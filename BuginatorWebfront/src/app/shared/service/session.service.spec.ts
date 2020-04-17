@@ -45,4 +45,17 @@ describe('SessionService', () => {
     //then
     expect(sessionService.hasPermission("test")).toBeFalsy();
   });
+
+  it('should logout user', () => {
+    //given
+    sessionStorage.setItem(environment.api.loggedUserStorage,
+      '{"name":"test@gmail.com","email":"test@gmail.com","permissions":[]}');
+    expect(sessionService.isAuthenticated()).toBeTruthy();
+
+    //when
+    sessionService.logout();
+
+    //then
+    expect(sessionService.isAuthenticated()).toBeFalsy();
+  });
 });

@@ -23,6 +23,10 @@ export class SessionService {
     return this.getLoggedUser() != null;
   }
 
+  get username() {
+    return this.getLoggedUser() != null ? this.getLoggedUser().name : '';
+  }
+
   logout() {
     this.loggedUser = null;
     sessionStorage.removeItem(environment.api.loggedUserStorage);
