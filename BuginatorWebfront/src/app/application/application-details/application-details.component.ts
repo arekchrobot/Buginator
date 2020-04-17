@@ -22,11 +22,14 @@ export class ApplicationDetailsComponent extends PageableComponent implements On
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
-      let applicationId = parseInt(paramMap.get('id'));
-      this.applicationService.getApplicationDetails(applicationId)
-        .then(app => this.application = app,
-          error => this.toastr.error(error.message, 'Error'));
+      this.fetchApplicationDetails(parseInt(paramMap.get('id')));
     });
+  }
+
+  private fetchApplicationDetails(applicationId: number) {
+    this.applicationService.getApplicationDetails(applicationId)
+      .then(app => this.application = app,
+        error => this.toastr.error(error.message, 'Error'));
   }
 
   get canManageAggregators(): boolean {
