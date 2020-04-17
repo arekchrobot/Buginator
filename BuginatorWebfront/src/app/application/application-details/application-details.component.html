@@ -1,0 +1,69 @@
+<div class="box dark">
+  <header>
+    <div class="icons"><i class="fa fa-desktop"></i></div>
+    <h5>{{application.name}}</h5>
+
+    <div class="toolbar">
+      <div class="btn-group">
+        <button class="btn btn-success"
+                *ngIf="canManageAggregators" translate>application.details.buttons.aggregators
+        </button>
+        <button class="btn btn-success"
+                *ngIf="canManageUsers" translate>application.details.buttons.users
+        </button>
+        <button class="btn btn-primary" routerLink="/application" translate>common.buttons.back</button>
+      </div>
+    </div>
+  </header>
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <!--      <canvas id="line" class="chart chart-line" chart-data="errorsChart.data"-->
+      <!--              chart-labels="errorsChart.labels" chart-series="errorsChart.series"-->
+      <!--              chart-options="errorsChart.options"-->
+      <!--              chart-dataset-override="errorsChart.datasetOverride">-->
+      <!--      </canvas>-->
+      CHART SECTION IN PROGRESS...
+    </div>
+  </div>
+  <div id="collapse4" class="body">
+    <div id="dataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="lead" translate>application.details.sections.error.header</p>
+        </div>
+      </div>
+      <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+        <thead>
+        <tr>
+          <th translate>application.details.sections.error.title</th>
+          <th translate>application.details.sections.error.description</th>
+          <th translate>application.details.sections.error.status</th>
+          <th translate>application.details.sections.error.severity</th>
+          <th translate>application.details.sections.error.lastOccurrence</th>
+          <th translate>application.details.sections.error.count</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let error of application.errors | paginate: { itemsPerPage: pageSize, currentPage: page }">
+          <td>{{error.title}}</td>
+          <td>{{error.description}}</td>
+          <td>{{error.status}}</td>
+          <td>{{error.severity}}</td>
+          <td>{{error.lastOccurrence}}</td>
+          <td>{{error.count}}</td>
+          <td>
+            <button class="btn btn-info" translate>
+              application.details.sections.error.buttons.details
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="changePage($event)" autoHide="true"
+                           previousLabel="{{'common.pagination.previous' | translate}}"
+                           nextLabel="{{'common.pagination.next' | translate}}"></pagination-controls>
+    </div>
+  </div>
+</div>

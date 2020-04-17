@@ -22,6 +22,7 @@ import { ApplicationCreateComponent } from './application/application-create/app
 import {SessionService} from "./shared/service/session.service";
 import {Router} from "@angular/router";
 import {UnauthorizedInterceptor} from "./auth/interceptors/unauthorized.interceptor";
+import { ApplicationDetailsComponent } from './application/application-details/application-details.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {UnauthorizedInterceptor} from "./auth/interceptors/unauthorized.intercep
     RegisterComponent,
     DashboardComponent,
     ApplicationListComponent,
-    ApplicationCreateComponent
+    ApplicationCreateComponent,
+    ApplicationDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Application, BaseApplication} from "./model/application.model";
+import {Application, ApplicationDetails, BaseApplication} from "./model/application.model";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -25,6 +25,15 @@ export class ApplicationService {
       return this.httpClient.post(`${environment.api.url}/api/buginator/application`, newApplication)
         .toPromise()
         .then(res => resolve(), error => reject(error));
+    })
+  }
+
+  getApplicationDetails(id: number): Promise<any> {
+    return new Promise<ApplicationDetails>((resolve, reject) => {
+      return this.httpClient.get(`${environment.api.url}/api/buginator/application/${id}`)
+        .toPromise()
+        .then((res: ApplicationDetails) => resolve(res),
+          error => reject(error));
     })
   }
 }

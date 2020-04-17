@@ -41,7 +41,7 @@
               <td>{{userApp.name}}</td>
               <td>{{userApp.allErrorCount}}</td>
               <td>{{userApp.lastWeekErrorCount}}</td>
-              <td><button class="btn btn-info" translate>application.list.buttons.details</button></td>
+              <td><button class="btn btn-info" [routerLink]="['/application', userApp.id]" translate>application.list.buttons.details</button></td>
             </tr>
             </tbody>
           </table>

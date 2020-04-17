@@ -101,6 +101,26 @@
         }
       },
       "submit": "Create"
+    },
+    "details": {
+      "buttons": {
+        "aggregators": "Manage notifications",
+        "users": "Manage Users"
+      },
+      "sections": {
+        "error": {
+          "header": "Errors",
+          "title": "Title",
+          "description": "Description",
+          "status": "Status",
+          "severity": "Severity",
+          "lastOccurrence": "Last occurrence",
+          "count": "Count",
+          "buttons": {
+            "details": "Details"
+          }
+        }
+      }
     }
   },
   "common": {
