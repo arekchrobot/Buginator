@@ -69,7 +69,7 @@ public class Error extends BaseEntity<Error> implements FilterData {
     @Column(name = "error_count", nullable = false)
     private int count;
 
-    @Column(name = "last_occurence", nullable = false)
+    @Column(name = "last_occurrence", nullable = false)
     private LocalDate lastOccurrence;
 
     protected Error() {
