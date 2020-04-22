@@ -12,8 +12,10 @@ import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.security.session.LoggedUserService;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -28,6 +30,8 @@ public class ErrorService extends AbstractApplicationAccessRestricted<Applicatio
     private Comparator<Error> severityComparator = Comparator.comparing(error -> error.getSeverity().getOrder());
     private Comparator<Error> lastOccurrenceComparator = Comparator.comparing(Error::getLastOccurrence).reversed();
     private Comparator<Error> errorComparator = lastOccurrenceComparator.thenComparing(severityComparator).thenComparing(statusComparator);
+
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Autowired
     public ErrorService(LoggedUserService loggedUserService, UserApplicationService userApplicationService,
@@ -57,5 +61,12 @@ public class ErrorService extends AbstractApplicationAccessRestricted<Applicatio
                     .map(errorMapper::toDto)
                     .collect(Collectors.toList());
         }
+    }
+
+    public Map<String, Long> getErrorsGroupedByDaySince(Application application, LocalDate since) {
+        return errorRepository.findByApplicationAndLastOccurrenceGreaterThanEqual(application, since)
+                .stream()
+                .map(Error::getLastOccurrence)
+                .collect(Collectors.groupingBy(i -> i.format(DATE_FORMAT), Collectors.counting()));
     }
 }

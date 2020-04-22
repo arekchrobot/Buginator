@@ -1,7 +1,7 @@
 <div class="box dark">
   <header>
     <div class="icons"><i class="fa fa-desktop"></i></div>
-    <h5>{{application.name}}</h5>
+    <h5 *ngIf="application">{{application.name}}</h5>
 
     <div class="toolbar">
       <div class="btn-group">
@@ -18,15 +18,12 @@
   <div class="row">
     <div class="col-lg-2"></div>
     <div class="col-lg-8">
-      <!--      <canvas id="line" class="chart chart-line" chart-data="errorsChart.data"-->
-      <!--              chart-labels="errorsChart.labels" chart-series="errorsChart.series"-->
-      <!--              chart-options="errorsChart.options"-->
-      <!--              chart-dataset-override="errorsChart.datasetOverride">-->
-      <!--      </canvas>-->
-      CHART SECTION IN PROGRESS...
+      <div>
+        <canvas #lastWeekErrors></canvas>
+      </div>
     </div>
   </div>
-  <div id="collapse4" class="body">
+  <div id="collapse4" class="body" *ngIf="application">
     <div id="dataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
       <div class="row">
         <div class="col-sm-6">

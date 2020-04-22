@@ -108,7 +108,7 @@ class ErrorServiceTest {
         assertThat(dataAccessException.getMessage()).isEqualTo("Attempt to access forbidden resources");
     }
 
-    private Stream generateErrors() {
+    private Stream<Error> generateErrors() {
         LocalDateTime now = LocalDateTime.now();
 
         LocalDateTime minusSevenDays = now.minusDays(7);

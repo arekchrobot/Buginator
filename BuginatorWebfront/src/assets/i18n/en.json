@@ -120,6 +120,10 @@
             "details": "Details"
           }
         }
+      },
+      "chart": {
+        "title": "Errors from last week",
+        "datasetLabel": "Count"
       }
     }
   },
