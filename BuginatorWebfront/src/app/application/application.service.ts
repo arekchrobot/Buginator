@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Application, ApplicationDetails, BaseApplication} from "./model/application.model";
 import {environment} from "../../environments/environment";
+import {LastWeekErrors} from "./model/report.model";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,15 @@ export class ApplicationService {
       return this.httpClient.get(`${environment.api.url}/api/buginator/application/${id}`)
         .toPromise()
         .then((res: ApplicationDetails) => resolve(res),
+          error => reject(error));
+    })
+  }
+
+  getLastWeekErrorsReport(id: number): Promise<any> {
+    return new Promise<LastWeekErrors>((resolve, reject) => {
+      return this.httpClient.get(`${environment.api.url}/api/buginator/application/report/last-week-errors/${id}`)
+        .toPromise()
+        .then((res: LastWeekErrors) => resolve(res),
           error => reject(error));
     })
   }

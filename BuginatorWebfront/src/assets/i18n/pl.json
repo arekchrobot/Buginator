@@ -120,6 +120,10 @@
             "details": "Szczegóły"
           }
         }
+      },
+      "chart": {
+        "title": "Błędy z ostatniego tygodnia",
+        "datasetLabel": "Ilość"
       }
     }
   },

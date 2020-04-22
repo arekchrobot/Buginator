@@ -11,7 +11,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.app.BuginatorApplication;
 import pl.ark.chr.buginator.commons.util.Pair;
-import pl.ark.chr.buginator.domain.auth.PaymentOption;
 import pl.ark.chr.buginator.domain.auth.Role;
 import pl.ark.chr.buginator.domain.auth.UserApplication;
 import pl.ark.chr.buginator.domain.core.Application;
@@ -52,8 +51,7 @@ class ApplicationServiceIT {
     @DisplayName("should get all applications that are connected to logged user")
     void shouldGetUserApplications() {
         //given
-        PaymentOption paymentOption = setupPaymentOption();
-        var company = TestObjectCreator.createCompany(paymentOption);
+        var company = TestObjectCreator.createCompany(TestObjectCreator.trialPaymentOption());
 
         testEntityManager.persist(company);
 
@@ -109,8 +107,7 @@ class ApplicationServiceIT {
     @DisplayName("should create application and link it to logged user with modify permission")
     void shouldCreateApplication() {
         //given
-        PaymentOption paymentOption = setupPaymentOption();
-        var company = TestObjectCreator.createCompany(paymentOption);
+        var company = TestObjectCreator.createCompany(TestObjectCreator.trialPaymentOption());
 
         testEntityManager.persist(company);
 
@@ -142,8 +139,7 @@ class ApplicationServiceIT {
     @DisplayName("should get application details by id")
     void shouldGetApplicationDetails() {
         //given
-        PaymentOption paymentOption = setupPaymentOption();
-        var company = TestObjectCreator.createCompany(paymentOption);
+        var company = TestObjectCreator.createCompany(TestObjectCreator.trialPaymentOption());
 
         testEntityManager.persist(company);
 
@@ -175,7 +171,7 @@ class ApplicationServiceIT {
     @DisplayName("should create application with duplicated name if for different company")
     void shouldCreateAppWhenOneExist() {
         //given
-        PaymentOption paymentOption = setupPaymentOption();
+        var paymentOption = TestObjectCreator.trialPaymentOption();
         var company = TestObjectCreator.createCompany(paymentOption);
         var secondCompany = TestObjectCreator.createCompany("AnotherComp", paymentOption);
 
@@ -203,12 +199,6 @@ class ApplicationServiceIT {
 
         //then
         assertThat(userApplication).isNotNull();
-    }
-
-    private PaymentOption setupPaymentOption() {
-        var paymentOption = TestObjectCreator.createPaymentOption("Trial");
-        paymentOption.setId(PaymentOption.TRIAL);
-        return paymentOption;
     }
 
     private void createErrors(Pair<Application, UserApplication> userApp1) {

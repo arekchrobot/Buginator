@@ -157,22 +157,7 @@ class ApplicationServiceTest {
         //given
         final String appName = "TestApp";
 
-        UserApplicationDTO userApp1 = UserApplicationDTO.builder()
-                .id(1L)
-                .name(appName + 1)
-                .modify(true)
-                .build();
-
-        Set<UserApplicationDTO> userApps = Stream
-                .iterate(userApp1, ua ->
-                        UserApplicationDTO.builder()
-                                .id(ua.getId() + 1)
-                                .name(appName + (ua.getId() + 1))
-                                .modify(ua.getId() % 2 == 0)
-                                .build()
-                )
-                .limit(5)
-                .collect(Collectors.toSet());
+        Set<UserApplicationDTO> userApps = TestObjectCreator.createUserApps(appName, 5);
 
         doReturn(userApps).when(userApplicationService).getAllForUser(eq(loggedUserEmail));
 
