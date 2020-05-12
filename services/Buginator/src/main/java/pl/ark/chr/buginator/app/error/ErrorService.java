@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.ark.chr.buginator.app.application.BaseApplicationDTO;
 import pl.ark.chr.buginator.app.application.UserApplicationService;
 import pl.ark.chr.buginator.app.core.security.AbstractApplicationAccessRestricted;
+import pl.ark.chr.buginator.app.exceptions.DataNotFoundException;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.core.Error;
 import pl.ark.chr.buginator.repository.core.ErrorRepository;
@@ -25,6 +26,7 @@ public class ErrorService extends AbstractApplicationAccessRestricted<Applicatio
 
     private ErrorRepository errorRepository;
     private ErrorMapper errorMapper;
+    private ErrorDetailsMapper errorDetailsMapper;
 
     private Comparator<Error> statusComparator = Comparator.comparing(error -> error.getStatus().getOrder());
     private Comparator<Error> severityComparator = Comparator.comparing(error -> error.getSeverity().getOrder());
@@ -35,10 +37,11 @@ public class ErrorService extends AbstractApplicationAccessRestricted<Applicatio
 
     @Autowired
     public ErrorService(LoggedUserService loggedUserService, UserApplicationService userApplicationService,
-                        ErrorRepository errorRepository, ErrorMapper errorMapper) {
+                        ErrorRepository errorRepository, ErrorMapper errorMapper, ErrorDetailsMapper errorDetailsMapper) {
         super(loggedUserService, userApplicationService);
         this.errorRepository = errorRepository;
         this.errorMapper = errorMapper;
+        this.errorDetailsMapper = errorDetailsMapper;
     }
 
     public int countByApplication(BaseApplicationDTO application) {
@@ -68,5 +71,15 @@ public class ErrorService extends AbstractApplicationAccessRestricted<Applicatio
                 .stream()
                 .map(Error::getLastOccurrence)
                 .collect(Collectors.groupingBy(i -> i.format(DATE_FORMAT), Collectors.counting()));
+    }
+
+    public ErrorDetailsDTO details(Long id) {
+        Objects.requireNonNull(id);
+
+        Error error = errorRepository.findWithFullInfo(id).orElseThrow(() -> new DataNotFoundException("error.notFound"));
+
+        readAccessAllowed(error.getApplication());
+
+        return errorDetailsMapper.toDto(error);
     }
 }

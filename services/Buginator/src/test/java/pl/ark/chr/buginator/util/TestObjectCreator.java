@@ -1,5 +1,6 @@
 package pl.ark.chr.buginator.util;
 
+import net.pieroxy.ua.detection.UserAgentDetector;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -7,10 +8,8 @@ import pl.ark.chr.buginator.app.application.UserApplicationDTO;
 import pl.ark.chr.buginator.commons.dto.LoggedUserDTO;
 import pl.ark.chr.buginator.commons.util.Pair;
 import pl.ark.chr.buginator.domain.auth.*;
-import pl.ark.chr.buginator.domain.core.Application;
+import pl.ark.chr.buginator.domain.core.*;
 import pl.ark.chr.buginator.domain.core.Error;
-import pl.ark.chr.buginator.domain.core.ErrorSeverity;
-import pl.ark.chr.buginator.domain.core.ErrorStatus;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -20,6 +19,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TestObjectCreator {
+
+    private final static UserAgentDetector userAgentDetector = new UserAgentDetector();
 
     public static PaymentOption createPaymentOption(String name) {
         var paymentOption = new PaymentOption();
@@ -168,5 +169,25 @@ public class TestObjectCreator {
                 .build();
 
         return Arrays.asList(error1,error2,error3,error4,error5,error6,error7,error8,error9);
+    }
+
+    public static UserAgentData createUserAgent(String userAgentString) {
+        return new UserAgentData(userAgentDetector.parseUserAgent(userAgentString));
+    }
+
+    public static List<ErrorStackTrace> createErrorStackTrace(Error error) {
+        int i = 1;
+        ErrorStackTrace root = new ErrorStackTrace(error, i++, "Exception: java.lang.NullPointerException");
+        ErrorStackTrace stackTrace2 = new ErrorStackTrace(error, i++, "at java.base/java.util.ImmutableCollections.listCopy(ImmutableCollections.java:92)");
+        ErrorStackTrace stackTrace3 = new ErrorStackTrace(error, i++, "at java.base/java.util.List.copyOf(List.java:1061)");
+        ErrorStackTrace stackTrace4 = new ErrorStackTrace(error, i++, "at pl.ark.chr.buginator.domain.core.Error.getStackTrace(Error.java:114)");
+        ErrorStackTrace stackTrace5 = new ErrorStackTrace(error, i++, "at pl.ark.chr.buginator.app.error.ErrorDetailsMapperImpl.toDto(ErrorDetailsMapperImpl.java:47)");
+        ErrorStackTrace stackTrace6 = new ErrorStackTrace(error, i++, "at pl.ark.chr.buginator.app.error.ErrorService.details(ErrorService.java:83)");
+        ErrorStackTrace stackTrace7 = new ErrorStackTrace(error, i++, "at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)");
+        ErrorStackTrace cause1 = new ErrorStackTrace(error, i++, "Caused by: java.lang.NullPointerException");
+        ErrorStackTrace cause2 = new ErrorStackTrace(error, i++, "at pl.ark.chr.buginator.app.error.ErrorService.details(ErrorService.java:83)");
+        ErrorStackTrace cause3 = new ErrorStackTrace(error, i, "at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)");
+        return List.of(root, stackTrace2, stackTrace3, stackTrace4, stackTrace5, stackTrace6, stackTrace7,
+                cause1, cause2, cause3);
     }
 }

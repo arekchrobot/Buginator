@@ -13,16 +13,15 @@ import pl.ark.chr.buginator.app.exceptions.DataAccessException;
 import pl.ark.chr.buginator.commons.dto.LoggedUserDTO;
 import pl.ark.chr.buginator.domain.auth.Company;
 import pl.ark.chr.buginator.domain.auth.PaymentOption;
-import pl.ark.chr.buginator.domain.core.Application;
+import pl.ark.chr.buginator.domain.core.*;
 import pl.ark.chr.buginator.domain.core.Error;
-import pl.ark.chr.buginator.domain.core.ErrorSeverity;
-import pl.ark.chr.buginator.domain.core.ErrorStatus;
 import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.security.session.LoggedUserService;
 import pl.ark.chr.buginator.util.TestObjectCreator;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -44,6 +43,7 @@ class ErrorServiceTest {
     private UserApplicationService userApplicationService;
 
     private final ErrorMapper errorMapper = new ErrorMapperImpl();
+    private final ErrorDetailsMapper errorDetailsMapper = new ErrorDetailsMapperImpl(new UserAgentMapperImpl());
 
     static final PaymentOption paymentOption = TestObjectCreator.createPaymentOption("Trial");
     static final Company company = TestObjectCreator.createCompany(paymentOption);
@@ -53,7 +53,7 @@ class ErrorServiceTest {
     @BeforeEach
     void setUp() {
         application.setId(1L);
-        errorService = new ErrorService(loggedUserService, userApplicationService, errorRepository, errorMapper);
+        errorService = new ErrorService(loggedUserService, userApplicationService, errorRepository, errorMapper, errorDetailsMapper);
     }
 
     @Test
@@ -140,15 +140,104 @@ class ErrorServiceTest {
                 ErrorStatus.ONGOING, minusOneDay, application)
                 .id(6L)
                 .build();
-        Error error7= TestObjectCreator.createErrorBuilder(errorTitle, ErrorSeverity.WARNING,
+        Error error7 = TestObjectCreator.createErrorBuilder(errorTitle, ErrorSeverity.WARNING,
                 ErrorStatus.ONGOING, minusOneDay, application)
                 .id(7L)
                 .build();
 
-        return Stream.of(error1,error2,error3,error4,error5,error6,error7);
+        return Stream.of(error1, error2, error3, error4, error5, error6, error7);
     }
 
     private Long[] getSortedErrorIdArray() {
-        return new Long[]{6L,5L,7L,4L,3L,2L,1L};
+        return new Long[]{6L, 5L, 7L, 4L, 3L, 2L, 1L};
+    }
+
+    @Test
+    @DisplayName("should correctly build error details with user agent data")
+    void shouldBuildErrorDetailsWithUserAgent() {
+        //given
+        doReturn(Set.of(UserApplicationDTO.builder().id(application.getId()).build()))
+                .when(userApplicationService).getAllForUser(eq(loggedUser.getEmail()));
+
+        doReturn(loggedUser).when(loggedUserService).getCurrentUser();
+
+        String errorTitle = "Test Error";
+        Error error = TestObjectCreator.createError(application, errorTitle, LocalDateTime.now());
+        error.setUserAgent(TestObjectCreator.createUserAgent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0"));
+
+        error.setStackTrace(TestObjectCreator.createErrorStackTrace(error));
+
+        Long errorId = 1L;
+        doReturn(Optional.of(error)).when(errorRepository).findWithFullInfo(eq(errorId));
+
+        //when
+        ErrorDetailsDTO errorDetails = errorService.details(errorId);
+
+        //then
+        assertThat(errorDetails.getTitle()).isEqualTo(errorTitle);
+        assertThat(errorDetails.getUserAgent()).isNotNull();
+        assertThat(errorDetails.getUserAgent().getBrowser()).isEqualTo("Mozilla Firefox 76.0");
+        assertThat(errorDetails.getUserAgent().getDevice()).isEqualTo("COMPUTER x86_64");
+        assertThat(errorDetails.getUserAgent().getOperatingSystem()).isEqualTo("Unknown Linux");
+    }
+
+    @Test
+    @DisplayName("should correctly build error details when user data is not present")
+    void shouldBuildErrorDetailsWithoutUserAgent() {
+        //given
+        doReturn(Set.of(UserApplicationDTO.builder().id(application.getId()).build()))
+                .when(userApplicationService).getAllForUser(eq(loggedUser.getEmail()));
+
+        doReturn(loggedUser).when(loggedUserService).getCurrentUser();
+
+        String errorTitle = "Test Error";
+        Error error = TestObjectCreator.createError(application, errorTitle, LocalDateTime.now());
+
+        error.setStackTrace(TestObjectCreator.createErrorStackTrace(error));
+
+        Long errorId = 1L;
+        doReturn(Optional.of(error)).when(errorRepository).findWithFullInfo(eq(errorId));
+
+        //when
+        ErrorDetailsDTO errorDetails = errorService.details(errorId);
+
+        //then
+        assertThat(errorDetails.getTitle()).isEqualTo(errorTitle);
+        assertThat(errorDetails.getUserAgent()).isNull();
+    }
+
+    @Test
+    @DisplayName("should correctly present stack trace for error details")
+    void shouldCorrectlyPresentStackTraceForErrorDetails() {
+        //given
+        doReturn(Set.of(UserApplicationDTO.builder().id(application.getId()).build()))
+                .when(userApplicationService).getAllForUser(eq(loggedUser.getEmail()));
+
+        doReturn(loggedUser).when(loggedUserService).getCurrentUser();
+
+        String errorTitle = "Test Error";
+        Error error = TestObjectCreator.createError(application, errorTitle, LocalDateTime.now());
+
+        error.setStackTrace(TestObjectCreator.createErrorStackTrace(error));
+
+        Long errorId = 1L;
+        doReturn(Optional.of(error)).when(errorRepository).findWithFullInfo(eq(errorId));
+
+        //when
+        ErrorDetailsDTO errorDetails = errorService.details(errorId);
+
+        //then
+        assertThat(errorDetails.getTitle()).isEqualTo(errorTitle);
+        assertThat(errorDetails.getStackTrace())
+                .isEqualTo("Exception: java.lang.NullPointerException\n" +
+                        "\tat java.base/java.util.ImmutableCollections.listCopy(ImmutableCollections.java:92)\n" +
+                        "\tat java.base/java.util.List.copyOf(List.java:1061)\n" +
+                        "\tat pl.ark.chr.buginator.domain.core.Error.getStackTrace(Error.java:114)\n" +
+                        "\tat pl.ark.chr.buginator.app.error.ErrorDetailsMapperImpl.toDto(ErrorDetailsMapperImpl.java:47)\n" +
+                        "\tat pl.ark.chr.buginator.app.error.ErrorService.details(ErrorService.java:83)\n" +
+                        "\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1540)\n" +
+                        "Caused by: java.lang.NullPointerException\n" +
+                        "\tat pl.ark.chr.buginator.app.error.ErrorService.details(ErrorService.java:83)\n" +
+                        "\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1540)\n");
     }
 }

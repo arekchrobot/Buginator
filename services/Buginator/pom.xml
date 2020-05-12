@@ -20,6 +20,7 @@
         <ehcache.version>3.7.0</ehcache.version>
         <postgres.version>42.2.5</postgres.version>
         <javax.cache.version>1.1.1</javax.cache.version>
+        <apache.commons.text.version>1.8</apache.commons.text.version>
     </properties>
 
     <dependencies>
@@ -77,6 +78,12 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${apache.commons.text.version}</version>
+        </dependency>
+
 
         <!--JAX-B support-->
         <dependency>

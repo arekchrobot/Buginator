@@ -10,6 +10,7 @@ import pl.ark.chr.buginator.domain.core.ErrorStatus;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public interface ErrorRepository extends JpaRepository<Error, Long> {
@@ -37,4 +38,7 @@ public interface ErrorRepository extends JpaRepository<Error, Long> {
                                    @Param("requestMethod") String requestMethod,
                                    @Param("requestUrl") String requestUrl,
                                    @Param("application") Application application);
+
+    @Query("select e from Error e join fetch e.stackTrace left join fetch e.userAgent")
+    Optional<Error> findWithFullInfo(Long id);
 }
