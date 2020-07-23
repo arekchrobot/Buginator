@@ -51,7 +51,7 @@
           <td>{{error.lastOccurrence}}</td>
           <td>{{error.count}}</td>
           <td>
-            <button class="btn btn-info" translate>
+            <button class="btn btn-info" translate [routerLink]="['/application', application.id, 'error', error.id]">
               application.details.sections.error.buttons.details
             </button>
           </td>

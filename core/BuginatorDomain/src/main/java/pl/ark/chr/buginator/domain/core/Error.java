@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Stores the single error that occured in external application.
@@ -111,7 +112,13 @@ public class Error extends BaseEntity<Error> implements FilterData {
     }
 
     public List<ErrorStackTrace> getStackTrace() {
-        return List.copyOf(stackTrace);
+        /*
+            For some reason the stackTrace begins with null value
+            so it must be filtered out before returning
+         */
+        return stackTrace.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     //TODO: rethink solution

@@ -23,6 +23,7 @@ import {SessionService} from "./shared/service/session.service";
 import {Router} from "@angular/router";
 import {UnauthorizedInterceptor} from "./auth/interceptors/unauthorized.interceptor";
 import { ApplicationDetailsComponent } from './application/application-details/application-details.component';
+import { ErrorDetailsComponent } from './error/error-details/error-details.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ApplicationDetailsComponent } from './application/application-details/a
     DashboardComponent,
     ApplicationListComponent,
     ApplicationCreateComponent,
-    ApplicationDetailsComponent
+    ApplicationDetailsComponent,
+    ErrorDetailsComponent
   ],
   imports: [
     BrowserModule,

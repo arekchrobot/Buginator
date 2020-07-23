@@ -39,6 +39,6 @@ public interface ErrorRepository extends JpaRepository<Error, Long> {
                                    @Param("requestUrl") String requestUrl,
                                    @Param("application") Application application);
 
-    @Query("select e from Error e join fetch e.stackTrace left join fetch e.userAgent")
+    @Query("select e from Error e join fetch e.stackTrace left join fetch e.userAgent where e.id = ?1")
     Optional<Error> findWithFullInfo(Long id);
 }
