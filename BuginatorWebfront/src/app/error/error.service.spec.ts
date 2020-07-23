@@ -2,7 +2,7 @@ import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {ErrorService} from './error.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {ApplicationErrorDetails} from "./model/error.model";
+import {ApplicationErrorDetails, ErrorStatus} from "./model/error.model";
 import {environment} from "../../environments/environment";
 
 describe('ErrorServiceService', () => {
@@ -54,6 +54,42 @@ describe('ErrorServiceService', () => {
     const getErrorDetailsRequest = httpMock.expectOne(`${environment.api.url}/api/buginator/error/5`);
     expect(getErrorDetailsRequest.request.method).toBe('GET');
     getErrorDetailsRequest.error(new ErrorEvent('fail fetch'));
+
+    tick();
+  }));
+
+  it('should correctly change error status', fakeAsync(() => {
+    //given
+    let errorDetails: ApplicationErrorDetails = createErrorDetails(5, 'Test error');
+
+    //when
+    errorService.changeStatus(errorDetails.id, ErrorStatus.REOPENED)
+      .then(res => {
+        expect(res).toBeDefined();
+      });
+
+    //then
+    const changeErrorStatusRequest = httpMock.expectOne(`${environment.api.url}/api/buginator/error/5?status=REOPENED`);
+    expect(changeErrorStatusRequest.request.method).toBe('PUT');
+    changeErrorStatusRequest.flush({});
+
+    tick();
+  }));
+
+  it('should return error when unable to change error status', fakeAsync(() => {
+    //given
+    let errorDetails: ApplicationErrorDetails = createErrorDetails(5, 'Test error');
+
+    //when
+    errorService.changeStatus(errorDetails.id, ErrorStatus.REOPENED)
+      .then(res => {
+        expect(res).not.toBeDefined();
+      }, error => expect(error).toBeDefined());
+
+    //then
+    const changeErrorStatusRequest = httpMock.expectOne(`${environment.api.url}/api/buginator/error/5?status=REOPENED`);
+    expect(changeErrorStatusRequest.request.method).toBe('PUT');
+    changeErrorStatusRequest.error(new ErrorEvent('update failed'));
 
     tick();
   }));

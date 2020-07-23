@@ -240,4 +240,54 @@ class ErrorServiceTest {
                         "\tat pl.ark.chr.buginator.app.error.ErrorService.details(ErrorService.java:83)\n" +
                         "\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1540)\n");
     }
+
+    @Test
+    @DisplayName("should correctly change status of an error")
+    void shouldCorrectlyUpdateErrorStatus() {
+        //given
+        doReturn(Set.of(UserApplicationDTO.builder().id(application.getId()).modify(true).build()))
+                .when(userApplicationService).getAllForUser(eq(loggedUser.getEmail()));
+
+        doReturn(loggedUser).when(loggedUserService).getCurrentUser();
+
+        String errorTitle = "Test Error";
+        Error error = TestObjectCreator.createError(application, errorTitle, LocalDateTime.now());
+
+        error.setStackTrace(TestObjectCreator.createErrorStackTrace(error));
+
+        Long errorId = 1L;
+        doReturn(Optional.of(error)).when(errorRepository).findById(eq(errorId));
+
+        //when
+        ErrorDetailsDTO errorDetails = errorService.changeStatus(errorId, ErrorStatus.REOPENED);
+
+        //then
+        assertThat(errorDetails.getStatus()).isEqualTo(ErrorStatus.REOPENED);
+    }
+
+    @Test
+    @DisplayName("should not allow to change status of an error when user has no modify")
+    void shouldNotAllowToUpdateErrorStatus() {
+        //given
+        doReturn(Set.of(UserApplicationDTO.builder().id(application.getId()).modify(false).build()))
+                .when(userApplicationService).getAllForUser(eq(loggedUser.getEmail()));
+
+        doReturn(loggedUser).when(loggedUserService).getCurrentUser();
+
+        String errorTitle = "Test Error";
+        Error error = TestObjectCreator.createError(application, errorTitle, LocalDateTime.now());
+
+        error.setStackTrace(TestObjectCreator.createErrorStackTrace(error));
+
+        Long errorId = 1L;
+        doReturn(Optional.of(error)).when(errorRepository).findById(eq(errorId));
+
+        //when
+        Executable codeUnderException = () -> errorService.changeStatus(errorId, ErrorStatus.REOPENED);
+
+        //then
+        DataAccessException dataAccessException = assertThrows(DataAccessException.class, codeUnderException);
+
+        assertThat(dataAccessException.getMessage()).isEqualTo("User is not permitted to modify application");
+    }
 }

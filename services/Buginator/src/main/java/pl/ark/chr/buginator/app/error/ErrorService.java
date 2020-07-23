@@ -9,6 +9,7 @@ import pl.ark.chr.buginator.app.core.security.AbstractApplicationAccessRestricte
 import pl.ark.chr.buginator.app.exceptions.DataNotFoundException;
 import pl.ark.chr.buginator.domain.core.Application;
 import pl.ark.chr.buginator.domain.core.Error;
+import pl.ark.chr.buginator.domain.core.ErrorStatus;
 import pl.ark.chr.buginator.repository.core.ErrorRepository;
 import pl.ark.chr.buginator.security.session.LoggedUserService;
 
@@ -79,6 +80,21 @@ public class ErrorService extends AbstractApplicationAccessRestricted<Applicatio
         Error error = errorRepository.findWithFullInfo(id).orElseThrow(() -> new DataNotFoundException("error.notFound"));
 
         readAccessAllowed(error.getApplication());
+
+        return errorDetailsMapper.toDto(error);
+    }
+
+    public ErrorDetailsDTO changeStatus(Long id, ErrorStatus newStatus) {
+        Objects.requireNonNull(id);
+        Objects.requireNonNull(newStatus);
+
+        Error error = errorRepository.findById(id).orElseThrow(() -> new DataNotFoundException("error.notFound"));
+
+        writeAccessAllowed(error.getApplication());
+
+        error.setStatus(newStatus);
+
+        errorRepository.save(error);
 
         return errorDetailsMapper.toDto(error);
     }

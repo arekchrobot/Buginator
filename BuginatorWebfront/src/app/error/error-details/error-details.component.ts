@@ -36,6 +36,8 @@ export class ErrorDetailsComponent implements OnInit {
   }
 
   changeStatus(newStatus: ErrorStatus) {
-    //TODO: implement PUT change
+    this.errorService.changeStatus(this.error.id, newStatus)
+      .then(res => this.error.status = newStatus,
+        error => this.toastr.error(error.message, 'Error'));
   }
 }
