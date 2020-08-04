@@ -127,6 +127,38 @@
       }
     }
   },
+  "error": {
+    "details": {
+      "generalTitle": "Ogólne",
+      "description": "Opis",
+      "severity": "Waga",
+      "status": "Status",
+      "firstOccurrence": "Pierwsze wystąpienie",
+      "lastOccurrence": "Ostatnie wystąpienie",
+      "count": "Ilość",
+      "stackTrace": "Stos wywołań",
+      "request": {
+        "url": "Adres URL",
+        "method": "Metoda żądania",
+        "queryParams": "Parametry zapytania",
+        "formParams": "Parametry żądania",
+        "headers": "Nagłówki żądania"
+      },
+      "userAgent": {
+        "title": "Dane User Agent",
+        "manufacturer": "Producent",
+        "device": "Urządzenie",
+        "operatingSystem": "System operacyjny",
+        "browser": "Przeglądarka",
+        "countryLang": "Kraj i Język"
+      },
+      "buttons": {
+        "ongoing": "Zbadaj",
+        "resolve": "Rozwiąż",
+        "reopen": "Otwórz"
+      }
+    }
+  },
   "common": {
     "pagination": {
       "previous": "Poprzednia",

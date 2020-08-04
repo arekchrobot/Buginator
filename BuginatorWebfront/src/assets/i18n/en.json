@@ -127,6 +127,38 @@
       }
     }
   },
+  "error": {
+    "details": {
+      "generalTitle": "General",
+      "description": "Description",
+      "severity": "Severity",
+      "status": "Status",
+      "firstOccurrence": "First appeared",
+      "lastOccurrence": "Last occurrence",
+      "count": "Count",
+      "stackTrace": "Stack Trace",
+      "request": {
+        "url": "Request URL",
+        "method": "Request method",
+        "queryParams": "Query params",
+        "formParams": "Request params",
+        "headers": "Request headers"
+      },
+      "userAgent": {
+        "title": "User Agent Data",
+        "manufacturer": "Manufacturer",
+        "device": "Device",
+        "operatingSystem": "Operating System",
+        "browser": "Browser",
+        "countryLang": "Country and Language"
+      },
+      "buttons": {
+        "ongoing": "In progress",
+        "resolve": "Resolve",
+        "reopen": "Reopen"
+      }
+    }
+  },
   "common": {
     "pagination": {
       "previous": "Previous",

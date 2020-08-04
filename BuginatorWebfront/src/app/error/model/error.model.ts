@@ -9,7 +9,6 @@ export class ApplicationError {
 }
 
 export class ApplicationErrorDetails {
-  id: number;
   title: String;
   description: String;
   status: ErrorStatus;

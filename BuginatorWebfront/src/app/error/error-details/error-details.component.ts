@@ -15,7 +15,7 @@ export class ErrorDetailsComponent implements OnInit {
   status = ErrorStatus;
   severity = ErrorSeverity;
   appId: number;
-  private errorId: number;
+  errorId: number;
 
   constructor(private route: ActivatedRoute, private errorService: ErrorService,
               private toastr: ToastrService) {
@@ -36,7 +36,7 @@ export class ErrorDetailsComponent implements OnInit {
   }
 
   changeStatus(newStatus: ErrorStatus) {
-    this.errorService.changeStatus(this.error.id, newStatus)
+    this.errorService.changeStatus(this.errorId, newStatus)
       .then(res => this.error.status = newStatus,
         error => this.toastr.error(error.message, 'Error'));
   }

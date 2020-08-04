@@ -44,13 +44,14 @@ describe('ErrorDetailsComponent', () => {
   it('should update status', fakeAsync(() => {
     //given
     expect(component.error.status == ErrorStatus.CREATED);
+    component.errorId=1;
     let newStatus = ErrorStatus.RESOLVED;
 
     //when
     component.changeStatus(newStatus);
 
     //then
-    const changeErrorStatusRequest = httpMock.expectOne(`${environment.api.url}/api/buginator/error/${component.error.id}?status=${newStatus}`);
+    const changeErrorStatusRequest = httpMock.expectOne(`${environment.api.url}/api/buginator/error/${component.errorId}?status=${newStatus}`);
     changeErrorStatusRequest.flush({});
 
     tick();
@@ -58,9 +59,26 @@ describe('ErrorDetailsComponent', () => {
     expect(component.error.status).toEqual(ErrorStatus.RESOLVED);
   }));
 
+  it('should not update status', fakeAsync(() => {
+    //given
+    expect(component.error.status == ErrorStatus.CREATED);
+    component.errorId=1;
+    let newStatus = ErrorStatus.RESOLVED;
+
+    //when
+    component.changeStatus(newStatus);
+
+    //then
+    const changeErrorStatusRequest = httpMock.expectOne(`${environment.api.url}/api/buginator/error/${component.errorId}?status=${newStatus}`);
+    changeErrorStatusRequest.error(new ErrorEvent('fail update'));
+
+    tick(10000);
+
+    expect(component.error.status).toEqual(ErrorStatus.CREATED);
+  }));
+
   function createErrorDetails() {
     let errorDetails = new ApplicationErrorDetails();
-    errorDetails.id = 1;
     errorDetails.title = 'Test title';
     errorDetails.description = 'Test description';
     errorDetails.status = ErrorStatus.CREATED;

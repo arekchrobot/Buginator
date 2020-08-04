@@ -6,24 +6,24 @@
     <div class="toolbar">
       <div class="btn-group">
         <button class="btn btn-info" (click)="changeStatus(status.ONGOING)" translate
-                *ngIf="error.status !== status.ONGOING && error.status !== status.RESOLVED">ERROR_ONGOING
+                *ngIf="error.status !== status.ONGOING && error.status !== status.RESOLVED">error.details.buttons.ongoing
         </button>
         <button class="btn btn-success" (click)="changeStatus(status.RESOLVED)" translate
-                *ngIf="error.status !== status.RESOLVED">ERROR_RESOLVE
+                *ngIf="error.status !== status.RESOLVED">error.details.buttons.resolve
         </button>
         <button class="btn btn-warning" (click)="changeStatus(status.REOPENED)" translate
-                *ngIf="error.status === status.RESOLVED">ERROR_REOPEN
+                *ngIf="error.status === status.RESOLVED">error.details.buttons.reopen
         </button>
-        <button class="btn btn-primary" [routerLink]="['/application', appId]" translate>BACK_BUTTON
+        <button class="btn btn-primary" [routerLink]="['/application', appId]" translate>common.buttons.back
         </button>
       </div>
     </div>
   </header>
   <div id="div-1" class="body">
     <div class="form-horizontal">
-      <h5><strong translate>ERROR_GENERAL</strong></h5>
+      <h5><strong translate>error.details.generalTitle</strong></h5>
       <div class="form-group">
-        <label for="errorDescription" class="control-label col-lg-3" translate>ERROR_DESCRIPTION</label>
+        <label for="errorDescription" class="control-label col-lg-3" translate>error.details.description</label>
         <div class="col-lg-5">
           <div id="errorDescription" disabled class="form-control">{{error.description}}</div>
         </div>
@@ -32,7 +32,7 @@
       <br/>
 
       <div class="form-group">
-        <label for="errorSeverity" class="control-label col-lg-3" translate>ERROR_SEVERITY</label>
+        <label for="errorSeverity" class="control-label col-lg-3" translate>error.details.severity</label>
         <div class="col-lg-5 has-feedback"
              [ngClass]="{'has-error': error.severity !== severity.WARNING, 'has-warning': error.severity === severity.WARNING}">
           <div id="errorSeverity" disabled class="form-control"> {{error.severity}}</div>
@@ -45,7 +45,7 @@
       <br/>
 
       <div class="form-group">
-        <label for="errorStatus" class="control-label col-lg-3" translate>ERROR_STATUS</label>
+        <label for="errorStatus" class="control-label col-lg-3" translate>error.details.status</label>
         <div class="col-lg-5 has-feedback" [ngClass]="{'has-success': error.status === status.RESOLVED}">
           <div id="errorStatus" disabled class="form-control">{{error.status}}</div>
           <span class="fa fa-check form-control-feedback" *ngIf="error.status === status.RESOLVED"></span>
@@ -55,7 +55,7 @@
       <br/>
 
       <div class="form-group">
-        <label for="errorDate" class="control-label col-lg-3" translate>ERROR_FIRST_OCCURRENCE</label>
+        <label for="errorDate" class="control-label col-lg-3" translate>error.details.firstOccurrence</label>
         <div class="col-lg-5">
           <div id="errorDate" disabled class="form-control">
             {{error.dateTime | date: 'yyyy-MM-dd HH:mm:ss'}}
@@ -66,7 +66,7 @@
       <br/>
 
       <div class="form-group">
-        <label for="errorLastOccurrence" class="control-label col-lg-3" translate>ERROR_LAST_OCCURRENCE</label>
+        <label for="errorLastOccurrence" class="control-label col-lg-3" translate>error.details.lastOccurrence</label>
         <div class="col-lg-5">
           <div id="errorLastOccurrence" disabled class="form-control">{{error.lastOccurrence}}</div>
         </div>
@@ -75,7 +75,7 @@
       <br/>
 
       <div class="form-group">
-        <label for="errorCount" class="control-label col-lg-3" translate>ERROR_COUNT</label>
+        <label for="errorCount" class="control-label col-lg-3" translate>error.details.count</label>
         <div class="col-lg-5">
           <div id="errorCount" disabled class="form-control">{{error.count}}</div>
         </div>
@@ -84,7 +84,7 @@
       <br *ngIf="error.requestUrl"/>
 
       <div class="form-group" *ngIf="error.requestUrl">
-        <label for="errorRequestUrl" class="control-label col-lg-3" translate>ERROR_REQUEST_URL</label>
+        <label for="errorRequestUrl" class="control-label col-lg-3" translate>error.details.request.url</label>
         <div class="col-lg-5">
           <div id="errorRequestUrl" disabled class="form-control">{{error.requestUrl}}</div>
         </div>
@@ -93,7 +93,7 @@
       <br *ngIf="error.requestMethod"/>
 
       <div class="form-group" *ngIf="error.requestMethod">
-        <label for="errorRequestUrl" class="control-label col-lg-3" translate>ERROR_REQUEST_METHOD</label>
+        <label for="errorRequestUrl" class="control-label col-lg-3" translate>error.details.request.method</label>
         <div class="col-lg-5">
           <div id="errorRequestMethod" disabled class="form-control">{{error.requestMethod}}</div>
         </div>
@@ -102,7 +102,7 @@
       <br *ngIf="error.queryParams"/>
 
       <div class="form-group" *ngIf="error.queryParams">
-        <label for="errorQueryParams" class="control-label col-lg-3" translate>ERROR_QUERY_PARAMS</label>
+        <label for="errorQueryParams" class="control-label col-lg-3" translate>error.details.request.queryParams</label>
         <div class="col-lg-5">
           <div id="errorQueryParams" disabled class="form-control">{{error.queryParams}}</div>
         </div>
@@ -111,7 +111,7 @@
       <br *ngIf="error.requestParams"/>
 
       <div class="form-group" *ngIf="error.requestParams">
-        <label for="errorRequestParams" class="control-label col-lg-3" translate>ERROR_REQUEST_PARAMS</label>
+        <label for="errorRequestParams" class="control-label col-lg-3" translate>error.details.request.formParams</label>
         <div class="col-lg-5">
           <textarea id="errorRequestParams" disabled style="overflow: hidden; resize: both; min-height: 250px;"
                     class="form-control">{{error.requestParams}}</textarea>
@@ -121,7 +121,7 @@
       <br *ngIf="error.requestHeaders"/>
 
       <div class="form-group" *ngIf="error.requestHeaders">
-        <label for="errorRequestHeaders" class="control-label col-lg-3" translate>ERROR_REQUEST_HEADERS</label>
+        <label for="errorRequestHeaders" class="control-label col-lg-3" translate>error.details.request.headers</label>
         <div class="col-lg-5">
           <textarea id="errorRequestHeaders" disabled style="overflow: hidden; resize: both; min-height: 250px;"
                     class="form-control">{{error.requestHeaders}}</textarea>
@@ -131,7 +131,7 @@
       <br/>
 
       <div class="body">
-        <h5><strong translate>ERROR_STACK_TRACE</strong></h5>
+        <h5><strong translate>error.details.stackTrace</strong></h5>
 
         <div class="form-group">
           <div class="control-label col-lg-3">
@@ -146,11 +146,11 @@
       <br/>
 
       <div class="body" *ngIf="error.userAgent">
-        <h5><strong translate>ERROR_USER_AGENT_DATA</strong></h5>
+        <h5><strong translate>error.details.userAgent.title</strong></h5>
 
         <div class="form-group">
           <label for="errorUAManufacturer" class="control-label col-lg-3"
-                 translate>ERROR_UA_MANUFACTURER</label>
+                 translate>error.details.userAgent.manufacturer</label>
           <div class="col-lg-5">
             <div id="errorUAManufacturer" disabled class="form-control">
               {{error.userAgent.manufacturer}}
@@ -161,7 +161,7 @@
         <br/>
 
         <div class="form-group">
-          <label for="errorUADevice" class="control-label col-lg-3" translate>ERROR_UA_DEVICE</label>
+          <label for="errorUADevice" class="control-label col-lg-3" translate>error.details.userAgent.device</label>
           <div class="col-lg-5">
             <div id="errorUADevice" disabled class="form-control">
               {{error.userAgent.device}}
@@ -172,7 +172,7 @@
         <br/>
 
         <div class="form-group">
-          <label for="errorUAOperatingSystem" class="control-label col-lg-3" translate>ERROR_UA_OPERATING_SYSTEM</label>
+          <label for="errorUAOperatingSystem" class="control-label col-lg-3" translate>error.details.userAgent.operatingSystem</label>
           <div class="col-lg-5">
             <div id="errorUAOperatingSystem" disabled class="form-control">
               {{error.userAgent.operatingSystem}}
@@ -183,7 +183,7 @@
         <br/>
 
         <div class="form-group">
-          <label for="errorUABrowser" class="control-label col-lg-3" translate>ERROR_UA_BROWSER</label>
+          <label for="errorUABrowser" class="control-label col-lg-3" translate>error.details.userAgent.browser</label>
           <div class="col-lg-5">
             <div id="errorUABrowser" disabled class="form-control">
               {{error.userAgent.browser}}
@@ -196,7 +196,7 @@
         <div class="form-group"
              *ngIf="error.userAgent.country != 'Unknown' && error.userAgent.language != 'Unknown'">
           <label for="errorUACountryLang" class="control-label col-lg-3"
-                 translate>ERROR_UA_COUNTRY_LANG</label>
+                 translate>error.details.userAgent.countrylang</label>
           <div class="col-lg-5">
             <div id="errorUACountryLang" disabled class="form-control">
               {{error.userAgent.country}}, {{error.userAgent.language}}
