@@ -6,6 +6,7 @@ import {ToastrService} from "ngx-toastr";
 import {ErrorResponseDTO} from "../../shared/model/error-response.model";
 import {UserApplication} from "../model/application.model";
 import {Router} from "@angular/router";
+import {Permissions} from "../../auth/model/permissions.model";
 
 @Component({
   selector: 'app-application-create',
@@ -32,7 +33,7 @@ export class ApplicationCreateComponent implements OnInit {
   }
 
   get canCreateApps(): boolean {
-    return this.sessionService.hasPermission("create_application");
+    return this.sessionService.hasPermission(Permissions.CREATE_APPLICATION);
   }
 
   onCreateApplicationSubmit() {

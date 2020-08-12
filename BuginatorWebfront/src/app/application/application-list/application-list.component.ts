@@ -5,6 +5,7 @@ import {PageableComponent} from "../../shared/component/pageable.component";
 import {ToastrService} from "ngx-toastr";
 import {ErrorResponseDTO} from "../../shared/model/error-response.model";
 import {SessionService} from "../../shared/service/session.service";
+import {Permissions} from "../../auth/model/permissions.model";
 
 @Component({
   selector: 'buginator-application-list',
@@ -28,7 +29,7 @@ export class ApplicationListComponent extends PageableComponent implements OnIni
   }
 
   get canCreateApps(): boolean {
-    return this.sessionService.hasPermission("create_application");
+    return this.sessionService.hasPermission(Permissions.CREATE_APPLICATION);
   }
 
   get userApps() {

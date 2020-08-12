@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {SessionService} from "../shared/service/session.service";
 import {CookieService} from "ngx-cookie-service";
 import {environment} from "../../environments/environment";
+import {Permissions} from "../auth/model/permissions.model";
 
 @Component({
   selector: 'buginator-dashboard',
@@ -37,7 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   get canViewApplications() {
-    return this.sessionService.hasPermission("read_application");
+    return this.sessionService.hasPermission(Permissions.READ_APPLICATION);
   }
 
 }

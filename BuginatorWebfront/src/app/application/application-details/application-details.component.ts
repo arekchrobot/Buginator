@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {Chart} from 'chart.js';
 import {TranslateService} from "@ngx-translate/core";
 import {LastWeekErrors} from "../model/report.model";
+import {Permissions} from "../../auth/model/permissions.model";
 
 @Component({
   selector: 'app-application-details',
@@ -43,11 +44,11 @@ export class ApplicationDetailsComponent extends PageableComponent implements On
   }
 
   get canManageAggregators(): boolean {
-    return this.sessionService.hasPermission("app_show_notification");
+    return this.sessionService.hasPermission(Permissions.APP_SHOW_NOTIFICATION);
   }
 
   get canManageUsers(): boolean {
-    return this.sessionService.hasPermission("app_manage_users");
+    return this.sessionService.hasPermission(Permissions.APP_MANAGE_USERS);
   }
 
   private generateChartData(applicationId: number) {
