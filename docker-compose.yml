@@ -79,8 +79,6 @@ services:
     working_dir: /opt/apps/
     ports:
       - 4200:4200
-    depends_on:
-      - buginator-gateway
     command: ng serve --host 0.0.0.0
 
   email-sender:
