@@ -24,14 +24,14 @@ public class ApplicationResource {
         return applicationService.getUserApps();
     }
 
-    @PreAuthorize("hasAuthority(" + Permissions.CREATE_APPLICATION + ")")
+    @PreAuthorize("hasAuthority('" + Permissions.CREATE_APPLICATION + "')")
     @PostMapping("/api/buginator/application")
     @ResponseStatus(HttpStatus.CREATED)
     public UserApplicationDTO create(@Valid @RequestBody ApplicationRequestDTO applicationRequest) {
         return applicationService.create(applicationRequest);
     }
 
-    @PreAuthorize("hasAuthority(" + Permissions.READ_APPLICATION + ")")
+    @PreAuthorize("hasAuthority('" + Permissions.READ_APPLICATION + "')")
     @GetMapping("/api/buginator/application/{id}")
     public ApplicationDetailsDTO getById(@PathVariable Long id) {
         return applicationService.get(id);

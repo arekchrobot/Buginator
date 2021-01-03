@@ -10,6 +10,7 @@ services:
       ARTEMIS_PASSWORD: artemis
     ports:
       - 8161:8161
+      - 61616:61616
     volumes:
       - ./docker_init_files/artemis:/var/lib/artemis/etc-override
 
@@ -21,6 +22,8 @@ services:
       POSTGRES_PASSWORD: buginator
       POSTGRES_USER: Buginator
       POSTGRES_DB: Buginator
+    ports:
+      - 5432:5432
     volumes:
       - ./docker_init_files/postgres:/docker-entrypoint-initdb.d/
 
@@ -28,6 +31,8 @@ services:
     image: redis:5.0.3
     container_name: redis
     restart: always
+    ports:
+      - 6379:6379
     volumes:
       - ./docker_init_files/redis/redis.conf:/usr/local/etc/redis/redis.conf
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
