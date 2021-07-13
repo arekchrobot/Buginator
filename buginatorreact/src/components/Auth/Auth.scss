@@ -1,0 +1,21 @@
+.Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+    min-height: 200px;
+    margin: auto;
+
+
+    form{
+        display:flex;
+        flex-direction: column;
+    
+        label{
+            margin: 10px auto;
+        }
+        button{
+            margin: 10px auto;
+        }
+    }
+}

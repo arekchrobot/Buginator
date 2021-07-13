@@ -1,0 +1,171 @@
+{
+  "auth": {
+    "login": {
+      "submit": "Sign in",
+      "info": "Enter your username and password",
+      "error": "Username or password is invalid",
+      "input": {
+        "password": "password",
+        "username": "mail@domain.com"
+      },
+      "form": {
+        "username": {
+          "required": "Username is required",
+          "email": "Username must be a valid email"
+        },
+        "password": {
+          "required": "Password is required"
+        }
+      }
+    },
+    "forgot": {
+      "info": "Enter your valid e-mail",
+      "input": {
+        "email": "mail@domain.com"
+      },
+      "form": {
+        "email": {
+          "required": "Email is required",
+          "email": "Not a valid email"
+        }
+      },
+      "submit": "Recover Password",
+      "success": "An email with password reset token has been sent",
+      "error": "There has been error while sending reset token"
+    },
+    "register": {
+      "input": {
+        "companyName": "company name",
+        "companyAddress": "address",
+        "userEmail": "mail@domain.com",
+        "userName": "username",
+        "password": "password",
+        "passwordConfirm": "password confirm"
+      },
+      "form": {
+        "companyName": {
+          "required": "Company name is required"
+        },
+        "userEmail": {
+          "required": "Email is required",
+          "email": "Not a valid email"
+        },
+        "userPassword": {
+          "required": "Password is required"
+        },
+        "userPasswordConfirm": {
+          "passwordNotMatch": "Passwords don't match"
+        }
+      },
+      "submit": "Register",
+      "success": "Thank you for registering. Details has been sent to mail"
+    },
+    "tab": {
+      "toggle": {
+        "login": "Login",
+        "forgot": "Forgot Password",
+        "register": "Signup"
+      }
+    }
+  },
+  "user": {
+    "duplicate": "Given email already exists"
+  },
+  "company": {
+    "duplicate": "Given company already exists"
+  },
+  "application": {
+    "menu": {
+      "name": "Applications"
+    },
+    "list": {
+      "title": "Applications",
+      "search": "Search",
+      "name": "Name",
+      "allErrors": "Errors",
+      "lastWeekErrors": "Errors last 7 days",
+      "buttons": {
+        "create": "Create application",
+        "details": "Details"
+      }
+    },
+    "create": {
+      "title": "Create application",
+      "input": {
+        "label": "Name",
+        "name": "Application name"
+      },
+      "form": {
+        "name": {
+          "required": "Name is required"
+        }
+      },
+      "submit": "Create"
+    },
+    "details": {
+      "buttons": {
+        "aggregators": "Manage notifications",
+        "users": "Manage Users"
+      },
+      "sections": {
+        "error": {
+          "header": "Errors",
+          "title": "Title",
+          "description": "Description",
+          "status": "Status",
+          "severity": "Severity",
+          "lastOccurrence": "Last occurrence",
+          "count": "Count",
+          "buttons": {
+            "details": "Details"
+          }
+        }
+      },
+      "chart": {
+        "title": "Errors from last week",
+        "datasetLabel": "Count"
+      }
+    }
+  },
+  "error": {
+    "details": {
+      "generalTitle": "General",
+      "description": "Description",
+      "severity": "Severity",
+      "status": "Status",
+      "firstOccurrence": "First appeared",
+      "lastOccurrence": "Last occurrence",
+      "count": "Count",
+      "stackTrace": "Stack Trace",
+      "request": {
+        "url": "Request URL",
+        "method": "Request method",
+        "queryParams": "Query params",
+        "formParams": "Request params",
+        "headers": "Request headers"
+      },
+      "userAgent": {
+        "title": "User Agent Data",
+        "manufacturer": "Manufacturer",
+        "device": "Device",
+        "operatingSystem": "Operating System",
+        "browser": "Browser",
+        "countryLang": "Country and Language"
+      },
+      "buttons": {
+        "ongoing": "In progress",
+        "resolve": "Resolve",
+        "reopen": "Reopen"
+      }
+    }
+  },
+  "common": {
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "buttons": {
+      "back": "Return"
+    }
+  }
+}

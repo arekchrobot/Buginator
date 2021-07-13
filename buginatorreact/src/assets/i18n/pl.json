@@ -1,0 +1,171 @@
+{
+  "auth": {
+    "login": {
+      "submit": "Zaloguj",
+      "info": "Podaj nazwę użytkownika oraz hasło",
+      "error": "Nazwa użytkownika bądź hasło jest niepoprawne",
+      "input": {
+        "password": "hasło",
+        "username": "mail@domain.com"
+      },
+      "form": {
+        "username": {
+          "required": "Nazwa użytkownika jest wymagana",
+          "email": "Nazwa użytkownika musi być emailem"
+        },
+        "password": {
+          "required": "Hasło jest wymagane"
+        }
+      }
+    },
+    "forgot": {
+      "info": "Podaj poprawny adres e-mail",
+      "input": {
+        "email": "mail@domain.com"
+      },
+      "form": {
+        "email": {
+          "required": "Email jest wymagany",
+          "email": "Niepoprawny adres email"
+        }
+      },
+      "submit": "Odzyskaj hasło",
+      "success": "Email z tokenem do reset został wysłany",
+      "error": "Wystąpił błąd podczas wysyłania tokenu resetującego hasło"
+    },
+    "register": {
+      "input": {
+        "companyName": "nazwa firmy",
+        "companyAddress": "adres",
+        "userEmail": "mail@domain.com",
+        "userName": "nazwa użytkownika",
+        "password": "hasło",
+        "passwordConfirm": "powtórz hasło"
+      },
+      "form": {
+        "companyName": {
+          "required": "Nazwa firmy jest wymagana"
+        },
+        "userEmail": {
+          "required": "Email jest wymagany",
+          "email": "Niepoprawny adres email"
+        },
+        "userPassword": {
+          "required": "Hasło jest wymagane"
+        },
+        "userPasswordConfirm": {
+          "passwordNotMatch": "Hasła nie są identyczne"
+        }
+      },
+      "submit": "Zarejestruj",
+      "success": "Dziękujemy za rejestrację. Szczegóły zostały wysłane na adres email"
+    },
+    "tab": {
+      "toggle": {
+        "login": "Zaloguj",
+        "forgot": "Zapomniałem hasła",
+        "register": "Zarejestruj"
+      }
+    }
+  },
+  "user": {
+    "duplicate": "Podany adres email już istnieje"
+  },
+  "company": {
+    "duplicate": "Podana firma już istnieje"
+  },
+  "application": {
+    "menu": {
+      "name": "Aplikacje"
+    },
+    "list": {
+      "title": "Aplikacje",
+      "search": "Szukaj",
+      "name": "Nazwa",
+      "allErrors": "Błędy",
+      "lastWeekErrors": "Błędy z ostatnich 7 dni",
+      "buttons": {
+        "create": "Utwórz aplikację",
+        "details": "Szczegóły"
+      }
+    },
+    "create": {
+      "title": "Utwórz aplikację",
+      "input": {
+        "label": "Nazwa",
+        "name": "Nazwa aplikacji"
+      },
+      "form": {
+        "name": {
+          "required": "Nazwa jest wymagana"
+        }
+      },
+      "submit": "Stwórz"
+    },
+    "details": {
+      "buttons": {
+        "aggregators": "Zarządzaj powiadomieniami",
+        "users": "Zarządzaj użytkownikami"
+      },
+      "sections": {
+        "error": {
+          "header": "Błędy",
+          "title": "Tytuł",
+          "description": "Opis",
+          "status": "Status",
+          "severity": "Skala",
+          "lastOccurrence": "Ostatnie wystąpienie",
+          "count": "Ilość",
+          "buttons": {
+            "details": "Szczegóły"
+          }
+        }
+      },
+      "chart": {
+        "title": "Błędy z ostatniego tygodnia",
+        "datasetLabel": "Ilość"
+      }
+    }
+  },
+  "error": {
+    "details": {
+      "generalTitle": "Ogólne",
+      "description": "Opis",
+      "severity": "Waga",
+      "status": "Status",
+      "firstOccurrence": "Pierwsze wystąpienie",
+      "lastOccurrence": "Ostatnie wystąpienie",
+      "count": "Ilość",
+      "stackTrace": "Stos wywołań",
+      "request": {
+        "url": "Adres URL",
+        "method": "Metoda żądania",
+        "queryParams": "Parametry zapytania",
+        "formParams": "Parametry żądania",
+        "headers": "Nagłówki żądania"
+      },
+      "userAgent": {
+        "title": "Dane User Agent",
+        "manufacturer": "Producent",
+        "device": "Urządzenie",
+        "operatingSystem": "System operacyjny",
+        "browser": "Przeglądarka",
+        "countryLang": "Kraj i Język"
+      },
+      "buttons": {
+        "ongoing": "Zbadaj",
+        "resolve": "Rozwiąż",
+        "reopen": "Otwórz"
+      }
+    }
+  },
+  "common": {
+    "pagination": {
+      "previous": "Poprzednia",
+      "next": "Następna"
+    },
+    "buttons": {
+      "back": "Powrót"
+    }
+  }
+}

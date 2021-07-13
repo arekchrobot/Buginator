@@ -1,8 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './reset.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+
+import axios from 'axios';
+
+// For GET requests
+axios.interceptors.request.use(
+  (req) => {
+     if(!req.headers.Authorization){   
+      req.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+     }
+     return req;
+  },
+  (err) => {
+     return Promise.reject(err);
+  }
+);
+
+// For POST requests
+axios.interceptors.response.use(
+  (res) => {
+    if (res.status === 401) {
+      console.log('Unauthorized 1');
+   }
+     return res;
+  },
+  (err) => {
+    if (err.status === 401) {
+      console.log('Unauthorized 2');
+   }
+     return Promise.reject(err);
+  }
+);
+
 
 ReactDOM.render(
   <React.StrictMode>
