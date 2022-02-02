@@ -16,7 +16,7 @@
     <description>Buginator Auth MicroService</description>
 
     <properties>
-        <postgres.version>42.2.5</postgres.version>
+        <postgres.version>42.2.25</postgres.version>
     </properties>
 
     <dependencies>
