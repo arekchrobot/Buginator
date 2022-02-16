@@ -18,7 +18,7 @@
 
     <properties>
         <ehcache.version>3.7.0</ehcache.version>
-        <postgres.version>42.2.5</postgres.version>
+        <postgres.version>42.3.3</postgres.version>
         <javax.cache.version>1.1.1</javax.cache.version>
         <apache.commons.text.version>1.8</apache.commons.text.version>
     </properties>
